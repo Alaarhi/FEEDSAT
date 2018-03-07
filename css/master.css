@@ -1458,7 +1458,7 @@ header {
     font-size: 16px;
     color: rgb(63, 81, 181);
     font-weight: 500; }
-  
+
 
 .pm-sub-header-breadcrumbs {
   border-bottom: 1px solid #eeeeee; }
@@ -4998,7 +4998,7 @@ label {
     float: left;
     margin-bottom: 12px;
     margin-left: 45%; }
-  
+
     .pm-comment-vote-btn {
       float: right;
       margin-bottom: 12px;
@@ -5687,6 +5687,47 @@ label {
   background-color: white;
   color: black !important;
   border: 3px solid white; }
+
+
+  /****** Style Star Rating Widget *****/
+
+    .rating {
+      padding-left: 30%;
+      border: none;
+      float: left;
+    }
+
+    .rating > input {
+      display: none;
+    }
+    .rating > label:before {
+      margin: 20px;
+      font-size: 2em;
+      font-family: FontAwesome;
+      display: inline-block;
+      content: "\f005";
+    }
+
+    .rating > .half:before {
+      content: "\f089";
+      position: absolute;
+    }
+
+    .rating > label {
+      color: #ddd;
+     float: right;
+    }
+
+    /***** CSS Magic to Highlight Stars on Hover *****/
+
+    .rating > input:checked ~ label, /* show gold star when clicked */
+    .rating:not(:checked) > label:hover, /* hover current star */
+    .rating:not(:checked) > label:hover ~ label { color: #FFD700;  } /* hover previous stars in list */
+
+    .rating > input:checked + label:hover, /* hover current star when changing rating */
+    .rating > input:checked ~ label:hover,
+    .rating > label:hover ~ input:checked ~ label, /* lighten current selection */
+    .rating > input:checked ~ label:hover ~ label { color: #FFED85;  }
 
 
 
