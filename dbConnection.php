@@ -1,8 +1,8 @@
 <?php 
-	// On démarre la session AVANT d'écrire du code HTML
+	// On demarre la session AVANT d'ecrire du code HTML
 	session_start();
 
 	// connect to the database
-	$bd = mysqli_connect('localhost', 'root', '', 'feedsat');
+	$bd = new PDO('mysql:host=localhost;dbname=feedsat;charset=utf8', 'root', '');
 
 ?>

@@ -1,4 +1,12 @@
-﻿<?php include 'dbConnection.php';?>
+﻿<?php include 'dbConnection.php';
+
+if(isset($_GET['id']))
+{
+$id=$_GET['id'];
+$req=$bd->query('select * from professor where id='.$id);
+$prof=$req->fetch();
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -262,8 +270,8 @@
                                             <div class="pm-comment-vote-btn">
                                                     <a href="vote.php" class="pm-square-btn comment-reply">VOTER</a>
                                                 </div>
-                                        <p class="pm-author-name">dr. Med Ali Maaref</p>
-                                        <p class="pm-author-title">physicien</p>
+                                        <p class="pm-author-name"><?php echo($prof['surname']." ".$prof['name']); ?></p>
+                                        <p class="pm-author-title"><?php echo($prof['grade']); ?></p>
 
                                         <div class="pm-author-divider"></div>
                                         <p class="pm-author-bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc fringilla erat nec tellus consectetur sodales. Vivamus quis est eget velit scelerisque condimentum sed non lorem. Morbi commodo id magna nec semper. Nullam pulvinar erat nisl, ac laoreet orci tempus iaculis. Vivamus nec tortor velit. Praesent a tortor nulla. Nullam pulvinar erat nisl, ac laoreet orci tempus iaculis.</p>

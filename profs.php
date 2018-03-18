@@ -301,7 +301,7 @@
                             </div>
                         </div>
                         
-                       <a href="profile.php"><p class="name">Hamza Gaaliche</p></a> 
+                       <a href="profile.php?id=1"><p class="name">Hamza Gaaliche</p></a> 
                         
                         
                         <div class="pm-single-testimonial-divider"></div>
