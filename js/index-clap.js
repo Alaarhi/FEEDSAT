@@ -41,8 +41,6 @@ var circleBurst = new mojs.Burst({
 
 
 
-var animationTimeline = new mojs.Timeline();
-animationTimeline.add([triangleBurst, circleBurst]);
 
 i=0;
 for(i=0;i<clap.length;i++){
