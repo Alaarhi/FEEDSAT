@@ -4991,7 +4991,7 @@ label {
 
 .pm-comment {
   border-top: 1px solid #303F9F;
-  margin: 10px 31px 0 106px;
+  margin: -10px 31px 0 106px;
   padding: 20px 0 0 10px; }
 
   .pm-comment-reply-btn {

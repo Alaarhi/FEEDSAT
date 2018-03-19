@@ -1,10 +1,47 @@
-﻿<?php include 'dbConnection.php';
-
+﻿<?php 
+include 'dbConnection.php';
 if(isset($_GET['id']))
 {
 $id=$_GET['id'];
 $req=$bd->query('select * from professor where id='.$id);
 $prof=$req->fetch();
+$req=$bd->query('select * from rating where profId='.$id);
+$cdc=0; $tdp=0; $pdg=0; $adc=0; $cdln = 0; $i=0;$note=0;
+if($req->rowCount()>0)
+{
+while($result=$req->fetch())
+    {   
+        $cdc+= intval($result['courseContent']);
+        $tdp+= intval($result['absenteism']);
+        $pdg+= intval($result['pedagogy']);
+        $adc+= intval($result['ambiance']);
+        $cdln+= intval($result['gradesCredibility']);    
+        $i=$i+1;    
+    }
+
+$cdc=$cdc/$i; $tdp=$tdp/$i; $pdg=$pdg/$i; $adc=$adc/$i; $cdln = $cdln/$i;
+
+$req=$bd->query('select * from rcriteria');
+while ($result=$req->fetch())
+{
+    if($result['criteria']=="Ambiance en classe")
+        $adcr=$result['weight'];
+    if($result['criteria']=="Contenu du cours")
+        $cdcr=$result['weight'];
+    if($result['criteria']=="Crédibilité de la note")
+        $cdlnr=$result['weight'];
+    if($result['criteria']=="Pédagogie")
+        $pdgr=$result['weight'];
+    if($result['criteria']=="Taux de présence")
+        $tdpr=$result['weight'];
+    
+}
+$note=($cdc*$cdcr+$adc*$adcr+$cdln*$cdlnr+$pdg*$pdgr+$tdp*$tdpr)/10;
+}
+$req=$bd->query('select count(*) as count from comment where profId='.$id);
+$result=$req->fetch();
+$commentsNumber=$result['count'];
+
 }
 ?>
 
@@ -298,7 +335,7 @@ $prof=$req->fetch();
                                         <div class="panel panel-default">
 
                                             <div class="panel-heading">
-                                                <h4 class="panel-title"><i class="fa fa-plus"></i><a class="pm-accordion-link pm-dark-link collapsed" href="#collapse0" data-parent="#accordion" data-toggle="collapse" aria-expanded="false">Contenu du cours : 8.5</a></h4>
+                                                <h4 class="panel-title"><i class="fa fa-plus"></i><a class="pm-accordion-link pm-dark-link collapsed" href="#collapse0" data-parent="#accordion" data-toggle="collapse" aria-expanded="false">Contenu du cours : <?php echo $cdc; ?></a></h4>
                                             </div>
 
                                             <div class="panel-collapse collapse" id="collapse0" aria-expanded="false" style="height: 0px;">
@@ -314,7 +351,7 @@ $prof=$req->fetch();
                                         <div class="panel panel-default">
 
                                             <div class="panel-heading">
-                                                <h4 class="panel-title"><i class="fa fa-plus"></i><a class="pm-accordion-link collapsed pm-dark-link" href="#collapse1" data-parent="#accordion" data-toggle="collapse" aria-expanded="false">Taux de présence : 7.46</a></h4>
+                                                <h4 class="panel-title"><i class="fa fa-plus"></i><a class="pm-accordion-link collapsed pm-dark-link" href="#collapse1" data-parent="#accordion" data-toggle="collapse" aria-expanded="false">Taux de présence : <?php echo $tdp; ?></a></h4>
                                             </div>
 
                                             <div class="panel-collapse collapse" id="collapse1" aria-expanded="false">
@@ -333,7 +370,7 @@ $prof=$req->fetch();
                                         <div class="panel panel-default">
 
                                             <div class="panel-heading">
-                                                <h4 class="panel-title"><i class="fa fa-plus"></i><a class="pm-accordion-link collapsed pm-dark-link" href="#collapse2" data-parent="#accordion" data-toggle="collapse" aria-expanded="false">Pédagogie : 6.89</a></h4>
+                                                <h4 class="panel-title"><i class="fa fa-plus"></i><a class="pm-accordion-link collapsed pm-dark-link" href="#collapse2" data-parent="#accordion" data-toggle="collapse" aria-expanded="false">Pédagogie : <?php echo $pdg; ?></a></h4>
                                             </div>
 
                                             <div class="panel-collapse collapse" id="collapse2" aria-expanded="false">
@@ -350,7 +387,7 @@ $prof=$req->fetch();
                                         <div class="panel panel-default">
 
                                             <div class="panel-heading">
-                                                <h4 class="panel-title"><i class="fa fa-plus"></i><a class="pm-accordion-link pm-dark-link collapsed" href="#collapse3" data-parent="#accordion" data-toggle="collapse" aria-expanded="false">Ambiance en classe : 8.53</a></h4>
+                                                <h4 class="panel-title"><i class="fa fa-plus"></i><a class="pm-accordion-link pm-dark-link collapsed" href="#collapse3" data-parent="#accordion" data-toggle="collapse" aria-expanded="false">Ambiance en classe : <?php echo $adc; ?></a></h4>
                                             </div>
 
                                             <div class="panel-collapse collapse" id="collapse3" aria-expanded="false" style="height: 0px;">
@@ -366,7 +403,7 @@ $prof=$req->fetch();
                                         <div class="panel panel-default">
 
                                             <div class="panel-heading">
-                                                <h4 class="panel-title"><i class="fa fa-plus"></i><a class="pm-accordion-link collapsed pm-dark-link" href="#collapse4" data-parent="#accordion" data-toggle="collapse" aria-expanded="false">Crédibilité de la note : 4.23</a></h4>
+                                                <h4 class="panel-title"><i class="fa fa-plus"></i><a class="pm-accordion-link collapsed pm-dark-link" href="#collapse4" data-parent="#accordion" data-toggle="collapse" aria-expanded="false">Crédibilité de la note : <?php echo $cdln; ?></a></h4>
                                             </div>
 
                                             <div class="panel-collapse collapse" id="collapse4" aria-expanded="false">
@@ -414,7 +451,7 @@ $prof=$req->fetch();
 
                                 <div class="col-lg-3 col-md-6 col-sm-6 desktop pm-center " style="padding: 30px 0px 0px 70px">
 
-                                                            <p class="pm-static-number">7.46</p>
+                                                            <p class="pm-static-number"><?php echo $note; ?></p>
 
                                                             <!-- milestone -->
 
@@ -433,16 +470,16 @@ $prof=$req->fetch();
 
                 <!-- PANEL 4 -->
                 <a id="comments"></a>
-                <div class="pm-column-container pm-containerPadding80" style="background-color:#FFFFFF;">
+                <div class="pm-column-container pm-containerPadding-top-80 pm-containerPadding-bottom-50" style="background-color:#FFFFFF;">
 
                     <div class="container">
                         <div class="row">
-                            <div class="col-lg-12">
+                            <div  class="col-lg-12">
 
-                                <h4 class="pm-comments-response-title"> <font color=#303F9F>8 étudiants ont commenté le profil de cet enseignant</font></h4>
-
+                                <h4 class="pm-comments-response-title"> <font color=#303F9F><?php echo $commentsNumber ?> étudiants ont commenté le profil de cet enseignant</font></h4>
+                                <?php if($commentsNumber!=0) { ?>
                                 <!-- Comments -->
-                                <div class="pm-comments-container">
+                                <div class="pm-comments-container" id="zone_de_rechargement">
 
                                     <!-- Comment -->
                                     <div class="pm-comment-box-container">
@@ -522,17 +559,18 @@ $prof=$req->fetch();
                                             <p>Sed vitae arcu quis dolor pulvinar rhoncus id eget velit. Vivamus lectus dolor, consectetur quis magna ac, viverra mollis orci. Mauris eget fermentum erat. Maecenas mattis, dui quis mollis commodo, justo elit aliquam nulla, sit amet iaculis nisl velit vitae nibh. Aliquam erat volutpat. Sed scelerisque mattis euismod. Curabitur interdum lectus sit amet nisl tempus, sit amet laoreet.</p>
                                         </div>
 
-                                        <div class="pm-comment-reply-btn">
-                                            <br>
-                                                <a href="#" class="pm-square-btn-comment comment-reply">VOIR PLUS +</a>
-                                            </div>
+                                        
 
                                     </div>
                                     <!-- Comment end -->
-
-                                </div></div>
+                                
+                                </div></div> 
                                 <!-- Comments end -->
-
+                                <div class="pm-comment-reply-btn">
+                                            <br><br>
+                                                <a  id="voirPlus" class="pm-square-btn-comment comment-reply">VOIR PLUS +</a>
+                                            </div>
+                                            <?php } ?>
                             </div>
                         </div>
                     </div>
@@ -627,6 +665,33 @@ $prof=$req->fetch();
             <script src="js/jquery-ui.js"></script>
             <script src='https://cdnjs.cloudflare.com/ajax/libs/mo-js/0.288.1/mo.min.js'></script>
             <script  src="js/index-clap.js"></script>
+            <script>
+            var lastTime="";
+                    $("#voirPlus").click(function(){
+                        $.ajax({
+                            url : 'voirPlus.php',
+                            type : 'GET',
+                            data: {
+                                lastTime
+                            },
+                            dataType : "json",
+                            success : function(response, statut){
+                                if(response.comment!="")
+                                {
+                                $('#zone_de_rechargement').fadeIn(2000);
+                                $("#zone_de_rechargement").append(response.comment);
+                               lastTime=response.lastTime;
+                                }
+                                else 
+                                $('#voirPlus').hide();
+                        },
+                            error : function(response, statut, erreur){
+                            // TODO Error
+                        }
+                        });
+            
+                    });
+            </script>
 
             <p id="back-top" class="visible-lg visible-md visible-sm" style="bottom: -70px;"></p>
 
