@@ -249,7 +249,12 @@
                                       <p class="pm-author-title">physicien</p>
 
                                       <div class="pm-author-divider"></div>
-                                      <p class="pm-author-bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc fringilla erat nec tellus consectetur sodales. Vivamus quis est eget velit scelerisque condimentum sed non lorem. Morbi commodo id magna nec semper. Nullam pulvinar erat nisl, ac laoreet orci tempus iaculis. Vivamus nec tortor velit. Praesent a tortor nulla. Nullam pulvinar erat nisl, ac laoreet orci tempus iaculis.</p>
+                                      <p class="pm-author-bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                                          Nunc fringilla erat nec tellus consectetur sodales. Vivamus quis est eget velit
+                                            scelerisque condimentum sed non lorem. Morbi commodo id magna nec semper. 
+                                            Nullam pulvinar erat nisl, ac laoreet orci tempus iaculis. Vivamus nec tortor velit. 
+                                            Praesent a tortor nulla. Nullam pulvinar erat nisl, ac laoreet orci tempus iaculis.
+                                        </p>
                                   </div>
 
                               </div>
@@ -445,7 +450,7 @@
 
                         <div class="row">
                           <div class="pm-comment-vote-btn ">
-                            <a href="#" class="pm-square-btn comment-reply pm-center" style="width:400px">SOUMETTRE </a>
+                            <a href="#" class="pm-square-btn" style="width:400px">SOUMETTRE </a>
                           </div>
                         </div>
                 <!-- PANEL 4 end -->

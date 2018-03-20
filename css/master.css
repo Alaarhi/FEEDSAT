@@ -3916,14 +3916,16 @@ header {
   font-weight: 300; }
 
 .pm-form-textfield {
-  border: 1px solid #303F9F;
+  border: 1px solid rgb(119, 119, 119);
   background-color: transparent;
-  padding: 13px 13px;
-  width: 100%;
-  margin-bottom: 20px;
-  font-family: 'Lato';
-  font-size: 16px;
-  color: #303F9F;
+  padding: 12px 20px;
+  margin: 10px 30px;
+  /*padding: 13px 13px;*/
+  width: 50%;
+  /*margin-bottom: 20px;*/
+  font-family: 'Raleway';
+  font-size: 13px;
+  color: rgb(77, 9, 167);
   border-radius: 0px;
   -webkit-border-radius: 0px;
   -o-border-radius: 0px;
@@ -4760,7 +4762,7 @@ label {
   color: white !important;
   text-align: center;
   text-transform: uppercase;
-  margin: 10px 0;
+  margin: 10px 16px;
   display: inline-block;
   transition: all 0.4s;
   -moz-transition: all 0.4s;
@@ -4991,7 +4993,7 @@ label {
 
 .pm-comment {
   border-top: 1px solid #303F9F;
-  margin: -10px 31px 0 106px;
+  margin: 10px 31px 0 106px;
   padding: 20px 0 0 10px; }
 
   .pm-comment-reply-btn {
@@ -5728,6 +5730,10 @@ label {
     .rating > input:checked ~ label:hover,
     .rating > label:hover ~ input:checked ~ label, /* lighten current selection */
     .rating > input:checked ~ label:hover ~ label { color: #FFED85;  }
+
+
+
+
 
 
 
