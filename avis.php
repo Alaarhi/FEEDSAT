@@ -25,7 +25,7 @@
     }
 
     //Extraction de données pour le contenu de la page - Les requêtes ne sont exécutées qu'une seule fois pour une session donnée
-    /*
+    
     if (!(isset($_SESSION['moyenneFiliere']))) {
             $idFiliere = $_SESSION['idFiliere'];
             $reqMoyenne = 'SELECT avg(score) as moyenne 
@@ -35,7 +35,7 @@
             $repMoyenne = $bd->query($reqMoyenne);
             $moyenneFiliere = $repMoyenne->fetch(PDO::FETCH_OBJ);
             $_SESSION['moyenneFiliere'] = $moyenneFiliere->moyenne;
-    } */
+    } 
     include 'header.php'; 
 ?>
         
