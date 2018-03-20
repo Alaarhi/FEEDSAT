@@ -26,6 +26,7 @@
 
     //Extraction de données pour le contenu de la page - Les requêtes ne sont exécutées qu'une seule fois pour une session donnée
     
+    //Note moyenne attribuée par les étudiants
     if (!(isset($_SESSION['moyenneFiliere']))) {
             $idFiliere = $_SESSION['idFiliere'];
             $reqMoyenne = 'SELECT avg(score) as moyenne 
@@ -36,6 +37,12 @@
             $moyenneFiliere = $repMoyenne->fetch(PDO::FETCH_OBJ);
             $_SESSION['moyenneFiliere'] = $moyenneFiliere->moyenne;
     } 
+
+    //Taux d'anonymat 
+    
+
+
+
     include 'header.php'; 
 ?>
         
