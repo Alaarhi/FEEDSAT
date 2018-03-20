@@ -5,18 +5,16 @@
     if ((isset($_POST['numInscri'])) && (isset($_POST['numCin']))) {
         $numCin = $_POST['numCin'];
         $numInscri = $_POST['numInscri'];
-        $requete = 'SELECT * FROM student WHERE password = '.$numCin.' AND id = '.$numInscri;
-        $reponse = $bd->query($requete);
 
-        /*$requete = $bd->prepare('SELECT * FROM student WHERE password = ? AND id = ?');
+        $requete = $bd->prepare('SELECT * FROM student WHERE password = ? AND id = ?');
         $requete->execute(array($numCin, $numInscri));
-        $reponse = $bd->query($requete);*/
 
-        if (($reponse->rowCount())==0) {
+        if (($requete->rowCount())==0) {
             header("Location: index.php");
             exit;
         } else {
-            $etudiant = $reponse->fetch(PDO::FETCH_OBJ);
+            $etudiant = $requete->fetch(PDO::FETCH_OBJ);
+            $_SESSION['idEtudiant'] = $etudiant->id;
             $_SESSION['nom'] = $etudiant->name;
             $_SESSION['prenom'] = $etudiant->surname;
             $_SESSION['niveau'] = $etudiant->level;
@@ -24,24 +22,32 @@
         }     
     }
 
+    $idFiliere = $_SESSION['idFiliere'];
+
     //Extraction de données pour le contenu de la page - Les requêtes ne sont exécutées qu'une seule fois pour une session donnée
     
     //Note moyenne attribuée par les étudiants
     if (!(isset($_SESSION['moyenneFiliere']))) {
-            $idFiliere = $_SESSION['idFiliere'];
-            $reqMoyenne = 'SELECT avg(score) as moyenne 
-                FROM student 
-                INNER JOIN rating ON student.id = rating.studentId 
-                WHERE (student.fosId= '.$idFiliere.')';
-            $repMoyenne = $bd->query($reqMoyenne);
-            $moyenneFiliere = $repMoyenne->fetch(PDO::FETCH_OBJ);
-            $_SESSION['moyenneFiliere'] = $moyenneFiliere->moyenne;
+        $reqMoyenne = $bd->prepare('SELECT avg(score) as moyenne 
+            FROM student 
+            INNER JOIN rating ON student.id = rating.studentId 
+            WHERE student.fosId= ?');
+        $reqMoyenne->execute(array($idFiliere));
+        $moyenneFiliere = $reqMoyenne->fetch(PDO::FETCH_OBJ);
+        $_SESSION['moyenneFiliere'] = $moyenneFiliere->moyenne;
     } 
 
-    //Taux d'anonymat 
-    
-
-
+    if (!(isset($_SESSION['tauxAnonyme']))) {
+        $requeteTauxAnonyme = $bd->prepare('SELECT visibility, count(*) as nombre from student 
+            INNER JOIN comment
+            ON (student.id = comment.studentId)
+            WHERE (student.fosId = ?)
+            GROUP BY (comment.visibility)');     
+        $requeteTauxAnonyme->execute(array($idFiliere));
+        $tauxAnonyme = $requeteTauxAnonyme->fetch(PDO::FETCH_OBJ);
+        $_SESSION['tauxAnonyme'] = $tauxAnonyme->nombre; 
+        
+    }
 
     include 'header.php'; 
 ?>
@@ -97,7 +103,7 @@
                     <!-- milestone -->
                     <div class="milestone already-animated">
                         <div class="milestone-content">                         
-                            <span data-speed="2000" data-stop="548" class="milestone-value">548</span>
+                            <span data-speed="2000" data-stop="548" class="milestone-value"><?php echo $_SESSION['tauxAnonyme'] ?></span>
                             <div class="milestone-description">Des votes de vos amis sont anonymes</div>
                         </div>
                     </div>

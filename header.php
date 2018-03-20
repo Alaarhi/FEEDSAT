@@ -184,7 +184,7 @@
                                 <?php if (isset($_SESSION['nom'])) { ?>
                                 <li><a href="avis.php">Avis de mes collègues</a></li>
                                 <?php } else { ?>
-                                <li><a onclick="document.getElementById('modal-wrapper').style.display='block'">Avis de mes collègues</a></li>
+                                <li><a onclick="document.getElementById('avis').style.display='block'">Avis de mes collègues</a></li>
                                 <?php } ?>
 
                                 <?php if (isset($_SESSION['nom'])) { ?>    
