@@ -4,7 +4,7 @@
 ?>
 
         <!-- SLIDER AREA -->
-
+        // hhhhh
         <div class="pm-pulse-container" id="pm-pulse-container">
 
             <div id="pm-pulse-loader">
