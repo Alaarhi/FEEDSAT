@@ -2,11 +2,10 @@
     include 'dbConnection.php';
     include 'header.php';
 
-     $requete = $bd->query('SELECT * FROM professor LIMIT 0, 9 ');
-
+     $requete = $bd->query('SELECT * FROM professor LIMIT 0,9 ');
+     $i=0;
 
 ?>
-          <!--fchhhtttt-->
         <!-- Sub-header area -->
         
         <div class="pm-sub-header-container">
@@ -87,8 +86,9 @@
                             </div>
                         </div>
                         
-                       <a href="profile.php?id=1"><p class="name"><?php
-                       echo $prof['name'] . $prof['surname']
+                       <a href="profile.php?id=<?php echo $prof['id'] ?>"><p class="name"><?php
+                       echo $prof['name'] . $prof['surname'];
+                               $idprf=$prof['id'];
                         ?></p></a>
                         
                         <div class="pm-single-testimonial-divider"></div>
@@ -114,8 +114,8 @@
         <!-- BODY CONTENT end -->
 
 
-<div>  <?php include 'footer.html';?>
-</div>
+  <?php include 'footer.html';?>
+
 
 
     <!-- Bootstrap core JavaScript
