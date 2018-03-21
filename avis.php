@@ -38,6 +38,7 @@
         $_SESSION['moyenneFiliere'] = $moyenneFiliere->moyenne;
     } 
 
+
     //Taux anonymat chez une filière
     if (!(isset($_SESSION['tauxAnonymes']))) {
 
@@ -64,23 +65,52 @@
                 }
             }
         } 
-
         $nbrCommentsTotal = $nbrCommentsVisibles + $nbrCommentsAnonymes;      
         if (($nbrCommentsTotal) != 0) {
             $tauxAnonymes = (($nbrCommentsAnonymes * 100) / $nbrCommentsTotal);
         }
-
         $_SESSION['tauxAnonymes'] = (int)$tauxAnonymes;     
     }
 
 
-    
+    //Nombre d'amis contribuables 
+    //Extraire le nombre des commentators+voters en éliminant les doublons 
+    //i.e. celui qui est à la fois commentator et voter doit être compté 1 seule fois
+    if (!(isset($_SESSION['nbrContributors']))) {
 
+        $voters = array();
+        $commentators = array();
+        $contributors = array();
 
+        $requeteIdOfVoters = $bd->prepare('SELECT DISTINCT studentId FROM rating 
+            INNER JOIN student
+            ON (student.id = rating.studentId)
+            WHERE (student.fosId = ?)');     
+        $requeteIdOfVoters->execute(array($idFiliere));
 
+        $requeteIdOfCommentators= $bd->prepare('SELECT DISTINCT studentId FROM comment
+            INNER JOIN student
+            ON (student.id = comment.studentId)
+            WHERE (student.fosId = ?)');     
+        $requeteIdOfCommentators->execute(array($idFiliere));
 
+        if (($requeteIdOfVoters->rowCount()) !=0 ) {
+            while ($row = $requeteIdOfVoters->fetch(PDO::FETCH_OBJ)) {
+                array_push($voters, $row->studentId);
+            }
+        }
 
+        if (($requeteIdOfCommentators->rowCount()) !=0 ) {
+            while ($row = $requeteIdOfCommentators->fetch(PDO::FETCH_OBJ)) {
+                array_push($commentators, $row->studentId);
+            }
+        }
 
+        $contributors = array_unique(array_merge($voters,$commentators));
+        $nbrContributors = sizeof($contributors);
+        
+        $_SESSION['nbrContributors'] = $nbrContributors;
+    }
     include 'header.php'; 
 ?>
         
@@ -124,7 +154,7 @@
                     <!-- milestone -->
                     <div class="milestone already-animated">
                         <div class="milestone-content">                         
-                            <span data-speed="2000" data-stop="1789" class="milestone-value"><?php echo $_SESSION['moyenneFiliere'] ?> </span>
+                            <span data-speed="2000" data-stop="1789" class="milestone-value"><?php printf('%0.2f', $_SESSION['moyenneFiliere']) ?> </span>
                             <div class="milestone-description">Note moyenne attribuée par vos amis</div>
                         </div>
                     </div>
@@ -147,7 +177,7 @@
                     <!-- milestone -->
                     <div class="milestone already-animated">
                         <div class="milestone-content">                         
-                            <span data-speed="2000" data-stop="3490" class="milestone-value">3490</span>
+                            <span data-speed="2000" data-stop="3490" class="milestone-value"><?php echo $_SESSION['nbrContributors'] ?></span>
                             <div class="milestone-description">De vos amis ont contribué au site</div>
                         </div>
                     </div>
