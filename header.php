@@ -141,7 +141,7 @@
                             <li>
                             	<div class="pm-dropdown pm-categories-menu">
                                     <div class="pm-dropmenu">
-                                        <p class="pm-menu-title">Filtrer par département</p>
+                                        <p class="pm-menu-title">Filtrer par Département</p>
                                         <i class="fa fa-angle-down"></i>
                                     </div>
                                     <div class="pm-dropmenu-active">

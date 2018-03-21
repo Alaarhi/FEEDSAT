@@ -6,8 +6,6 @@
      $i=0;
 
 ?>
-        <!-- Sub-header area -->
-        
         <div class="pm-sub-header-container">
         
         	<div class="pm-sub-header-info-profs">

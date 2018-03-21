@@ -6,7 +6,6 @@ $requete = $bd->query('SELECT * FROM professor WHERE departement = "Sciences Soc
 
 
 ?>
-<!--fchhhtttt-->
 <!-- Sub-header area -->
 
 <div class="pm-sub-header-container">
