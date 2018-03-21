@@ -4803,10 +4803,29 @@ label {
       -webkit-transition: all 0.4s;
       -o-transition: all 0.4s; }
 
-    .pm-square-btn-comment:hover {
-      background-color: #FFC107;
-      color: #303F9F !important;
-      border: 3px solid #FFC107; }
+      .pm-square-btn-comment:hover {
+        background-color: #FFC107;
+        color: #303F9F !important;
+        border: 3px solid #FFC107; }
+
+      .pm-square-btn-comment-hovered {
+        min-width: 100px;
+        padding: 10px 25px;
+        font-family: 'Open sans';
+        font-size: 14px;
+        font-weight: bold;
+        text-align: center;
+        text-transform: uppercase;
+        margin: 10px 0;
+        display: inline-block;
+        background-color: #FFC107;
+        color: #303F9F !important;
+        border: 3px solid #FFC107;
+        transition: all 0.4s;
+        -moz-transition: all 0.4s;
+        -webkit-transition: all 0.4s;
+        -o-transition: all 0.4s;
+           }
 
     .pm-square-btn-comment-avis:hover {
       background-color: #303F9F;
@@ -4994,7 +5013,9 @@ label {
 .pm-comment {
   border-top: 1px solid #303F9F;
   margin: 10px 31px 0 106px;
-  padding: 20px 0 0 10px; }
+  padding: 20px 0 0 10px; 
+  align: inline;
+}
 
   .pm-comment-reply-btn {
     float: left;

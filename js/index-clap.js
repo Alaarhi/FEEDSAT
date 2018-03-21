@@ -1,3 +1,5 @@
+function clapping(){
+
 var clap = document.getElementsByClassName('clap');
 var clapIcon = document.getElementsByClassName('clap--icon');
 var btnDimension = 80;
@@ -46,7 +48,6 @@ i=0;
 for(i=0;i<clap.length;i++){
 clap[i].addEventListener('click', function () {
   j=this.id;
-
   if(document.getElementById(j+"1").classList.contains("checked"))
   {
     document.getElementById(j+"1").classList.remove("checked");
@@ -74,7 +75,9 @@ clap[i].addEventListener('mouseup', function () {
 function repeatClapping(j) {
   clapIcon[j-1].classList.add('checked');
 }
+}
 
+clapping();
 
 
 /*====== TODO ==========

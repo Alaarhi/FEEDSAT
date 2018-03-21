@@ -1,10 +1,120 @@
 ﻿<?php 
     include 'dbConnection.php';    
     include 'header.php';
+    $ind=0;
+    $req0=$bd->query('select id from professor');    
+    while($result0=$req0->fetch())  
+    {  
+    $req=$bd->query('select * from rating where profId='.$result0['id']);
+    $cdc=0; $tdp=0; $pdg=0; $adc=0; $cdln = 0; $i=0;$note=0;
+    if($req)
+    {
+    while($result=$req->fetch())
+        {   
+            $cdc+= intval($result['courseContent']);
+            $tdp+= intval($result['absenteism']);
+            $pdg+= intval($result['pedagogy']);
+            $adc+= intval($result['ambiance']);
+            $cdln+= intval($result['gradesCredibility']);    
+            $i=$i+1;    
+        }
+    if($i>0)
+    {
+    $cdc=$cdc/$i; $tdp=$tdp/$i; $pdg=$pdg/$i; $adc=$adc/$i; $cdln = $cdln/$i;
+    $req5=$bd->query('select * from rcriteria');
+    while ($result5=$req5->fetch())
+    {
+        if($result5['criteria']=="Ambiance en classe")
+            $adcr=$result5['weight'];
+        if($result5['criteria']=="Contenu du cours")
+            $cdcr=$result5['weight'];
+        if($result5['criteria']=="Crédibilité de la note")
+            $cdlnr=$result5['weight'];
+        if($result5['criteria']=="Pédagogie")
+            $pdgr=$result5['weight'];
+        if($result5['criteria']=="Taux de présence")
+            $tdpr=$result5['weight'];   
+    }
+    $note=($cdc*$cdcr+$adc*$adcr+$cdln*$cdlnr+$pdg*$pdgr+$tdp*$tdpr)/10;
+    $tabIdProf[$ind]=$result0['id'];
+    $tabNote[$ind]=$note;
+    $ind++;    
+}
+    //insertion dans 2tabs:
+    
+    }    
+}//fin while 1
+    $max=0;
+    $imax=0;
+    $min=10;
+    $imin=0;
+    for ($num= 0; $num<$ind; $num++)
+    {
+        if($tabNote[$num]>$max)
+                {$max=$tabNote[$num];
+                $imax=$num;}
+        if($tabNote[$num]<$min)
+                {$min=$tabNote[$num];
+                $imin=$num;}
+    }
+    //Best:
+    $idBestProfRate=$tabIdProf[$imax];
+    $noteBest=$tabNote[$imax];
+    $req2=$bd->query('select * from professor where id='.$idBestProfRate);
+    $result2=$req2->fetch();
+    $nomBestProf=$result2['name'];
+    $prenomBestProf=$result2['surname'];
+    $grade=$result2['grade'];
+    if($grade=="Professeur")
+        $gradeBestProf="Pr";
+    if($grade=="Maître de Conférences")
+        $gradeBestProf="M conf";
+    if($grade=="Maître Assistant")
+        $gradeBestProf="M asst";
+    if($grade=="Assistant")
+        $gradeBestProf="Asst";
+    //Min:
+    $idWorstProfRate=$tabIdProf[$imin];
+    $noteWorst=$tabNote[$imin];    
+    $req3=$bd->query('select * from professor where id='.$idWorstProfRate);
+    $result3=$req3->fetch();
+    $nomWorstProf=$result3['name'];
+    $prenomWorstProf=$result3['surname'];
+    $grade=$result3['grade'];
+    if($grade=="Professeur")
+        $gradeWorstProf="Pr";
+    if($grade=="Maître de Conférences")
+        $gradeWorstProf="M conf";
+    if($grade=="Maître Assistant")
+        $gradeWorstProf="M asst";
+    if($grade=="Assistant")
+        $gradeWorstProf="Asst";
+
+
+//prof avec le plus de feedbacks:
+$reqFeed=$bd->query('select COUNT(profId),profId from rating GROUP BY profId ORDER BY COUNT(profId) DESC');    
+$resultFeed=$reqFeed->fetch();
+
+$reqProf=$bd->query('select * from professor where id='.$resultFeed['profId']);
+$resultProf=$reqProf->fetch();
+
+$nomPlusFeed=$resultProf['name'];
+$prenomPlusFeed=$resultProf['surname'];
+$grade=$resultProf['grade'];
+if($grade=="Professeur")
+    $gradePlusFeed="Pr";
+if($grade=="Maître de Conférences")
+    $gradePlusFeed="M conf";
+if($grade=="Maître Assistant")
+    $gradePlusFeed="M asst";
+if($grade=="Assistant")
+    $gradePlusFeed="Asst";
+
+
+    
 ?>
 
         <!-- SLIDER AREA -->
-
         <div class="pm-pulse-container" id="pm-pulse-container">
 
             <div id="pm-pulse-loader">
@@ -103,7 +213,7 @@
 
                 	<a href="#" class="fa fa-hand-o-up pm-icon-btn"></a>
 
-                    <h6 class="pm-column-title">Dr Wided Miled</h6>
+                    <h6 class="pm-column-title"><?php echo($gradeBestProf." ".$nomBestProf." ".$prenomBestProf); ?></h6>
                     <h7 class="pm-column-subtitle">Le enseignant avec le plus de feedback positif</h7>
 
                     <div class="pm-title-divider"></div>
@@ -121,7 +231,7 @@
 
                     <a href="#" class="fa fa-hand-o-down pm-icon-btn"></a>
 
-                    <h6 class="pm-column-title">Dr. Khalil Chebil</h6>
+                    <h6 class="pm-column-title"><?php echo($gradeWorstProf." ".$nomWorstProf." ".$prenomWorstProf); ?></h6>
                     <h7 class="pm-column-subtitle">Le enseignant avec le plus de feedback négatif</h7>
 
                     <div class="pm-title-divider"></div>
@@ -139,7 +249,7 @@
 
                     <a href="#" class="fa fa-fire pm-icon-btn"></a>
 
-                    <h6 class="pm-column-title">Dr. Mouhamed Ali Maaref</h6>
+                    <h6 class="pm-column-title"><?php echo($gradePlusFeed." ".$nomPlusFeed." ".$prenomPlusFeed); ?></h6>
                     <h7 class="pm-column-subtitle">Le enseignant avec le plus de feeddback</h7>
 
                     <div class="pm-title-divider"></div>

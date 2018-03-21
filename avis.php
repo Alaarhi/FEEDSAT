@@ -1,4 +1,5 @@
 ﻿<?php 
+    
     include 'dbConnection.php';
 
     //Authentification et création d'une session
@@ -9,7 +10,7 @@
         $requete = $bd->prepare('SELECT * FROM student WHERE password = ? AND id = ?');
         $requete->execute(array($numCin, $numInscri));
 
-        if (($requete->rowCount())==0) {
+        if (($requete->rowCount()) == 0) {
             header("Location: index.php");
             exit;
         } else {
@@ -37,17 +38,48 @@
         $_SESSION['moyenneFiliere'] = $moyenneFiliere->moyenne;
     } 
 
-    if (!(isset($_SESSION['tauxAnonyme']))) {
-        $requeteTauxAnonyme = $bd->prepare('SELECT visibility, count(*) as nombre from student 
+    //Taux anonymat chez une filière
+    if (!(isset($_SESSION['tauxAnonymes']))) {
+
+        $nbrCommentsAnonymes = 0;
+        $nbrCommentsVisibles = 0;
+        $tauxAnonymes = 0;
+
+        $requeteTauxAnonyme = $bd->prepare('SELECT visibility as visibilite, count(*) as nbrComments from student 
             INNER JOIN comment
             ON (student.id = comment.studentId)
             WHERE (student.fosId = ?)
             GROUP BY (comment.visibility)');     
         $requeteTauxAnonyme->execute(array($idFiliere));
-        $tauxAnonyme = $requeteTauxAnonyme->fetch(PDO::FETCH_OBJ);
-        $_SESSION['tauxAnonyme'] = $tauxAnonyme->nombre; 
-        
+
+        if (($requeteTauxAnonyme->rowCount()) !=0 ) {
+            while ($row = $requeteTauxAnonyme->fetch(PDO::FETCH_OBJ)) {
+                switch ($row->visibilite) {
+                    case 0:
+                        $nbrCommentsAnonymes = $row->nbrComments;
+                        break;
+                    case 1:
+                        $nbrCommentsVisibles = $row->nbrComments;  
+                        break;
+                }
+            }
+        } 
+
+        $nbrCommentsTotal = $nbrCommentsVisibles + $nbrCommentsAnonymes;      
+        if (($nbrCommentsTotal) != 0) {
+            $tauxAnonymes = (($nbrCommentsAnonymes * 100) / $nbrCommentsTotal);
+        }
+
+        $_SESSION['tauxAnonymes'] = (int)$tauxAnonymes;     
     }
+
+
+    
+
+
+
+
+
 
     include 'header.php'; 
 ?>
@@ -103,7 +135,7 @@
                     <!-- milestone -->
                     <div class="milestone already-animated">
                         <div class="milestone-content">                         
-                            <span data-speed="2000" data-stop="548" class="milestone-value"><?php echo $_SESSION['tauxAnonyme'] ?></span>
+                            <span data-speed="2000" data-stop="548" class="milestone-value"><?php echo $_SESSION['tauxAnonymes'].' %' ?></span>
                             <div class="milestone-description">Des votes de vos amis sont anonymes</div>
                         </div>
                     </div>

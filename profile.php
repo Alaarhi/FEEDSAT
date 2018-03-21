@@ -7,7 +7,7 @@ $req=$bd->query('select * from professor where id='.$id);
 $prof=$req->fetch();
 $req=$bd->query('select * from rating where profId='.$id);
 $cdc=0; $tdp=0; $pdg=0; $adc=0; $cdln = 0; $i=0;$note=0;
-if($req->rowCount()>0)
+if($req)
 {
 while($result=$req->fetch())
     {   
@@ -17,10 +17,10 @@ while($result=$req->fetch())
         $adc+= intval($result['ambiance']);
         $cdln+= intval($result['gradesCredibility']);    
         $i=$i+1;    
-    }
+    
 
 $cdc=$cdc/$i; $tdp=$tdp/$i; $pdg=$pdg/$i; $adc=$adc/$i; $cdln = $cdln/$i;
-
+}
 $req=$bd->query('select * from rcriteria');
 while ($result=$req->fetch())
 {
@@ -264,66 +264,25 @@ $commentsNumber=$result['count'];
                                                     $i=0;
                                                     $reqMAXIComments=$bd->query('select count(*) as counts ,commentId from interact GROUP BY commentId ORDER BY counts DESC');
                                                     ?>
+
+                                                        <div style="padding-left: 33%">
+                                                            <br><br>
+                                                            <a id="topCommentaires" onclick="topCommentaires()" class="pm-square-btn-comment-hovered comment-reply">Top Commentaires</a> &nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <a id="plusRecents" onclick="plusRecents()" class="pm-square-btn-comment comment-reply" >Les Plus Récents</a>
+                                                            </div>
+
                                                 <!-- Comments -->
                                                 <div class="pm-comments-container" id="zone_de_rechargement">
                 
                                                     <!-- Comment -->
-                                                    <?php while( ($i<3) && ($MAXIComments=$reqMAXIComments->fetch()) ) {
-                                                        $req1 = $bd->query('select * from comment where id = "'.$MAXIComments["commentId"].'"');
-                                                        $comment=$req1->fetch();
-                                                        $req2 = $bd->query('select * from student where id = "'.$comment['studentId'].'"');
-                                                        $student=$req2->fetch();
-                
-                                                        ?>
-                                                    <div class="pm-comment-box-container">
-                
-                                                        <div class="pm-comment-box-avatar-container">
-                                                            <div class="pm-comment-avatar" style="background-image:url(img/news/01_avatar.jpg);">
-                                                            </div>
-                                                            <ul class="pm-comment-author-list">
-                                                                <li><p class="pm-comment-name"><?php echo $student['surname'].' '.$student['name'] ; ?></p></li>
-                                                                <li style="padding-left: 24%">
-                
-                
-                
-                                                                </li>
-                                                                <li><p class="pm-comment-date"><?php echo date("j M Y", strtotime($comment['timestamp'])); ?></p></li>
-                                                            </ul>
-                
-                
-                                                        </div>
-                                                        <div class="col-md-1" style="padding-top: 25px">
-                
-                                                            <button id="<?php echo $MAXIComments['commentId'] ; ?>" class="clap" onclick="clap(<?php echo $MAXIComments['commentId'] ; ?>,<?php echo "1100675"; ?>)">
-                                                                <span>
-                                                                  <!--  SVG Created by Luis Durazo from the Noun Project  -->
-                                                                  <svg id="<?php echo $MAXIComments['commentId'].'1' ; ?>" class="clap--icon" xmlns="http://www.w3.org/2000/svg" viewBox="-549 338 100.1 125">
-                                                                <path d="M-471.2 366.8c1.2 1.1 1.9 2.6 2.3 4.1.4-.3.8-.5 1.2-.7 1-1.9.7-4.3-1-5.9-2-1.9-5.2-1.9-7.2.1l-.2.2c1.8.1 3.6.9 4.9 2.2zm-28.8 14c.4.9.7 1.9.8 3.1l16.5-16.9c.6-.6 1.4-1.1 2.1-1.5 1-1.9.7-4.4-.9-6-2-1.9-5.2-1.9-7.2.1l-15.5 15.9c2.3 2.2 3.1 3 4.2 5.3zm-38.9 39.7c-.1-8.9 3.2-17.2 9.4-23.6l18.6-19c.7-2 .5-4.1-.1-5.3-.8-1.8-1.3-2.3-3.6-4.5l-20.9 21.4c-10.6 10.8-11.2 27.6-2.3 39.3-.6-2.6-1-5.4-1.1-8.3z"/>
-                                                                <path d="M-527.2 399.1l20.9-21.4c2.2 2.2 2.7 2.6 3.5 4.5.8 1.8 1 5.4-1.6 8l-11.8 12.2c-.5.5-.4 1.2 0 1.7.5.5 1.2.5 1.7 0l34-35c1.9-2 5.2-2.1 7.2-.1 2 1.9 2 5.2.1 7.2l-24.7 25.3c-.5.5-.4 1.2 0 1.7.5.5 1.2.5 1.7 0l28.5-29.3c2-2 5.2-2 7.1-.1 2 1.9 2 5.1.1 7.1l-28.5 29.3c-.5.5-.4 1.2 0 1.7.5.5 1.2.4 1.7 0l24.7-25.3c1.9-2 5.1-2.1 7.1-.1 2 1.9 2 5.2.1 7.2l-24.7 25.3c-.5.5-.4 1.2 0 1.7.5.5 1.2.5 1.7 0l14.6-15c2-2 5.2-2 7.2-.1 2 2 2.1 5.2.1 7.2l-27.6 28.4c-11.6 11.9-30.6 12.2-42.5.6-12-11.7-12.2-30.8-.6-42.7m18.1-48.4l-.7 4.9-2.2-4.4m7.6.9l-3.7 3.4 1.2-4.8m5.5 4.7l-4.8 1.6 3.1-3.9"/>
-                                                              </svg>
-                                                                </span>
-                
-                                                              </button>
-                                                            <div id="<?php echo $MAXIComments['commentId'].'11' ; ?>" class="clapsNumber" ><?php echo $MAXIComments['counts'] ;?></div>
-                                                            </div>
-                
-                                                        <div class="pm-comment">
-                                                            <p><?php echo $comment['comment']; ?></p>
-                                                        </div>
-                
-                                                        <div class="pm-comment-reply-btn">
-                
-                                                        </div>
-                
-                                                    </div>
-                                                    <?php } ?>
+                                                    
                                                     <!-- Comment end -->
                 
                                                 </div> 
                                                 <!-- Comments end -->
                                                 <div class="pm-comment-reply-btn">
                                                             <br><br>
-                                                                <a  id="voirPlus" class="pm-square-btn-comment comment-reply">VOIR PLUS +</a>
+                                                                <a  id="voirPlus" onclick="plusRecents()" class="pm-square-btn-comment comment-reply" >VOIR PLUS +</a>
                                                             </div>
                                                             <?php } ?>
                                             </div>
@@ -419,53 +378,6 @@ $commentsNumber=$result['count'];
             <script src="js/tinynav.js"></script>
             <script src="js/jquery-ui.js"></script>
             <script src='https://cdnjs.cloudflare.com/ajax/libs/mo-js/0.288.1/mo.min.js'></script>
-            <script  src="js/index-clap.js"></script>
-            <script>
-                        var param = 1;
-                        var lastTime;
-                                    $.ajax({
-                                        url : 'voirPlus.php',
-                                        type : 'GET',
-                                        data: {
-                                        param    
-                                        },
-                                        dataType : "json",
-                                        success : function(response, statut){
-                                            lastTime=response.timemax;
-                                    },
-                                        error : function(response, statut, erreur){
-                                        alert(erreur);
-                                    }
-                                    });
-                        var param;
-                        var shown="";
-
-                                $("#voirPlus").click(function(){
-                                    $.ajax({
-                                        url : 'voirPlus.php',
-                                        type : 'GET',
-                                        data: {
-                                            lastTime,shown
-                                        },
-                                        dataType : "json",
-                                        success : function(response, statut){
-                                            if(response.comment!="")
-                                            {
-                                            $('#zone_de_rechargement').fadeIn(2000);
-                                            $("#zone_de_rechargement").append(response.comment);
-                                            lastTime=response.lastTime;
-                                            shown=response.shown;
-                                            }
-                                            else 
-                                            $('#voirPlus').hide();
-                                    },
-                                        error : function(response, statut, erreur){
-                                        alert(erreur);
-                                    }
-                                    });
-                        
-                                });
-            </script>
             <script>
                         function clap(commentId,studentId){
                                             j=commentId;
@@ -479,10 +391,8 @@ $commentsNumber=$result['count'];
                                                         param,commentId,studentId    
                                                         },
                                                         success : function(response, statut){
-                                                        alert(response);
                                                         },
                                                         error : function(response, statut, erreur){
-                                                        alert(erreur);
                                                         }
                                                     });  
                                             }
@@ -496,16 +406,90 @@ $commentsNumber=$result['count'];
                                                         param,commentId,studentId   
                                                         },
                                                         success : function(response, statut){
-                                                            alert(response);
                                                         },
                                                         error : function(response, statut, erreur){
-                                                        alert(erreur);
                                                         }
                                                     });
                                             }
                         
                         }
             </script>
+            <script>
+                            
+                            var param = 1;
+                            var lastTime;
+                                        $.ajax({
+                                            url : 'voirPlus.php',
+                                            type : 'GET',
+                                            data: {
+                                            param    
+                                            },
+                                            dataType : "json",
+                                            success : function(response, statut){
+                                                lastTime=response.timemax;
+                                        },
+                                            error : function(response, statut, erreur){
+                                        }
+                                        });
+
+                            var param;
+                            var shown="";
+
+                        function topCommentaires(){
+                            document.getElementById("plusRecents").classList.remove("pm-square-btn-comment-hovered");
+                            document.getElementById("plusRecents").classList.add("pm-square-btn-comment"); 
+                            document.getElementById("topCommentaires").classList.remove("pm-square-btn-comment");
+                            document.getElementById("topCommentaires").classList.add("pm-square-btn-comment-hovered");                            
+                        }
+
+                        function plusRecents(){
+                            if(document.getElementById("topCommentaires").classList.contains("pm-square-btn-comment-hovered"))
+                            {
+                            document.getElementById("topCommentaires").classList.remove("pm-square-btn-comment-hovered");
+                            document.getElementById("topCommentaires").classList.add("pm-square-btn-comment");
+                            }
+                            if(document.getElementById("plusRecents").classList.contains("pm-square-btn-comment"))
+                            {
+                            document.getElementById("plusRecents").classList.remove("pm-square-btn-comment");
+                            document.getElementById("plusRecents").classList.add("pm-square-btn-comment-hovered");
+                            }
+                            
+                            if(document.getElementById("559"))
+                            {
+                            var element = document.getElementById("559"); 
+                            element.parentNode.removeChild(element);
+                            }
+
+                                        $.ajax({
+                                            url : 'voirPlus.php',
+                                            type : 'GET',
+                                            data: {
+                                                lastTime,shown
+                                            },
+                                            dataType : "json",
+                                            success : function(response, statut){
+                                                if(response.comment.length!="50")
+                                                {
+                                                $('#zone_de_rechargement').fadeIn(2000);
+                                                $("#zone_de_rechargement").append(response.comment);
+                                                lastTime=response.lastTime;
+                                                shown=response.shown;    
+
+                                            }
+                                                else
+                                                { 
+                                                $('#voirPlus').hide();
+
+                                            }
+                                        },
+                                            error : function(response, statut, erreur){
+
+                                            }
+                                        });
+                        }
+
+            </script>
+           
             <p id="back-top" class="visible-lg visible-md visible-sm" style="bottom: -70px;"></p>
 
 
