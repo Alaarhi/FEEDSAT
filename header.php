@@ -141,15 +141,15 @@
                             <li>
                             	<div class="pm-dropdown pm-categories-menu">
                                     <div class="pm-dropmenu">
-                                        <p class="pm-menu-title">Filtrer par département</p>
+                                        <p class="pm-menu-title">Filtrer par Département</p>
                                         <i class="fa fa-angle-down"></i>
                                     </div>
                                     <div class="pm-dropmenu-active">
                                         <ul>
-                                           <li><a href="news.php">Département 1</a></li>
-                                           <li><a href="news.php">Département 2</a></li>
-                                           <li><a href="news.php">Département 3</a></li>
-                                           <li><a href="news.php">Département 4</a></li>
+                                           <li><a href="depinformatique.php">Génie informatique et Mathématique</a></li>
+                                           <li><a href="depphy.php">Génie physique et instrumentation</a></li>
+                                           <li><a href="depbio.php">Génie Biologie et chimie</a></li>
+                                           <li><a href="deplangue.php">Sciences Sociales, langues et Formation générale</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -172,11 +172,10 @@
                                 <li>
                                 	<a href="profs.php">Liste des enseignants</a>
                                     <ul>
-                                        <li><a href="medical-staff.php">Département 1</a></li>
-                                        <li><a href="medical-staff.php">Département 2</a></li>
-                                        <li><a href="medical-staff.php">Département 3</a></li>
-                                        <li><a href="medical-staff.php">Département 4</a></li>
-                                        <li><a href="medical-staff.php">Département 5</a></li>
+                                        <li><a href="depinformatique.php">Génie informatique et Mathématique</a></li>
+                                        <li><a href="depphy.php">Génie physique et instrumentation</a></li>
+                                        <li><a href="depbio.php">Génie Biologie et chimie</a></li>
+                                        <li><a href="deplangue.php">Sciences Sociales, langues et Formation générale</a></li>
                                     </ul>
                                 </li>
                                 

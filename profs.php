@@ -1,10 +1,11 @@
-﻿<?php 
+﻿<?php
     include 'dbConnection.php';
     include 'header.php';
+
+     $requete = $bd->query('SELECT * FROM professor LIMIT 0,9 ');
+     $i=0;
+
 ?>
-          <!--fchhhtttt-->
-        <!-- Sub-header area -->
-        
         <div class="pm-sub-header-container">
         
         	<div class="pm-sub-header-info-profs">
@@ -39,43 +40,35 @@
                         </div>
                         
                     </div>
-                </div>
-        
+            </div>
+
         </div>
-        
+
  		<!-- Sub-header area end -->
         
         <!-- BODY CONTENT starts here -->
-                
-        <!-- PANEL 1 -->
-    <!-- PANEL 1 end -->
-        
-        <!-- PANEL 2 -->
+<!-- PANEL 4 -->
+    <div class="pm-column-container testimonials pm-parallax-panel" style="background-color: rgb(32, 186, 199); background-image: url(&quot;img/home/testimonials-bg.jpg&quot;); background-repeat: repeat-y; background-position: 0% -1376.5px;" data-stellar-background-ratio="0.5" data-stellar-vertical-offset="-50">
 
-        <!-- PANEL 2 end -->
-        
-        <!-- PANEL 3 -->
-        
-        <!-- PANEL 3 end -->
-        
-        <!-- PANEL 4 -->
-        <div class="pm-column-container testimonials pm-parallax-panel" style="background-color: rgb(32, 186, 199); background-image: url(&quot;img/home/testimonials-bg.jpg&quot;); background-repeat: repeat-y; background-position: 0% -1376.5px;" data-stellar-background-ratio="0.5" data-stellar-vertical-offset="-50">
-        
-        	<!-- /.container -->
-        
-        </div>
-        <!-- PANEL 4 end -->
-        
-        <!-- PANEL 5 -->
+    <!-- /.container -->
+
+    </div>
+
+
+<!-- PANEL 1 -->
         <div class="container pm-containerPadding-bottom-30  pm-containerPadding-top-20">
-        
-        	
-            
-            <div class="row pm-containerPadding-bottom-60 pm-center">
-            
+        <div class="row pm-containerPadding-bottom-60 pm-center">
+
+
+            <?php
+            while($prof = $requete->fetch()){
+             ?>
+               
             	<!-- Column 1 -->
+              
+
                 <div class="col-lg-4 col-md-4 col-sm-12 desktop pm-center pm-columnPadding-30 pm-column-spacing">
-                	
+
                     <!-- Single testimonial -->
                     <div class="pm-single-testimonial-shortcode">
                     	
@@ -85,233 +78,38 @@
                             </div>
                         </div>
                         
-                       <a href="profile.php?id=1"><p class="name">Hamza Gaaliche</p></a> 
-                        
+                       <a href="profile.php?id=<?php echo $prof['id'] ?>"><p class="name"><?php
+                       echo $prof['name'] . $prof['surname'];
+                               $idprf=$prof['id'];
+                        ?></p></a>
                         
                         <div class="pm-single-testimonial-divider"></div>
-                        
-                        
-                    
+
                     </div>
                     <!-- Single testimonial end -->
-                    
+
               	</div>
                 <!-- Column 1 end -->
-                
-                <!-- Column 2 -->
-                <div class="col-lg-4 col-md-4 col-sm-12 desktop pm-center pm-columnPadding-30 pm-column-spacing">
-                	
-                    <!-- Single testimonial -->
-                    <div class="pm-single-testimonial-shortcode">
-                    	
-                    	<div style="background-image:url(img/information/avatar2.jpg);" class="pm-single-testimonial-img-bg">
-                            <div class="pm-single-testimonial-avatar-icon">
-                                <img width="33" height="41" class="img-responsive" src="img/news/post-icon.jpg">
-                            </div>
-                        </div>
-                        
-                        <a href="profile.php"><p class="name">Abir Messaoudi</p></a>
-                        
-                        
-                        <div class="pm-single-testimonial-divider"></div>
-                    
-                    
-                    </div>
-                    <!-- Single testimonial end -->
-                    
-              </div>
-                <!-- Column 2 end -->
-                
-                <!-- Column 3 -->
-                <div class="col-lg-4 col-md-4 col-sm-12 desktop pm-center pm-columnPadding-30 pm-column-spacing">
-                	
-                    <!-- Single testimonial -->
-                    <div class="pm-single-testimonial-shortcode">
-                    	
-                    	<div style="background-image:url(img/information/avatar3.jpg);" class="pm-single-testimonial-img-bg">
-                            <div class="pm-single-testimonial-avatar-icon">
-                                <img width="33" height="41" class="img-responsive" src="img/news/post-icon.jpg">
-                            </div>
-                        </div>
-                        
-                        <a href="profile.php"><p class="name">Skander Meghirbi</p></a>
-                        
-                        
-                        <div class="pm-single-testimonial-divider"></div>
-                    
-                    
-                  </div>
-                    <!-- Single testimonial end -->
-                    
-              </div>
-                <!-- Column 3 end -->
-
-                <div class="col-lg-4 col-md-4 col-sm-12 desktop pm-center pm-columnPadding-30 pm-column-spacing">
-                        
-                        <!-- Single testimonial -->
-                        <div class="pm-single-testimonial-shortcode">
-                            
-                            <div style="background-image:url(img/information/avatar1.jpg);" class="pm-single-testimonial-img-bg">
-                                <div class="pm-single-testimonial-avatar-icon">
-                                    <img width="33" height="41" class="img-responsive" src="img/news/post-icon.jpg">
-                                </div>
-                            </div>
-                            
-                            <p class="name">Hamza Gaaliche</p>
-                            
-                            
-                            <div class="pm-single-testimonial-divider"></div>
-                            
-                            
-                        
-                        </div>
-                        <!-- Single testimonial end -->
-                        
-                      </div>
-                    <!-- Column 1 end -->
-                    
-                    <!-- Column 2 -->
-                    <div class="col-lg-4 col-md-4 col-sm-12 desktop pm-center pm-columnPadding-30 pm-column-spacing">
-                        
-                        <!-- Single testimonial -->
-                        <div class="pm-single-testimonial-shortcode">
-                            
-                            <div style="background-image:url(img/information/avatar2.jpg);" class="pm-single-testimonial-img-bg">
-                                <div class="pm-single-testimonial-avatar-icon">
-                                    <img width="33" height="41" class="img-responsive" src="img/news/post-icon.jpg">
-                                </div>
-                            </div>
-                            
-                            <p class="name">Abir Messaoudi</p>
-                            
-                            
-                            <div class="pm-single-testimonial-divider"></div>
-                        
-                        
-                        </div>
-                        <!-- Single testimonial end -->
-                        
-                  </div>
-                    <!-- Column 2 end -->
-                    
-                    <!-- Column 3 -->
-                    <div class="col-lg-4 col-md-4 col-sm-12 desktop pm-center pm-columnPadding-30 pm-column-spacing">
-                        
-                        <!-- Single testimonial -->
-                        <div class="pm-single-testimonial-shortcode">
-                            
-                            <div style="background-image:url(img/information/avatar3.jpg);" class="pm-single-testimonial-img-bg">
-                                <div class="pm-single-testimonial-avatar-icon">
-                                    <img width="33" height="41" class="img-responsive" src="img/news/post-icon.jpg">
-                                </div>
-                            </div>
-                            
-                            <p class="name">Skander Meghirbi</p>
-                            
-                            
-                            <div class="pm-single-testimonial-divider"></div>
-                        
-                        
-                      </div>
-                        <!-- Single testimonial end -->
-                        
-                  </div>
-
-
-                  <div class="col-lg-4 col-md-4 col-sm-12 desktop pm-center pm-columnPadding-30 pm-column-spacing">
-                        
-                        <!-- Single testimonial -->
-                        <div class="pm-single-testimonial-shortcode">
-                            
-                            <div style="background-image:url(img/information/avatar1.jpg);" class="pm-single-testimonial-img-bg">
-                                <div class="pm-single-testimonial-avatar-icon">
-                                    <img width="33" height="41" class="img-responsive" src="img/news/post-icon.jpg">
-                                </div>
-                            </div>
-                            
-                            <p class="name">Hamza Gaaliche</p>
-                            
-                            
-                            <div class="pm-single-testimonial-divider"></div>
-                            
-                            
-                        
-                        </div>
-                        <!-- Single testimonial end -->
-                        
-                      </div>
-                    <!-- Column 1 end -->
-                    
-                    <!-- Column 2 -->
-                    <div class="col-lg-4 col-md-4 col-sm-12 desktop pm-center pm-columnPadding-30 pm-column-spacing">
-                        
-                        <!-- Single testimonial -->
-                        <div class="pm-single-testimonial-shortcode">
-                            
-                            <div style="background-image:url(img/information/avatar2.jpg);" class="pm-single-testimonial-img-bg">
-                                <div class="pm-single-testimonial-avatar-icon">
-                                    <img width="33" height="41" class="img-responsive" src="img/news/post-icon.jpg">
-                                </div>
-                            </div>
-                            
-                            <p class="name">Abir Messaoudi</p>
-                            
-                            
-                            <div class="pm-single-testimonial-divider"></div>
-                        
-                        
-                        </div>
-                        <!-- Single testimonial end -->
-                        
-                  </div>
-                    <!-- Column 2 end -->
-                    
-                    <!-- Column 3 -->
-                    <div class="col-lg-4 col-md-4 col-sm-12 desktop pm-center pm-columnPadding-30 pm-column-spacing">
-                        
-                        <!-- Single testimonial -->
-                        <div class="pm-single-testimonial-shortcode">
-                            
-                            <div style="background-image:url(img/information/avatar3.jpg);" class="pm-single-testimonial-img-bg">
-                                <div class="pm-single-testimonial-avatar-icon">
-                                    <img width="33" height="41" class="img-responsive" src="img/news/post-icon.jpg">
-                                </div>
-                            </div>
-                            
-                            <p class="name">Skander Meghirbi</p>
-                            
-                            
-                            <div class="pm-single-testimonial-divider"></div>
-                        
-                        
-                      </div>
-                        <!-- Single testimonial end -->
-                        
-                  </div>
+                <?php
+                }
+                ?>
+            </div>
 
 
                   <div class="pm-comment-reply-btn">
                         <br>
                             <a href="#" class="pm-square-btn-comment comment-reply">VOIR PLUS +</a>
-                        </div> 
-        
-
-              
-
-               
-                
-                
-            </div>
-        
+                  </div>
         </div>
         <!-- PANEL 5 end -->
         
         <!-- BODY CONTENT end -->
 
-    <?php include 'footer.html';?>
-    
-    </div><!-- /pm_layout-wrapper -->
-    
+
+  <?php include 'footer.html';?>
+
+
+
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
