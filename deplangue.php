@@ -59,21 +59,13 @@ $requete = $bd->query('SELECT * FROM professor WHERE departement = "Sciences Soc
 
 <!-- PANEL 1 -->
 <div class="container pm-containerPadding-bottom-30  pm-containerPadding-top-20">
+<div class="row pm-containerPadding-bottom-60 pm-center">
+
 
     <?php
     while($prof = $requete->fetch()){
     ?>
-    <?php
-    if ($prof['id']==1 || $prof['id']==4 || $prof['id']==7 )
-    {
-    ?>
 
-
-    <div class="row pm-containerPadding-bottom-60 pm-center">
-        <!-- Column 1 -->
-        <?php
-        }
-        ?>
 
         <div class="col-lg-4 col-md-4 col-sm-12 desktop pm-center pm-columnPadding-30 pm-column-spacing">
 
