@@ -110,6 +110,40 @@ if($grade=="Maître Assistant")
 if($grade=="Assistant")
     $gradePlusFeed="Asst";
 
+//nombre interactions:
+$reqnbinteract=$bd->query('select COUNT(*) from rating');
+$resultnbinteract=$reqnbinteract->fetch();
+
+//nombre comments:
+$reqnbincom=$bd->query('select COUNT(*) from comment');
+$resultnbcom=$reqnbinteract->fetch();
+
+// nb feedbacks:
+$nbfeed=$resultnbinteract[0]+$resultnbincom[0];
+
+//taux participation:
+$reqnbstudent=$bd->query('select COUNT(*) from student');
+$resultnbstudent=$reqnbstudent->fetch();
+$taux=round(($nbfeed/$resultnbstudent[0])*100,4);
+
+//Best comments:
+/*$reqBestCom=$bd->query('select COUNT(commentId),commentId,studentId from interact GROUP BY commentId ORDER BY COUNT(commentId) DESC');    
+$i=0;
+while(($resultBestCom=$reqFeed->fetch()) || $i<3 )
+{
+    $reqCom=$bd->query('select comment from comment where id='.$resultBestCom['commentId']);
+    $resultCom=$reqCom->fetch();
+    $reqCom=$db->query('select name,surname,level,fosId from student where id='.$resultBestCom['studentId']);
+    $resultCom=$reqCom->fetch();
+    $tabCom[$i]=$resultCom[0];
+    $tabStName[$i]=$resultSt['name'];
+    $tabStSurname[$i]=$resultSt['surname'];
+    $tabStLevel[$i]=$resultSt['level'];
+    $reqFos=$db->query('select fos from fos where id='.$resultBestCom['fosId']);
+    $resultFos=$reqCom->fetch();
+    $tabStFos[$i]=$resultFos[0];    
+    $i++;
+}*/
 
     
 ?>
@@ -428,7 +462,7 @@ if($grade=="Assistant")
                     <!-- milestone -->
                     <div class="milestone">
                         <div class="milestone-content">
-                            <span data-speed="2000" data-stop="1789" class="milestone-value"></span>
+                            <span data-speed="2000" data-stop="<?php echo($nbfeed); ?>" class="milestone-value"></span>
                             <div class="milestone-description">Fedbacks</div>
                         </div>
                     </div>
@@ -443,7 +477,7 @@ if($grade=="Assistant")
                     <!-- milestone -->
                     <div class="milestone">
                         <div class="milestone-content">
-                            <span data-speed="2000" data-stop="548" class="milestone-value"></span>
+                            <span data-speed="2000" data-stop="<?php echo($resultnbcom[0]); ?>" class="milestone-value"></span>
                             <div class="milestone-description">Commentaires</div>
                         </div>
                     </div>
@@ -458,7 +492,7 @@ if($grade=="Assistant")
                     <!-- milestone -->
                     <div class="milestone">
                         <div class="milestone-content">
-                            <span data-speed="2000" data-stop="3490" class="milestone-value"></span>
+                            <span data-speed="2000" data-stop="<?php echo($resultnbinteract[0]); ?>" class="milestone-value"></span>
                             <div class="milestone-description">Interactions</div>
                         </div>
                     </div>
@@ -473,7 +507,7 @@ if($grade=="Assistant")
                     <!-- milestone -->
                     <div class="milestone">
                         <div class="milestone-content">
-                            <span data-speed="2000" data-stop="439" class="milestone-value"></span>
+                            <span data-speed="2000" data-stop="<?php echo($taux); ?>" class="milestone-value"></span>
                             <div class="milestone-description">Taux de participation</div>
                         </div>
                     </div>
@@ -505,8 +539,8 @@ if($grade=="Assistant")
                                     	<img src="img/home/post-icon.jpg" class="img-responsive pm-center-align" alt="icon">
                                     </div>-->
                                 </div>
-                                <p class="pm-testimonial-name">Hamza Gaaliche</p>
-                                <p class="pm-testimonial-title">RT 4</p>
+                                <p class="pm-testimonial-name"> </p>
+                                <p class="pm-testimonial-title"></p>
                                 <div class="pm-testimonial-divider"></div>
                                 <p class="pm-testimonial-quote">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam quis nostrud exerci tation.</p>
                             </li>
