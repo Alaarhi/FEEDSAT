@@ -19,7 +19,7 @@ if(isset($_GET['parametre']))
     $shown2="";
     $lastCount=0;
     if(($_GET['param2']==1)||($_GET['lastCount']==" "))
-    {
+    {        
     $req = $bd->query('select count(*) as somme, commentId from interact group by commentId order by somme desc');
     }
     else 
@@ -37,7 +37,7 @@ if(isset($_GET['parametre']))
     
     while(($result2=$req->fetch())&&($i<3))
     {
-        $req0 = $bd->query('select * from comment where id = "'.$result2['commentId'].'"');
+        $req0 = $bd->query('select * from comment where id = "'.$result2['commentId'].'"  ');
         $result=$req0->fetch();
         $req2 = $bd->query('select * from student where id = "'.$result['studentId'].'"');
         $req3 = $bd->query('select count(*) as NInteract from interact where commentId = '.$result['id']);
@@ -121,7 +121,7 @@ if(isset($_GET['parametre']))
 if(isset($_GET['lastTime']))
 {
 $lastTime=$_GET['lastTime'];
-$req = $bd->query('select * from comment where ( timestamp <= "'.$lastTime.'" and approved="1" )  order by timestamp desc');
+$req = $bd->query('select * from comment where ( timestamp <= "'.$lastTime.'" and approved="1" and profId="'.$_GET['profId'].'")  order by timestamp desc');
 
 $i=0;
 $bloc="";

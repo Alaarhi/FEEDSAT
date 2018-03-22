@@ -89,7 +89,7 @@ $commentsNumber=$result['count'];
                 
                                                     <div class="col-lg-9 col-md-9 col-sm-12">
                                                             <div class="pm-comment-vote-btn">
-                                                                    <a href="vote.php" class="pm-square-btn comment-reply">VOTER</a>
+                                                                    <a href="vote.php?id=<?php echo $id; ?>" class="pm-square-btn comment-reply">VOTER</a>
                                                                 </div>
                                                         <p class="pm-author-name"><?php echo($prof['surname']." ".$prof['name']); ?></p>
                                                         <p class="pm-author-title"><?php echo($prof['grade']); ?></p>
@@ -268,8 +268,8 @@ $commentsNumber=$result['count'];
 
                                                         <div style="padding-left: 33%">
                                                             <br><br>
-                                                            <a id="topCommentaires" onclick="menuTopCommentaires()" class="pm-square-btn-comment-hovered comment-reply">Top Commentaires</a> &nbsp;&nbsp;&nbsp;&nbsp;
-                                                            <a id="plusRecents" onclick="menuPlusRecents()" class="pm-square-btn-comment comment-reply" >Les Plus Récents</a>
+                                                            <a id="topCommentaires" onclick="menuTopCommentaires(<?php echo $id; ?>)" class="pm-square-btn-comment-hovered comment-reply">Top Commentaires</a> &nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <a id="plusRecents" onclick="menuPlusRecents(<?php echo $id; ?>)" class="pm-square-btn-comment comment-reply" >Les Plus Récents</a>
                                                             </div>
 
                                                 <!-- Comments -->
@@ -294,7 +294,7 @@ $commentsNumber=$result['count'];
                                                 <!-- Comments end -->
                                                 <div id="voirPlus" class="pm-comment-reply-btn">
                                                             <br><br>
-                                                                <a  onclick="choice()" class="pm-square-btn-comment comment-reply" >VOIR PLUS +</a>
+                                                                <a  onclick="choice(<?php echo $id; ?>)" class="pm-square-btn-comment comment-reply" >VOIR PLUS +</a>
                                                             </div>
                                                             <?php } ?>
                                             </div>
@@ -470,13 +470,13 @@ $commentsNumber=$result['count'];
                     
       
 
-                            function lastTimee(){
+                            function lastTimee(profId){
                                 var x;
                                         $.ajax({
                                             url : 'voirPlus.php',
                                             type : 'GET',
                                             data: {
-                                            param    
+                                            param,profId    
                                             },
                                             dataType : "json",
                                             success : function(response, statut){
@@ -488,7 +488,7 @@ $commentsNumber=$result['count'];
                                         });
                                         return "x";
                                     }
-                        lastTimee();
+                        lastTimee(<?php echo $id; ?>);
 
                         
                                         $.ajax({
@@ -510,38 +510,38 @@ $commentsNumber=$result['count'];
                                    
 
                                     
-                            function menuPlusRecents()
+                            function menuPlusRecents(profId)
                         {   
                             if(document.getElementById("plusRecents").classList.contains("pm-square-btn-comment"))
                             {
                             param=1;
-                            lastTime=lastTimee();
+                            lastTime=lastTimee(profId);
                             shown="";
-                            plusRecents();
+                            plusRecents(profId);
                         }
                         }
 
 
-                        function menuTopCommentaires()
+                        function menuTopCommentaires(profId)
                         {
                             
                             parametre=1;
                             param2=1;
-                            topCommentaires();
+                            topCommentaires(profId);
                         }
                         
-                        function choice(){
+                        function choice(profId){
                             if(document.getElementById("topCommentaires").classList.contains("pm-square-btn-comment-hovered"))
                             {
-                                topCommentaires(1);
+                                topCommentaires(profId);
                             }
                             else
                             {
-                                plusRecents();
+                                plusRecents(profId);
                             }
                         }
 
-                        function plusRecents(){
+                        function plusRecents(profId){
                             var param;
                             var zone = '<div class="pm-comments-container" hidden id="zone_plus_recents"></div>'; 
                             if(document.getElementById("zone_top_commentaires"))
@@ -578,7 +578,7 @@ $commentsNumber=$result['count'];
                                             url : 'voirPlus.php',
                                             type : 'GET',
                                             data: {
-                                                lastTime,shown
+                                                lastTime,shown,profId
                                             },
                                             dataType : "json",
                                             success : function(response, statut){
@@ -609,8 +609,8 @@ $commentsNumber=$result['count'];
                         }
                 
                 lastCount=" ";       
-               topCommentaires();
-               function topCommentaires(){
+               topCommentaires(<?php echo $id; ?>);
+               function topCommentaires(profId){
                             var zone = '<div class="pm-comments-container" hidden id="zone_top_commentaires"></div>'; 
                             if(document.getElementById("zone_plus_recents"))
                             $('#zone_plus_recents').remove();
@@ -647,7 +647,7 @@ $commentsNumber=$result['count'];
                                             url : 'voirPlus.php',
                                             type : 'GET',
                                             data: {
-                                                lastCount,shown2,parametre,param2
+                                                lastCount,shown2,parametre,param2,profId
                                             },
                                             dataType : "json",
                                             success : function(response, statut){
