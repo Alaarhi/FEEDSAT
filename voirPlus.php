@@ -49,12 +49,13 @@ if(isset($_GET['parametre']))
         else 
         $studentName="Anonyme";
         $checked="";
-        
+        $idSession="0";
             if(isset($_SESSION['idEtudiant']))
             {
                 $clapStatus = $bd->query("select * from interact where studentId=".$_SESSION['idEtudiant']." and commentId=".$result['id']);
                 if($clapStatus->rowCount())
                 $checked="checked";
+                $idSession=$_SESSION['idEtudiant'];
     
             }
         $bloc=$bloc.'<div class="pm-comment-box-container">
@@ -76,7 +77,7 @@ if(isset($_GET['parametre']))
                                                 </div>
                                                 <div class="col-md-1" style="padding-top: 25px">
         
-                                                    <button id="'.$result["id"].'" class="clap" onclick="clap('.$result["id"].','.$_SESSION["idEtudiant"].')">
+                                                    <button id="'.$result["id"].'" class="clap" onclick="clap('.$result["id"].','.$idSession.')">
                                                         <span>
                                                           <!--  SVG Created by Luis Durazo from the Noun Project  -->
                                                           <svg id="'.$result["id"].'1" class="clap--icon '.$checked.'" xmlns="http://www.w3.org/2000/svg" viewBox="-549 338 100.1 125">
@@ -141,12 +142,13 @@ while(($result=$req->fetch())&&($i<3))
     else 
     $studentName="Anonyme";
     $checked="";
-    
+    $idSession="0";
         if(isset($_SESSION['idEtudiant']))
         {
             $clapStatus = $bd->query("select * from interact where studentId=".$_SESSION['idEtudiant']." and commentId=".$result['id']);
             if($clapStatus->rowCount())
             $checked="checked";
+            $idSession=$_SESSION['idEtudiant'];
 
         }
     $bloc=$bloc.'<div class="pm-comment-box-container">
@@ -168,7 +170,7 @@ while(($result=$req->fetch())&&($i<3))
                                             </div>
                                             <div class="col-md-1" style="padding-top: 25px">
     
-                                                <button id="'.$result["id"].'" class="clap" onclick="clap('.$result["id"].','.$_SESSION["idEtudiant"].')">
+                                                <button id="'.$result["id"].'" class="clap" onclick="clap('.$result["id"].','.$idSession.')">
                                                     <span>
                                                       <!--  SVG Created by Luis Durazo from the Noun Project  -->
                                                       <svg id="'.$result["id"].'1" class="clap--icon '.$checked.'" xmlns="http://www.w3.org/2000/svg" viewBox="-549 338 100.1 125">
