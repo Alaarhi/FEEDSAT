@@ -1,48 +1,10 @@
 function clapping(){
-
 var clap = document.getElementsByClassName('clap');
 var clapIcon = document.getElementsByClassName('clap--icon');
 var btnDimension = 80;
 var tlDuration = 300;
 var numberOfClaps = 0;
 var clapHold = void 0;
-
-var triangleBurst = new mojs.Burst({
-  parent: clap,
-  radius: { 50: 95 },
-  count: 5,
-  angle: 30,
-  children: {
-    shape: 'polygon',
-    radius: { 6: 0 },
-    scale: 1,
-    stroke: 'rgba(211,84,0 ,0.5)',
-    strokeWidth: 2,
-    angle: 210,
-    delay: 30,
-    speed: 0.2,
-    easing: mojs.easing.bezier(0.1, 1, 0.3, 1),
-    duration: tlDuration
-  }
-});
-var circleBurst = new mojs.Burst({
-  parent: clap,
-  radius: { 50: 75 },
-  angle: 25,
-  duration: tlDuration,
-  children: {
-    shape: 'circle',
-    fill: 'rgba(149,165,166 ,0.5)',
-    delay: 30,
-    speed: 0.2,
-    radius: { 3: 0 },
-    easing: mojs.easing.bezier(0.1, 1, 0.3, 1)
-  }
-});
-
-
-
-
 
 i=0;
 for(i=0;i<clap.length;i++){

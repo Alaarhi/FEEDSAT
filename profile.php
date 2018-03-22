@@ -253,13 +253,13 @@ $commentsNumber=$result['count'];
                 
                                 <!-- PANEL 4 -->
                                 <a id="comments"></a>
-                                <div class="pm-column-container pm-containerPadding-top-80 pm-containerPadding-bottom-50" style="background-color:#FFFFFF;">
+                                <div class="pm-column-container pm-containerPadding-top-60 pm-containerPadding-bottom-50" style="background-color:#FFFFFF;">
                 
                                     <div class="container">
                                         <div class="row">
                                             <div  class="col-lg-12">
                 
-                                                <h4 class="pm-comments-response-title"> <font color=#303F9F><?php echo $commentsNumber ?> étudiants ont commenté le profil de cet enseignant</font></h4>
+                                                <center><h4 class="pm-comments-response-title"> <font color=#303F9F><?php echo $commentsNumber ?> étudiants ont commenté le profil de cet enseignant</font></h4></center>
                                                 <?php if($commentsNumber!=0) { 
                                                     $i=0;
                                                     $reqMAXIComments=$bd->query('select count(*) as counts ,commentId from interact GROUP BY commentId ORDER BY counts DESC');
@@ -267,22 +267,33 @@ $commentsNumber=$result['count'];
 
                                                         <div style="padding-left: 33%">
                                                             <br><br>
-                                                            <a id="topCommentaires" onclick="topCommentaires()" class="pm-square-btn-comment-hovered comment-reply">Top Commentaires</a> &nbsp;&nbsp;&nbsp;&nbsp;
-                                                            <a id="plusRecents" onclick="plusRecents()" class="pm-square-btn-comment comment-reply" >Les Plus Récents</a>
+                                                            <a id="topCommentaires" onclick="menuTopCommentaires()" class="pm-square-btn-comment-hovered comment-reply">Top Commentaires</a> &nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <a id="plusRecents" onclick="menuPlusRecents()" class="pm-square-btn-comment comment-reply" >Les Plus Récents</a>
                                                             </div>
 
                                                 <!-- Comments -->
-                                                <div class="pm-comments-container" id="zone_de_rechargement">
+                                                <div class="pm-comments-container" id="zone_par_defaut">
                 
                                                     <!-- Comment -->
+
                                                     
                                                     <!-- Comment end -->
                 
                                                 </div> 
+
+                                                <div id="zone" >
+
+                                                <div class="pm-comments-container" id="zone_plus_recents">
+                                                </div>
+
+                                                <div class="pm-comments-container" id="zone_top_commentaires">
+                                                </div>
+
+                                                 </div>
                                                 <!-- Comments end -->
-                                                <div class="pm-comment-reply-btn">
+                                                <div id="voirPlus" class="pm-comment-reply-btn">
                                                             <br><br>
-                                                                <a  id="voirPlus" onclick="plusRecents()" class="pm-square-btn-comment comment-reply" >VOIR PLUS +</a>
+                                                                <a  onclick="choice()" class="pm-square-btn-comment comment-reply" >VOIR PLUS +</a>
                                                             </div>
                                                             <?php } ?>
                                             </div>
@@ -292,7 +303,7 @@ $commentsNumber=$result['count'];
                                 </div>
                                 <!-- PANEL 4 end -->
                 
-                
+                                
                                 <!-- PANEL 5 -->
                                 <div class="container pm-containerPadding-top-100 pm-containerPadding-bottom-80">
                                     <div class="row">
@@ -377,6 +388,7 @@ $commentsNumber=$result['count'];
             <script src="js/prettyphoto/js/jquery.prettyPhoto.js"></script>
             <script src="js/tinynav.js"></script>
             <script src="js/jquery-ui.js"></script>
+            <script id="559" src="js/index-clap.js"></script>
             <script src='https://cdnjs.cloudflare.com/ajax/libs/mo-js/0.288.1/mo.min.js'></script>
             <script>
                         function clap(commentId,studentId){
@@ -415,9 +427,19 @@ $commentsNumber=$result['count'];
                         }
             </script>
             <script>
-                            
-                            var param = 1;
-                            var lastTime;
+                    
+                    var param = 1;
+                    var param2 = 1;
+                    var lastTime;  
+                    var shown="";
+                    var shown2;
+                    var parametre;
+                    
+                    
+      
+
+                            function lastTimee(){
+                                var x;
                                         $.ajax({
                                             url : 'voirPlus.php',
                                             type : 'GET',
@@ -427,22 +449,81 @@ $commentsNumber=$result['count'];
                                             dataType : "json",
                                             success : function(response, statut){
                                                 lastTime=response.timemax;
+                                                x=response.timemax;
                                         },
                                             error : function(response, statut, erreur){
                                         }
                                         });
+                                        return "x";
+                                    }
+                        lastTimee();
 
-                            var param;
-                            var shown="";
+                        
+                                        $.ajax({
+                                            url : 'voirPlus.php',
+                                            type : 'GET',
+                                            data: {
+                                            param2    
+                                            },
+                                            dataType : "json",
+                                            success : function(response, statut){
+                                                
+                                                lastCount=response.lastCount;
+                                                
 
-                        function topCommentaires(){
-                            document.getElementById("plusRecents").classList.remove("pm-square-btn-comment-hovered");
-                            document.getElementById("plusRecents").classList.add("pm-square-btn-comment"); 
-                            document.getElementById("topCommentaires").classList.remove("pm-square-btn-comment");
-                            document.getElementById("topCommentaires").classList.add("pm-square-btn-comment-hovered");                            
+                                        },
+                                            error : function(response, statut, erreur){
+                                        }
+                                        });
+                                   
+
+                                    
+                            function menuPlusRecents()
+                        {   
+                            if(document.getElementById("plusRecents").classList.contains("pm-square-btn-comment"))
+                            {
+                            param=1;
+                            lastTime=lastTimee();
+                            shown="";
+                            plusRecents();
+                        }
+                        }
+
+
+                        function menuTopCommentaires()
+                        {
+                            
+                            parametre=1;
+                            param2=1;
+                            topCommentaires();
+                        }
+                        
+                        function choice(){
+                            if(document.getElementById("topCommentaires").classList.contains("pm-square-btn-comment-hovered"))
+                            {
+                                topCommentaires(1);
+                            }
+                            else
+                            {
+                                plusRecents();
+                            }
                         }
 
                         function plusRecents(){
+                            var param;
+                            var zone = '<div class="pm-comments-container" hidden id="zone_plus_recents"></div>'; 
+                            if(document.getElementById("zone_top_commentaires"))
+                            $('#zone_top_commentaires').remove();
+
+                            if(!document.getElementById("zone_plus_recents"))
+                            {
+                            $('#zone').append(zone);
+                            $('#zone_plus_recents').fadeIn(2000);
+                            $('#zone').fadeIn(2000);
+                            }
+
+                            
+
                             if(document.getElementById("topCommentaires").classList.contains("pm-square-btn-comment-hovered"))
                             {
                             document.getElementById("topCommentaires").classList.remove("pm-square-btn-comment-hovered");
@@ -460,6 +541,7 @@ $commentsNumber=$result['count'];
                             element.parentNode.removeChild(element);
                             }
 
+
                                         $.ajax({
                                             url : 'voirPlus.php',
                                             type : 'GET',
@@ -470,10 +552,13 @@ $commentsNumber=$result['count'];
                                             success : function(response, statut){
                                                 if(response.comment.length!="50")
                                                 {
-                                                $('#zone_de_rechargement').fadeIn(2000);
-                                                $("#zone_de_rechargement").append(response.comment);
+                                                $('#zone_plus_recents').fadeIn(2000);
+                                                $("#zone_plus_recents").append(response.comment);
                                                 lastTime=response.lastTime;
-                                                shown=response.shown;    
+                                                shown=response.shown;
+                                                
+                                                if ( $('#voirPlus').css('display') == 'none' )
+                                                $('#voirPlus').show();
 
                                             }
                                                 else
@@ -486,10 +571,84 @@ $commentsNumber=$result['count'];
 
                                             }
                                         });
-                        }
 
-            </script>
-           
+                                          
+
+                        }
+                
+                lastCount=" ";       
+               topCommentaires();
+               function topCommentaires(){
+                            var zone = '<div class="pm-comments-container" hidden id="zone_top_commentaires"></div>'; 
+                            if(document.getElementById("zone_plus_recents"))
+                            $('#zone_plus_recents').remove();
+                            
+                            if(!document.getElementById("zone_top_commentaires"))
+                            {
+                            $("#zone").append(zone);
+                            $("#zone").fadeIn(2000);                            
+                            $('#zone_top_commentaires').fadeIn(2000);
+                            }
+                            if(document.getElementById("plusRecents").classList.contains("pm-square-btn-comment-hovered"))
+                            {
+                            document.getElementById("plusRecents").classList.remove("pm-square-btn-comment-hovered");
+                            document.getElementById("plusRecents").classList.add("pm-square-btn-comment"); 
+                            }
+                            if(document.getElementById("topCommentaires").classList.contains("pm-square-btn-comment"))
+                            {
+                            document.getElementById("topCommentaires").classList.remove("pm-square-btn-comment");
+                            document.getElementById("topCommentaires").classList.add("pm-square-btn-comment-hovered");  
+                            }   
+                            
+
+                            if(document.getElementById("559"))
+                            {
+                            var element = document.getElementById("559"); 
+                            element.parentNode.removeChild(element);
+                            }
+
+                            var parametre = "top";
+                            
+                            alert(lastCount);
+                            
+                            $.ajax({
+                                
+                                            url : 'voirPlus.php',
+                                            type : 'GET',
+                                            data: {
+                                                lastCount,shown2,parametre,param2
+                                            },
+                                            dataType : "json",
+                                            success : function(response, statut){
+                                                if(response.comment.length!="50")
+                                                {
+                                                $('#zone_top_commentaires').fadeIn(2000);
+                                                $("#zone_top_commentaires").append(response.comment);
+                                                
+                                                lastCount=response.lastCount;
+                                                shown2=response.shown2;
+                                                param2=0;
+                                                if ( $('#voirPlus').css('display') == 'none' )
+                                                $('#voirPlus').show();
+
+                                            }
+                                                else
+                                                { 
+                                                $('#voirPlus').hide();
+
+                                            }
+                                            
+                                        },
+                                            error : function(response, statut, erreur){
+                                                alert(erreur);
+
+                                            }
+                                        });
+
+                            
+
+                        }
+            </script>           
             <p id="back-top" class="visible-lg visible-md visible-sm" style="bottom: -70px;"></p>
 
 
