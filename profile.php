@@ -328,17 +328,25 @@ $commentsNumber=$result['count'];
                                                     <div class="col-lg-12 pm-clear-element">
                                                         <textarea name="pm-comment-message" cols="20" rows="10" placeholder="VOTRE AVIS ICI" class="pm-comment-form-textarea"></textarea>
                                                     </div>
-                
+                                                    
                                                     <div class="col-lg-12 pm-clear-element">
                                                         <div class="pm-comment-html-tags">
-                                                            <span>Prière d'être constructif</span>
+                                                            <span><font color="#FFC107">Prière d'être constructif</font></span>
                 
                                                         </div>
-                
                                                         <input name="pm-comment-submit-btn" class="pm-rounded-btn no-border" type="button" value="Commenter">
-                
+                                                        <div id="radios">
+                                                        <label for="Identité Publique" class="material-icons">
+                                                            <input type="radio" name="mode" id="Identité Publique" value="Identité Publique" checked="">
+                                                            <span><i class="material-icons">remove_red_eye</i></span>
+                                                        </label>								
+                                                        <label for="Anonyme" class="material-icons">
+                                                            <input type="radio" name="mode" id="Anonyme" value="Vote Anonyme">
+                                                            <span><i class="material-icons">panorama_fish_eye</i></span>
+                                                        </label>
+                                                        
                                                     </div>
-                
+                                                </div>
                                                 </form>
                 
                                             </div>

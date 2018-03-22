@@ -20,7 +20,7 @@
 
     <!-- mobile css -->
     <link href="css/responsive.css" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- FontAwesome Support -->
     <link rel="stylesheet" type="text/css" href="css/fontawesome/font-awesome.min.css" />
     <!-- FontAwesome Support -->
