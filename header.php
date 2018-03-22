@@ -82,13 +82,10 @@
 	<div id="pm_layout_wrapper" class="pm-full-mode"><!-- Use wrapper for wide or boxed mode -->
 
     	<!-- Sub-Menu -->
-
         <!-- Request appointment form -->
         <div class="pm-request-appointment-form" id="pm-appointment-form">
-
             <div class="container">
             	<div class="row">
-
                     <form action="#" method="post">
                         <div class="col-lg-4 col-md-4 col-sm-6">
                         	<input name="" type="text" class="pm-request-appointment-form-textfield" placeholder="Full Name">
@@ -109,9 +106,7 @@
                         	<input type="submit" value="Submit Request" class="pm-square-btn appointment-form" />
                             <p class="pm-appointment-form-notice">All fields are required.</p><a href="#" class="pm-appointment-form-close" id="pm-close-appointment-form"><i class="fa fa-close"></i> Close Appointment form</a>
                         </div>
-
                     </form>
-
                 </div>
             </div>
         </div>
@@ -178,24 +173,18 @@
                                         <li><a href="deplangue.php">Sciences Sociales, langues et Formation générale</a></li>
                                     </ul>
                                 </li>
-                                
-                                 
                                 <?php if (isset($_SESSION['nom'])) { ?>
                                 <li><a href="avis.php">Avis de mes collègues</a></li>
                                 <?php } else { ?>
                                 <li><a onclick="document.getElementById('avis').style.display='block'">Avis de mes collègues</a></li>
                                 <?php } ?>
-
                                 <?php if (isset($_SESSION['nom'])) { ?>    
                                 <li><a href="deconnexion.php">Déconnexion</a></li>
                                 <?php } ?>
                             </ul>
                         </nav>
-                        
                         <?php include 'loginForm.php'; ?>
-                
                     </div>
-                    
                 </div>
             </div>
         </div>

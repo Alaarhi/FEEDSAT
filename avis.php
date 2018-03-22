@@ -20,12 +20,13 @@
             $_SESSION['prenom'] = $etudiant->surname;
             $_SESSION['niveau'] = $etudiant->level;
             $_SESSION['idFiliere'] = $etudiant->fosId;
+            $_SESSION['level'] = $etudiant->level;
         }     
     }
 
     $idFiliere = $_SESSION['idFiliere'];
+    $level = $_SESSION['level'];
 
-    //Extraction de données pour le contenu de la page - Les requêtes ne sont exécutées qu'une seule fois pour une session donnée
     
     //Note moyenne attribuée par les étudiants
     if (!(isset($_SESSION['moyenneFiliere']))) {
@@ -75,7 +76,7 @@
 
     //Nombre d'amis contribuables 
     //Extraire le nombre des commentators+voters en éliminant les doublons 
-    //i.e. celui qui est à la fois commentator et voter doit être compté 1 seule fois
+    //i.e. celui qui est à la fois commentator et voter sera compté 1 seule fois
     if (!(isset($_SESSION['nbrContributors']))) {
 
         $voters = array();
@@ -121,27 +122,36 @@
     // STATISTIQUE #4
 
 
+    //VOS ENSEIGNANTS 
+    $requeteVosEnseignants = $bd->prepare(
+        'SELECT p.id, p.surname, p.name, p.departement, p.grade, p.photo, p.linkedIn
+        FROM teach as t
+        INNER JOIN professor as p
+        ON (t.profId = p.id)
+        WHERE (t.fosId = ?) AND (t.level = ?)
+        LIMIT 0,4');
+    $requeteVosEnseignants->execute(array($idFiliere, $level));
+
     //Top commentaires de vos amis
-    $requeteTopComments = $bd->prepare('SELECT c.comment as commentaire, 
+    $requeteTopComments = $bd->prepare(
+        'SELECT c.comment as commentaire, 
         s.id as idAauteur, s.surname as prenomAuteur, s.name as nomAuteur,
         sum(interaction) as nbrInteractions,
         date_format(c.timestamp, \'%d-%m-%Y\') as dateCommentaire,
         s.imageUrl as photo
         FROM interact as i INNER JOIN student as s INNER JOIN comment as c 
         ON (c.studentId = s.id) AND (c.id = i.commentId) 
-        WHERE (s.fosId = ?) 
+        WHERE (s.fosId = ?) AND (c.approved = 1)
         GROUP BY i.commentId 
         ORDER BY nbrInteractions DESC    
-        LIMIT 0,3');     
+        LIMIT 0,3'
+        );     
     $requeteTopComments->execute(array($idFiliere));
 
     include 'header.php'; 
 ?>
-        
-        
 
-        <!-- Sub-header area -->
-        
+        <!-- Sub-header area -->        
         <div class="pm-sub-header-container">     
         	<div class="pm-sub-header-info">    	
                 <div class="container">
@@ -225,159 +235,109 @@
         <!-- PANEL 1 end -->
         
         <!-- PANEL 2 -->
-        <div class="pm-column-container testimonials pm-parallax-panel" style=" background-image: url('img/home/purple.jpg'); background-repeat: repeat-y; " data-stellar-background-ratio="0" >
+        <div class="pm-column-container testimonials pm-parallax-panel" id="zone-profs" style=" background-image: url('img/home/purple.jpg'); background-repeat: repeat-y; " data-stellar-background-ratio="0" >
         	<div class="container pm-containerPadding-top-110 pm-containerPadding-bottom-80">
             	<div class="row">          
                 	<div class="col-lg-12 pm-column-spacing pm-center">             
                     	<h5 class="light">VOS ENSEIGNANTS</h5>                 
                         <p class="light">Ce que vos amis ont voté pour vos enseignants</p>
                         <br>                   
-                    </div>           
-                	<div class="col-lg-3 col-md-3 col-sm-12 pm-column-spacing">
-
+                    </div> 
+                    <?php 
+                    while ($row = $requeteVosEnseignants->fetch(PDO::FETCH_OBJ)) { 
+                        $requeteAmisVotants = $bd->prepare(
+                            'SELECT s.surname as prenomEtudiant, s.name AS nomEtudiant, 
+                            p.id, p.surname AS prenomProf, p.name AS nomProf
+                            FROM student AS s 
+                            INNER JOIN rating AS r
+                            INNER JOIN professor AS p 
+                            ON (r.studentId = s.id) AND (r.profId = p.id)
+                            WHERE (s.fosId = ?) AND (p.id = ?)');
+                        $requeteAmisVotants->execute(array($idFiliere, $row->id));    
+                    ?>
+                    <div class="col-lg-3 col-md-3 col-sm-12 pm-column-spacing">
                     <!-- Staff profile -->
-                    <div class="pm-staff-profile-parent-container">
-                        <div class="pm-staff-profile-container" style="background-image:url(img/home/staff-profile1.jpg);">
-                            <div class="pm-staff-profile-overlay-container">
-                                <ul class="pm-staff-profile-icons">
-                                    <li><a href="#" class="fa fa-linkedin"></a></li>
-                                </ul>  
-                                <div class="pm-staff-profile-quote">
-                                    <p>"The good physician treats the disease; the great physician treats the patient who has the disease."</p>
-                                    <a href="#" class="pm-square-btn pm-center-align">View profile</a>
-                                </div>
-                            </div>                            
-                            <a href="#" class="pm-staff-profile-expander fa fa-plus"></a>                                           
-                        </div>
-                            
-                        <div class="pm-staff-profile-info">
-                            <p class="pm-staff-profile-name light">Dr. Mehdi Abouda</p>
-                            <p class="pm-staff-profile-name light">8.49 / 10</p>
-                            <p class="pm-staff-profile-title light">Hamza Gaaliche, Skander Meghirbi, Abir Messaoudi et 13 autres amis ont voté pour ce prof</p>
-                        </div>       
-                    </div>                    
-                        <!-- Staff profile end -->
-                        
-                    </div>
-
-
-
-
-        <div class="col-lg-3 col-md-3 col-sm-12 pm-column-spacing">
-            <!-- Staff profile -->
                         <div class="pm-staff-profile-parent-container">
                             <div class="pm-staff-profile-container" style="background-image:url(img/home/staff-profile1.jpg);">
                                 <div class="pm-staff-profile-overlay-container">
                                     <ul class="pm-staff-profile-icons">
-                                        <li><a href="#" class="fa fa-linkedin"></a></li>
-                                    </ul>
-                                    
+                                        <li><a href="<?php echo $row->linkedIn?>" class="fa fa-linkedin"></a></li>
+                                    </ul>  
                                     <div class="pm-staff-profile-quote">
-                                        <p>"The good physician treats the disease; the great physician treats the patient who has the disease."</p>
-                                        <a href="#" class="pm-square-btn pm-center-align">View profile</a>
+                                        <!--<p>"The good physician treats the disease; the great physician treats the patient who has the disease."</p>-->
+                                        <br><br><br><br><br><br><a href="profile.php?id=<?php echo $row->id ?>" class="pm-square-btn pm-center-align">VOIR PROFIL</a>
                                     </div>
-                                
-                                </div>
-                                                        
-                                <a href="#" class="pm-staff-profile-expander fa fa-plus"></a>
-                                                    
+                                </div>                            
+                                <a href="#" class="pm-staff-profile-expander fa fa-plus"></a>                                           
                             </div>
                             
                             <div class="pm-staff-profile-info">
-                                <p class="pm-staff-profile-name light">Dr. Mehdi Abouda</p>
-<p class="pm-staff-profile-name light">8.49 / 10</p>
-                                <p class="pm-staff-profile-title light">Hamza Gaaliche, Skander Meghirbi, Abir Messaoudi et 13 autres amis ont voté pour ce prof</p>
-                            </div>
-                            
+                                <p class="pm-staff-profile-name light"><?php echo $row->surname.' '.$row->name; ?></p>
+                                <p class="pm-staff-profile-name light">8.49 / 10</p>
+                                <p class="pm-staff-profile-title light">
+                                <?php
+                                //$reponseAmisVotants = $requeteAmisVotants->fetch(PDO::FETCH_OBJ);
+                                $nbrAmisVotants = $requeteAmisVotants->rowCount();
+                                $numRow = 0;
+                                switch ($nbrAmisVotants) {
+                                    case 0:
+                                        echo 'Aucun étudiant de votre filière n\'a évalué cet enseignant.
+                                            Soyez le premier à le faire!';
+                                        break;
+                                    case 1:
+                                        $reponseAmisVotants = $requeteAmisVotants->fetch(PDO::FETCH_ASSOC);
+                                        echo $reponseAmisVotants['prenomEtudiant'].' '.$reponseAmisVotants['nomEtudiant'].
+                                            'a évalué cet enseignant';
+                                        break;
+                                    case 2:
+                                        while ($row1 = $requeteAmisVotants->fetch(PDO::FETCH_ASSOC)) {
+                                            $numRow ++;
+                                            if ($numRow != 2) {
+                                                echo $row1['prenomEtudiant'].' '.$row1['nomEtudiant'].' et ';
+                                            } else {
+                                                echo $row1['prenomEtudiant'].' '.$row1['nomEtudiant'].' ont évalué cet enseignant';
+                                            }
+                                        }
+                                        break;
+                                    case 3:
+                                        //$dernierElement = end(($requeteAmisVotants->fetch(PDO::FETCH_ASSOC)));
+                                        while ($row1 = $requeteAmisVotants->fetch(PDO::FETCH_ASSOC)) {
+                                            $numRow ++;
+                                            if ($numRow != 2) {
+                                                echo $row1['prenomEtudiant'].' '.$row1['nomEtudiant'].', ';
+                                            } else {
+                                                echo ' et '.$row1['prenomEtudiant'].' '.$row1['nomEtudiant'].' ont évalué cet enseignant';
+                                            }
+                                        }
+                                        break;
+                                    default :
+                                        while ($row1 = $requeteAmisVotants->fetch(PDO::FETCH_ASSOC)) {
+                                            $numRow ++;
+                                            if($numRow != $nbrAmisVotants-1) {
+                                                echo $row1['prenomEtudiant'].' '.$row1['nomEtudiant'].', ';
+                                            } else {
+                                                if (($nbrAmisVotants - 3) == 1) {
+                                                    echo 'et '.($nbrAmisVotants - 3).' autre étudiant de votre filière ont évalué cet enseignant';
+                                                } else {
+                                                    echo 'et '.($nbrAmisVotants - 3).' autres étudiants de votre filière ont évalué cet enseignant';
+                                                }
+                                            }
+                                        }
+                                        break;
+                                }
+                                ?>
+                                </p>
+                            </div>       
                         </div>                    
-                        <!-- Staff profile end -->
-                        
+                        <!-- Staff profile end --> 
                     </div>
-
-<div class="col-lg-3 col-md-3 col-sm-12 pm-column-spacing">
-                	
-                        <!-- Staff profile -->
-                        <div class="pm-staff-profile-parent-container">
-                        
-                            <div class="pm-staff-profile-container" style="background-image:url(img/home/staff-profile1.jpg);">
-                        
-                                <div class="pm-staff-profile-overlay-container">
-                                
-                                    <ul class="pm-staff-profile-icons">
-                                        
-                                        
-                                        
-                                        <li><a href="#" class="fa fa-linkedin"></a></li>
-                                    </ul>
-                                    
-                                    <div class="pm-staff-profile-quote">
-                                        <p>"The good physician treats the disease; the great physician treats the patient who has the disease."</p>
-                                        <a href="#" class="pm-square-btn pm-center-align">View profile</a>
-                                    </div>
-                                
-                                </div>
-                                                        
-                                <a href="#" class="pm-staff-profile-expander fa fa-plus"></a>
-                                                    
-                            </div>
-                            
-                            <div class="pm-staff-profile-info">
-                                <p class="pm-staff-profile-name light">Dr. Mehdi Abouda</p>
-<p class="pm-staff-profile-name light">8.49 / 10</p>
-                                <p class="pm-staff-profile-title light">Hamza Gaaliche, Skander Meghirbi, Abir Messaoudi et 13 autres amis ont voté pour ce prof</p>
-                            </div>
-                            
-                        </div>                    
-                        <!-- Staff profile end -->
-                        
-                    </div><div class="col-lg-3 col-md-3 col-sm-12 pm-column-spacing">
-                	
-                        <!-- Staff profile -->
-                        <div class="pm-staff-profile-parent-container">
-                        
-                            <div class="pm-staff-profile-container" style="background-image:url(img/home/staff-profile1.jpg);">
-                        
-                                <div class="pm-staff-profile-overlay-container">
-                                
-                                    <ul class="pm-staff-profile-icons">
-                                        
-                                        
-                                        
-                                        <li><a href="#" class="fa fa-linkedin"></a></li>
-                                    </ul>
-                                    
-                                    <div class="pm-staff-profile-quote">
-                                        <p>"The good physician treats the disease; the great physician treats the patient who has the disease."</p>
-                                        <a href="#" class="pm-square-btn pm-center-align">View profile</a>
-                                    </div>
-                                
-                                </div>
-                                                        
-                                <a href="#" class="pm-staff-profile-expander fa fa-plus"></a>
-                                                    
-                            </div>
-                            
-                            <div class="pm-staff-profile-info">
-                                <p class="pm-staff-profile-name light">Dr. Mehdi Abouda</p>
-<p class="pm-staff-profile-name light">8.49 / 10</p>
-                                <p class="pm-staff-profile-title light">Hamza Gaaliche, Skander Meghirbi, Abir Messaoudi et 13 autres amis ont voté pour ce prof</p>
-                            </div>
-                            
-                        </div>                    
-                        <!-- Staff profile end -->
-                        
-                    </div>
-                    
+                    <?php } ?>
                     <div class="pm-comment-reply-btn">
                         <br>
-                            <a href="#" class="pm-square-btn-comment-avis comment-reply">VOIR PLUS +</a>
-                        </div>
-                    
-                    
-                
+                        <a href="onclick="choice()"" class="pm-square-btn-comment-avis comment-reply">VOIR PLUS +</a>
+                    </div>
                 </div><!-- /.row -->
             </div><!-- /.container -->
-        
         </div>
         <!-- PANEL 2 end -->
         
@@ -424,7 +384,43 @@
     <!-- BODY CONTENT end -->
     <?php include 'footer.html';?>
     </div>
-
+<!--
+<script>
+function voirPlus(){
+    var zone = '<div class="pm-column-container testimonials pm-parallax-panel" id="zone-profs"></div>'; 
+    if(!document.getElementById("zone_plus_recents"))
+                            {
+                            $('#zone').append(zone);
+                            $('#zone_plus_recents').fadeIn(2000);
+                            $('#zone').fadeIn(2000);
+                            }
+    $.ajax({
+        url : 'voirPlusAvis.php',
+        type : 'GET',
+        data: {
+        lastTime,
+        shown
+        },
+        dataType : "json",
+        success : function(response, statut) {
+            if(response.comment.length != "50") {
+                $('#zone_plus_recents').fadeIn(2000);
+                $("#zone_plus_recents").append(response.comment);
+                lastTime=response.lastTime;
+                shown=response.shown;
+                if ($('#voirPlus').css('display') == 'none') {
+                $('#voirPlus').show();
+                }
+            } else { 
+            $('#voirPlus').hide();
+            }
+        },
+        error : function(response, statut, erreur){
+        }
+    });
+}
+</script>
+-->
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
