@@ -37,8 +37,9 @@ while ($result=$req->fetch())
     
 }
 $note=($cdc*$cdcr+$adc*$adcr+$cdln*$cdlnr+$pdg*$pdgr+$tdp*$tdpr)/10;
+$note=round($note, 1);
 }
-$req=$bd->query('select count(*) as count from comment where profId='.$id);
+$req=$bd->query('select count(distinct(studentId)) as count from comment where profId='.$id);
 $result=$req->fetch();
 $commentsNumber=$result['count'];
 
@@ -326,7 +327,7 @@ $commentsNumber=$result['count'];
                 
                 
                                                     <div class="col-lg-12 pm-clear-element">
-                                                        <textarea name="pm-comment-message" cols="20" rows="10" placeholder="VOTRE AVIS ICI" class="pm-comment-form-textarea"></textarea>
+                                                        <textarea id="commentArea" name="pm-comment-message" cols="20" rows="10" placeholder="VOTRE AVIS ICI" class="pm-comment-form-textarea"></textarea>
                                                     </div>
                                                     
                                                     <div class="col-lg-12 pm-clear-element">
@@ -334,7 +335,7 @@ $commentsNumber=$result['count'];
                                                             <span><font color="#FFC107">Prière d'être constructif</font></span>
                 
                                                         </div>
-                                                        <input name="pm-comment-submit-btn" class="pm-rounded-btn no-border" type="button" value="Commenter">
+                                                        <input name="pm-comment-submit-btn" class="pm-rounded-btn no-border" onclick="commenter(<?php echo $id; ?>)" type="button" value="Commenter">
                                                         <div id="radios">
                                                         <label for="Identité Publique" class="material-icons">
                                                             <input type="radio" name="mode" id="Identité Publique" value="Identité Publique" checked="">
@@ -398,6 +399,29 @@ $commentsNumber=$result['count'];
             <script src="js/jquery-ui.js"></script>
             <script id="559" src="js/index-clap.js"></script>
             <script src='https://cdnjs.cloudflare.com/ajax/libs/mo-js/0.288.1/mo.min.js'></script>
+            <script>
+                        function commenter(profId){
+                            commentaire = document.getElementById("commentArea").value;
+                            publique = document.getElementById("Identité Publique").checked;
+                            anonyme = document.getElementById("Anonyme").checked;
+                            $.ajax({
+                                                        url : 'commenter.php',
+                                                        type : 'GET',
+                                                        data: {
+                                                        commentaire,publique,anonyme,profId    
+                                                        },
+                                                        success : function(response, statut){
+                                                            if(response=="unlogged")
+                                                            alert("POPUP : POPUP DE LOGIN")
+                                                            else
+                                                            alert("POPUP : Votre commentaire est maintenant en attente d'approbation. Vos commentaires seront automatiquement approuvés si vous faites preuve d'activité et de volonté constructive.");
+                                                        },
+                                                        error : function(response, statut, erreur){
+                                                            alert('ma tsabech  '+erreur);
+                                                        }
+                                                    }); 
+                            }
+            </script>
             <script>
                         function clap(commentId,studentId){
                                             j=commentId;
