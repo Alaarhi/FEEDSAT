@@ -609,7 +609,6 @@ $commentsNumber=$result['count'];
 
                             var parametre = "top";
                             
-                            alert(lastCount);
                             
                             $.ajax({
                                 
