@@ -32,15 +32,20 @@ if(isset($_GET['parametre']))
     {}
     }
     }
+
+
     if($req)
     {
-    
     while(($result2=$req->fetch())&&($i<3))
-    {
-        $req0 = $bd->query('select * from comment where id = "'.$result2['commentId'].'"  ');
+    {                   
+        $req0 = $bd->query('select * from comment where id = "'.$result2['commentId'].'" and profId="'.$_GET['profId'].'" ');
+        if($req0)
+        {
         $result=$req0->fetch();
         $req2 = $bd->query('select * from student where id = "'.$result['studentId'].'"');
         $req3 = $bd->query('select count(*) as NInteract from interact where commentId = '.$result['id']);
+        if($req2&&$req3)
+        {
         $NInteract = $req3->fetch();
         $student=$req2->fetch();    
         $studentName="";
@@ -106,8 +111,9 @@ if(isset($_GET['parametre']))
                                             $i=$i+1;
                                             $lastCount=$result2['somme'];
                                             $shown2 = $result['id'];
-        
+        }
     }
+}
 }
     header('Content-Type: application/json');
     $bloc=$bloc.' <script id="559" src="js/index-clap.js"></script>';
