@@ -124,26 +124,26 @@ $nbfeed=$resultnbinteract[0]+$resultnbincom[0];
 //taux participation:
 $reqnbstudent=$bd->query('select COUNT(*) from student');
 $resultnbstudent=$reqnbstudent->fetch();
-$taux=round(($nbfeed/$resultnbstudent[0])*100,4);
+$taux=round(($nbfeed/$resultnbstudent[0])*100,2);
 
 //Best comments:
-/*$reqBestCom=$bd->query('select COUNT(commentId),commentId,studentId from interact GROUP BY commentId ORDER BY COUNT(commentId) DESC');    
+$reqBestCom=$bd->query('select COUNT(commentId),commentId,studentId from interact GROUP BY commentId ORDER BY COUNT(commentId) DESC');    
 $i=0;
-while(($resultBestCom=$reqFeed->fetch()) || $i<3 )
+while(($resultBestCom=$reqBestCom->fetch()) && $i<3 )
 {
     $reqCom=$bd->query('select comment from comment where id='.$resultBestCom['commentId']);
+    $reqSt=$bd->query('select name,surname,level,fosId from student where id='.$resultBestCom['studentId']);
     $resultCom=$reqCom->fetch();
-    $reqCom=$db->query('select name,surname,level,fosId from student where id='.$resultBestCom['studentId']);
-    $resultCom=$reqCom->fetch();
+    $resultSt=$reqSt->fetch();    
     $tabCom[$i]=$resultCom[0];
     $tabStName[$i]=$resultSt['name'];
     $tabStSurname[$i]=$resultSt['surname'];
     $tabStLevel[$i]=$resultSt['level'];
-    $reqFos=$db->query('select fos from fos where id='.$resultBestCom['fosId']);
-    $resultFos=$reqCom->fetch();
+    $reqFos=$bd->query('select fos from fos where id='.$resultSt['fosId']);
+    $resultFos=$reqFos->fetch();
     $tabStFos[$i]=$resultFos[0];    
     $i++;
-}*/
+}
 
     
 ?>
@@ -539,10 +539,10 @@ while(($resultBestCom=$reqFeed->fetch()) || $i<3 )
                                     	<img src="img/home/post-icon.jpg" class="img-responsive pm-center-align" alt="icon">
                                     </div>-->
                                 </div>
-                                <p class="pm-testimonial-name"> </p>
-                                <p class="pm-testimonial-title"></p>
-                                <div class="pm-testimonial-divider"></div>
-                                <p class="pm-testimonial-quote">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam quis nostrud exerci tation.</p>
+                                <p class="pm-testimonial-name"> <?php echo($tabStSurname[0]." ".$tabStName[0]); ?> </p>
+                                <p class="pm-testimonial-title"> <?php echo($tabStFos[0]." ".$tabStLevel[0]); ?></p>
+                                <div class="pm-testimonial-divider"> <?php echo($tabCom[0]); ?></div>
+                                <p class="pm-testimonial-quote"></p>
                             </li>
                             <li>
                                 <div class="pm-testimonial-img" style="background-image:url(img/information/abir.jpg);">
