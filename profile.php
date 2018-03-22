@@ -37,8 +37,9 @@ while ($result=$req->fetch())
     
 }
 $note=($cdc*$cdcr+$adc*$adcr+$cdln*$cdlnr+$pdg*$pdgr+$tdp*$tdpr)/10;
+$note=round($note, 1);
 }
-$req=$bd->query('select count(*) as count from comment where profId='.$id);
+$req=$bd->query('select count(distinct(studentId)) as count from comment where profId='.$id);
 $result=$req->fetch();
 $commentsNumber=$result['count'];
 
@@ -88,7 +89,7 @@ $commentsNumber=$result['count'];
                 
                                                     <div class="col-lg-9 col-md-9 col-sm-12">
                                                             <div class="pm-comment-vote-btn">
-                                                                    <a href="vote.php" class="pm-square-btn comment-reply">VOTER</a>
+                                                                    <a href="vote.php?id=<?php echo $id; ?>" class="pm-square-btn comment-reply">VOTER</a>
                                                                 </div>
                                                         <p class="pm-author-name"><?php echo($prof['surname']." ".$prof['name']); ?></p>
                                                         <p class="pm-author-title"><?php echo($prof['grade']); ?></p>
@@ -253,13 +254,13 @@ $commentsNumber=$result['count'];
                 
                                 <!-- PANEL 4 -->
                                 <a id="comments"></a>
-                                <div class="pm-column-container pm-containerPadding-top-80 pm-containerPadding-bottom-50" style="background-color:#FFFFFF;">
+                                <div class="pm-column-container pm-containerPadding-top-60 pm-containerPadding-bottom-50" style="background-color:#FFFFFF;">
                 
                                     <div class="container">
                                         <div class="row">
                                             <div  class="col-lg-12">
                 
-                                                <h4 class="pm-comments-response-title"> <font color=#303F9F><?php echo $commentsNumber ?> étudiants ont commenté le profil de cet enseignant</font></h4>
+                                                <center><h4 class="pm-comments-response-title"> <font color=#303F9F><?php echo $commentsNumber ?> étudiants ont commenté le profil de cet enseignant</font></h4></center>
                                                 <?php if($commentsNumber!=0) { 
                                                     $i=0;
                                                     $reqMAXIComments=$bd->query('select count(*) as counts ,commentId from interact GROUP BY commentId ORDER BY counts DESC');
@@ -267,22 +268,33 @@ $commentsNumber=$result['count'];
 
                                                         <div style="padding-left: 33%">
                                                             <br><br>
-                                                            <a id="topCommentaires" onclick="topCommentaires()" class="pm-square-btn-comment-hovered comment-reply">Top Commentaires</a> &nbsp;&nbsp;&nbsp;&nbsp;
-                                                            <a id="plusRecents" onclick="plusRecents()" class="pm-square-btn-comment comment-reply" >Les Plus Récents</a>
+                                                            <a id="topCommentaires" onclick="menuTopCommentaires(<?php echo $id; ?>)" class="pm-square-btn-comment-hovered comment-reply">Top Commentaires</a> &nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <a id="plusRecents" onclick="menuPlusRecents(<?php echo $id; ?>)" class="pm-square-btn-comment comment-reply" >Les Plus Récents</a>
                                                             </div>
 
                                                 <!-- Comments -->
-                                                <div class="pm-comments-container" id="zone_de_rechargement">
+                                                <div class="pm-comments-container" id="zone_par_defaut">
                 
                                                     <!-- Comment -->
+
                                                     
                                                     <!-- Comment end -->
                 
                                                 </div> 
+
+                                                <div id="zone" >
+
+                                                <div class="pm-comments-container" id="zone_plus_recents">
+                                                </div>
+
+                                                <div class="pm-comments-container" id="zone_top_commentaires">
+                                                </div>
+
+                                                 </div>
                                                 <!-- Comments end -->
-                                                <div class="pm-comment-reply-btn">
+                                                <div id="voirPlus" class="pm-comment-reply-btn">
                                                             <br><br>
-                                                                <a  id="voirPlus" onclick="plusRecents()" class="pm-square-btn-comment comment-reply" >VOIR PLUS +</a>
+                                                                <a  onclick="choice(<?php echo $id; ?>)" class="pm-square-btn-comment comment-reply" >VOIR PLUS +</a>
                                                             </div>
                                                             <?php } ?>
                                             </div>
@@ -292,7 +304,7 @@ $commentsNumber=$result['count'];
                                 </div>
                                 <!-- PANEL 4 end -->
                 
-                
+                                
                                 <!-- PANEL 5 -->
                                 <div class="container pm-containerPadding-top-100 pm-containerPadding-bottom-80">
                                     <div class="row">
@@ -315,19 +327,27 @@ $commentsNumber=$result['count'];
                 
                 
                                                     <div class="col-lg-12 pm-clear-element">
-                                                        <textarea name="pm-comment-message" cols="20" rows="10" placeholder="VOTRE AVIS ICI" class="pm-comment-form-textarea"></textarea>
+                                                        <textarea id="commentArea" name="pm-comment-message" cols="20" rows="10" placeholder="VOTRE AVIS ICI" class="pm-comment-form-textarea"></textarea>
                                                     </div>
-                
+                                                    
                                                     <div class="col-lg-12 pm-clear-element">
                                                         <div class="pm-comment-html-tags">
-                                                            <span>Prière d'être constructif</span>
+                                                            <span><font color="#FFC107">Prière d'être constructif</font></span>
                 
                                                         </div>
-                
-                                                        <input name="pm-comment-submit-btn" class="pm-rounded-btn no-border" type="button" value="Commenter">
-                
+                                                        <input name="pm-comment-submit-btn" class="pm-rounded-btn no-border" onclick="commenter(<?php echo $id; ?>)" type="button" value="Commenter">
+                                                        <div id="radios">
+                                                        <label for="Identité Publique" class="material-icons">
+                                                            <input type="radio" name="mode" id="Identité Publique" value="Identité Publique" checked="">
+                                                            <span><i class="material-icons">remove_red_eye</i></span>
+                                                        </label>								
+                                                        <label for="Anonyme" class="material-icons">
+                                                            <input type="radio" name="mode" id="Anonyme" value="Vote Anonyme">
+                                                            <span><i class="material-icons">panorama_fish_eye</i></span>
+                                                        </label>
+                                                        
                                                     </div>
-                
+                                                </div>
                                                 </form>
                 
                                             </div>
@@ -377,7 +397,31 @@ $commentsNumber=$result['count'];
             <script src="js/prettyphoto/js/jquery.prettyPhoto.js"></script>
             <script src="js/tinynav.js"></script>
             <script src="js/jquery-ui.js"></script>
+            <script id="559" src="js/index-clap.js"></script>
             <script src='https://cdnjs.cloudflare.com/ajax/libs/mo-js/0.288.1/mo.min.js'></script>
+            <script>
+                        function commenter(profId){
+                            commentaire = document.getElementById("commentArea").value;
+                            publique = document.getElementById("Identité Publique").checked;
+                            anonyme = document.getElementById("Anonyme").checked;
+                            $.ajax({
+                                                        url : 'commenter.php',
+                                                        type : 'GET',
+                                                        data: {
+                                                        commentaire,publique,anonyme,profId    
+                                                        },
+                                                        success : function(response, statut){
+                                                            if(response=="unlogged")
+                                                            alert("POPUP : POPUP DE LOGIN")
+                                                            else
+                                                            alert("POPUP : Votre commentaire est maintenant en attente d'approbation. Vos commentaires seront automatiquement approuvés si vous faites preuve d'activité et de volonté constructive.");
+                                                        },
+                                                        error : function(response, statut, erreur){
+                                                            alert('ma tsabech  '+erreur);
+                                                        }
+                                                    }); 
+                            }
+            </script>
             <script>
                         function clap(commentId,studentId){
                                             j=commentId;
@@ -415,34 +459,103 @@ $commentsNumber=$result['count'];
                         }
             </script>
             <script>
-                            
-                            var param = 1;
-                            var lastTime;
+                    
+                    var param = 1;
+                    var param2 = 1;
+                    var lastTime;  
+                    var shown="";
+                    var shown2;
+                    var parametre;
+                    
+                    
+      
+
+                            function lastTimee(profId){
+                                var x;
                                         $.ajax({
                                             url : 'voirPlus.php',
                                             type : 'GET',
                                             data: {
-                                            param    
+                                            param,profId    
                                             },
                                             dataType : "json",
                                             success : function(response, statut){
                                                 lastTime=response.timemax;
+                                                x=response.timemax;
                                         },
                                             error : function(response, statut, erreur){
                                         }
                                         });
+                                        return "x";
+                                    }
+                        lastTimee(<?php echo $id; ?>);
 
-                            var param;
-                            var shown="";
+                        
+                                        $.ajax({
+                                            url : 'voirPlus.php',
+                                            type : 'GET',
+                                            data: {
+                                            param2    
+                                            },
+                                            dataType : "json",
+                                            success : function(response, statut){
+                                                
+                                                lastCount=response.lastCount;
+                                                
 
-                        function topCommentaires(){
-                            document.getElementById("plusRecents").classList.remove("pm-square-btn-comment-hovered");
-                            document.getElementById("plusRecents").classList.add("pm-square-btn-comment"); 
-                            document.getElementById("topCommentaires").classList.remove("pm-square-btn-comment");
-                            document.getElementById("topCommentaires").classList.add("pm-square-btn-comment-hovered");                            
+                                        },
+                                            error : function(response, statut, erreur){
+                                        }
+                                        });
+                                   
+
+                                    
+                            function menuPlusRecents(profId)
+                        {   
+                            if(document.getElementById("plusRecents").classList.contains("pm-square-btn-comment"))
+                            {
+                            param=1;
+                            lastTime=lastTimee(profId);
+                            shown="";
+                            plusRecents(profId);
+                        }
                         }
 
-                        function plusRecents(){
+
+                        function menuTopCommentaires(profId)
+                        {
+                            
+                            parametre=1;
+                            param2=1;
+                            topCommentaires(profId);
+                        }
+                        
+                        function choice(profId){
+                            if(document.getElementById("topCommentaires").classList.contains("pm-square-btn-comment-hovered"))
+                            {
+                                topCommentaires(profId);
+                            }
+                            else
+                            {
+                                plusRecents(profId);
+                            }
+                        }
+
+                        function plusRecents(profId){
+                            var param;
+                            var zone = '<div class="pm-comments-container" hidden id="zone_plus_recents"></div>'; 
+                            if(document.getElementById("zone_top_commentaires"))
+                            $('#zone_top_commentaires').remove();
+
+                            if(!document.getElementById("zone_plus_recents"))
+                            {
+                            $('#zone').append(zone);
+                            $('#zone_plus_recents').fadeIn(2000);
+                            $('#zone').fadeIn(2000);
+                            }
+
+                            
+
                             if(document.getElementById("topCommentaires").classList.contains("pm-square-btn-comment-hovered"))
                             {
                             document.getElementById("topCommentaires").classList.remove("pm-square-btn-comment-hovered");
@@ -460,20 +573,24 @@ $commentsNumber=$result['count'];
                             element.parentNode.removeChild(element);
                             }
 
+
                                         $.ajax({
                                             url : 'voirPlus.php',
                                             type : 'GET',
                                             data: {
-                                                lastTime,shown
+                                                lastTime,shown,profId
                                             },
                                             dataType : "json",
                                             success : function(response, statut){
                                                 if(response.comment.length!="50")
                                                 {
-                                                $('#zone_de_rechargement').fadeIn(2000);
-                                                $("#zone_de_rechargement").append(response.comment);
+                                                $('#zone_plus_recents').fadeIn(2000);
+                                                $("#zone_plus_recents").append(response.comment);
                                                 lastTime=response.lastTime;
-                                                shown=response.shown;    
+                                                shown=response.shown;
+                                                
+                                                if ( $('#voirPlus').css('display') == 'none' )
+                                                $('#voirPlus').show();
 
                                             }
                                                 else
@@ -486,10 +603,83 @@ $commentsNumber=$result['count'];
 
                                             }
                                         });
-                        }
 
-            </script>
-           
+                                          
+
+                        }
+                
+                lastCount=" ";       
+               topCommentaires(<?php echo $id; ?>);
+               function topCommentaires(profId){
+                            var zone = '<div class="pm-comments-container" hidden id="zone_top_commentaires"></div>'; 
+                            if(document.getElementById("zone_plus_recents"))
+                            $('#zone_plus_recents').remove();
+                            
+                            if(!document.getElementById("zone_top_commentaires"))
+                            {
+                            $("#zone").append(zone);
+                            $("#zone").fadeIn(2000);                            
+                            $('#zone_top_commentaires').fadeIn(2000);
+                            }
+                            if(document.getElementById("plusRecents").classList.contains("pm-square-btn-comment-hovered"))
+                            {
+                            document.getElementById("plusRecents").classList.remove("pm-square-btn-comment-hovered");
+                            document.getElementById("plusRecents").classList.add("pm-square-btn-comment"); 
+                            }
+                            if(document.getElementById("topCommentaires").classList.contains("pm-square-btn-comment"))
+                            {
+                            document.getElementById("topCommentaires").classList.remove("pm-square-btn-comment");
+                            document.getElementById("topCommentaires").classList.add("pm-square-btn-comment-hovered");  
+                            }   
+                            
+
+                            if(document.getElementById("559"))
+                            {
+                            var element = document.getElementById("559"); 
+                            element.parentNode.removeChild(element);
+                            }
+
+                            var parametre = "top";
+                            
+                            
+                            $.ajax({
+                                
+                                            url : 'voirPlus.php',
+                                            type : 'GET',
+                                            data: {
+                                                lastCount,shown2,parametre,param2,profId
+                                            },
+                                            dataType : "json",
+                                            success : function(response, statut){
+                                                if(response.comment.length!="50")
+                                                {
+                                                $('#zone_top_commentaires').fadeIn(2000);
+                                                $("#zone_top_commentaires").append(response.comment);
+                                                
+                                                lastCount=response.lastCount;
+                                                shown2=response.shown2;
+                                                param2=0;
+                                                if ( $('#voirPlus').css('display') == 'none' )
+                                                $('#voirPlus').show();
+
+                                            }
+                                                else
+                                                { 
+                                                $('#voirPlus').hide();
+
+                                            }
+                                            
+                                        },
+                                            error : function(response, statut, erreur){
+                                                alert(erreur);
+
+                                            }
+                                        });
+
+                            
+
+                        }
+            </script>           
             <p id="back-top" class="visible-lg visible-md visible-sm" style="bottom: -70px;"></p>
 
 

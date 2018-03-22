@@ -1,4 +1,12 @@
-<?php include 'dbConnection.php';?>
+<?php 
+include 'dbConnection.php';
+if(isset($_GET['id']))
+{
+$id=$_GET['id'];
+$req=$bd->query('select * from professor where id='.$id);
+$prof=$req->fetch();
+}
+?>
 
 
 <!DOCTYPE html>
@@ -232,7 +240,7 @@
 
 
 
-                              <div class="row pm-containerPadding-top-30">
+                              <div class="row pm-containerPadding-top-30" style="padding-left: 30%;">
 
                                   <div class="col-lg-3 col-md-3 col-sm-12">
 
@@ -244,17 +252,12 @@
 
                                   </div>
 
-                                  <div class="col-lg-9 col-md-9 col-sm-12">
-                                      <p class="pm-author-name">dr. Med Ali Maaref</p>
-                                      <p class="pm-author-title">physicien</p>
+                                  <div class="col-lg-9 col-md-9 col-sm-12" style="padding-top: 75px;padding-left: 30px;">
+                                      <p class="pm-author-name"><?php echo $prof['surname'].' '.$prof['name']; ?></p>
+                                      <p class="pm-author-title"><?php echo($prof['grade']); ?></p>
 
                                       <div class="pm-author-divider"></div>
-                                      <p class="pm-author-bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                                          Nunc fringilla erat nec tellus consectetur sodales. Vivamus quis est eget velit
-                                            scelerisque condimentum sed non lorem. Morbi commodo id magna nec semper. 
-                                            Nullam pulvinar erat nisl, ac laoreet orci tempus iaculis. Vivamus nec tortor velit. 
-                                            Praesent a tortor nulla. Nullam pulvinar erat nisl, ac laoreet orci tempus iaculis.
-                                        </p>
+                                      
                                   </div>
 
                               </div>
@@ -285,8 +288,9 @@
                 <br><br><br><br>
 
                         <div class="row">
+                            <center>
                             <h5 class="light">Partagez votre avis sur cet enseignant</h5>
-                            <p class="light"> Pour chacun des critères ci dessous, dites quelle note attribuez-vous.</p>
+                            <p class="light"> Pour chacun des critères ci dessous, dites quelle note attribuez-vous.</p></center>
                               <!--<div class="pm-divider light" style="padding-left:25px"></div>-->
                               <br><br>
 
@@ -368,7 +372,7 @@
                                                   Commenet jugez-vous le cours que procure cet enseignant? Que pensez-vous de la qualité du cours, sa longeur et son utilité?
                                                   Commenet jugez-vous le cours que procure cet enseignant? Que pensez-vous de la qualité du cours, sa longeur et son utilité?</p>
                                                   <div class="rating" id="pedagogie">
-                                                      <input type="radio" id="pedagogies10" name="pedagogie" value="10" /> <label class = "full" for="pedagogie10" title="Awesome - 5 stars"></label>
+                                                      <input type="radio" id="pedagogie10" name="pedagogie" value="10" /> <label class = "full" for="pedagogie10" title="Awesome - 5 stars"></label>
                                                       <input type="radio" id="pedagogie9" name="pedagogie" value="9" /><label class="half" for="pedagogie9" title="Pretty good - 4.5 stars"></label>
                                                       <input type="radio" id="pedagogie8" name="pedagogie" value="8" /> <label class = "full" for="pedagogie8" title="Pretty good - 4 stars"></label>
                                                       <input type="radio" id="pedagogie7" name="pedagogie" value="7" /><label class="half" for="pedagogie7" title="Meh - 3.5 stars"></label>
@@ -449,8 +453,8 @@
                         </div>
 
                         <div class="row">
-                          <div class="pm-comment-vote-btn ">
-                            <a href="#" class="pm-square-btn" style="width:400px">SOUMETTRE </a>
+                          <div class="pm-comment-vote-btn " onclick="voter(<?php echo $id; ?>)">
+                            <a  class="pm-square-btn" style="width:400px">SOUMETTRE </a>
                           </div>
                         </div>
                 <!-- PANEL 4 end -->
@@ -488,6 +492,46 @@
             <script src="js/prettyphoto/js/jquery.prettyPhoto.js"></script>
             <script src="js/tinynav.js"></script>
             <script src="js/jquery-ui.js"></script>
+
+            <script>
+                function voter(profId){
+                    note=0;
+                    ambiance=0;
+                    pedagogie=0;
+                    presence=0;
+                    cours=0;
+                    for(i=1;i<=10;i++)
+                        {
+                            if(document.getElementById('note'+i).checked)
+                            note=i;
+                            if(document.getElementById('ambiance'+i).checked)
+                            ambiance=i;
+                            if(document.getElementById('pedagogie'+i).checked)
+                            pedagogie=i;
+                            if(document.getElementById('presence'+i).checked)
+                            presence=i;
+                            if(document.getElementById('cours'+i).checked)
+                            cours=i;
+                        }
+
+                        $.ajax({
+                            url : 'submitVote.php',
+                            type : 'GET',
+                            data: {
+                            note,ambiance,pedagogie,presence,cours,profId   
+                            },
+                            success : function(response, statut){
+                                if(response=="done")
+                                alert("POPUP : POPUP : VOTE RECU PUIS REDIRECTION")
+                            },
+                            error : function(response, statut, erreur){
+                                alert('ma tsabech  '+erreur);
+                            }
+                        }); 
+                    
+
+                }
+            </script>
 
             <p id="back-top" class="visible-lg visible-md visible-sm" style="bottom: -70px;"></p>
 
