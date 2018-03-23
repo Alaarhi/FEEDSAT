@@ -22,8 +22,11 @@
             $_SESSION['idFiliere'] = $etudiant->fosId;
             $_SESSION['level'] = $etudiant->level;
         }     
+    } elseif (!(isset($_SESSION['idEtudiant']))) {
+        header ("location: index.php");
     }
 
+    $idEtudiant = $_SESSION['idEtudiant'];
     $idFiliere = $_SESSION['idFiliere'];
     $level = $_SESSION['level'];
 
@@ -33,8 +36,8 @@
         $reqMoyenne = $bd->prepare('SELECT avg(score) as moyenne 
             FROM student 
             INNER JOIN rating ON student.id = rating.studentId 
-            WHERE student.fosId= ?');
-        $reqMoyenne->execute(array($idFiliere));
+            WHERE (student.fosId= ?) AND (student.level = ?)');
+        $reqMoyenne->execute(array($idFiliere, $level));
         $moyenneFiliere = $reqMoyenne->fetch(PDO::FETCH_OBJ);
         $_SESSION['moyenneFiliere'] = $moyenneFiliere->moyenne;
     } 
@@ -50,9 +53,9 @@
         $requeteTauxAnonyme = $bd->prepare('SELECT visibility as visibilite, count(*) as nbrComments from student 
             INNER JOIN comment
             ON (student.id = comment.studentId)
-            WHERE (student.fosId = ?)
+            WHERE (student.fosId = ?) AND (student.level = ?)
             GROUP BY (comment.visibility)');     
-        $requeteTauxAnonyme->execute(array($idFiliere));
+        $requeteTauxAnonyme->execute(array($idFiliere, $level));
 
         if (($requeteTauxAnonyme->rowCount()) !=0 ) {
             while ($row = $requeteTauxAnonyme->fetch(PDO::FETCH_OBJ)) {
@@ -84,21 +87,21 @@
         $contributors = array();
 
         $requeteNbrAmis = $bd->prepare('SELECT COUNT(*) as nbrAmis FROM student
-            WHERE (student.fosId = ?)');     
-        $requeteNbrAmis->execute(array($idFiliere));
+            WHERE (student.fosId = ?) AND (student.id != ?) AND (student.level = ?)');     
+        $requeteNbrAmis->execute(array($idFiliere, $idEtudiant, $level));
         $nbrAmis = $requeteNbrAmis->fetch(PDO::FETCH_OBJ);
 
         $requeteIdOfVoters = $bd->prepare('SELECT DISTINCT studentId FROM rating 
             INNER JOIN student
             ON (student.id = rating.studentId)
-            WHERE (student.fosId = ?)');     
-        $requeteIdOfVoters->execute(array($idFiliere));
+            WHERE (student.fosId = ?) AND (student.id != ?) AN (student.level = ?)');     
+        $requeteIdOfVoters->execute(array($idFiliere, $idEtudiant, $level));
 
         $requeteIdOfCommentators= $bd->prepare('SELECT DISTINCT studentId FROM comment
             INNER JOIN student
             ON (student.id = comment.studentId)
-            WHERE (student.fosId = ?)');     
-        $requeteIdOfCommentators->execute(array($idFiliere));
+            WHERE (student.fosId = ?) AND (student.id != ?) AND (student.level = ?)');     
+        $requeteIdOfCommentators->execute(array($idFiliere, $idEtudiant, $level));
 
         if (($requeteIdOfVoters->rowCount()) !=0 ) {
             while ($row = $requeteIdOfVoters->fetch(PDO::FETCH_OBJ)) {
@@ -116,7 +119,7 @@
         $nbrContributors = sizeof($contributors);
         
         $_SESSION['nbrContributors'] = $nbrContributors;
-        $_SESSION['nbrAmis'] = $nbrAmis->nbrAmis;
+        $_SESSION['nbrAmis'] = ($nbrAmis->nbrAmis);
     }
 
     // STATISTIQUE #4
@@ -141,12 +144,12 @@
         s.imageUrl as photo
         FROM interact as i INNER JOIN student as s INNER JOIN comment as c 
         ON (c.studentId = s.id) AND (c.id = i.commentId) 
-        WHERE (s.fosId = ?) AND (c.approved = 1)
+        WHERE (s.fosId = ?) AND (c.approved = 1) AND (s.id != ?)
         GROUP BY i.commentId 
         ORDER BY nbrInteractions DESC    
         LIMIT 0,3'
         );     
-    $requeteTopComments->execute(array($idFiliere));
+    $requeteTopComments->execute(array($idFiliere, $idEtudiant));
 
     include 'header.php'; 
 ?>
@@ -247,13 +250,22 @@
                     while ($row = $requeteVosEnseignants->fetch(PDO::FETCH_OBJ)) { 
                         $requeteAmisVotants = $bd->prepare(
                             'SELECT s.surname as prenomEtudiant, s.name AS nomEtudiant, 
-                            p.id, p.surname AS prenomProf, p.name AS nomProf
+                            p.id, p.surname AS prenomProf, p.name AS nomProf,
+                            r.score 
                             FROM student AS s 
-                            INNER JOIN rating AS r
+                            INNER JOIN rating AS r 
                             INNER JOIN professor AS p 
-                            ON (r.studentId = s.id) AND (r.profId = p.id)
-                            WHERE (s.fosId = ?) AND (p.id = ?)');
-                        $requeteAmisVotants->execute(array($idFiliere, $row->id));    
+                            ON (r.studentId = s.id) AND (r.profId = p.id) 
+                            WHERE (s.id != ?) AND (s.fosId = ?) AND (s.level = ?) AND (p.id = ?)');
+                        $requeteAmisVotants->execute(array($idEtudiant, $idFiliere, $level, $row->id));  
+                        $nbrAmisVotants = $requeteAmisVotants->rowCount();
+                        $moyenneProf = 0;  
+                        if ($nbrAmisVotants != 0) {
+                            while ($roww = $requeteAmisVotants->fetch(PDO::FETCH_ASSOC)) {
+                                $moyenneProf = $moyenneProf + $roww['score'];
+                            }
+                        $moyenneProf = ($moyenneProf / $nbrAmisVotants);
+                        }
                     ?>
                     <div class="col-lg-3 col-md-3 col-sm-12 pm-column-spacing">
                     <!-- Staff profile -->
@@ -273,15 +285,15 @@
                             
                             <div class="pm-staff-profile-info">
                                 <p class="pm-staff-profile-name light"><?php echo $row->surname.' '.$row->name; ?></p>
-                                <p class="pm-staff-profile-name light">8.49 / 10</p>
+                                <p class="pm-staff-profile-name light">
+                                <?php printf('%0.2f', $moyenneProf)?>
+                                </p>
                                 <p class="pm-staff-profile-title light">
                                 <?php
-                                //$reponseAmisVotants = $requeteAmisVotants->fetch(PDO::FETCH_OBJ);
-                                $nbrAmisVotants = $requeteAmisVotants->rowCount();
                                 $numRow = 0;
                                 switch ($nbrAmisVotants) {
                                     case 0:
-                                        echo 'Aucun étudiant de votre filière n\'a évalué cet enseignant.
+                                        echo 'Aucun étudiant de votre classe n\'a évalué cet enseignant.
                                             Soyez le premier à le faire!';
                                         break;
                                     case 1:
@@ -296,6 +308,7 @@
                                                 echo $row1['prenomEtudiant'].' '.$row1['nomEtudiant'].' et ';
                                             } else {
                                                 echo $row1['prenomEtudiant'].' '.$row1['nomEtudiant'].' ont évalué cet enseignant';
+                                                break;
                                             }
                                         }
                                         break;
@@ -306,7 +319,8 @@
                                             if ($numRow != 2) {
                                                 echo $row1['prenomEtudiant'].' '.$row1['nomEtudiant'].', ';
                                             } else {
-                                                echo ' et '.$row1['prenomEtudiant'].' '.$row1['nomEtudiant'].' ont évalué cet enseignant';
+                                                echo ' et '.$row1['prenomEtudiant'].' '.$row1['nomEtudiant'].' ont évalué cet enseignant.';
+                                                break;
                                             }
                                         }
                                         break;
@@ -315,13 +329,10 @@
                                             $numRow ++;
                                             if($numRow != $nbrAmisVotants-1) {
                                                 echo $row1['prenomEtudiant'].' '.$row1['nomEtudiant'].', ';
-                                            } else {
-                                                if (($nbrAmisVotants - 3) == 1) {
-                                                    echo 'et '.($nbrAmisVotants - 3).' autre étudiant de votre filière ont évalué cet enseignant';
-                                                } else {
-                                                    echo 'et '.($nbrAmisVotants - 3).' autres étudiants de votre filière ont évalué cet enseignant';
-                                                }
-                                            }
+                                            }   else {
+                                                    echo 'et '.($nbrAmisVotants - 3).' autres étudiants de votre classe ont évalué cet enseignant.';
+                                                    break;
+                                                }                                           
                                         }
                                         break;
                                 }
