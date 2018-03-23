@@ -1,5 +1,5 @@
 ﻿<?php 
-include 'dbConnection.php';
+include 'interpretationProfil.php';
 if(isset($_GET['id']))
 {
 $id=$_GET['id'];
@@ -18,9 +18,17 @@ while($result=$req->fetch())
         $cdln+= intval($result['gradesCredibility']);    
         $i=$i+1;    
     
+    }
+    if($i>0)
+    {
+    $cdc=$cdc/$i; $tdp=$tdp/$i; $pdg=$pdg/$i; $adc=$adc/$i; $cdln = $cdln/$i;
+    $cdc=round($cdc, 2);
+    $tdp=round($tdp, 2);
+    $pdg=round($pdg, 2);
+    $adc=round($adc, 2);
+    $cdln=round($cdln, 2);
+    }
 
-$cdc=$cdc/$i; $tdp=$tdp/$i; $pdg=$pdg/$i; $adc=$adc/$i; $cdln = $cdln/$i;
-}
 $req=$bd->query('select * from rcriteria');
 while ($result=$req->fetch())
 {
@@ -89,13 +97,13 @@ $commentsNumber=$result['count'];
                 
                                                     <div class="col-lg-9 col-md-9 col-sm-12">
                                                             <div class="pm-comment-vote-btn">
-                                                                    <a href="vote.php?id=<?php echo $id; ?>" class="pm-square-btn comment-reply">VOTER</a>
+                                                                    <a onclick="voter(<?php if(isset($_SESSION['idEtudiant'])) echo '1'; else echo '0'?>)" class="pm-square-btn comment-reply">VOTER</a>
                                                                 </div>
                                                         <p class="pm-author-name"><?php echo($prof['surname']." ".$prof['name']); ?></p>
                                                         <p class="pm-author-title"><?php echo($prof['grade']); ?></p>
                 
                                                         <div class="pm-author-divider"></div>
-                                                        <p class="pm-author-bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc fringilla erat nec tellus consectetur sodales. Vivamus quis est eget velit scelerisque condimentum sed non lorem. Morbi commodo id magna nec semper. Nullam pulvinar erat nisl, ac laoreet orci tempus iaculis. Vivamus nec tortor velit. Praesent a tortor nulla. Nullam pulvinar erat nisl, ac laoreet orci tempus iaculis.</p>
+                                                        <p class="pm-author-bio"><?php echo $phrase1; ?></p>
                                                     </div>
                 
                                                 </div>
@@ -400,6 +408,13 @@ $commentsNumber=$result['count'];
             <script id="559" src="js/index-clap.js"></script>
             <script src='https://cdnjs.cloudflare.com/ajax/libs/mo-js/0.288.1/mo.min.js'></script>
             <script>
+                        function voter(etudiant)
+                        {
+                            if(etudiant==0)
+                            alert("POPUP: POPUP LOGIN");
+                            else window.location.href = "vote.php?id=<?php echo $id; ?>";
+
+                        }
                         function commenter(profId){
                             commentaire = document.getElementById("commentArea").value;
                             publique = document.getElementById("Identité Publique").checked;
@@ -546,7 +561,7 @@ $commentsNumber=$result['count'];
                             var zone = '<div class="pm-comments-container" hidden id="zone_plus_recents"></div>'; 
                             if(document.getElementById("zone_top_commentaires"))
                             $('#zone_top_commentaires').remove();
-
+                            
                             if(!document.getElementById("zone_plus_recents"))
                             {
                             $('#zone').append(zone);
