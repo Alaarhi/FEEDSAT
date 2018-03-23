@@ -117,7 +117,8 @@
 
         $contributors = array_unique(array_merge($voters,$commentators));
         $nbrContributors = sizeof($contributors);
-        
+
+        $_SESSION['nbrCommentators'] = sizeof($commentators);
         $_SESSION['nbrContributors'] = $nbrContributors;
         $_SESSION['nbrAmis'] = ($nbrAmis->nbrAmis);
     }
@@ -127,11 +128,11 @@
 
     //VOS ENSEIGNANTS 
     $requeteVosEnseignants = $bd->prepare(
-        'SELECT p.id, p.surname, p.name, p.departement, p.grade, p.photo, p.linkedIn
-        FROM teach as t
-        INNER JOIN professor as p
-        ON (t.profId = p.id)
-        WHERE (t.fosId = ?) AND (t.level = ?)
+        'SELECT p.id, p.name, p.surname, p.photo, p.linkedIn FROM rating as r
+        INNER JOIN student as s
+        INNER JOIN professor as p 
+        ON (s.id = r.studentId) AND (p.id = r.profId)
+        WHERE  (s.fosId = ?) AND (s.level = ?)
         LIMIT 0,4');
     $requeteVosEnseignants->execute(array($idFiliere, $level));
 
@@ -247,7 +248,14 @@
                         <br>                   
                     </div> 
                     <?php 
-                    while ($row = $requeteVosEnseignants->fetch(PDO::FETCH_OBJ)) { 
+                    if ($_SESSION['nbrContributors'] == 0) {
+                        echo '<div class="col-lg-12 pm-column-spacing pm-center">
+                            <h5 class="light">Aucun de vos enseignants n\'a fait l\'objet d\'une évaluation de 
+                            la part de vos amis pour le moment. </h5>
+                            </div>';
+                    } 
+                    else {
+                        while ($row = $requeteVosEnseignants->fetch(PDO::FETCH_OBJ)) { 
                         $requeteAmisVotants = $bd->prepare(
                             'SELECT s.surname as prenomEtudiant, s.name AS nomEtudiant, 
                             p.id, p.surname AS prenomProf, p.name AS nomProf,
@@ -257,12 +265,16 @@
                             INNER JOIN professor AS p 
                             ON (r.studentId = s.id) AND (r.profId = p.id) 
                             WHERE (s.id != ?) AND (s.fosId = ?) AND (s.level = ?) AND (p.id = ?)');
-                        $requeteAmisVotants->execute(array($idEtudiant, $idFiliere, $level, $row->id));  
-                        $nbrAmisVotants = $requeteAmisVotants->rowCount();
+                        $requeteAmisVotants->execute(array($idEtudiant, $idFiliere, $level, $row->id));
+                        $nbrAmisVotants = $requeteAmisVotants->rowCount();  
+                        
+                        $AmisVotants = $requeteAmisVotants->fetchALL(PDO::FETCH_ASSOC);
+
+                        
                         $moyenneProf = 0;  
                         if ($nbrAmisVotants != 0) {
-                            while ($roww = $requeteAmisVotants->fetch(PDO::FETCH_ASSOC)) {
-                                $moyenneProf = $moyenneProf + $roww['score'];
+                            foreach ($AmisVotants as $amiVotant) {
+                                $moyenneProf = $moyenneProf + $amiVotant['score'];
                             }
                         $moyenneProf = ($moyenneProf / $nbrAmisVotants);
                         }
@@ -297,38 +309,39 @@
                                             Soyez le premier à le faire!';
                                         break;
                                     case 1:
-                                        $reponseAmisVotants = $requeteAmisVotants->fetch(PDO::FETCH_ASSOC);
-                                        echo $reponseAmisVotants['prenomEtudiant'].' '.$reponseAmisVotants['nomEtudiant'].
-                                            'a évalué cet enseignant';
+                                        foreach ($AmisVotants as $amiVotant) {
+                                            echo $amiVotant['prenomEtudiant'].' '.$amiVotant['nomEtudiant'].
+                                                ' a évalué cet enseignant';
+                                        }
                                         break;
                                     case 2:
-                                        while ($row1 = $requeteAmisVotants->fetch(PDO::FETCH_ASSOC)) {
+                                        foreach ($AmisVotants as $amiVotant) {
                                             $numRow ++;
                                             if ($numRow != 2) {
-                                                echo $row1['prenomEtudiant'].' '.$row1['nomEtudiant'].' et ';
+                                                echo $amiVotant['prenomEtudiant'].' '.$amiVotant['nomEtudiant'].' et ';
                                             } else {
-                                                echo $row1['prenomEtudiant'].' '.$row1['nomEtudiant'].' ont évalué cet enseignant';
+                                                echo $amiVotant['prenomEtudiant'].' '.$amiVotant['nomEtudiant'].' ont évalué cet enseignant';
                                                 break;
                                             }
                                         }
                                         break;
                                     case 3:
                                         //$dernierElement = end(($requeteAmisVotants->fetch(PDO::FETCH_ASSOC)));
-                                        while ($row1 = $requeteAmisVotants->fetch(PDO::FETCH_ASSOC)) {
+                                        foreach ($AmisVotants as $amiVotant) {
                                             $numRow ++;
                                             if ($numRow != 2) {
-                                                echo $row1['prenomEtudiant'].' '.$row1['nomEtudiant'].', ';
+                                                echo $amiVotant['prenomEtudiant'].' '.$amiVotant['nomEtudiant'].', ';
                                             } else {
-                                                echo ' et '.$row1['prenomEtudiant'].' '.$row1['nomEtudiant'].' ont évalué cet enseignant.';
+                                                echo ' et '.$amiVotant['prenomEtudiant'].' '.$amiVotant['nomEtudiant'].' ont évalué cet enseignant.';
                                                 break;
                                             }
                                         }
                                         break;
                                     default :
-                                        while ($row1 = $requeteAmisVotants->fetch(PDO::FETCH_ASSOC)) {
+                                        foreach ($AmisVotants as $amiVotant) {
                                             $numRow ++;
                                             if($numRow != $nbrAmisVotants-1) {
-                                                echo $row1['prenomEtudiant'].' '.$row1['nomEtudiant'].', ';
+                                                echo $amiVotant['prenomEtudiant'].' '.$amiVotant['nomEtudiant'].', ';
                                             }   else {
                                                     echo 'et '.($nbrAmisVotants - 3).' autres étudiants de votre classe ont évalué cet enseignant.';
                                                     break;
@@ -347,6 +360,8 @@
                         <br>
                         <a href="onclick="choice()"" class="pm-square-btn-comment-avis comment-reply">VOIR PLUS +</a>
                     </div>
+                    <?php } ?>
+
                 </div><!-- /.row -->
             </div><!-- /.container -->
         </div>
@@ -370,6 +385,10 @@
             <div class="row pm-containerPadding-top-30 pm-containerPadding-bottom-60 pm-center">
             	<!-- Column 1 TO 3 -->
                 <?php 
+                if ($_SESSION['nbrCommentators'] == 0) {
+                    echo '<h5> Vos amis n\'ont pas de commentaires sur le site, pour le moment. </h5>';
+                }
+                else {
                 if (($requeteTopComments->rowCount()) !=0 ) {
                     while ($row = $requeteTopComments->fetch(PDO::FETCH_OBJ)) {
                 ?>
@@ -387,7 +406,7 @@
                         <p class="date"> <?php echo $row->dateCommentaire; ?> </p>
                     </div>
                 </div>
-                <?php }} ?>
+                <?php }}} ?>
                 <!-- Column 1 TO 3 end -->    
             </div>
         </div>
