@@ -182,7 +182,7 @@
                             </ul>
                             <ul class="sf-menu pm-nav" style="float: right;">
                             <?php if (isset($_SESSION['nom'])) { ?>    
-                                <li><a href="deconnexion.php"><?php echo $_SESSION['prenom']." ".$_SESSION['nom']; ?></a>
+                                <li><a href="javascript:;"><?php echo $_SESSION['prenom']." ".$_SESSION['nom']; ?></a>
                                     <ul>
                                     <li><a href="#">Ajouter une photo d'identité</a></li>
                                     <li><a href="#">Changer mon mot de passe</a></li>

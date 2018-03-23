@@ -1,10 +1,18 @@
 <?php 
 include 'dbConnection.php';
+if (!(isset($_SESSION['idEtudiant']))) {
+        header ("location: index.php");
+    }
+
 if(isset($_GET['id']))
 {
 $id=$_GET['id'];
 $req=$bd->query('select * from professor where id='.$id);
 $prof=$req->fetch();
+}
+else 
+{
+    header ("location: index.php");    
 }
 ?>
 
@@ -125,96 +133,11 @@ $prof=$req->fetch();
         <!-- Request appointment form end -->
 
     	<!-- Header area -->
-        <header>
-
-        	<div class="container">
-
-            	<div class="row">
-
-                	<div class="col-lg-4 col-md-4 col-sm-12">
-
-                    	 <div class="pm-header-logo-container">
-                            <a href="index.php"><img src="img/Medical-Link.jpg" class="img-responsive pm-header-logo" alt="Medical-Link Template"></a>
-                        </div>
-
-                    </div>
-
-                    <div class="col-lg-8 col-md-8 col-sm-12">
-                        <ul class="pm-search-container">
-                        	<li>
-                            	<div class="pm-search-field-container">
-                                	<a href="#" class="fa fa-search"></a>
-                                	<form action="#" method="post">
-                                    	<input name="pm-search-field" class="pm-search-field" type="text" placeholder="Rechercher un prof...">
-                                    </form>
-                                </div>
-                            </li>
-                            <li>
-                            	<div class="pm-dropdown pm-categories-menu">
-                                    <div class="pm-dropmenu">
-                                        <p class="pm-menu-title">Filtrer par département</p>
-                                        <i class="fa fa-angle-down"></i>
-                                    </div>
-                                    <div class="pm-dropmenu-active">
-                                        <ul>
-                                           <li><a href="news.html">Département 1</a></li>
-                                           <li><a href="news.html">Département 2</a></li>
-                                           <li><a href="news.html">Département 3</a></li>
-                                           <li><a href="news.html">Département 4</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </header>
+        <?php include 'header.php' ?>
         <!-- /Header area end -->
 
         <!-- Navigation area -->
-        <div class="pm-nav-container">
 
-        	<div class="container">
-
-                <div class="row">
-
-                    <div class="col-lg-10 col-md-10 col-sm-12">
-
-                        <nav class="navbar-collapse collapse" id="pm-main-navigation">
-
-                            <ul class="sf-menu pm-nav">
-
-                        		<li><a href="index.php" class="fa fa-home" id="pm-home-btn"></a></li>
-                                <li>
-                                	<a href="profs.php">Liste des enseignants</a>
-                                    <ul>
-                                        <li><a href="medical-staff.html">Département 1</a></li>
-                                        <li><a href="medical-staff.html">Département 2</a></li>
-                                        <li><a href="medical-staff.html">Département 3</a></li>
-                                        <li><a href="medical-staff.html">Département 4</a></li>
-                                        <li><a href="medical-staff.html">Département 5</a></li>
-
-                                    </ul>
-                                </li>
-
-                                <li><a href="avis.php">Avis de mes collègues</a></li>
-
-                            </ul>
-
-                        </nav>
-
-                    </div>
-
-                    <div class="col-lg-2 col-md-2 col-sm-12 pm-main-menu">
-                    </div>
-                </div>
-            </div>
-        </div>
                 <!-- Navigation area end -->
 
                 <!-- Sub-header area -->
@@ -454,7 +377,7 @@ $prof=$req->fetch();
 
                         <div class="row">
                           <div class="pm-comment-vote-btn " onclick="voter(<?php echo $id; ?>)">
-                            <a  class="pm-square-btn" style="width:400px">SOUMETTRE </a>
+                            <a href="javascript:;" class="pm-square-btn2" style="width:400px">SOUMETTRE </a>
                           </div>
                         </div>
                 <!-- PANEL 4 end -->
