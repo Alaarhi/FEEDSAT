@@ -240,7 +240,7 @@ $prof=$req->fetch();
 
 
 
-                              <div class="row pm-containerPadding-top-30" style="padding-left: 30%;">
+                              <div class="row pm-containerPadding-top-30" style="padding-left: 32.5%;">
 
                                   <div class="col-lg-3 col-md-3 col-sm-12">
 

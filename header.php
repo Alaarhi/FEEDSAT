@@ -134,17 +134,17 @@
                                 </div>
                             </li>
                             <li>
-                            	<div class="pm-dropdown pm-categories-menu">
-                                    <div class="pm-dropmenu">
+                            	<div class="pm-dropdown pm-categories-menu" >
+                                    <div class="pm-dropmenu" >
                                         <p class="pm-menu-title">Filtrer par Département</p>
                                         <i class="fa fa-angle-down"></i>
                                     </div>
-                                    <div class="pm-dropmenu-active">
+                                    <div class="pm-dropmenu-active" >
                                         <ul>
-                                           <li><a href="depinformatique.php">Génie informatique et Mathématique</a></li>
-                                           <li><a href="depphy.php">Génie physique et instrumentation</a></li>
-                                           <li><a href="depbio.php">Génie Biologie et chimie</a></li>
-                                           <li><a href="deplangue.php">Sciences Sociales, langues et Formation générale</a></li>
+                                           <li><a href="depinformatique.php"><center>Génie informatique et Mathématique</center></a></li>
+                                           <li><a href="depphy.php"><center>Génie physique et instrumentation</center></a></li>
+                                           <li><a href="depbio.php"><center>Génie Biologie et chimie</center></a></li>
+                                           <li><a href="deplangue.php"><center>Sciences Sociales, langues et Formation générale</center></a></li>
                                         </ul>
                                     </div>
                                 </div>
