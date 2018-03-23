@@ -15,7 +15,7 @@ if(isset($_GET['commentaire'])&&isset($_GET['publique'])&&isset($_GET['anonyme']
     $visibility=0;
     $req = $bd->prepare("insert into comment (comment,studentLevel,visibility,studentId,profId) values (:comment,:studentLevel,:visibility,:studentId,:profId) ");
     $req->execute(array(
-        'comment' => $_GET['commentaire'],
+        'comment' => htmlspecialchars($_GET['commentaire']),
         'studentLevel' => $_SESSION['level'],
         'visibility' => $visibility,
         'studentId' => $_SESSION['idEtudiant'],
