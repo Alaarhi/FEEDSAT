@@ -25,7 +25,7 @@ while($ratings=$requete->fetch())
     else
     $etat="convergence";
 
-    $pos1=array("Par rapport à ","Concernant ","Relativement à ");
+    $pos1=array("Par rapport à ","En ce qui concerne ","Relativement à ");
     $pos2=array("cet enseignant, les ","ce prof, les ");
     $pos3=array("opinions ","avis ","appréciations ","jugements "); 
     $pos41=array("divergent ","différent ","s'écartent ");

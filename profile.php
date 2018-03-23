@@ -94,7 +94,7 @@ $commentsNumber=$result['count'];
                                                         </div>
                 
                                                     </div>
-                
+                 
                                                     <div class="col-lg-9 col-md-9 col-sm-12">
                                                             <div class="pm-comment-vote-btn">
                                                                     <a onclick="voter(<?php if(isset($_SESSION['idEtudiant'])) echo '1'; else echo '0'?>)" class="pm-square-btn comment-reply">VOTER</a>
@@ -105,16 +105,19 @@ $commentsNumber=$result['count'];
                                                         <div class="pm-author-divider"></div>
                                                         <p class="pm-author-bio"><?php echo $phrase1; ?></p>
                                                     </div>
-                
+                                                    
+
                                                 </div>
                 
                                             </div>
                                         </div>
-                
+                                       
                                         <div class="row">
                                             <br>
                                             <div class="col-lg-3 col-md-6 col-sm-6 ">
-                
+                                            <div class="row">
+                                        <img class="arrowVote" src="img/arrow.png"></img>
+                                    </div>
                 
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-6 ">
