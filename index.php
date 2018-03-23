@@ -334,7 +334,7 @@ if($resultRT1[0] > 0)
 
                     <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
 
-                    <a href="#" class="pm-standard-link">consulter ce profil <i class="fa fa-plus"></i></a>
+                    <a href="/feedsat/profile.php?id=<?php echo($idBestProfRate); ?>" class="pm-standard-link">consulter ce profil <i class="fa fa-plus"></i></a>
 
                 </div>
                 <!-- Column 1 end -->
@@ -352,7 +352,7 @@ if($resultRT1[0] > 0)
 
                     <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
 
-                    <a href="#" class="pm-standard-link">consulter ce profil<i class="fa fa-plus"></i></a>
+                    <a href="/feedsat/profile.php?id=<?php echo($idWorstProfRate); ?>" class="pm-standard-link">consulter ce profil<i class="fa fa-plus"></i></a>
 
                 </div>
                 <!-- Column 2 end -->
@@ -370,7 +370,7 @@ if($resultRT1[0] > 0)
 
                     <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
 
-                    <a href="#" class="pm-standard-link">consulter ce profil<i class="fa fa-plus"></i></a>
+                    <a href="/feedsat/profile.php?id=<?php echo($resultFeed['profId']); ?>" class="pm-standard-link">consulter ce profil<i class="fa fa-plus"></i></a>
 
                 </div>
                 <!-- Column 3 end -->
@@ -621,24 +621,24 @@ if($resultRT1[0] > 0)
                                 </div>
                                 <p class="pm-testimonial-name"> <?php echo($tabStSurname[0]." ".$tabStName[0]); ?> </p>
                                 <p class="pm-testimonial-title"> <?php echo($tabStFos[0]." ".$tabStLevel[0]); ?></p>
-                                <div class="pm-testimonial-divider"> <?php echo($tabCom[0]); ?></div>
-                                <p class="pm-testimonial-quote"></p>
+                                <div class="pm-testimonial-divider"> </div>
+                                <p class="pm-testimonial-quote"><?php echo($tabCom[0]); ?></p>
                             </li>
                             <li>
                                 <div class="pm-testimonial-img" style="background-image:url(img/information/abir.jpg);">
                                 </div>
-                                <p class="pm-testimonial-name">Abir Messaoudi</p>
-                                <p class="pm-testimonial-title">CBA</p>
+                                <p class="pm-testimonial-name"><?php echo($tabStSurname[1]." ".$tabStName[1]); ?></p>
+                                <p class="pm-testimonial-title"><?php echo($tabStFos[1]." ".$tabStLevel[1]); ?></p>
                                 <div class="pm-testimonial-divider"></div>
-                                <p class="pm-testimonial-quote">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam quis nostrud exerci tation.</p>
+                                <p class="pm-testimonial-quote"><?php echo($tabCom[1]); ?></p>
                             </li>
                             <li>
                                 <div class="pm-testimonial-img" style="background-image:url(img/information/ala.jpg);">
                                 </div>
-                                <p class="pm-testimonial-name">Alàa Riahi</p>
-                                <p class="pm-testimonial-title">GL 2</p>
+                                <p class="pm-testimonial-name"><?php echo($tabStSurname[2]." ".$tabStName[2]); ?></p>
+                                <p class="pm-testimonial-title"><?php echo($tabStFos[2]." ".$tabStLevel[2]); ?></p>
                                 <div class="pm-testimonial-divider"></div>
-                                <p class="pm-testimonial-quote">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam quis nostrud exerci tation.</p>
+                                <p class="pm-testimonial-quote"><?php echo($tabCom[2]); ?></p>
                             </li>
                         </ul>
 
