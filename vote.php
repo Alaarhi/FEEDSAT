@@ -304,7 +304,7 @@ $prof=$req->fetch();
                                               <h4 class="panel-title"><i class="fa fa-plus"></i><a class="pm-accordion-link pm-dark-link collapsed" href="#collapse0" data-parent="#accordion" data-toggle="collapse" aria-expanded="false"><b>Contenu du cours</b></a></h4>
                                           </div>
 
-                                          <div class="panel-collapse collapse" id="collapse0" aria-expanded="false" style="height: 0px;">
+                                          <div class="panel-collapse collapse" id="collapse0" aria-expanded="true" style="height: 0px;">
                                               <div class="panel-body">
                                                 <p>Commenet jugez-vous le cours que procure cet enseignant? Que pensez-vous de la qualité du cours, sa longeur et son utilité?
                                                   Commenet jugez-vous le cours que procure cet enseignant? Que pensez-vous de la qualité du cours, sa longeur et son utilité?
@@ -531,6 +531,7 @@ $prof=$req->fetch();
                     
 
                 }
+                
             </script>
 
             <p id="back-top" class="visible-lg visible-md visible-sm" style="bottom: -70px;"></p>
