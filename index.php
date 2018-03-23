@@ -145,6 +145,86 @@ while(($resultBestCom=$reqBestCom->fetch()) && $i<3 )
     $i++;
 }
 
+//satisfaction:
+$reqMPI=$bd->query('select COUNT(score) from rating, student where( (rating.score>5) 
+                    and (rating.studentId=student.id) and (student.fosId=0) )');
+$reqBIO=$bd->query('select COUNT(score) from rating, student where( (rating.score>5) 
+                    and (rating.studentId=student.id) and (student.fosId=1) )');
+$reqCBA=$bd->query('select COUNT(score) from rating, student where( (rating.score>5) 
+                    and (rating.studentId=student.id) and (student.fosId=12) )');
+$reqCH=$bd->query('select COUNT(score) from rating, student where( (rating.score>5) 
+                    and (rating.studentId=student.id) and (student.fosId=3) )');
+$reqGL=$bd->query('select COUNT(score) from rating, student where( (rating.score>5) 
+                    and (rating.studentId=student.id) and (student.fosId=4) )');
+$reqIIA=$bd->query('select COUNT(score) from rating, student where( (rating.score>5) 
+                    and (rating.studentId=student.id) and (student.fosId=5) )');
+$reqIMI=$bd->query('select COUNT(score) from rating, student where( (rating.score>5) 
+                    and (rating.studentId=student.id) and (student.fosId=6) )');
+$reqRT=$bd->query('select COUNT(score) from rating, student where( (rating.score>5) 
+                    and (rating.studentId=student.id) and (student.fosId=13) )');
+
+                    $resultMPI=$reqMPI->fetch();
+                    $resultBIO=$reqBIO->fetch();
+                    $resultCBA=$reqCBA->fetch();
+                    $resultCH=$reqCH->fetch();
+                    $resultGL=$reqGL->fetch();
+                    $resultIIA=$reqIIA->fetch();
+                    $resultIMI=$reqIMI->fetch();
+                    $resultRT=$reqRT->fetch();
+
+$rMPI=$bd->query('select COUNT(score) from rating, student where( 
+                    (rating.studentId=student.id) and (student.fosId=0) )');
+$rBIO=$bd->query('select COUNT(score) from rating, student where( 
+                    (rating.studentId=student.id) and (student.fosId=1) )');
+$rCBA=$bd->query('select COUNT(score) from rating, student where( 
+                    (rating.studentId=student.id) and (student.fosId=2) )');
+$rCH=$bd->query('select COUNT(score) from rating, student where( 
+                    (rating.studentId=student.id) and (student.fosId=3) )');
+$rGL=$bd->query('select COUNT(score) from rating, student where( 
+                     (rating.studentId=student.id) and (student.fosId=4) )');
+$rIIA=$bd->query('select COUNT(score) from rating, student where( 
+                    (rating.studentId=student.id) and (student.fosId=5) )');
+$rIMI=$bd->query('select COUNT(score) from rating, student where( 
+                   (rating.studentId=student.id) and (student.fosId=6) )');
+$rRT=$bd->query('select COUNT(score) from rating, student where( 
+                (rating.studentId=student.id) and (student.fosId=13) )');
+
+                $resultMPI1=$rMPI->fetch();
+                $resultBIO1=$rBIO->fetch();
+                $resultCBA1=$rCBA->fetch();
+                $resultCH1=$rCH->fetch();
+                $resultGL1=$rGL->fetch();
+                $resultIIA1=$rIIA->fetch();
+                $resultIMI1=$rIMI->fetch();
+                $resultRT1=$rRT->fetch();
+
+if($resultMPI1[0] > 0) 
+    {$MPI=$resultMPI[0]/$resultMPI1[0];}
+    else {$MPI=0;}
+if($resultBIO1[0] > 0) 
+    {$BIO= $resultBIO[0]/$resultBIO1[0];}
+    else {$BIO=0;}
+if($resultCBA1[0] > 0) 
+    {$CBA=$resultCBA/$resultCBA1[0];}
+    else {$CBA=0;}
+if($resultCH1[0] > 0) 
+    {$CH=$resultCH/$resultCH1[0];}
+    else {$CH=0;}
+if($resultGL1[0] > 0) 
+    {$GL=$resultGL/$resultGL1[0];}
+    else {$GL=0;}
+if($resultIIA1[0] > 0) 
+    {$IIA=$resultIIA/$resultIIA1[0];}
+    else {$IIA=0;}
+if($resultIMI1[0] > 0) 
+    {$IMI=$resultIMI/$resultIMI1[0];}
+    else {$IMI=0;}
+if($resultRT1[0] > 0) 
+    {$RT=($resultRT[0]/$resultRT1[0]);}
+    else {$RT=0;}
+                                        
+                    
+
     
 ?>
 
@@ -323,10 +403,10 @@ while(($resultBestCom=$reqBestCom->fetch()) && $i<3 )
                       <div class="pm-progress-bar-description" id="pm-progress-bar-desc-1">
                           1er Cycle (MPI)
                           <div class="pm-progress-bar-diamond"></div>
-                          <span>42%</span>
+                          <span><?php echo($MPI."%"); ?></span>
                       </div>
                       <div class="pm-progress-bar">
-                          <span data-width="42" class="pm-progress-bar-outer" id="pm-progress-bar-1">
+                          <span data-width="<?php echo($MPI); ?>" class="pm-progress-bar-outer" id="pm-progress-bar-1">
                               <span class="pm-progress-bar-inner"></span>
                           </span>
                       </div>
@@ -336,10 +416,10 @@ while(($resultBestCom=$reqBestCom->fetch()) && $i<3 )
                       <div class="pm-progress-bar-description" id="pm-progress-bar-desc-2">
                           Génie Logiciel (GL)
                           <div class="pm-progress-bar-diamond"></div>
-                          <span>89%</span>
+                          <span><?php echo($GL."%"); ?></span>
                       </div>
                       <div class="pm-progress-bar">
-                          <span data-width="89" class="pm-progress-bar-outer" id="pm-progress-bar-2">
+                          <span data-width="<?php echo($GL); ?>" class="pm-progress-bar-outer" id="pm-progress-bar-2">
                               <span class="pm-progress-bar-inner"></span>
                           </span>
                       </div>
@@ -349,10 +429,10 @@ while(($resultBestCom=$reqBestCom->fetch()) && $i<3 )
                       <div class="pm-progress-bar-description" id="pm-progress-bar-desc-3">
                           Informtique Industrielle Automatique (IIA)
                           <div class="pm-progress-bar-diamond"></div>
-                          <span>75%</span>
+                          <span><?php echo($IIA."%"); ?></span>
                       </div>
                       <div class="pm-progress-bar">
-                          <span data-width="75" class="pm-progress-bar-outer" id="pm-progress-bar-3">
+                          <span data-width="<?php echo($IIA); ?>" class="pm-progress-bar-outer" id="pm-progress-bar-3">
                               <span class="pm-progress-bar-inner"></span>
                           </span>
                       </div>
@@ -362,10 +442,10 @@ while(($resultBestCom=$reqBestCom->fetch()) && $i<3 )
                       <div class="pm-progress-bar-description" id="pm-progress-bar-desc-4">
                           Chimie Industrielle (CH)
                           <div class="pm-progress-bar-diamond"></div>
-                          <span>60%</span>
+                          <span><?php echo($CH."%"); ?></span>
                       </div>
                       <div class="pm-progress-bar">
-                          <span data-width="60" class="pm-progress-bar-outer" id="pm-progress-bar-4">
+                          <span data-width="<?php echo($CH); ?>" class="pm-progress-bar-outer" id="pm-progress-bar-4">
                               <span class="pm-progress-bar-inner"></span>
                           </span>
                       </div>
@@ -383,10 +463,10 @@ while(($resultBestCom=$reqBestCom->fetch()) && $i<3 )
                         <div class="pm-progress-bar-description" id="pm-progress-bar-desc-5">
                             1er Cycle (CBA)
                             <div class="pm-progress-bar-diamond"></div>
-                            <span>75%</span>
+                            <span><?php echo($CBA."%"); ?></span>
                         </div>
                         <div class="pm-progress-bar">
-                            <span data-width="75" class="pm-progress-bar-outer" id="pm-progress-bar-5">
+                            <span data-width="<?php echo($CBA); ?>" class="pm-progress-bar-outer" id="pm-progress-bar-5">
                                 <span class="pm-progress-bar-inner"></span>
                             </span>
                         </div>
@@ -396,10 +476,10 @@ while(($resultBestCom=$reqBestCom->fetch()) && $i<3 )
                         <div class="pm-progress-bar-description" id="pm-progress-bar-desc-6">
                             Réseaux Informatiques et Télécommunications (RT)
                             <div class="pm-progress-bar-diamond"></div>
-                            <span>36%</span>
+                            <span><?php echo($RT."%"); ?></span>
                         </div>
                         <div class="pm-progress-bar">
-                            <span data-width="36" class="pm-progress-bar-outer" id="pm-progress-bar-6">
+                            <span data-width="<?php echo($RT); ?>" class="pm-progress-bar-outer" id="pm-progress-bar-6">
                                 <span class="pm-progress-bar-inner"></span>
                             </span>
                         </div>
@@ -409,10 +489,10 @@ while(($resultBestCom=$reqBestCom->fetch()) && $i<3 )
                         <div class="pm-progress-bar-description" id="pm-progress-bar-desc-7">
                             Informatiques et Mainenance Industrielle (IMI)
                             <div class="pm-progress-bar-diamond"></div>
-                            <span>23%</span>
+                            <span><?php echo($IMI."%"); ?></span>
                         </div>
                         <div class="pm-progress-bar">
-                            <span data-width="23" class="pm-progress-bar-outer" id="pm-progress-bar-7">
+                            <span data-width="<?php echo($IMI); ?>" class="pm-progress-bar-outer" id="pm-progress-bar-7">
                                 <span class="pm-progress-bar-inner"></span>
                             </span>
                         </div>
@@ -422,10 +502,10 @@ while(($resultBestCom=$reqBestCom->fetch()) && $i<3 )
                         <div class="pm-progress-bar-description" id="pm-progress-bar-desc-8">
                             Biologie Industrielle (BIO)
                             <div class="pm-progress-bar-diamond"></div>
-                            <span>50%</span>
+                            <span><?php echo($BIO."%"); ?></span>
                         </div>
                         <div class="pm-progress-bar">
-                            <span data-width="50" class="pm-progress-bar-outer" id="pm-progress-bar-8">
+                            <span data-width="<?php echo($BIO); ?>" class="pm-progress-bar-outer" id="pm-progress-bar-8">
                                 <span class="pm-progress-bar-inner"></span>
                             </span>
                         </div>
