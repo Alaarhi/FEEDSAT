@@ -123,7 +123,7 @@ $commentsNumber=$result['count'];
                                                         <p class="pm-author-title"><?php echo($prof['grade']); ?></p>
                 
                                                         <div class="pm-author-divider"></div>
-                                                        <p class="pm-author-bio"><?php echo $phrase1; ?></p>
+                                                        <p class="pm-author-bio"><?php echo $phrase; ?></p>
                                                     </div>
                                                     
 
@@ -136,7 +136,7 @@ $commentsNumber=$result['count'];
                                             <br>
                                             <div class="col-lg-3 col-md-6 col-sm-6 ">
                                             <div class="row">
-                                        <img class="arrowVote" src="img/arrow.png"></img>
+                                        <img class="arrowVote" src="img/arrow.png" hidden></img>
                                     </div>
                 
                                                 </div>
