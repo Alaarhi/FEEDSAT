@@ -3,7 +3,7 @@
   <form class="modal-content animate" action="avis.php" method="post">
     
     <div class="imgcontainer">
-      <span onclick="document.getElementById('modal-wrapper').style.display='none'" class="close" title="fermer">&times;</span>
+      <span onclick="document.getElementById('avis').style.display='none'" class="close" title="fermer">&times;</span>
         <img src="img/medical-link.jpg" alt="Logo">
           <h4 style="margin-top: 5%; text-align:center; color: #5e6467">Identifiez-vous pour accéder à ce contenu</h4>
     </div>
@@ -136,3 +136,4 @@
     </div>
   </form>
 </div>
+

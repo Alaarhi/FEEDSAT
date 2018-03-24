@@ -160,7 +160,7 @@
         <div class="pm-nav-container">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-10 col-md-10 col-sm-12">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
                         <nav class="navbar-collapse collapse" id="pm-main-navigation">
                             <ul class="sf-menu pm-nav">
                                 <li><a href="index.php" class="fa fa-home" id="pm-home-btn"></a></li>
@@ -178,8 +178,17 @@
                                 <?php } else { ?>
                                 <li><a onclick="document.getElementById('avis').style.display='block'">Avis de mes collègues</a></li>
                                 <?php } ?>
-                                <?php if (isset($_SESSION['nom'])) { ?>    
-                                <li><a href="deconnexion.php">Déconnexion</a></li>
+                                
+                            </ul>
+                            <ul class="sf-menu pm-nav" style="float: right;">
+                            <?php if (isset($_SESSION['nom'])) { ?>    
+                                <li><a href="javascript:;"><?php echo $_SESSION['prenom']." ".$_SESSION['nom']; ?></a>
+                                    <ul>
+                                    <li><a href="#">Ajouter une photo d'identité</a></li>
+                                    <li><a href="#">Changer mon mot de passe</a></li>
+                                    <li><a href="deconnexion.php">Déconnexion</a></li>
+                                    </ul>
+                                </li>
                                 <?php } ?>
                             </ul>
                         </nav>
@@ -193,7 +202,7 @@
 
 <script>
 // If user clicks anywhere outside of the modal, Modal will close
-var modal = document.getElementById('modal-wrapper');
+var modal = document.getElementById('avis');
 window.onclick = function(event) {
     if (event.target == modal) {
         modal.style.display = "none";

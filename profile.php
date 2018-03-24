@@ -97,13 +97,33 @@ $commentsNumber=$result['count'];
                  
                                                     <div class="col-lg-9 col-md-9 col-sm-12">
                                                             <div class="pm-comment-vote-btn">
-                                                                    <a onclick="voter(<?php if(isset($_SESSION['idEtudiant'])) echo '1'; else echo '0'?>)" class="pm-square-btn comment-reply">VOTER</a>
+                                                                <?php
+                                                                $voted=0;
+                                                                $teaches=0;
+                                                                if(isset($_SESSION['idEtudiant']))
+                                                                {
+                                                                    $requ = $bd->query("select * from rating where studentId='".$_SESSION['idEtudiant']."' and studentLevel='".$_SESSION['niveau']."' and profId='".$id."'");
+                                                                    if($requ->fetch())
+                                                                    $voted=1;
+                                                                    else $voted=0;
+                                                                    $requ2 = $bd->query("select * from teach where profId='".$id."'");
+                                                                    if($requ2)
+                                                                    while($result=$requ2->fetch())
+                                                                    {
+                                                                        if(($result['fosId']==$_SESSION['idFiliere'])&&($result['level']==$_SESSION['niveau']))
+                                                                        $teaches=1;
+                                                                    }
+                                                                    
+                                                                }
+                                                                
+                                                                ?>
+                                                                    <a href="#" onclick="voter(<?php if(isset($_SESSION['idEtudiant'])) echo '1'; else echo '0'?>,<?php echo $voted; ?>,<?php echo $teaches; ?>)" class="pm-square-btn comment-reply">VOTER</a>
                                                                 </div>
                                                         <p class="pm-author-name"><?php echo($prof['surname']." ".$prof['name']); ?></p>
                                                         <p class="pm-author-title"><?php echo($prof['grade']); ?></p>
                 
                                                         <div class="pm-author-divider"></div>
-                                                        <p class="pm-author-bio"><?php echo $phrase1; ?></p>
+                                                        <p class="pm-author-bio"><?php echo $phrase; ?></p>
                                                     </div>
                                                     
 
@@ -116,7 +136,7 @@ $commentsNumber=$result['count'];
                                             <br>
                                             <div class="col-lg-3 col-md-6 col-sm-6 ">
                                             <div class="row">
-                                        <img class="arrowVote" src="img/arrow.png"></img>
+                                        <img class="arrowVote" src="img/arrow.png" hidden></img>
                                     </div>
                 
                                                 </div>
@@ -279,8 +299,8 @@ $commentsNumber=$result['count'];
 
                                                         <div style="padding-left: 33%">
                                                             <br><br>
-                                                            <a id="topCommentaires" onclick="menuTopCommentaires(<?php echo $id; ?>)" class="pm-square-btn-comment-hovered comment-reply">Top Commentaires</a> &nbsp;&nbsp;&nbsp;&nbsp;
-                                                            <a id="plusRecents" onclick="menuPlusRecents(<?php echo $id; ?>)" class="pm-square-btn-comment comment-reply" >Les Plus Récents</a>
+                                                            <a href="javascript:;" id="topCommentaires" onclick="menuTopCommentaires(<?php echo $id; ?>)" class="pm-square-btn-comment-hovered comment-reply">Top Commentaires</a> &nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <a href="javascript:;" id="plusRecents" onclick="menuPlusRecents(<?php echo $id; ?>)" class="pm-square-btn-comment comment-reply" >Les Plus Récents</a>
                                                             </div>
 
                                                 <!-- Comments -->
@@ -305,7 +325,7 @@ $commentsNumber=$result['count'];
                                                 <!-- Comments end -->
                                                 <div id="voirPlus" class="pm-comment-reply-btn">
                                                             <br><br>
-                                                                <a  onclick="choice(<?php echo $id; ?>)" class="pm-square-btn-comment comment-reply" >VOIR PLUS +</a>
+                                                                <a href="javascript:;"  onclick="choice(<?php echo $id; ?>)" class="pm-square-btn-comment comment-reply" >VOIR PLUS +</a>
                                                             </div>
                                                             <?php } ?>
                                             </div>
@@ -411,10 +431,19 @@ $commentsNumber=$result['count'];
             <script id="559" src="js/index-clap.js"></script>
             <script src='https://cdnjs.cloudflare.com/ajax/libs/mo-js/0.288.1/mo.min.js'></script>
             <script>
-                        function voter(etudiant)
+                        function voter(etudiant,voted,teaches)
                         {
                             if(etudiant==0)
                             alert("POPUP: POPUP LOGIN");
+                            else if (teaches==0)
+                            {
+                                alert("Cet enseignant ne vous enseigne pas cette année. Vous êtes incapable de l'évaluer.");
+                            }
+                            else if (voted==1)
+                            {
+                            alert("VOUS AVEZ DEJA DONNÉ VOTRE AVIS PAR RAPPORT A CE PROF. CE VOTE SERA CONSIDÉRÉ COMME CHANGEMENT D'AVIS ET NON PAS UN VOTE SUPPLEMENTAIRE.");
+                            window.location.href = "vote.php?id=<?php echo $id; ?>";
+                            }
                             else window.location.href = "vote.php?id=<?php echo $id; ?>";
 
                         }
@@ -435,7 +464,6 @@ $commentsNumber=$result['count'];
                                                             alert("POPUP : Votre commentaire est maintenant en attente d'approbation. Vos commentaires seront automatiquement approuvés si vous faites preuve d'activité et de volonté constructive.");
                                                         },
                                                         error : function(response, statut, erreur){
-                                                            alert('ma tsabech  '+erreur);
                                                         }
                                                     }); 
                             }
@@ -689,7 +717,6 @@ $commentsNumber=$result['count'];
                                             
                                         },
                                             error : function(response, statut, erreur){
-                                                alert(erreur);
 
                                             }
                                         });
