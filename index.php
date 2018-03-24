@@ -128,21 +128,21 @@ $taux=round(($nbfeed/$resultnbstudent[0])*100,2);
 
 //Best comments:
 $reqBestCom=$bd->query('select COUNT(commentId),commentId,studentId from interact GROUP BY commentId ORDER BY COUNT(commentId) DESC');    
-$i=0;
-while(($resultBestCom=$reqBestCom->fetch()) && $i<3 )
+$nbCom=0;
+while(($resultBestCom=$reqBestCom->fetch()) && $nbCom<3 )
 {
     $reqCom=$bd->query('select comment from comment where id='.$resultBestCom['commentId']);
     $reqSt=$bd->query('select name,surname,level,fosId from student where id='.$resultBestCom['studentId']);
     $resultCom=$reqCom->fetch();
     $resultSt=$reqSt->fetch();    
-    $tabCom[$i]=$resultCom[0];
-    $tabStName[$i]=$resultSt['name'];
-    $tabStSurname[$i]=$resultSt['surname'];
-    $tabStLevel[$i]=$resultSt['level'];
+    $tabCom[$nbCom]=$resultCom[0];
+    $tabStName[$nbCom]=$resultSt['name'];
+    $tabStSurname[$nbCom]=$resultSt['surname'];
+    $tabStLevel[$nbCom]=$resultSt['level'];
     $reqFos=$bd->query('select fos from fos where id='.$resultSt['fosId']);
     $resultFos=$reqFos->fetch();
-    $tabStFos[$i]=$resultFos[0];    
-    $i++;
+    $tabStFos[$nbCom]=$resultFos[0];    
+    $nbCom++;
 }
 
 //satisfaction:
@@ -605,7 +605,8 @@ if($resultRT1[0] > 0)
 
             <div class="container pm-containerPadding100">
             	<div class="row">
-
+                <?php if($nbCom>4)
+                                {?>
                 	<div class="col-lg-12 pm-center">
                     	<h5 class="light">TOP COMMENTAIRES EN CE MOMENT</h5>
                     </div>
@@ -613,12 +614,14 @@ if($resultRT1[0] > 0)
                 	<div class="pm-testimonials-carousel" id="pm-testimonials-carousel">
 
                     	<ul class="pm-testimonial-items">
+                        
                         	<li>
                                 <div class="pm-testimonial-img" style="background-image:url(img/information/hamza.jpg);">
                                 	<!--<div class="pm-testimonial-img-icon">
                                     	<img src="img/home/post-icon.jpg" class="img-responsive pm-center-align" alt="icon">
                                     </div>-->
                                 </div>
+                                
                                 <p class="pm-testimonial-name"> <?php echo($tabStSurname[0]." ".$tabStName[0]); ?> </p>
                                 <p class="pm-testimonial-title"> <?php echo($tabStFos[0]." ".$tabStLevel[0]); ?></p>
                                 <div class="pm-testimonial-divider"> </div>
@@ -639,9 +642,9 @@ if($resultRT1[0] > 0)
                                 <p class="pm-testimonial-title"><?php echo($tabStFos[2]." ".$tabStLevel[2]); ?></p>
                                 <div class="pm-testimonial-divider"></div>
                                 <p class="pm-testimonial-quote"><?php echo($tabCom[2]); ?></p>
+                                <?php  } ?>
                             </li>
                         </ul>
-
                     </div>
 
                 </div>
