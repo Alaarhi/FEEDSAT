@@ -1,6 +1,6 @@
 ﻿<?php 
     include 'dbConnection.php';    
-    include 'header.php';
+    
     $ind=0;
     $req0=$bd->query('select id from professor');    
     while($result0=$req0->fetch())  
@@ -119,7 +119,7 @@ $reqnbincom=$bd->query('select COUNT(*) from comment');
 $resultnbcom=$reqnbinteract->fetch();
 
 // nb feedbacks:
-$nbfeed=$resultnbinteract[0]+$resultnbincom[0];
+$nbfeed=$resultnbinteract[0]+$resultnbcom[0];
 
 //taux participation:
 $reqnbstudent=$bd->query('select COUNT(*) from student');
@@ -205,19 +205,19 @@ if($resultBIO1[0] > 0)
     {$BIO= $resultBIO[0]/$resultBIO1[0];}
     else {$BIO=0;}
 if($resultCBA1[0] > 0) 
-    {$CBA=$resultCBA/$resultCBA1[0];}
+    {$CBA=$resultCBA[0]/$resultCBA1[0];}
     else {$CBA=0;}
 if($resultCH1[0] > 0) 
-    {$CH=$resultCH/$resultCH1[0];}
+    {$CH=$resultCH[0]/$resultCH1[0];}
     else {$CH=0;}
 if($resultGL1[0] > 0) 
-    {$GL=$resultGL/$resultGL1[0];}
+    {$GL=$resultGL[0]/$resultGL1[0];}
     else {$GL=0;}
 if($resultIIA1[0] > 0) 
-    {$IIA=$resultIIA/$resultIIA1[0];}
+    {$IIA=$resultIIA[0]/$resultIIA1[0];}
     else {$IIA=0;}
 if($resultIMI1[0] > 0) 
-    {$IMI=$resultIMI/$resultIMI1[0];}
+    {$IMI=$resultIMI[0]/$resultIMI1[0];}
     else {$IMI=0;}
 if($resultRT1[0] > 0) 
     {$RT=($resultRT[0]/$resultRT1[0]);}
@@ -227,7 +227,7 @@ if($resultRT1[0] > 0)
 
     
 ?>
-
+<?php include 'header.php'; ?>
         <!-- SLIDER AREA -->
         <div class="pm-pulse-container" id="pm-pulse-container">
 
