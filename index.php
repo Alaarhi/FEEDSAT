@@ -66,13 +66,13 @@
     $prenomBestProf=$result2['surname'];
     $grade=$result2['grade'];
     if($grade=="Professeur")
-        $gradeBestProf="Pr";
+        $gradeBestProf="Pr.";
     if($grade=="Maître de Conférences")
-        $gradeBestProf="M conf";
+        $gradeBestProf="MC.";
     if($grade=="Maître Assistant")
-        $gradeBestProf="M asst";
+        $gradeBestProf="MA.";
     if($grade=="Assistant")
-        $gradeBestProf="Asst";
+        $gradeBestProf="A.";
     //Min:
     $idWorstProfRate=$tabIdProf[$imin];
     $noteWorst=$tabNote[$imin];    
@@ -82,13 +82,13 @@
     $prenomWorstProf=$result3['surname'];
     $grade=$result3['grade'];
     if($grade=="Professeur")
-        $gradeWorstProf="Pr";
+        $gradeWorstProf="Pr.";
     if($grade=="Maître de Conférences")
-        $gradeWorstProf="M conf";
+        $gradeWorstProf="MC.";
     if($grade=="Maître Assistant")
-        $gradeWorstProf="M asst";
+        $gradeWorstProf="MA.";
     if($grade=="Assistant")
-        $gradeWorstProf="Asst";
+        $gradeWorstProf="A.";
 
 
 //prof avec le plus de feedbacks:
@@ -102,13 +102,13 @@ $nomPlusFeed=$resultProf['name'];
 $prenomPlusFeed=$resultProf['surname'];
 $grade=$resultProf['grade'];
 if($grade=="Professeur")
-    $gradePlusFeed="Pr";
+    $gradePlusFeed="Pr.";
 if($grade=="Maître de Conférences")
-    $gradePlusFeed="M conf";
+    $gradePlusFeed="MC.";
 if($grade=="Maître Assistant")
-    $gradePlusFeed="M asst";
+    $gradePlusFeed="MA.";
 if($grade=="Assistant")
-    $gradePlusFeed="Asst";
+    $gradePlusFeed="A.";
 
 //nombre interactions:
 $reqnbinteract=$bd->query('select COUNT(*) from rating');
@@ -199,28 +199,52 @@ $rRT=$bd->query('select COUNT(score) from rating, student where(
                 $resultRT1=$rRT->fetch();
 
 if($resultMPI1[0] > 0) 
-    {$MPI=$resultMPI[0]/$resultMPI1[0];}
+    {
+        $MPI=$resultMPI[0]/$resultMPI1[0];
+        $MPI=round($MPI,1);
+    }
     else {$MPI=0;}
 if($resultBIO1[0] > 0) 
-    {$BIO= $resultBIO[0]/$resultBIO1[0];}
+    {
+        $BIO= $resultBIO[0]/$resultBIO1[0];
+        $BIO=round($BIO,1);
+    }
     else {$BIO=0;}
 if($resultCBA1[0] > 0) 
-    {$CBA=$resultCBA[0]/$resultCBA1[0];}
+    {
+        $CBA=$resultCBA[0]/$resultCBA1[0];
+        $CBA=round($CBA,1);
+    }
     else {$CBA=0;}
 if($resultCH1[0] > 0) 
-    {$CH=$resultCH[0]/$resultCH1[0];}
+    {
+        $CH=$resultCH[0]/$resultCH1[0];
+        $CH=round($CH,1);
+    }
     else {$CH=0;}
 if($resultGL1[0] > 0) 
-    {$GL=$resultGL[0]/$resultGL1[0];}
+    {
+        $GL=$resultGL[0]/$resultGL1[0];
+        $GL=round($GL,1);
+    }
     else {$GL=0;}
 if($resultIIA1[0] > 0) 
-    {$IIA=$resultIIA[0]/$resultIIA1[0];}
+    {
+        $IIA=$resultIIA[0]/$resultIIA1[0];
+        $IIA=round($IIA,1);
+    }
     else {$IIA=0;}
 if($resultIMI1[0] > 0) 
-    {$IMI=$resultIMI[0]/$resultIMI1[0];}
+    {
+        $IMI=$resultIMI[0]/$resultIMI1[0];
+        $IMI=round($IMI,1);
+    }
     else {$IMI=0;}
 if($resultRT1[0] > 0) 
-    {$RT=($resultRT[0]/$resultRT1[0]);}
+    {
+        $RT=($resultRT[0]/$resultRT1[0]);
+        $RT=round($RT,1);
+    }
     else {$RT=0;}
                                         
                     
@@ -402,53 +426,53 @@ if($resultRT1[0] > 0)
                       <!-- Progress bar -->
                       <div class="pm-progress-bar-description" id="pm-progress-bar-desc-1">
                           1er Cycle (MPI)
-                          <div class="pm-progress-bar-diamond"></div>
                           <span><?php echo($MPI."%"); ?></span>
                       </div>
-                      <div class="pm-progress-bar">
-                          <span data-width="<?php echo($MPI); ?>" class="pm-progress-bar-outer" id="pm-progress-bar-1">
-                              <span class="pm-progress-bar-inner"></span>
-                          </span>
-                      </div>
+                      <div class="bar" data-percent="<?php echo($MPI."%"); ?>">
+                        <div class="tag" style="background: #303F9F;">
+                        </div>
+                        <div class="load" style="background-color: rgb(255, 193, 7);"></div>
+                        <div class="skill-bar-percent"><?php echo($MPI."%"); ?></div>
+                     </div>
                       <!-- Progress bar end -->
 
                       <!-- Progress bar -->
                       <div class="pm-progress-bar-description" id="pm-progress-bar-desc-2">
                           Génie Logiciel (GL)
-                          <div class="pm-progress-bar-diamond"></div>
                           <span><?php echo($GL."%"); ?></span>
                       </div>
-                      <div class="pm-progress-bar">
-                          <span data-width="<?php echo($GL); ?>" class="pm-progress-bar-outer" id="pm-progress-bar-2">
-                              <span class="pm-progress-bar-inner"></span>
-                          </span>
-                      </div>
+                      <div class="bar" data-percent="<?php echo("65"."%"); ?>">
+                        <div class="tag" style="background: #303F9F;">
+                        </div>
+                        <div class="load" style="background-color: rgb(255, 193, 7);"></div>
+                        <div class="skill-bar-percent"><?php echo("65"."%"); ?></div>
+                     </div>
                       <!-- Progress bar end -->
 
                       <!-- Progress bar -->
                       <div class="pm-progress-bar-description" id="pm-progress-bar-desc-3">
                           Informtique Industrielle Automatique (IIA)
-                          <div class="pm-progress-bar-diamond"></div>
                           <span><?php echo($IIA."%"); ?></span>
                       </div>
-                      <div class="pm-progress-bar">
-                          <span data-width="<?php echo($IIA); ?>" class="pm-progress-bar-outer" id="pm-progress-bar-3">
-                              <span class="pm-progress-bar-inner"></span>
-                          </span>
+                      <div class="bar" data-percent="<?php echo($IIA."%"); ?>">
+                      <div class="tag" style="background: #303F9F;">
                       </div>
+                      <div class="load" style="background-color: rgb(255, 193, 7);"></div>
+                      <div class="skill-bar-percent"><?php echo($IIA."%"); ?></div>
+                   </div>
                       <!-- Progress bar end -->
 
                       <!-- Progress bar -->
                       <div class="pm-progress-bar-description" id="pm-progress-bar-desc-4">
                           Chimie Industrielle (CH)
-                          <div class="pm-progress-bar-diamond"></div>
                           <span><?php echo($CH."%"); ?></span>
                       </div>
-                      <div class="pm-progress-bar">
-                          <span data-width="<?php echo($CH); ?>" class="pm-progress-bar-outer" id="pm-progress-bar-4">
-                              <span class="pm-progress-bar-inner"></span>
-                          </span>
+                      <div class="bar" data-percent="<?php echo($CH."%"); ?>">
+                      <div class="tag" style="background: #303F9F;">
                       </div>
+                      <div class="load" style="background-color: rgb(255, 193, 7);"></div>
+                      <div class="skill-bar-percent"><?php echo($CH."%"); ?></div>
+                   </div>
                       <!-- Progress bar end -->
 
                   </div>
@@ -479,7 +503,7 @@ if($resultRT1[0] > 0)
                             <span><?php echo($RT."%"); ?></span>
                         </div>
                         <div class="pm-progress-bar">
-                            <span data-width="<?php echo($RT); ?>" class="pm-progress-bar-outer" id="pm-progress-bar-6">
+                            <span data-width="<?php echo("33"); ?>" class="pm-progress-bar-outer" id="pm-progress-bar-6">
                                 <span class="pm-progress-bar-inner"></span>
                             </span>
                         </div>
@@ -701,6 +725,14 @@ if($resultRT1[0] > 0)
     <script src="js/prettyphoto/js/jquery.prettyPhoto.js"></script>
     <script src="js/tinynav.js"></script>
     <script src="js/jquery-ui.js"></script>
+    <script>
+        setTimeout(function(){
+  $('.bar').each(function(){
+    $(this).find('.load').animate({
+      width: $(this).attr('data-percent') }, 2000);
+  });
+}, 2000);
+    </script>
 
     <p id="back-top" class="visible-lg visible-md visible-sm"></p>
 
