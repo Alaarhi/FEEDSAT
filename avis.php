@@ -118,6 +118,7 @@
         $contributors = array_unique(array_merge($voters,$commentators));
         $nbrContributors = sizeof($contributors);
 
+        $_SESSION['nbrVoters'] = sizeof($voters);
         $_SESSION['nbrCommentators'] = sizeof($commentators);
         $_SESSION['nbrContributors'] = $nbrContributors;
         $_SESSION['nbrAmis'] = ($nbrAmis->nbrAmis);
@@ -143,7 +144,9 @@
         sum(interaction) as nbrInteractions,
         date_format(c.timestamp, \'%d-%m-%Y\') as dateCommentaire,
         s.imageUrl as photo
-        FROM interact as i INNER JOIN student as s INNER JOIN comment as c 
+        FROM interact as i 
+        INNER JOIN student as s 
+        INNER JOIN comment as c 
         ON (c.studentId = s.id) AND (c.id = i.commentId) 
         WHERE (s.fosId = ?) AND (c.approved = 1) AND (s.id != ?)
         GROUP BY i.commentId 
@@ -188,6 +191,19 @@
                 </div>
             </div>
         	<div class="row">
+                            
+                <div class="col-lg-3 col-md-6 col-sm-6 desktop pm-center pm-columnPadding-30 pm-column-spacing">
+                    <p class="fa fa-comments pm-static-icon"></p>
+                    <!-- milestone -->
+                    <div class="milestone already-animated">
+                        <div class="milestone-content">                         
+                            <span data-speed="2000" data-stop="3490" class="milestone-value"><?php echo $_SESSION['nbrContributors'].'/'.$_SESSION['nbrAmis']; ?></span>
+                            <div class="milestone-description">De vos amis ont contribué au site</div>
+                        </div>
+                    </div>
+                    <!-- milestone end --> 
+                </div>
+
             	<div class="col-lg-3 col-md-6 col-sm-6 desktop pm-center pm-columnPadding-30 pm-column-spacing">              	
                     <p class="fa fa-bar-chart pm-static-icon"></p>            
                     <!-- milestone -->
@@ -199,6 +215,7 @@
                     </div>
                     <!-- milestone end --> 
                 </div> 
+
                 <div class="col-lg-3 col-md-6 col-sm-6 desktop pm-center pm-columnPadding-30 pm-column-spacing">
                     <p class="fa fa-eye-slash pm-static-icon"></p>
                     <!-- milestone -->
@@ -209,18 +226,6 @@
                         </div>
                     </div>
                     <!-- milestone end -->
-                </div>
-                
-                <div class="col-lg-3 col-md-6 col-sm-6 desktop pm-center pm-columnPadding-30 pm-column-spacing">
-                    <p class="fa fa-comments pm-static-icon"></p>
-                    <!-- milestone -->
-                    <div class="milestone already-animated">
-                        <div class="milestone-content">                         
-                            <span data-speed="2000" data-stop="3490" class="milestone-value"><?php echo $_SESSION['nbrContributors'].'/'.$_SESSION['nbrAmis']; ?></span>
-                            <div class="milestone-description">De vos amis ont contribué au site</div>
-                        </div>
-                    </div>
-                    <!-- milestone end --> 
                 </div>
                 
                 <div class="col-lg-3 col-md-6 col-sm-6 desktop pm-center pm-columnPadding-30 pm-column-spacing">	
@@ -244,14 +249,19 @@
             	<div class="row">          
                 	<div class="col-lg-12 pm-column-spacing pm-center">             
                     	<h5 class="light">VOS ENSEIGNANTS</h5>                 
-                        <p class="light">Ce que vos amis ont voté pour vos enseignants</p>
+                        <p class="light">Que pensent vos camarades de classe de vos enseignants?</p>
                         <br>                   
                     </div> 
                     <?php 
-                    if ($_SESSION['nbrContributors'] == 0) {
+                    if ($_SESSION['nbrVoters'] == 0) {
                         echo '<div class="col-lg-12 pm-column-spacing pm-center">
-                            <h5 class="light">Aucun de vos enseignants n\'a fait l\'objet d\'une évaluation de 
-                            la part de vos amis pour le moment. </h5>
+                            <h4 class="light" style="font-size: 25px;">
+                                Aucun de vos enseignants n\'a fait l\'objet d\'une évaluation de 
+                                la part de vos amis pour le moment.
+                            </h4>
+                            <h4 class="light" style="font-size:20px;"><font color=white>
+                            <u><a href="profs.php"> Donner un feedback! </a></u>
+                            <font></h4>
                             </div>';
                     } 
                     else {
@@ -386,27 +396,34 @@
             	<!-- Column 1 TO 3 -->
                 <?php 
                 if ($_SESSION['nbrCommentators'] == 0) {
-                    echo '<h5> Vos amis n\'ont pas de commentaires sur le site, pour le moment. </h5>';
+                    echo '<div class="col-lg-12 pm-column-spacing pm-center">
+                    <h4 class="light" style="font-size:30px;"> <font color=#303F9F> Vos amis n\'ont pas de commentaires sur le site, pour le moment.</font></h4>
+                    
+                    <h4 class="light" style="font-size:20px;"><font color=#303F9F>
+                    <u><a href="profs.php"> Donnez un feedback </a> </u> (sous forme d\'un commentaire) sur le profil d\'un de vos enseignant. 
+                    </h4>
+                    </font> 
+                    </div>';                    
                 }
                 else {
-                if (($requeteTopComments->rowCount()) !=0 ) {
-                    while ($row = $requeteTopComments->fetch(PDO::FETCH_OBJ)) {
-                ?>
-                <div class="col-lg-4 col-md-4 col-sm-12 desktop pm-center pm-columnPadding-30 pm-column-spacing">             	
-                    <div class="pm-single-testimonial-shortcode">                 	
-                    	<div style="background-image:url(<?php echo $row->photo; ?>);" class="pm-single-testimonial-img-bg">
-                            <div class="pm-single-testimonial-avatar-icon">
-                                <img width="33" height="41" class="img-responsive" src="img/news/post-icon.jpg">
-                            </div>
-                        </div>         
-                        <p class="name"><?php echo $row->prenomAuteur.' '.$row->nomAuteur; ?></p>                      
-                        <div class="pm-single-testimonial-divider"></div>
-                        <p class="quote"> <?php echo '"'.$row->commentaire.'"'; ?> </p>
-                        <div class="pm-single-testimonial-divider"></div>
-                        <p class="date"> <?php echo $row->dateCommentaire; ?> </p>
+                    if (($requeteTopComments->rowCount()) !=0 ) {
+                        while ($row = $requeteTopComments->fetch(PDO::FETCH_OBJ)) {
+                    ?>
+                    <div class="col-lg-4 col-md-4 col-sm-12 desktop pm-center pm-columnPadding-30 pm-column-spacing">             	
+                        <div class="pm-single-testimonial-shortcode">                 	
+                            <div style="background-image:url(<?php echo $row->photo; ?>);" class="pm-single-testimonial-img-bg">
+                                <div class="pm-single-testimonial-avatar-icon">
+                                    <img width="33" height="41" class="img-responsive" src="img/news/post-icon.jpg">
+                                </div>
+                            </div>         
+                            <p class="name"><?php echo $row->prenomAuteur.' '.$row->nomAuteur; ?></p>                      
+                            <div class="pm-single-testimonial-divider"></div>
+                            <p class="quote"> <?php echo '"'.$row->commentaire.'"'; ?> </p>
+                            <div class="pm-single-testimonial-divider"></div>
+                            <p class="date"> <?php echo $row->dateCommentaire; ?> </p>
+                        </div>
                     </div>
-                </div>
-                <?php }}} ?>
+                    <?php }}} ?>
                 <!-- Column 1 TO 3 end -->    
             </div>
         </div>
