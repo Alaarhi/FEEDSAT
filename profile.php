@@ -99,16 +99,25 @@ $commentsNumber=$result['count'];
                                                             <div class="pm-comment-vote-btn">
                                                                 <?php
                                                                 $voted=0;
+                                                                $teaches=0;
                                                                 if(isset($_SESSION['idEtudiant']))
                                                                 {
                                                                     $requ = $bd->query("select * from rating where studentId='".$_SESSION['idEtudiant']."' and studentLevel='".$_SESSION['niveau']."' and profId='".$id."'");
                                                                     if($requ->fetch())
                                                                     $voted=1;
                                                                     else $voted=0;
+                                                                    $requ2 = $bd->query("select * from teach where profId='".$id."'");
+                                                                    if($requ2)
+                                                                    while($result=$requ2->fetch())
+                                                                    {
+                                                                        if(($result['fosId']==$_SESSION['idFiliere'])&&($result['level']==$_SESSION['niveau']))
+                                                                        $teaches=1;
+                                                                    }
+                                                                    
                                                                 }
                                                                 
                                                                 ?>
-                                                                    <a href="#" onclick="voter(<?php if(isset($_SESSION['idEtudiant'])) echo '1'; else echo '0'?>,<?php echo $voted; ?>)" class="pm-square-btn comment-reply">VOTER</a>
+                                                                    <a href="#" onclick="voter(<?php if(isset($_SESSION['idEtudiant'])) echo '1'; else echo '0'?>,<?php echo $voted; ?>,<?php echo $teaches; ?>)" class="pm-square-btn comment-reply">VOTER</a>
                                                                 </div>
                                                         <p class="pm-author-name"><?php echo($prof['surname']." ".$prof['name']); ?></p>
                                                         <p class="pm-author-title"><?php echo($prof['grade']); ?></p>
@@ -422,10 +431,14 @@ $commentsNumber=$result['count'];
             <script id="559" src="js/index-clap.js"></script>
             <script src='https://cdnjs.cloudflare.com/ajax/libs/mo-js/0.288.1/mo.min.js'></script>
             <script>
-                        function voter(etudiant,voted)
+                        function voter(etudiant,voted,teaches)
                         {
                             if(etudiant==0)
                             alert("POPUP: POPUP LOGIN");
+                            else if (teaches==0)
+                            {
+                                alert("Cet enseignant ne vous enseigne pas cette année. Vous êtes incapable de l'évaluer.");
+                            }
                             else if (voted==1)
                             {
                             alert("VOUS AVEZ DEJA DONNÉ VOTRE AVIS PAR RAPPORT A CE PROF. CE VOTE SERA CONSIDÉRÉ COMME CHANGEMENT D'AVIS ET NON PAS UN VOTE SUPPLEMENTAIRE.");
