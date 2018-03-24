@@ -4762,6 +4762,24 @@ transform: rotate(-25deg);
 
 
 /* Square btn */
+.pm-square-btn2 {
+  min-width: 100px;
+  padding: 10px 25px;
+  border: 3px solid white;
+  font-family: 'Open sans';
+  font-size: 14px;
+  font-weight: bold;
+  color: white !important;
+  text-align: center;
+  text-transform: uppercase;
+  margin: 10px 16px;
+  display: inline-block;
+  transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+}
+
 .pm-square-btn {
   min-width: 100px;
   padding: 10px 25px;

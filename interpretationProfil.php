@@ -41,7 +41,30 @@ while($ratings=$requete->fetch())
     $pos4=$pos42;
     $phrase1=$pos1[rand(0,2)].$pos2[rand(0,1)].$pos3[rand(0,3)].$pos4[rand(0,2)].". ";    
     }
+    $phrase=$phrase1;
 
 
 
+    $lowLevelScoree=0;
+    $highLevelScoree=0;
+    $requeteLowLevel=$bd->query("select count(score) as count, sum(score) as somme from rating where studentLevel<=2 and profId=".$_GET['id']);
+    $requeteHighLevel=$bd->query("select count(score) as count, sum(score) as somme from rating where studentLevel>=3 and profId=".$_GET['id']);
+    if(($lowLevelScore=$requeteLowLevel->fetch())&&($lowLevelScore['count']!=0))
+    $lowLevelScoree=($lowLevelScore['somme']/$lowLevelScore['count']);
+    if(($highLevelScore=$requeteHighLevel->fetch())&&($highLevelScore['count']!=0))
+    $highLevelScoree=$highLevelScore['somme']/$highLevelScore['count'];
+    
+    $pos4="";
+    $pos1=array("En fait, ","En effet, ");
+    $pos2=array("normalement ","remarquablement ","trouvé ","considéré ","");
+    $pos3=array("plus efficace ","plus populaire ");
+    if($lowLevelScoree>($highLevelScoree+3))
+    $pos4=array("pour les niveaux inférieurs. ","en cycle préparatoire. ");
+    if($highLevelScoree>($lowLevelScoree+3))    
+    $pos4=array("pour les niveaux supérieurs. ","en deuxième cycle. ");    
+    if($pos4!="")
+    {
+        $phrase2=$pos1[rand(0,1)]."il est ".$pos2[rand(0,4)].$pos3[rand(0,1)].$pos4[rand(0,1)]." ";    
+        $phrase=$phrase.$phrase2;
+    }
 ?>
