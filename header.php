@@ -199,6 +199,31 @@
         </div>
         <!-- Navigation area end -->
 
+<!--
+<script>
+$("#avisVoirPlus").click(avisVoirPlus(){
+    
+    $.ajax({
+        url : 'authentification.php',
+        type : 'GET',
+        data: {
+          numInscri, numCin
+        },
+        success : function(response, statut) {
+            if (response == 1) {
+              header('location: avis.php');
+            } else {
+              header('location: index.php');
+            }
+        },
+        error : function(response, statut, erreur) {
+        }
+    });
+    //return "x";
+});
+</script>
+-->
+
 
 <script>
 // If user clicks anywhere outside of the modal, Modal will close

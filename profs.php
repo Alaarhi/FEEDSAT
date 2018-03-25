@@ -2,105 +2,95 @@
     include 'dbConnection.php';
     include 'header.php';
 
-     $requete = $bd->query('SELECT * FROM professor LIMIT 0,9 ');
-     $i=0;
-
+    $requeteProfs = $bd->prepare('SELECT * FROM professor ORDER BY rand() LIMIT 0,9 ');
+    $requeteMesProfs = $bd->prepare(
+        'SELECT DISTINCT p.id, p.name, p.surname, p.photo, p.grade FROM teach as t 
+        INNER JOIN professor as p 
+        ON (t.profId = p.id) 
+        WHERE EXISTS (
+            SELECT level, fosId FROM student as s WHERE s.id = ?
+            )'
+        );
+    $i=0;
 ?>
         <div class="pm-sub-header-container">
-        
-        	<div class="pm-sub-header-info-profs">
-            	
+        	<div class="pm-sub-header-info-profs">    	
                 <div class="container">
                 	<div class="row">
-                    	<div class="col-lg-12">
-                        	
+                    	<div class="col-lg-12">               	
                             <p class="pm-page-title">Liste des enseignants</p>
                             <p class="pm-page-message">Découvrez la popularité de vos enseignants </p>
                             
                         </div>
                     </div>
-                </div>
-                
+                </div>            
+            </div>          
+            <div class="pm-sub-header-breadcrumbs">          	
+                <div class="container">  	
+                </div>   
             </div>
-            
-            <div class="pm-sub-header-breadcrumbs">
-            	
-                <div class="container">
-                	
-                </div>
-                
-            </div>
-
             <div class="row">
                     <div class="col-lg-12  pm-columnPadding30 pm-center">
                         <br><br>
                         <h5>CONSULTER . VOTER . AMÉLIORER </h5>
                         <div class="pm-column-title-divider">
                             <img height="29" width="29" src="img/divider-icon.png" alt="icon">
-                        </div>
-                        
+                        </div>                  
                     </div>
             </div>
-
         </div>
-
  		<!-- Sub-header area end -->
         
         <!-- BODY CONTENT starts here -->
-<!-- PANEL 4 -->
-    <div class="pm-column-container testimonials pm-parallax-panel" style="background-color: rgb(32, 186, 199); background-image: url(&quot;img/home/testimonials-bg.jpg&quot;); background-repeat: repeat-y; background-position: 0% -1376.5px;" data-stellar-background-ratio="0.5" data-stellar-vertical-offset="-50">
-
-    <!-- /.container -->
-
-    </div>
+        <!-- PANEL 4 -->
+        <div class="pm-column-container testimonials pm-parallax-panel" style="background-color: rgb(32, 186, 199); background-image: url(&quot;img/home/testimonials-bg.jpg&quot;); background-repeat: repeat-y; background-position: 0% -1376.5px;" data-stellar-background-ratio="0.5" data-stellar-vertical-offset="-50">
+        <!-- /.container -->
+        </div>
 
 
 <!-- PANEL 1 -->
         <div class="container pm-containerPadding-bottom-30  pm-containerPadding-top-20">
         <div class="row pm-containerPadding-bottom-60 pm-center">
-
-
             <?php
-            while($prof = $requete->fetch()){
+            if (isset($_GET['id'])) {
+                $idEtudiant = $_GET['id'];
+                $requeteMesProfs->execute(array($idEtudiant));
+                $profs = $requeteMesProfs->fetchALL(PDO::FETCH_ASSOC);
+            } else {
+                $requeteProfs->execute();
+                $profs = $requeteProfs->fetchALL(PDO::FETCH_ASSOC);
+            }
+            
+            foreach ($profs as $prof) { 
+            //while($prof = $requete->fetch()){
              ?>
-               
             	<!-- Column 1 -->
-              
-
                 <div class="col-lg-4 col-md-4 col-sm-12 desktop pm-center pm-columnPadding-30 pm-column-spacing">
-
                     <!-- Single testimonial -->
                     <div class="pm-single-testimonial-shortcode">
-                    	
                     	<div style="background-image:url(img/information/avatar1.jpg);" class="pm-single-testimonial-img-bg">
                             <div class="pm-single-testimonial-avatar-icon">
                                 <img width="33" height="41" class="img-responsive" src="img/news/post-icon.jpg">
                             </div>
                         </div>
-                        
                        <a href="profile.php?id=<?php echo $prof['id'] ?>"><p class="name"><?php
                        echo $prof['name'] . $prof['surname'];
                                $idprf=$prof['id'];
                         ?></p></a>
-                        
                         <div class="pm-single-testimonial-divider"></div>
-
                     </div>
                     <!-- Single testimonial end -->
-
               	</div>
                 <!-- Column 1 end -->
                 <?php
                 }
                 ?>
             </div>
-
-
-                  <div class="pm-comment-reply-btn">
-                        <br>
-                            <a href="#" class="pm-square-btn-comment comment-reply">VOIR PLUS +</a>
-                  </div>
-        </div>
+                <div class="pm-comment-reply-btn">
+                    <br>
+                    <a href="#" class="pm-square-btn-comment comment-reply">VOIR PLUS +</a>
+                </div>
+            </div>
         <!-- PANEL 5 end -->
         
         <!-- BODY CONTENT end -->

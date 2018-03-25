@@ -1,5 +1,6 @@
 
 <div id="avis" class="modal" >
+<!--<div class="modal-content animate">-->
   <form class="modal-content animate" action="avis.php" method="post">
     
     <div class="imgcontainer">
@@ -27,7 +28,7 @@
         -webkit-transition: all 0.5s;
         -o-transition: all 0.5s;
       "   
-      type="submit" >SE CONNECTER</button>  
+      type="submit" id ="avisVoirPlus">SE CONNECTER</button>  
     </div>
   </form>
 </div>
@@ -66,8 +67,6 @@
     </div>
   </form>
 </div>
-
-
 
 
 <div id="vote" class="modal" >

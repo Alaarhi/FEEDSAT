@@ -32,7 +32,7 @@
 
     
     //Note moyenne attribuée par les étudiants
-    if (!(isset($_SESSION['moyenneFiliere']))) {
+    //if (!(isset($_SESSION['moyenneFiliere']))) {
         $reqMoyenne = $bd->prepare('SELECT avg(score) as moyenne 
             FROM student 
             INNER JOIN rating ON student.id = rating.studentId 
@@ -40,11 +40,11 @@
         $reqMoyenne->execute(array($idFiliere, $level));
         $moyenneFiliere = $reqMoyenne->fetch(PDO::FETCH_OBJ);
         $_SESSION['moyenneFiliere'] = $moyenneFiliere->moyenne;
-    } 
+    
 
 
     //Taux anonymat chez une filière
-    if (!(isset($_SESSION['tauxAnonymes']))) {
+    //if (!(isset($_SESSION['tauxAnonymes']))) {
 
         $nbrCommentsAnonymes = 0;
         $nbrCommentsVisibles = 0;
@@ -74,13 +74,13 @@
             $tauxAnonymes = (($nbrCommentsAnonymes * 100) / $nbrCommentsTotal);
         }
         $_SESSION['tauxAnonymes'] = (int)$tauxAnonymes;     
-    }
+    
 
 
     //Nombre d'amis contribuables 
     //Extraire le nombre des commentators+voters en éliminant les doublons 
     //i.e. celui qui est à la fois commentator et voter sera compté 1 seule fois
-    if (!(isset($_SESSION['nbrContributors']))) {
+    //if (!(isset($_SESSION['nbrContributors']))) {
 
         $voters = array();
         $commentators = array();
@@ -122,9 +122,20 @@
         $_SESSION['nbrCommentators'] = sizeof($commentators);
         $_SESSION['nbrContributors'] = $nbrContributors;
         $_SESSION['nbrAmis'] = ($nbrAmis->nbrAmis);
-    }
+    
 
-    // STATISTIQUE #4
+    // STATISTIQUE #4 : Nombre de profs évalués par mes amis
+    $reqNbrProfsRated = $bd->prepare(
+        'SELECT count(*) as nbrProfsRated
+        FROM rating as r
+        INNER JOIN professor as p 
+        INNER JOIN student as s 
+        ON (r.studentId = s.id) AND (r.profId = p.id)
+        WHERE (s.fosId = ?) AND (s.level = ?)');
+    $reqNbrProfsRated->execute(array($idFiliere, $level));
+    
+    $nbrProfsRated = $reqNbrProfsRated->fetch(PDO::FETCH_OBJ);
+    $_SESSION['nbrProfsRated'] = $nbrProfsRated->nbrProfsRated;
 
 
     //VOS ENSEIGNANTS 
@@ -183,7 +194,7 @@
         <div class="container pm-containerPadding-top-60 pm-containerPadding-bottom-80">
         	<div class="row">
             	<div class="col-lg-12 pm-columnPadding30 pm-center">
-                    <h5> Vos amis en chiffres </h5>
+                    <h5> MES AMIS EN CHIFFRES </h5>
                     <br>
                     <div class="pm-column-title-divider">
                     	<img height="29" width="29" src="img/divider-icon.png" alt="icon">
@@ -198,19 +209,7 @@
                     <div class="milestone already-animated">
                         <div class="milestone-content">                         
                             <span data-speed="2000" data-stop="3490" class="milestone-value"><?php echo $_SESSION['nbrContributors'].'/'.$_SESSION['nbrAmis']; ?></span>
-                            <div class="milestone-description">De vos amis ont contribué au site</div>
-                        </div>
-                    </div>
-                    <!-- milestone end --> 
-                </div>
-
-            	<div class="col-lg-3 col-md-6 col-sm-6 desktop pm-center pm-columnPadding-30 pm-column-spacing">              	
-                    <p class="fa fa-bar-chart pm-static-icon"></p>            
-                    <!-- milestone -->
-                    <div class="milestone already-animated">
-                        <div class="milestone-content">                         
-                            <span data-speed="2000" data-stop="1789" class="milestone-value"><?php printf('%0.2f', $_SESSION['moyenneFiliere']) ?> </span>
-                            <div class="milestone-description">Note moyenne attribuée par vos amis</div>
+                            <div class="milestone-description">De mes amis sont actifs sur le site</div>
                         </div>
                     </div>
                     <!-- milestone end --> 
@@ -222,19 +221,31 @@
                     <div class="milestone already-animated">
                         <div class="milestone-content">                         
                             <span data-speed="2000" data-stop="548" class="milestone-value"><?php echo $_SESSION['tauxAnonymes'].' %' ?></span>
-                            <div class="milestone-description">Des commentaires de vos amis sont anonymes</div>
+                            <div class="milestone-description">De mes amis sont anonymes sur le site</div>
                         </div>
                     </div>
                     <!-- milestone end -->
                 </div>
-                
-                <div class="col-lg-3 col-md-6 col-sm-6 desktop pm-center pm-columnPadding-30 pm-column-spacing">	
-                    <p class="fa fa-eye-slash pm-static-icon"></p> 
+
+            	<div class="col-lg-3 col-md-6 col-sm-6 desktop pm-center pm-columnPadding-30 pm-column-spacing">              	
+                    <p class="fa fa-bar-chart pm-static-icon"></p>            
                     <!-- milestone -->
                     <div class="milestone already-animated">
                         <div class="milestone-content">                         
-                            <span data-speed="2000" data-stop="439" class="milestone-value">439</span>
-                            <div class="milestone-description">Practioneers Trained</div>
+                            <span data-speed="2000" data-stop="1789" class="milestone-value"><?php printf('%0.2f', $_SESSION['moyenneFiliere']);echo'/10'; ?> </span>
+                            <div class="milestone-description">Moyenne attribuée par mes amis</div>
+                        </div>
+                    </div>
+                    <!-- milestone end --> 
+                </div>                
+                
+                <div class="col-lg-3 col-md-6 col-sm-6 desktop pm-center pm-columnPadding-30 pm-column-spacing">	
+                    <p class="fa fa-users pm-static-icon"></p> 
+                    <!-- milestone -->
+                    <div class="milestone already-animated">
+                        <div class="milestone-content">                         
+                            <span data-speed="2000" data-stop="439" class="milestone-value"><?php echo $_SESSION['nbrProfsRated'] ?></span>
+                            <div class="milestone-description">Enseignant(s) évalué(s) par mes amis</div>
                         </div>
                     </div>
                     <!-- milestone end -->  
@@ -248,21 +259,23 @@
         	<div class="container pm-containerPadding-top-110 pm-containerPadding-bottom-80">
             	<div class="row">          
                 	<div class="col-lg-12 pm-column-spacing pm-center">             
-                    	<h5 class="light">VOS ENSEIGNANTS</h5>                 
+                    	<h5 class="light">MES ENSEIGNANTS</h5>                 
                         <p class="light">Que pensent vos camarades de classe de vos enseignants?</p>
                         <br>                   
                     </div> 
                     <?php 
                     if ($_SESSION['nbrVoters'] == 0) {
-                        echo '<div class="col-lg-12 pm-column-spacing pm-center">
+                    ?>
+                        <div class="col-lg-12 pm-column-spacing pm-center">
                             <h4 class="light" style="font-size: 25px;">
-                                Aucun de vos enseignants n\'a fait l\'objet d\'une évaluation de 
-                                la part de vos amis pour le moment.
+                                Aucun de vos enseignants  n'a fait l'objet d'une évaluation de 
+                                la part de vos amis pour le moment. Faites le premier pas et donnez un feedback! 
                             </h4>
                             <h4 class="light" style="font-size:20px;"><font color=white>
-                            <u><a href="profs.php"> Donner un feedback! </a></u>
+                            <u><a href="profs.php?id=<?php echo $idEtudiant ?>"> Qui sont mes enseignants? </a></u>
                             <font></h4>
-                            </div>';
+                        </div>
+                    <?php 
                     } 
                     else {
                         while ($row = $requeteVosEnseignants->fetch(PDO::FETCH_OBJ)) { 
@@ -368,7 +381,7 @@
                     <?php } ?>
                     <div class="pm-comment-reply-btn">
                         <br>
-                        <a href="onclick="choice()"" class="pm-square-btn-comment-avis comment-reply">VOIR PLUS +</a>
+                        <a href= "javascript:;" onclick="avisVoirPlus()" class="pm-square-btn-comment-avis comment-reply">VOIR PLUS +</a>
                     </div>
                     <?php } ?>
 
@@ -386,7 +399,7 @@
         <div class="container pm-containerPadding-top-90 pm-containerPadding-bottom-30">
         	<div class="row">
             	<div class="col-lg-12 pm-columnPadding30 pm-center">
-                   <h5>Top commentaires de vos amis </h5>
+                   <h5> LES TOP COMMENTAIRE DE MES AMIS </h5>
                     <div class="pm-column-title-divider">
                     	<img height="29" width="29" src="img/divider-icon.png" alt="icon">
                     </div>   
@@ -431,43 +444,10 @@
     <!-- BODY CONTENT end -->
     <?php include 'footer.html';?>
     </div>
-<!--
-<script>
-function voirPlus(){
-    var zone = '<div class="pm-column-container testimonials pm-parallax-panel" id="zone-profs"></div>'; 
-    if(!document.getElementById("zone_plus_recents"))
-                            {
-                            $('#zone').append(zone);
-                            $('#zone_plus_recents').fadeIn(2000);
-                            $('#zone').fadeIn(2000);
-                            }
-    $.ajax({
-        url : 'voirPlusAvis.php',
-        type : 'GET',
-        data: {
-        lastTime,
-        shown
-        },
-        dataType : "json",
-        success : function(response, statut) {
-            if(response.comment.length != "50") {
-                $('#zone_plus_recents').fadeIn(2000);
-                $("#zone_plus_recents").append(response.comment);
-                lastTime=response.lastTime;
-                shown=response.shown;
-                if ($('#voirPlus').css('display') == 'none') {
-                $('#voirPlus').show();
-                }
-            } else { 
-            $('#voirPlus').hide();
-            }
-        },
-        error : function(response, statut, erreur){
-        }
-    });
-}
-</script>
--->
+
+
+
+
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
