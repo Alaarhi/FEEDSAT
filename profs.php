@@ -52,38 +52,7 @@
         <div class="container pm-containerPadding-bottom-30  pm-containerPadding-top-20">
         <div class="row pm-containerPadding-bottom-60 pm-center">
             <?php
-            if (isset($_POST['inputRecherche'])) {
-                $input = $_POST['inputRecherche'];
-            
-                $elements = explode(" ", $input);
-                switch (sizeof($elements)) {
-                    case 1:
-                        $requeteRecherche = $bd->prepare(
-                            'SELECT * FROM professor 
-                            WHERE 
-                            (name LIKE "inputValue") OR (name LIKE "%inputValue") OR (name LIKE "inputValue%") OR (name = "%inputValue") 
-                            OR
-                            (surname LIKE "inputValue") OR (surname LIKE "%inputValue") OR (surname LIKE "inputValue%") OR (surname = "%inputValue")'
-                        );
-                        $requeteRecherche->bindParam(':inputValue', $elements[0]);
-                       
-                        //header("location: profs.php?ind=0");
-                        break;
-                    
-                    case 2:
-                        $requeteRecherche = $bd->prepare(
-                            'SELECT * FROM professor as p
-                            WHERE 
-                            (p.name = ?) AND (p.surname = ?)'
-                        );
-                        //$requeteRecherche->bindParam(':surnameValue', $elements[0]);
-                        //$requeteRecherche->bindParam(':nameValue', $elements[1]);
-                        $requeteRecherche->execute(array($elements[0], $elements[1]));
-
-                        $profs = $requeteRecherche->fetchALL(PDO::FETCH_ASSOC);
-                        break;
-                }
-            } elseif (isset($_GET['id'])) {
+            if (isset($_GET['id'])) {
                 $idEtudiant = $_GET['id'];
                 $requeteMesProfs->execute(array($idEtudiant));
                 $profs = $requeteMesProfs->fetchALL(PDO::FETCH_ASSOC);
@@ -119,11 +88,6 @@
             </div>
                 <div class="pm-comment-reply-btn">
                     <br>
-<<<<<<< HEAD
-                    
-=======
-                    <p> <?php echo $requeteRecherche->rowCount() ?>
->>>>>>> 64b5443b3fff0e9679ae0f0aa2368bd68015d7ce
                     <a href="#" class="pm-square-btn-comment comment-reply">VOIR PLUS +</a>
                 </div>
             </div>
