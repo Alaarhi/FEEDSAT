@@ -127,9 +127,10 @@
                         <ul class="pm-search-container">
                         	<li>
                             	<div class="pm-search-field-container">
-                                	<a href="profs.php" class="fa fa-search"></a>
-                                	<form action="profs.php" method="post">
+                                	
+                                	<form action="recherche.php" method="post">
                                     	<input name="inputRecherche" class="pm-search-field" type="text" placeholder="Rechercher un prof...">
+                                        <!--<a href="recherche.php" type="submit" class="fa fa-search"></a>-->
                                     </form>
                                 </div>
                             </li>
@@ -141,10 +142,10 @@
                                     </div>
                                     <div class="pm-dropmenu-active" >
                                         <ul>
-                                           <li><a href="depinformatique.php"><center>Génie informatique et Mathématique</center></a></li>
-                                           <li><a href="depphy.php"><center>Génie physique et instrumentation</center></a></li>
-                                           <li><a href="depbio.php"><center>Génie Biologie et chimie</center></a></li>
-                                           <li><a href="deplangue.php"><center>Sciences Sociales, langues et Formation générale</center></a></li>
+                                           <li><a href="filtre.php?dep=gim"><center>Génie informatique et Mathématique</center></a></li>
+                                           <li><a href="filtre.php?dep=gpi"><center>Génie physique et instrumentation</center></a></li>
+                                           <li><a href="filtre.php?dep=gbc"><center>Génie Biologie et chimie</center></a></li>
+                                           <li><a href="filtre.php?dep=slf"><center>Sciences Sociales, langues et Formation générale</center></a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -167,10 +168,10 @@
                                 <li>
                                 	<a href="profs.php">Liste des enseignants</a>
                                     <ul>
-                                        <li><a href="depinformatique.php">Génie informatique et Mathématique</a></li>
-                                        <li><a href="depphy.php">Génie physique et instrumentation</a></li>
-                                        <li><a href="depbio.php">Génie Biologie et chimie</a></li>
-                                        <li><a href="deplangue.php">Sciences Sociales, langues et Formation générale</a></li>
+                                        <li><a href="filtre.php?dep=gim">Génie informatique et Mathématique</a></li>
+                                        <li><a href="filtre.php?dep=gpi">Génie physique et instrumentation</a></li>
+                                        <li><a href="filtre.php?dep=gbc">Génie Biologie et chimie</a></li>
+                                        <li><a href="filtre.php?dep=slf">Sciences Sociales, langues et Formation générale</a></li>
                                     </ul>
                                 </li>
                                 <?php if (isset($_SESSION['nom'])) { ?>
