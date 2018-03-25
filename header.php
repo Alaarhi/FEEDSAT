@@ -127,9 +127,9 @@
                         <ul class="pm-search-container">
                         	<li>
                             	<div class="pm-search-field-container">
-                                	<a href="#" class="fa fa-search"></a>
-                                	<form action="#" method="post">
-                                    	<input name="pm-search-field" class="pm-search-field" type="text" placeholder="Rechercher un prof...">
+                                	<a href="profs.php" class="fa fa-search"></a>
+                                	<form action="profs.php" method="post">
+                                    	<input name="inputRecherche" class="pm-search-field" type="text" placeholder="Rechercher un prof...">
                                     </form>
                                 </div>
                             </li>
