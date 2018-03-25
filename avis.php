@@ -80,8 +80,8 @@
     //Nombre d'amis contribuables 
     //Extraire le nombre des commentators+voters en éliminant les doublons 
     //i.e. celui qui est à la fois commentator et voter sera compté 1 seule fois
+    
     //if (!(isset($_SESSION['nbrContributors']))) {
-
         $voters = array();
         $commentators = array();
         $contributors = array();
@@ -138,7 +138,7 @@
     $_SESSION['nbrProfsRated'] = $nbrProfsRated->nbrProfsRated;
 
 
-    //VOS ENSEIGNANTS 
+    //MENU VOS ENSEIGNANTS 
     $requeteVosEnseignants = $bd->prepare(
         'SELECT p.id, p.name, p.surname, p.photo, p.linkedIn FROM rating as r
         INNER JOIN student as s
@@ -148,7 +148,7 @@
         LIMIT 0,4');
     $requeteVosEnseignants->execute(array($idFiliere, $level));
 
-    //Top commentaires de vos amis
+    //MENU TOP COMMENTS
     $requeteTopComments = $bd->prepare(
         'SELECT c.comment as commentaire, 
         s.id as idAauteur, s.surname as prenomAuteur, s.name as nomAuteur,
