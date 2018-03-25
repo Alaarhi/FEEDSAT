@@ -1,47 +1,35 @@
 <?php 
-
 include 'dbConnection.php';
-$indice = 0;
-if (isset($_POST['inputRecherche'])) {
-    $input = $_POST['inputRecherche'];
-    /*if ($input == "") {
-        $indice = 1;
+
+if (isset($_GET['dep'])) {
+    $departement =  $_GET['dep'];
+    $requeteFiltre = $bd->prepare ('SELECT * FROM professor as p WHERE p.departement = :departement');
+    switch ($departement) {
+        case "gim":
+            $depName = "Génie Informatique et Mathématiques";
+            $requeteFiltre->bindParam(':departement', $depName);
+            break;
+
+        case "gpi":
+            $depName = "Génie Physique et Instrumentation";
+            $requeteFiltre->bindParam(':departement', $depName);         
+            break;
+
+        case "gbc":
+            $depName = "Génie Biologique et de Chimie";
+            $requeteFiltre->bindParam(':departement', $depName);
+            break;
+
+        case "slf":
+            $depName = "Sciences Sociales, Langues et Formation Générale";
+            $requeteFiltre->bindParam(':departement', $depName);
+            break;
     }
-    else {*/
-        $elements = explode(" ", $input);
-        switch (sizeof($elements)) {
-            case 1:
-                $requeteRecherche = $bd->prepare(
-                    'SELECT * FROM professor 
-                    WHERE 
-                    (name LIKE :inputValue"%")
-                    OR
-                    (surname LIKE :inputValue"%")'
-                );
-                $requeteRecherche->bindParam(':inputValue', $elements[0]);
-                $requeteRecherche->execute();
-                $profs = $requeteRecherche->fetchAll(PDO::FETCH_ASSOC);
-                break;
-            
-            case 2:
-                $requeteRecherche = $bd->prepare(
-                    'SELECT * FROM professor 
-                    WHERE (name LIKE :nameValue"%") OR (surname LIKE :surnameValue"%")
-                    OR (name LIKE :nameValue) OR (name LIKE "%":nameValue) OR (name LIKE :nameValue"%") OR (name = "%":nameValue)
-                    OR (surname LIKE :surnameValue) OR (surname LIKE "%":surnameValue) OR (surname LIKE :surnameValue"%") OR (surname = "%":surnameValue)'
-                );
-                $requeteRecherche->bindParam(':surnameValue', $elements[0]);
-                $requeteRecherche->bindParam(':nameValue', $elements[1]);
-                $requeteRecherche->execute();
-                $profs = $requeteRecherche->fetchAll(PDO::FETCH_ASSOC);
-                break;
-        }
-} 
-
-
+    $requeteFiltre->execute();
+    $profs = $requeteFiltre->fetchAll(PDO::FETCH_ASSOC);
+}
 include 'header.php';
 ?>
-
 <div class="pm-sub-header-container">
     <div class="pm-sub-header-info-profs">    	
         <div class="container">
@@ -69,8 +57,7 @@ include 'header.php';
 <div class="container pm-containerPadding-bottom-30  pm-containerPadding-top-20">
         <div class="row pm-containerPadding-bottom-60 pm-center">
             <?php
-            if ($requeteRecherche) {
-            if ($requeteRecherche->rowCount() != 0){
+            if ($requeteFiltre->rowCount() != 0) {
                 foreach ($profs as $prof) { 
             ?>
             	<!-- Column 1 -->
@@ -92,8 +79,8 @@ include 'header.php';
               	</div>
                 <!-- Column 1 end -->
             <?php
-            }}}
-            else if ($indice == 1) {
+            }}
+            else {
             ?>
             <div class="col-lg-12 pm-column-spacing pm-center">
                 <h4 class="light" style="font-size:30px;"> <font color=#303F9F> Aucun enseignant de ce nom trouvé. <br> Veuillez réessayer.</font></h4></font> 
