@@ -426,53 +426,53 @@ if($resultRT1[0] > 0)
                       <!-- Progress bar -->
                       <div class="pm-progress-bar-description" id="pm-progress-bar-desc-1">
                           1er Cycle (MPI)
+                          <div class="pm-progress-bar-diamond"></div>
                           <span><?php echo($MPI."%"); ?></span>
                       </div>
-                      <div class="bar" data-percent="<?php echo($MPI."%"); ?>">
-                        <div class="tag" style="background: #303F9F;">
-                        </div>
-                        <div class="load" style="background-color: rgb(255, 193, 7);"></div>
-                        <div class="skill-bar-percent"><?php echo($MPI."%"); ?></div>
-                     </div>
+                      <div class="pm-progress-bar">
+                          <span data-width="<?php echo($MPI); ?>" class="pm-progress-bar-outer" id="pm-progress-bar-1">
+                              <span class="pm-progress-bar-inner"></span>
+                          </span>
+                      </div>
                       <!-- Progress bar end -->
 
                       <!-- Progress bar -->
                       <div class="pm-progress-bar-description" id="pm-progress-bar-desc-2">
                           Génie Logiciel (GL)
+                          <div class="pm-progress-bar-diamond"></div>
                           <span><?php echo($GL."%"); ?></span>
                       </div>
-                      <div class="bar" data-percent="<?php echo("65"."%"); ?>">
-                        <div class="tag" style="background: #303F9F;">
-                        </div>
-                        <div class="load" style="background-color: white;"></div>
-                        <div class="skill-bar-percent"><?php echo("65"."%"); ?></div>
-                     </div>
+                      <div class="pm-progress-bar">
+                          <span data-width="<?php echo($GL); ?>" class="pm-progress-bar-outer" id="pm-progress-bar-2">
+                              <span class="pm-progress-bar-inner"></span>
+                          </span>
+                      </div>
                       <!-- Progress bar end -->
 
                       <!-- Progress bar -->
                       <div class="pm-progress-bar-description" id="pm-progress-bar-desc-3">
                           Informtique Industrielle Automatique (IIA)
+                          <div class="pm-progress-bar-diamond"></div>
                           <span><?php echo($IIA."%"); ?></span>
                       </div>
-                      <div class="bar" data-percent="<?php echo($IIA."%"); ?>">
-                      <div class="tag" style="background: #303F9F;">
+                      <div class="pm-progress-bar">
+                          <span data-width="<?php echo($IIA); ?>" class="pm-progress-bar-outer" id="pm-progress-bar-3">
+                              <span class="pm-progress-bar-inner"></span>
+                          </span>
                       </div>
-                      <div class="load" style="background-color: rgb(255, 193, 7);"></div>
-                      <div class="skill-bar-percent"><?php echo($IIA."%"); ?></div>
-                   </div>
                       <!-- Progress bar end -->
 
                       <!-- Progress bar -->
                       <div class="pm-progress-bar-description" id="pm-progress-bar-desc-4">
                           Chimie Industrielle (CH)
+                          <div class="pm-progress-bar-diamond"></div>
                           <span><?php echo($CH."%"); ?></span>
                       </div>
-                      <div class="bar" data-percent="<?php echo($CH."%"); ?>">
-                      <div class="tag" style="background: #303F9F;">
+                      <div class="pm-progress-bar">
+                          <span data-width="<?php echo($CH); ?>" class="pm-progress-bar-outer" id="pm-progress-bar-4">
+                              <span class="pm-progress-bar-inner"></span>
+                          </span>
                       </div>
-                      <div class="load" style="background-color: rgb(255, 193, 7);"></div>
-                      <div class="skill-bar-percent"><?php echo($CH."%"); ?></div>
-                   </div>
                       <!-- Progress bar end -->
 
                   </div>
@@ -503,7 +503,7 @@ if($resultRT1[0] > 0)
                             <span><?php echo($RT."%"); ?></span>
                         </div>
                         <div class="pm-progress-bar">
-                            <span data-width="<?php echo("33"); ?>" class="pm-progress-bar-outer" id="pm-progress-bar-6">
+                            <span data-width="<?php echo($RT); ?>" class="pm-progress-bar-outer" id="pm-progress-bar-6">
                                 <span class="pm-progress-bar-inner"></span>
                             </span>
                         </div>
@@ -725,14 +725,6 @@ if($resultRT1[0] > 0)
     <script src="js/prettyphoto/js/jquery.prettyPhoto.js"></script>
     <script src="js/tinynav.js"></script>
     <script src="js/jquery-ui.js"></script>
-    <script>
-        setTimeout(function(){
-  $('.bar').each(function(){
-    $(this).find('.load').animate({
-      width: $(this).attr('data-percent') }, 2000);
-  });
-}, 2000);
-    </script>
 
     <p id="back-top" class="visible-lg visible-md visible-sm"></p>
 
