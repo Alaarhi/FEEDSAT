@@ -444,7 +444,7 @@ if($resultRT1[0] > 0)
                       <div class="bar" data-percent="<?php echo("65"."%"); ?>">
                         <div class="tag" style="background: #303F9F;">
                         </div>
-                        <div class="load" style="background-color: rgb(255, 193, 7);"></div>
+                        <div class="load" style="background-color: white;"></div>
                         <div class="skill-bar-percent"><?php echo("65"."%"); ?></div>
                      </div>
                       <!-- Progress bar end -->
