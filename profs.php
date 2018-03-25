@@ -2,7 +2,7 @@
     include 'dbConnection.php';
     include 'header.php';
 
-    $requeteProfs = $bd->prepare('SELECT * FROM professor ORDER BY rand() LIMIT 0,9 ');
+    $requeteProfs = $bd->prepare('SELECT * FROM professor ORDER BY photo DESC LIMIT 0,9 ');
     $requeteMesProfs = $bd->prepare(
         'SELECT DISTINCT p.id, p.name, p.surname, p.photo, p.grade FROM teach as t 
         INNER JOIN professor as p 
