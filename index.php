@@ -200,19 +200,19 @@ $rRT=$bd->query('select COUNT(score) from rating, student where(
 
 if($resultMPI1[0] > 0) 
     {
-        $MPI=$resultMPI[0]/$resultMPI1[0];
+        $MPI=$resultMPI[0]*100/$resultMPI1[0];
         $MPI=round($MPI,1);
     }
     else {$MPI=0;}
 if($resultBIO1[0] > 0) 
     {
-        $BIO= $resultBIO[0]/$resultBIO1[0];
+        $BIO= $resultBIO[0]*100/$resultBIO1[0];
         $BIO=round($BIO,1);
     }
     else {$BIO=0;}
 if($resultCBA1[0] > 0) 
     {
-        $CBA=$resultCBA[0]/$resultCBA1[0];
+        $CBA=$resultCBA[0]*100/$resultCBA1[0];
         $CBA=round($CBA,1);
     }
     else {$CBA=0;}
@@ -224,13 +224,13 @@ if($resultCH1[0] > 0)
     else {$CH=0;}
 if($resultGL1[0] > 0) 
     {
-        $GL=$resultGL[0]/$resultGL1[0];
+        $GL=$resultGL[0]*100/$resultGL1[0];
         $GL=round($GL,1);
     }
     else {$GL=0;}
 if($resultIIA1[0] > 0) 
     {
-        $IIA=$resultIIA[0]/$resultIIA1[0];
+        $IIA=$resultIIA[0]*100/$resultIIA1[0];
         $IIA=round($IIA,1);
     }
     else {$IIA=0;}
@@ -242,7 +242,7 @@ if($resultIMI1[0] > 0)
     else {$IMI=0;}
 if($resultRT1[0] > 0) 
     {
-        $RT=($resultRT[0]/$resultRT1[0]);
+        $RT=($resultRT[0]*100/$resultRT1[0]);
         $RT=round($RT,1);
     }
     else {$RT=0;}
