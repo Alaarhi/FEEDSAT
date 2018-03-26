@@ -228,10 +228,10 @@ $("#avisVoirPlus").click(avisVoirPlus(){
 
 <script>
 // If user clicks anywhere outside of the modal, Modal will close
-var modal = document.getElementById('avis');
+var modal4 = document.getElementById('avis');
 window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
+    if (event.target == modal4) {
+        modal4.style.display = "none";
     }
 }
 </script>

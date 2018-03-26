@@ -382,7 +382,8 @@ $commentsNumber=$result['count'];
                                                 </form>
                 
                                             </div>
-                
+                                            <?php include 'loginForm.php'; ?>
+
                                         </div>
                                     </div>
                                 </div>
@@ -431,22 +432,45 @@ $commentsNumber=$result['count'];
             <script id="559" src="js/index-clap.js"></script>
             <script src='https://cdnjs.cloudflare.com/ajax/libs/mo-js/0.288.1/mo.min.js'></script>
             <script>
+                
+                function validerPopupDejaVote(){
+                            window.location.href = "vote.php?id=<?php echo $id; ?>";
+                        }
+
+                function validerPopupIncapable(){
+                    document.getElementById('incapableVoter').style.display='none';
+                    if(document.getElementById('submitCommentaire').style.display=='block')
+                    document.getElementById('submitCommentaire').style.display='none';
+                }
+
                         function voter(etudiant,voted,teaches)
                         {
                             if(etudiant==0)
-                            alert("POPUP: POPUP LOGIN");
+                            document.getElementById('vote').style.display='block';
                             else if (teaches==0)
                             {
-                                alert("Cet enseignant ne vous enseigne pas cette année. Vous êtes incapable de l'évaluer.");
+                                document.getElementById('incapableVoter').style.display='block';
                             }
                             else if (voted==1)
                             {
-                            alert("VOUS AVEZ DEJA DONNÉ VOTRE AVIS PAR RAPPORT A CE PROF. CE VOTE SERA CONSIDÉRÉ COMME CHANGEMENT D'AVIS ET NON PAS UN VOTE SUPPLEMENTAIRE.");
-                            window.location.href = "vote.php?id=<?php echo $id; ?>";
+                                document.getElementById('dejaVote').style.display='block';
+                                var cpt = 7;
+                                setInterval(function(){
+                                            --cpt;
+                                            document.getElementById('validerPopUp').innerText="VALIDER ( "+cpt+" )";
+                                        }, 1000);
+                                setTimeout(() => {
+                                    window.location.href = "vote.php?id=<?php echo $id; ?>";
+                                }, 7000);
+                                // puis :
                             }
                             else window.location.href = "vote.php?id=<?php echo $id; ?>";
 
                         }
+
+
+
+
                         function commenter(profId){
                             commentaire = document.getElementById("commentArea").value;
                             publique = document.getElementById("Identité Publique").checked;
@@ -459,9 +483,12 @@ $commentsNumber=$result['count'];
                                                         },
                                                         success : function(response, statut){
                                                             if(response=="unlogged")
-                                                            alert("POPUP : POPUP DE LOGIN")
+                                                            document.getElementById('commentaire').style.display='block';
                                                             else
-                                                            alert("POPUP : Votre commentaire est maintenant en attente d'approbation. Vos commentaires seront automatiquement approuvés si vous faites preuve d'activité et de volonté constructive.");
+                                                            {
+                                                            document.getElementById("commentArea").value="";
+                                                            document.getElementById('submitCommentaire').style.display='block';
+                                                            }
                                                         },
                                                         error : function(response, statut, erreur){
                                                         }
@@ -600,8 +627,6 @@ $commentsNumber=$result['count'];
                             $('#zone').fadeIn(2000);
                             }
 
-                            
-
                             if(document.getElementById("topCommentaires").classList.contains("pm-square-btn-comment-hovered"))
                             {
                             document.getElementById("topCommentaires").classList.remove("pm-square-btn-comment-hovered");
@@ -724,7 +749,41 @@ $commentsNumber=$result['count'];
                             
 
                         }
-            </script>           
+
+
+            </script> 
+            
+            <script>
+                var modal = document.getElementById('incapableVoter');
+                var modal2 = document.getElementById('dejaVote');
+                var modal3 = document.getElementById('vote');
+                var modal4 = document.getElementById('avis');
+                var modal5 = document.getElementById('commentaire');
+                var modal6 = document.getElementById('submitCommentaire');
+                window.onclick = function(event) {
+                    if (event.target == modal) {
+                        modal.style.display = "none";
+                    }
+                    if (event.target == modal2) {
+                        modal2.style.display = "none";
+                    }
+                    if (event.target == modal3) {
+                        modal3.style.display = "none";
+                    }
+                    if (event.target == modal4) {
+                        modal4.style.display = "none";
+                    }
+                    if (event.target == modal5) {
+                        modal5.style.display = "none";
+                    }
+                    if (event.target == modal6) {
+                        modal6.style.display = "none";
+                    }
+                }
+            
+              
+            </script>
+
             <p id="back-top" class="visible-lg visible-md visible-sm" style="bottom: -70px;"></p>
 
 
