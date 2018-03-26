@@ -112,21 +112,21 @@
 </div>
 
 
-
-
-
 <div id="applaud" class="modal" >
-  <form class="modal-content animate" action="avis.php" method="post">
+  <form class="modal-content animate" onsubmit="return false">
     
     <div class="imgcontainer">
-      <span onclick="document.getElementById('modal-wrapper').style.display='none'" class="close" title="fermer">&times;</span>
+      <span onclick="document.getElementById('applaud').style.display='none'" class="close" title="fermer">&times;</span>
         <img src="img/medical-link.jpg" alt="Logo">
-          <h4 style="margin-top: 5%; text-align:center; color: #5e6467">Identifiez-vous pour accéder à ce contenu</h4>
+          <h4 style="margin-top: 5%; text-align:center; color: #5e6467">Identifiez-vous pour interagir</h4>
     </div>
       
     <div class="container">
-      <input name="numInscri" class="pm-form-textfield" type="text" placeholder="Identifiant (votre numéro d'étudiant)">
-      <input name="numCin" class="pm-form-textfield" type="password" placeholder="Mot de Passe (votre numéro de cin)">        
+    <input name="numInscri" id="id6" class="pm-form-textfield" type="text" placeholder="Identifiant (votre numéro d'étudiant)">
+    <input name="numCin" id="mdp6" class="pm-form-textfield" type="password" placeholder="Mot de Passe (votre numéro de cin)">        
+    <input name="source" id="src6" type="text" hidden value="vote.php" >     
+    <div id="err6" style="display:none; padding-left:3%; font-family:Raleway;"> <font color="red"> Nom d'utilisateur ou mot de passe incorrect(s). </font></div>     
+  
       <button style= 
       "
         background-color:  #303F9F;
@@ -143,7 +143,7 @@
         -webkit-transition: all 0.5s;
         -o-transition: all 0.5s;
       "   
-      type="submit" >SE CONNECTER</button>  
+      onclick="seConnecter('id6,mdp6,src6,err6');" id ="avisVoirPlus" >SE CONNECTER</button>  
     </div>
   </form>
 </div>

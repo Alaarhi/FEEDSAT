@@ -1,15 +1,17 @@
-function clapping(){
+function clapping(j){
 var clap = document.getElementsByClassName('clap');
 var clapIcon = document.getElementsByClassName('clap--icon');
 var btnDimension = 80;
 var tlDuration = 300;
 var numberOfClaps = 0;
 var clapHold = void 0;
-
 i=0;
-for(i=0;i<clap.length;i++){
+
+for(i=j;i<clap.length;i++){
+  
 clap[i].addEventListener('click', function () {
   j=this.id;
+  if(!document.getElementById(j+"1").classList.contains("disabled"))
   if(document.getElementById(j+"1").classList.contains("checked"))
   {
     document.getElementById(j+"1").classList.remove("checked");
@@ -39,7 +41,7 @@ function repeatClapping(j) {
 }
 }
 
-clapping();
+
 
 
 /*====== TODO ==========

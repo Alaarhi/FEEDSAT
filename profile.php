@@ -430,8 +430,10 @@ $commentsNumber=$result['count'];
             <script src="js/tinynav.js"></script>
             <script src="js/jquery-ui.js"></script>
             <script id="559" src="js/index-clap.js"></script>
+
             <script src='https://cdnjs.cloudflare.com/ajax/libs/mo-js/0.288.1/mo.min.js'></script>
             <script>
+                clapping(0);
                 
                 function validerPopupDejaVote(){
                             window.location.href = "vote.php?id=<?php echo $id; ?>";
@@ -441,6 +443,10 @@ $commentsNumber=$result['count'];
                     document.getElementById('incapableVoter').style.display='none';
                     if(document.getElementById('submitCommentaire').style.display=='block')
                     document.getElementById('submitCommentaire').style.display='none';
+                }
+
+                function clapPopUp(){
+                    document.getElementById('applaud').style.display='block';
                 }
 
                         function voter(etudiant,voted,teaches)
@@ -539,8 +545,9 @@ $commentsNumber=$result['count'];
                     var shown="";
                     var shown2;
                     var parametre;
-                    
-                    
+                    var nbrClicksTopComments=0;    
+                    var nbrClicksRecents=0;
+
       
 
                             function lastTimee(profId){
@@ -584,7 +591,7 @@ $commentsNumber=$result['count'];
 
                                     
                             function menuPlusRecents(profId)
-                        {   
+                        {   nbrClicksRecents=0;
                             if(document.getElementById("plusRecents").classList.contains("pm-square-btn-comment"))
                             {
                             param=1;
@@ -597,7 +604,7 @@ $commentsNumber=$result['count'];
 
                         function menuTopCommentaires(profId)
                         {
-                            
+                            nbrClicksTopComments=0;    
                             parametre=1;
                             param2=1;
                             topCommentaires(profId);
@@ -613,6 +620,7 @@ $commentsNumber=$result['count'];
                                 plusRecents(profId);
                             }
                         }
+
 
                         function plusRecents(profId){
                             var param;
@@ -638,22 +646,24 @@ $commentsNumber=$result['count'];
                             document.getElementById("plusRecents").classList.add("pm-square-btn-comment-hovered");
                             }
                             
-                            if(document.getElementById("559"))
+                            /* if(document.getElementById("559"))
                             {
                             var element = document.getElementById("559"); 
                             element.parentNode.removeChild(element);
-                            }
+                            } */
 
 
                                         $.ajax({
                                             url : 'voirPlus.php',
                                             type : 'GET',
                                             data: {
-                                                lastTime,shown,profId
+                                                lastTime,shown,profId,nbrClicksRecents
                                             },
                                             dataType : "json",
                                             success : function(response, statut){
-                                                if(response.comment.length!="50")
+                                                var finVoirPlusR=(nbrClicksRecents.toString()).length;
+                                                finVoirPlusR=finVoirPlusR+28;
+                                                if(response.comment.length!=finVoirPlusR)
                                                 {
                                                 $('#zone_plus_recents').fadeIn(2000);
                                                 $("#zone_plus_recents").append(response.comment);
@@ -669,6 +679,7 @@ $commentsNumber=$result['count'];
                                                 $('#voirPlus').hide();
 
                                             }
+                                            nbrClicksRecents=nbrClicksRecents+3;
                                         },
                                             error : function(response, statut, erreur){
 
@@ -679,7 +690,7 @@ $commentsNumber=$result['count'];
 
                         }
                 
-                lastCount=" ";       
+                lastCount=" ";   
                topCommentaires(<?php echo $id; ?>);
                function topCommentaires(profId){
                             var zone = '<div class="pm-comments-container" hidden id="zone_top_commentaires"></div>'; 
@@ -704,11 +715,7 @@ $commentsNumber=$result['count'];
                             }   
                             
 
-                            if(document.getElementById("559"))
-                            {
-                            var element = document.getElementById("559"); 
-                            element.parentNode.removeChild(element);
-                            }
+                            
 
                             var parametre = "top";
                             
@@ -718,11 +725,13 @@ $commentsNumber=$result['count'];
                                             url : 'voirPlus.php',
                                             type : 'GET',
                                             data: {
-                                                lastCount,shown2,parametre,param2,profId
+                                                lastCount,shown2,parametre,param2,profId,nbrClicksTopComments
                                             },
                                             dataType : "json",
                                             success : function(response, statut){
-                                                if(response.comment.length!="50")
+                                                var finVoirPlusT=(nbrClicksTopComments.toString()).length;
+                                                finVoirPlusT=finVoirPlusT+28;
+                                                if(response.comment.length!=finVoirPlusT)
                                                 {
                                                 $('#zone_top_commentaires').fadeIn(2000);
                                                 $("#zone_top_commentaires").append(response.comment);
@@ -734,12 +743,17 @@ $commentsNumber=$result['count'];
                                                 $('#voirPlus').show();
 
                                             }
+                                                else if(nbrClicksTopComments==0)
+                                                {
+                                                    $('#zone_top_commentaires').fadeIn(2000);
+                                                    $("#zone_top_commentaires").append('<br><br><center><h4 class="pm-comments-response-title"> <font color="#303F9F">Aucun commentaire n\'a fait l\'objet d\'un applaud.</font></h4></center>');
+                                                    $('#voirPlus').hide();
+                                                }
                                                 else
                                                 { 
                                                 $('#voirPlus').hide();
-
-                                            }
-                                            
+                                                }
+                                            nbrClicksTopComments=nbrClicksTopComments+3;
                                         },
                                             error : function(response, statut, erreur){
 
@@ -760,6 +774,7 @@ $commentsNumber=$result['count'];
                 var modal4 = document.getElementById('avis');
                 var modal5 = document.getElementById('commentaire');
                 var modal6 = document.getElementById('submitCommentaire');
+                var modal7 = document.getElementById('applaud');
                 window.onclick = function(event) {
                     if (event.target == modal) {
                         modal.style.display = "none";
@@ -778,6 +793,9 @@ $commentsNumber=$result['count'];
                     }
                     if (event.target == modal6) {
                         modal6.style.display = "none";
+                    }
+                    if (event.target == modal7) {
+                        modal7.style.display = "none";
                     }
                 }
             
