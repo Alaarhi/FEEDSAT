@@ -111,7 +111,7 @@ if($grade=="Assistant")
     $gradePlusFeed="A.";
 
 //nombre interactions:
-$reqnbinteract=$bd->query('select COUNT(*) from rating');
+$reqnbinteract=$bd->query('select COUNT(*) from interact');
 $resultnbinteract=$reqnbinteract->fetch();
 
 //nombre comments:
@@ -119,12 +119,13 @@ $reqnbincom=$bd->query('select COUNT(*) from comment');
 $resultnbcom=$reqnbinteract->fetch();
 
 // nb feedbacks:
-$nbfeed=$resultnbinteract[0]+$resultnbcom[0];
+$reqfeed=$bd->query('select COUNT(*) from rating');
+$nbfeed=$reqfeed->fetch();
 
 //taux participation:
 $reqnbstudent=$bd->query('select COUNT(*) from student');
 $resultnbstudent=$reqnbstudent->fetch();
-$taux=round(($nbfeed/$resultnbstudent[0])*100,2);
+$taux=round(($nbfeed[0]/$resultnbstudent[0])*100,2);
 
 //Best comments:
 $reqBestCom=$bd->query('select COUNT(commentId),commentId,studentId from interact GROUP BY commentId ORDER BY COUNT(commentId) DESC');    
@@ -566,7 +567,7 @@ if($resultRT1[0] > 0)
                     <!-- milestone -->
                     <div class="milestone">
                         <div class="milestone-content">
-                            <span data-speed="2000" data-stop="<?php echo($nbfeed); ?>" class="milestone-value"></span>
+                            <span data-speed="2000" data-stop="<?php echo($nbfeed[0]); ?>" class="milestone-value"></span>
                             <div class="milestone-description">Fedbacks</div>
                         </div>
                     </div>
@@ -625,12 +626,13 @@ if($resultRT1[0] > 0)
         <!-- PANEL 3 end -->
 
         <!-- PANEL 6 -->
+        <?php if($nbCom>=3)
+                                {?>
         <div class="pm-column-container testimonials pm-parallax-panel" style="background-color:#A34DE9; background-image:url(img/home/purple.jpg); background-repeat:repeat-y;" data-stellar-background-ratio="0.5" data-stellar-vertical-offset="0">
 
             <div class="container pm-containerPadding100">
             	<div class="row">
-                <?php if($nbCom>4)
-                                {?>
+                
                 	<div class="col-lg-12 pm-center">
                     	<h5 class="light">TOP COMMENTAIRES EN CE MOMENT</h5>
                     </div>
@@ -666,7 +668,7 @@ if($resultRT1[0] > 0)
                                 <p class="pm-testimonial-title"><?php echo($tabStFos[2]." ".$tabStLevel[2]); ?></p>
                                 <div class="pm-testimonial-divider"></div>
                                 <p class="pm-testimonial-quote"><?php echo($tabCom[2]); ?></p>
-                                <?php  } ?>
+                                
                             </li>
                         </ul>
                     </div>
@@ -675,6 +677,99 @@ if($resultRT1[0] > 0)
             </div>
 
         </div>
+        <?php  } ?>
+
+        <!-- ***********0 commentaire************ -->
+
+        <?php if($nbCom==0)
+                                {?>
+        <div class="pm-column-container testimonials pm-parallax-panel" style="background-color:#A34DE9; background-image:url(img/home/purple.jpg); background-repeat:repeat-y;" data-stellar-background-ratio="0.5" data-stellar-vertical-offset="0">
+
+            <div class="container pm-containerPadding100">
+            	<div class="row">
+                	<div class="col-lg-12 pm-center">
+                    	<h5 class="light">Aucun commentaire pour le moment</h5>
+                    </div>
+                	<div class="pm-testimonials-carousel" id="pm-testimonials-carousel">
+                    	<ul class="pm-testimonial-items">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php  } ?>
+
+        <!-- ***********1 commentaire************ -->
+        <?php if($nbCom==1)
+                                {?>
+        <div class="pm-column-container testimonials pm-parallax-panel" style="background-color:#A34DE9; background-image:url(img/home/purple.jpg); background-repeat:repeat-y;" data-stellar-background-ratio="0.5" data-stellar-vertical-offset="0">
+
+            <div class="container pm-containerPadding100">
+            	<div class="row">
+                	<div class="col-lg-12 pm-center">
+                    	<h5 class="light">TOP COMMENTAIRES EN CE MOMENT</h5>
+                    </div>
+                	<div class="pm-testimonials-carousel" id="pm-testimonials-carousel">
+                    	<ul class="pm-testimonial-items">
+                        	<li>
+                                <div class="pm-testimonial-img" style="background-image:url(img/information/hamza.jpg);">
+                                </div>
+                                <p class="pm-testimonial-name"> <?php echo($tabStSurname[0]." ".$tabStName[0]); ?> </p>
+                                <p class="pm-testimonial-title"> <?php echo($tabStFos[0]." ".$tabStLevel[0]); ?></p>
+                                <div class="pm-testimonial-divider"> </div>
+                                <p class="pm-testimonial-quote"><?php echo($tabCom[0]); ?></p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php  } ?>
+
+        <!-- ***********2 commentaires************ -->
+        <?php if($nbCom==2)
+                                {?>
+        <div class="pm-column-container testimonials pm-parallax-panel" style="background-color:#A34DE9; background-image:url(img/home/purple.jpg); background-repeat:repeat-y;" data-stellar-background-ratio="0.5" data-stellar-vertical-offset="0">
+
+            <div class="container pm-containerPadding100">
+            	<div class="row">
+                
+                	<div class="col-lg-12 pm-center">
+                    	<h5 class="light">TOP COMMENTAIRES EN CE MOMENT</h5>
+                    </div>
+
+                	<div class="pm-testimonials-carousel" id="pm-testimonials-carousel">
+
+                    	<ul class="pm-testimonial-items">
+                        
+                        	<li>
+                                <div class="pm-testimonial-img" style="background-image:url(img/information/hamza.jpg);">
+                                	<!--<div class="pm-testimonial-img-icon">
+                                    	<img src="img/home/post-icon.jpg" class="img-responsive pm-center-align" alt="icon">
+                                    </div>-->
+                                </div>
+                                
+                                <p class="pm-testimonial-name"> <?php echo($tabStSurname[0]." ".$tabStName[0]); ?> </p>
+                                <p class="pm-testimonial-title"> <?php echo($tabStFos[0]." ".$tabStLevel[0]); ?></p>
+                                <div class="pm-testimonial-divider"> </div>
+                                <p class="pm-testimonial-quote"><?php echo($tabCom[0]); ?></p>
+                            </li>
+                            <li>
+                                <div class="pm-testimonial-img" style="background-image:url(img/information/abir.jpg);">
+                                </div>
+                                <p class="pm-testimonial-name"><?php echo($tabStSurname[1]." ".$tabStName[1]); ?></p>
+                                <p class="pm-testimonial-title"><?php echo($tabStFos[1]." ".$tabStLevel[1]); ?></p>
+                                <div class="pm-testimonial-divider"></div>
+                                <p class="pm-testimonial-quote"><?php echo($tabCom[1]); ?></p>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <?php  } ?>
         <!-- PANEL 6 end -->
 
         <!-- PANEL 5  -->
