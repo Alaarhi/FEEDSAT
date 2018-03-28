@@ -30,7 +30,7 @@ while($ratings=$requete->fetch())
     $pos3=array("opinions ","avis ","appréciations ","jugements "); 
     $pos41=array("divergent ","différent ","s'écartent ");
     $pos42=array("convergent","se rencontrent","se réunissent");
-    $pos5=array(" significativement. "," de façon flagrante. "," de manière marquante. ");
+    $pos5=array(" significativement. "," de façon remarquable. "," de manière marquante. ");
     if($etat=="divergence")
     {
     $pos4=$pos41;
@@ -67,4 +67,71 @@ while($ratings=$requete->fetch())
         $phrase2=$pos1[rand(0,1)]."il est ".$pos2[rand(0,4)].$pos3[rand(0,1)].$pos4[rand(0,1)]." ";    
         $phrase=$phrase.$phrase2;
     }
+
+    $requeteSatisFiliaire=$bd->query("select count(score) as nbr ,sum(score) as score,fos from student,rating,fos where ( rating.studentId=student.id and student.fosId=fos.id and profId=".$_GET['id']." ) group by fos ");
+    $filiairesS=array();
+    $filiairesNonS=array();
+    while($filiaireSatisf=$requeteSatisFiliaire->fetch())
+    {   if($filiaireSatisf['nbr']!=0)
+        if(($filiaireSatisf['score']/$filiaireSatisf['nbr'])>=6)
+        {
+            if($filiaireSatisf['fos']=="Réseaux informatiques et télécommunications")
+            array_push($filiairesS,"RT");
+
+            if($filiaireSatisf['fos']=="Génie Logiciel")
+            array_push($filiairesS,"GL");
+
+            if($filiaireSatisf['fos']=="Mathématiques, Physique, Informatique")
+            array_push($filiairesS,"MPI");
+
+            if($filiaireSatisf['fos']=="Instrumentation et maintenance industrielle")
+            array_push($filiairesS,"IMI");
+
+            if($filiaireSatisf['fos']=="Informatique Industrielle et Automatique")
+            array_push($filiairesS,"IIA");
+
+            if($filiaireSatisf['fos']=="Chimie Biologie Appliquée")
+            array_push($filiairesS,"CBA");
+
+            if($filiaireSatisf['fos']=="Chimie")
+            array_push($filiairesS,"CH");
+
+            if($filiaireSatisf['fos']=="Biologie")
+            array_push($filiairesS,"BIO");
+        }
+        else if (($filiaireSatisf['score']/$filiaireSatisf['nbr'])<=4)
+        {
+            if($filiaireSatisf['fos']=="Réseaux informatiques et télécommunications")
+            array_push($filiairesNonS,"RT");
+
+            if($filiaireSatisf['fos']=="Génie Logiciel")
+            array_push($filiairesNonS,"GL");
+
+            if($filiaireSatisf['fos']=="Mathématiques, Physique, Informatique")
+            array_push($filiairesNonS,"MPI");
+
+            if($filiaireSatisf['fos']=="Instrumentation et maintenance industrielle")
+            array_push($filiairesNonS,"IMI");
+
+            if($filiaireSatisf['fos']=="Informatique Industrielle et Automatique")
+            array_push($filiairesNonS,"IIA");
+
+            if($filiaireSatisf['fos']=="Chimie Biologie Appliquée")
+            array_push($filiairesNonS,"CBA");
+
+            if($filiaireSatisf['fos']=="Chimie")
+            array_push($filiairesNonS,"CH");
+
+            if($filiaireSatisf['fos']=="Biologie")
+            array_push($filiairesNonS,"BIO");
+        }
+    }
+    $phrase3="";
+    if((sizeof($filiairesS)>0)&&(sizeof($filiairesNonS)==0))
+    $phrase3 = "De plus, on constate qu'il va très bien avec les ".$filiairesS[rand(0,sizeof($filiairesS)-1)].".";
+    if((sizeof($filiairesS)==0)&&(sizeof($filiairesNonS)>0))
+    $phrase3 = "De plus, on constate qu'il ne va pas trop avec les ".$filiairesS[rand(0,sizeof($filiairesS)-1)].".";
+    if((sizeof($filiairesS)>0)&&(sizeof($filiairesNonS)>0))
+    $phrase3 = "De plus, on constate qu'il va très bien avec les ".$filiairesS[rand(0,sizeof($filiairesS)-1)]." mais pas aussi bien avec les ".$filiairesNonS[rand(0,sizeof($filiairesNonS)-1)].".";
+    $phrase=$phrase.$phrase3;
 ?>
