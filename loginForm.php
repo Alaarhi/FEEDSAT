@@ -183,12 +183,12 @@
     
     <div class="imgcontainer" id="message">
       <span onclick="document.getElementById('incapableVoter').style.display='none'" class="close" title="fermer">&times;</span>
-        <img src="img/medical-link.jpg" alt="Logo">
-          <h4 style="margin-top: 10%; text-align:center; color: #5e6467; font-size:20px">
+        <img src="img/medical-link.jpg" alt="Logo"><br>
+          <h4 style="margin-top: 10%; text-align:center; color: #5e6467; font-size:19px">
             <font color="#4553a9">
-              Vous n'êtes pas en mesure d'évaluer cet enseignant tant que vous ne suivez pas son cours. 
-              <br><br>Vous pouvez toutefois consulter son profil pour voir et intéragir avec les commentaires laissés par ses étudiants.
-              <br><br></font></h4>
+              Desolé, vous n'êtes pas en mesure d'évaluer cet enseignant tant que vous ne suivez pas son cours. 
+              <br><br>Vous êtes toutefois libre de consulter son profil pour voir et intéragir avec les commentaires laissés par ses étudiants.
+              <br><br><br></font></h4>
           <button style= 
       "
         background-color:  #303F9F;

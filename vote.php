@@ -213,7 +213,7 @@ else
                         <div class="row">
                             <center>
                             <h5 class="light">Partagez votre avis sur cet enseignant</h5>
-                            <p class="light"> Pour chacun des critères ci dessous, dites quelle note attribuez-vous.</p></center>
+                            <p class="light"> Lisez et réflichissez sur les critères ci dessous en vue d'attribuer un score sur chacun.</p></center>
                               <!--<div class="pm-divider light" style="padding-left:25px"></div>-->
                               <br><br>
 
@@ -229,9 +229,13 @@ else
 
                                           <div class="panel-collapse collapse" id="collapse0" aria-expanded="true" style="height: 0px;">
                                               <div class="panel-body">
-                                                <p>Commenet jugez-vous le cours que procure cet enseignant? Que pensez-vous de la qualité du cours, sa longeur et son utilité?
-                                                  Commenet jugez-vous le cours que procure cet enseignant? Que pensez-vous de la qualité du cours, sa longeur et son utilité?
-                                                  Commenet jugez-vous le cours que procure cet enseignant? Que pensez-vous de la qualité du cours, sa longeur et son utilité?</p>
+                                                <p style="font-size:18px">
+                                                Ce critère concerne uniquement le cours que propose cet enseignant, indépendemment 
+                                                de ce dernier, même ci il peut bien en être l'auteur. 
+                                                <br>Comment jugez-vous la qualité du cours? Trouvez-vous que sa longueur est appropriée?
+                                                <br> Prenez en considération son degré de difficulté, son ergonomie et sa pertinence dans le
+                                                score que vous attribuerez sur ce critère.
+                                                </p>
                                                   <div class="rating" id="contenuCours">
                                                       <input type="radio" id="cours10" name="contenuCours" value="10" /> <label class = "full" for="cours10" title="Awesome - 5 stars"></label>
                                                       <input type="radio" id="cours9" name="contenuCours" value="9" /><label class="half" for="cours9" title="Pretty good - 4.5 stars"></label>
@@ -260,9 +264,14 @@ else
 
                                           <div class="panel-collapse collapse" id="collapse1" aria-expanded="false">
                                               <div class="panel-body">
-                                                <p>Commenet jugez-vous le cours que procure cet enseignant? Que pensez-vous de la qualité du cours, sa longeur et son utilité?
-                                                  Commenet jugez-vous le cours que procure cet enseignant? Que pensez-vous de la qualité du cours, sa longeur et son utilité?
-                                                  Commenet jugez-vous le cours que procure cet enseignant? Que pensez-vous de la qualité du cours, sa longeur et son utilité?</p>
+                                                <p style="font-size:18px">
+                                                Ce critère concerne la fréquence d'absentéisme de l'enseignant.
+                                                <br>Pensez-vous que cet enseignant s'absente trop fréquemment? 
+                                                <br>Si c'est le cas, demandez-vous si les conséquences ont impacté 
+                                                vos notes dans les examens ou votre niveau de compréhension général
+                                                de la matière en fin de semestre et attribuez un score en fonction de 
+                                                votre réponse à cette question.    
+                                                </p>
                                                   <div class="rating" id="presence">
                                                       <input type="radio" id="presence10" name="presence" value="10" /> <label class = "full" for="presence10" title="Awesome - 5 stars"></label>
                                                       <input type="radio" id="presence9" name="presence" value="9" /><label class="half" for="presence9" title="Pretty good - 4.5 stars"></label>
@@ -291,9 +300,17 @@ else
 
                                           <div class="panel-collapse collapse" id="collapse2" aria-expanded="false">
                                               <div class="panel-body">
-                                                <p>Commenet jugez-vous le cours que procure cet enseignant? Que pensez-vous de la qualité du cours, sa longeur et son utilité?
-                                                  Commenet jugez-vous le cours que procure cet enseignant? Que pensez-vous de la qualité du cours, sa longeur et son utilité?
-                                                  Commenet jugez-vous le cours que procure cet enseignant? Que pensez-vous de la qualité du cours, sa longeur et son utilité?</p>
+                                                <p style="font-size:18px; font-style:italic">
+                                                "Il n'est pas de bonne pédagogie qui ne commence par éveiller le désir d'apprendre."</p>
+                                                <p style="font-size:18px">
+                                                Comme son nom l'indique, ce critère évalue les compétences éducatives et pédagogiques 
+                                                de l'enseignant. 
+                                                <br>Croyez-vous que cet enseignant fournit un effort supplémentaire pour vous faire 
+                                                parvenir l'information de manière ergonomique et efficace, ou au contraire, 
+                                                vous trouvez du mal à saisir toute information véhiculé par celui-ci?
+                                                <br>Quel sentiment vous procure cet enseignant vis à vis de sa matière? 
+                                                <br> Pensez-y et accorder une note honnête.
+                                                </p>
                                                   <div class="rating" id="pedagogie">
                                                       <input type="radio" id="pedagogie10" name="pedagogie" value="10" /> <label class = "full" for="pedagogie10" title="Awesome - 5 stars"></label>
                                                       <input type="radio" id="pedagogie9" name="pedagogie" value="9" /><label class="half" for="pedagogie9" title="Pretty good - 4.5 stars"></label>
@@ -321,9 +338,13 @@ else
 
                                           <div class="panel-collapse collapse" id="collapse3" aria-expanded="false" style="height: 0px;">
                                               <div class="panel-body">
-                                                <p>Commenet jugez-vous le cours que procure cet enseignant? Que pensez-vous de la qualité du cours, sa longeur et son utilité?
-                                                  Commenet jugez-vous le cours que procure cet enseignant? Que pensez-vous de la qualité du cours, sa longeur et son utilité?
-                                                  Commenet jugez-vous le cours que procure cet enseignant? Que pensez-vous de la qualité du cours, sa longeur et son utilité?</p>
+                                              <p style="font-size:18px">
+                                                L'ambiance d'un cours est un facteur tout aussi important dans l'expérience
+                                                d'un étudiant avec un enseignant particulier. 
+                                                <br>Comment la jugez-vous pendant les cours
+                                                de cet enseignant? Tendue? décontractée? Ennuyeuse?
+                                                <br> Attribuez votre score en fonction de vos préférences.                                 
+                                                </p>
                                                   <div class="rating" id="ambiance">
                                                       <input type="radio" id="ambiance10" name="ambiance" value="10" /> <label class = "full" for="ambiance10" title="Awesome - 5 stars"></label>
                                                       <input type="radio" id="ambiance9" name="ambiance" value="9" /><label class="half" for="ambiance9" title="Pretty good - 4.5 stars"></label>
@@ -351,9 +372,14 @@ else
 
                                           <div class="panel-collapse collapse" id="collapse4" aria-expanded="false">
                                               <div class="panel-body">
-                                                <p>Commenet jugez-vous le cours que procure cet enseignant? Que pensez-vous de la qualité du cours, sa longeur et son utilité?
-                                                  Commenet jugez-vous le cours que procure cet enseignant? Que pensez-vous de la qualité du cours, sa longeur et son utilité?
-                                                  Commenet jugez-vous le cours que procure cet enseignant? Que pensez-vous de la qualité du cours, sa longeur et son utilité?</p>
+                                                <p style="font-size:18px">
+                                                Pour ce critère, qui concerne les notes obtenus dans les devoirs ou examens, il est recommandé
+                                                de se baser sur votre expérience et celle de vos camarades de promotion. 
+                                                <br>Jugez-vous que l'attribution de notes de la part de cet enseignant se fait de manière
+                                                adéquate, crédible et égale? Avez-vous souvent eu l'impression que vous ne méritiez pas la note
+                                                obtenue dans un ou plusieurs examens? (Attention, il peut également s'agir d'une bonne note non méritée).
+                                                <br><b> Prière de faire preuve de sérieux et de maturité au moment où vous attribuerez un score sur ce critère. </b>
+                                                </p>
                                                   <div class="rating" id="note">
                                                       <input type="radio" id="note10" name="note" value="10" /> <label class = "full" for="note10" title="Awesome - 5 stars"></label>
                                                       <input type="radio" id="note9" name="note" value="9" /><label class="half" for="note9" title="Pretty good - 4.5 stars"></label>
