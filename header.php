@@ -137,7 +137,7 @@
                             <li>
                             	<div class="pm-dropdown pm-categories-menu" >
                                     <div class="pm-dropmenu" >
-                                        <p class="pm-menu-title">Filtrer par Département</p>
+                                        <p class="pm-menu-title">Départements de l'INSAT</p>
                                         <i class="fa fa-angle-down"></i>
                                     </div>
                                     <div class="pm-dropmenu-active" >
@@ -166,7 +166,7 @@
                             <ul class="sf-menu pm-nav">
                                 <li><a href="index.php" class="fa fa-home" id="pm-home-btn"></a></li>
                                 <li>
-                                	<a href="profs.php">Liste des enseignants</a>
+                                	<a href="profs.php">Les enseignants de l'INSAT</a>
                                     <ul>
                                         <li><a href="filtre.php?dep=gim">Génie informatique et Mathématique</a></li>
                                         <li><a href="filtre.php?dep=gpi">Génie physique et instrumentation</a></li>
@@ -175,9 +175,9 @@
                                     </ul>
                                 </li>
                                 <?php if (isset($_SESSION['nom'])) { ?>
-                                <li><a href="avis.php">Avis de mes collègues</a></li>
+                                <li><a href="avis.php">Ma promotion</a></li>
                                 <?php } else { ?>
-                                <li><a onclick="document.getElementById('avis').style.display='block'">Avis de mes collègues</a></li>
+                                <li><a onclick="document.getElementById('avis').style.display='block'">Ma promotion</a></li>
                                 <?php } ?>
                                 
                             </ul>
@@ -186,8 +186,8 @@
                                 <li><a href="javascript:;"><?php echo $_SESSION['prenom']." ".$_SESSION['nom']; ?></a>
                                     <ul>
                                     <li><a href="#">Ajouter une photo d'identité</a></li>
-                                    <li><a href="#">Changer mon mot de passe</a></li>
-                                    <li><a href="deconnexion.php">Déconnexion</a></li>
+                                    <li><a href="#">Changer de mot de passe</a></li>
+                                    <li><a href="deconnexion.php">Se déconnecter</a></li>
                                     </ul>
                                 </li>
                                 <?php } ?>

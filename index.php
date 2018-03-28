@@ -339,7 +339,7 @@ if($resultRT1[0] > 0)
         	<div class="row">
             <div class="col-lg-12 pm-center pm-containerPadding-bottom-0">
 
-                  <h5> F E E D S A T &nbsp;&nbsp;&nbsp; A W A R D S </h5>
+                  <h5> FEEDSAT AWARDS </h5>
                   <div class="pm-column-title-divider">
                     <img height="29" width="29" src="img/divider-icon.png" alt="icon">
                     <br><br>
@@ -353,13 +353,13 @@ if($resultRT1[0] > 0)
                 	<a href="#" class="fa fa-hand-o-up pm-icon-btn"></a>
 
                     <h6 class="pm-column-title"><?php echo($gradeBestProf." ".$nomBestProf." ".$prenomBestProf); ?></h6>
-                    <h7 class="pm-column-subtitle">Le enseignant avec le plus de feedback positif</h7>
+                    <h7 class="pm-column-subtitle">Le profil avec la <b> meilleur note </b> sur FEEDSAT</h7>
 
                     <div class="pm-title-divider"></div>
 
                     <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
 
-                    <a href="/feedsat/profile.php?id=<?php echo($idBestProfRate); ?>" class="pm-standard-link">consulter ce profil <i class="fa fa-plus"></i></a>
+                    <a href="/feedsat/profile.php?id=<?php echo($idBestProfRate); ?>" class="pm-standard-link">Voir profil <i class="fa fa-plus"></i></a>
 
                 </div>
                 <!-- Column 1 end -->
@@ -371,13 +371,13 @@ if($resultRT1[0] > 0)
                     <a href="#" class="fa fa-hand-o-down pm-icon-btn"></a>
 
                     <h6 class="pm-column-title"><?php echo($gradeWorstProf." ".$nomWorstProf." ".$prenomWorstProf); ?></h6>
-                    <h7 class="pm-column-subtitle">Le enseignant avec le plus de feedback négatif</h7>
+                    <h7 class="pm-column-subtitle">Le profil avec la <b> dernière note </b> sur FEEDSAT </h7>
 
                     <div class="pm-title-divider"></div>
 
                     <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
 
-                    <a href="/feedsat/profile.php?id=<?php echo($idWorstProfRate); ?>" class="pm-standard-link">consulter ce profil<i class="fa fa-plus"></i></a>
+                    <a href="/feedsat/profile.php?id=<?php echo($idWorstProfRate); ?>" class="pm-standard-link">Voir profil<i class="fa fa-plus"></i></a>
 
                 </div>
                 <!-- Column 2 end -->
@@ -389,13 +389,13 @@ if($resultRT1[0] > 0)
                     <a href="#" class="fa fa-fire pm-icon-btn"></a>
 
                     <h6 class="pm-column-title"><?php echo($gradePlusFeed." ".$nomPlusFeed." ".$prenomPlusFeed); ?></h6>
-                    <h7 class="pm-column-subtitle">Le enseignant avec le plus de feeddback</h7>
+                    <h7 class="pm-column-subtitle">Le profil le <b> plus populaire </b> sur FEEDSAT</h7>
 
                     <div class="pm-title-divider"></div>
 
                     <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
 
-                    <a href="/feedsat/profile.php?id=<?php echo($resultFeed['profId']); ?>" class="pm-standard-link">consulter ce profil<i class="fa fa-plus"></i></a>
+                    <a href="/feedsat/profile.php?id=<?php echo($resultFeed['profId']); ?>" class="pm-standard-link">Voir profil<i class="fa fa-plus"></i></a>
 
                 </div>
                 <!-- Column 3 end -->
@@ -409,7 +409,7 @@ if($resultRT1[0] > 0)
 
           <!-- Column message -->
         	<div class="pm-column-container-message">
-            	<p><strong>Le saviez-vous?</strong> Nous mesurons le niveau de satisfaction des différentes filières</p>
+            	<p><strong>FEEDSAT</strong> permet aux étudiants de toutes les filières de l'INSAT de s'exprimer librement et partagez leurs retours d'expérience </p>
             </div>
             <!-- Column message end -->
 
@@ -418,7 +418,7 @@ if($resultRT1[0] > 0)
               <div class="row">
 
                 <div class="col-lg-12 col-md-12">
-                  <h4 class="light">Quelle filière est la plus satisafaite de ses enseignants?</h4>
+                  <h4 class="light">Quelques chiffres sur le taux de satisfaction de chaque filière sur FEEDSAT</h4>
                     <div class="pm-divider light"></div>
                     <br />
                 </div>
@@ -549,7 +549,7 @@ if($resultRT1[0] > 0)
           <div class="row">
               <div class="col-lg-12 pm-columnPadding30 pm-center">
 
-                    <h5>FEEDSAT EN CHIFFRES</h5>
+                    <h5>FEEDSAT HIGHLIGHTS</h5>
                     <div class="pm-column-title-divider">
                       <img height="29" width="29" src="img/divider-icon.png" alt="icon">
                       <br>
@@ -568,7 +568,7 @@ if($resultRT1[0] > 0)
                     <div class="milestone">
                         <div class="milestone-content">
                             <span data-speed="2000" data-stop="<?php echo($nbfeed[0]); ?>" class="milestone-value"></span>
-                            <div class="milestone-description">Fedbacks</div>
+                            <div class="milestone-description"><b> Ratings </b> faits sur FEEDSAT </div>
                         </div>
                     </div>
                     <!-- milestone end -->
@@ -583,7 +583,7 @@ if($resultRT1[0] > 0)
                     <div class="milestone">
                         <div class="milestone-content">
                             <span data-speed="2000" data-stop="<?php echo($resultnbcom[0]); ?>" class="milestone-value"></span>
-                            <div class="milestone-description">Commentaires</div>
+                            <div class="milestone-description"><b> Commentaires </b> écrits sur FEEDSAT</div>
                         </div>
                     </div>
                     <!-- milestone end -->
@@ -598,7 +598,7 @@ if($resultRT1[0] > 0)
                     <div class="milestone">
                         <div class="milestone-content">
                             <span data-speed="2000" data-stop="<?php echo($resultnbinteract[0]); ?>" class="milestone-value"></span>
-                            <div class="milestone-description">Interactions</div>
+                            <div class="milestone-description"><b> Intéractions sur les commentaires </b>  écrits sur FEEDSAT</div>
                         </div>
                     </div>
                     <!-- milestone end -->
@@ -613,7 +613,7 @@ if($resultRT1[0] > 0)
                     <div class="milestone">
                         <div class="milestone-content">
                             <span data-speed="2000" data-stop="<?php echo($taux); ?>" class="milestone-value"></span>
-                            <div class="milestone-description">Taux de participation</div>
+                            <div class="milestone-description"><b> Taux de participation </b> des étudiants de l'INSAT sur FEEDSAT</div>
                         </div>
                     </div>
                     <!-- milestone end -->
@@ -634,7 +634,7 @@ if($resultRT1[0] > 0)
             	<div class="row">
                 
                 	<div class="col-lg-12 pm-center">
-                    	<h5 class="light">TOP COMMENTAIRES EN CE MOMENT</h5>
+                    	<h5 class="light">LES TOP COMMENTAIRES SUR FEEDSAT</h5>
                     </div>
 
                 	<div class="pm-testimonials-carousel" id="pm-testimonials-carousel">
