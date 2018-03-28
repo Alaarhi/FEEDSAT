@@ -155,7 +155,12 @@ $commentsNumber=$result['count'];
                 
                                                             <div class="panel-collapse collapse" id="collapse0" aria-expanded="false" style="height: 0px;">
                                                                 <div class="panel-body">
-                                                                    <p>Mauris adisciping fringila turpis intend tellus ornare etos pelim. Pulvunar est cardio neque vitae elit. Lorem vulputat paentra nunc gravida. Mauris adisciping fringila turpis intend tellus ornare etos.</p>
+                                                                    <p> Ce critère concerne uniquement le cours que propose cet enseignant, indépendemment 
+                                                                        de ce dernier, même ci il peut bien en être l'auteur. 
+                                                                        Comment jugez-vous la qualité du cours? Trouvez-vous que sa longueur est appropriée?
+                                                                        Prenez en considération son degré de difficulté, son ergonomie et sa pertinence dans le
+                                                                        score que vous attribuerez à ce critère.
+                                                                    </p>
                                                                 </div>
                                                             </div>
                 
@@ -171,10 +176,15 @@ $commentsNumber=$result['count'];
                 
                                                             <div class="panel-collapse collapse" id="collapse1" aria-expanded="false">
                                                                 <div class="panel-body">
-                                                                    <p>Mauris adisciping fringila turpis intend tellus ornare etos pelim. Pulvunar est cardio neque vitae elit. Lorem vulputat paentra nunc gravida. Mauris adisciping fringila turpis intend tellus ornare etos. </p>
+                                                                    <p>
+                                                                        Ce critère concerne la fréquence d'absentéisme de l'enseignant.
+                                                                        Pensez-vous que cet enseignant s'absente trop fréquemment? 
+                                                                        Si c'est le cas, demandez-vous si les conséquences ont impacté 
+                                                                        vos notes dans les examens ou votre niveau de compréhension général
+                                                                        de la matière en fin de semestre et attribuez un score en fonction de 
+                                                                        votre réponse à cette question.
+                                                                    </p>
                 
-                                                                    <p>Mauris adisciping fringila turpis intend tellus ornare etos pelim. Pulvunar est cardio neque vitae elit. Lorem vulputat paentra nunc gravida. Mauris adisciping fringila turpis intend tellus ornare etos. </p>
-                                                                    <a href="#" class="pm-standard-link pm-no-margin">Learn more <i class="fa fa-angle-right"></i></a>
                                                                 </div>
                                                             </div>
                 
@@ -190,7 +200,16 @@ $commentsNumber=$result['count'];
                 
                                                             <div class="panel-collapse collapse" id="collapse2" aria-expanded="false">
                                                                 <div class="panel-body">
-                                                                    <p>Mauris adisciping fringila turpis intend tellus ornare etos pelim. Pulvunar est cardio neque vitae elit. Lorem vulputat paentra nunc gravida. Mauris adisciping fringila turpis intend tellus ornare etos.</p>
+                                                                    <p>
+                                                                        "Il n'est pas de bonne pédagogie qui ne commence par éveiller le désir d'apprendre."
+                                                                        Comme son nom l'indique, ce critère évalue les compétences éducatives et pédagogiques 
+                                                                        de l'enseignant. 
+                                                                        Croyez-vous que cet enseignant fournit un effort supplémentaire pour vous faire 
+                                                                        parvenir l'information de manière ergonomique et efficace, ou au contraire, 
+                                                                        vous trouvez du mal à saisir toute information véhiculé par celui-ci?
+                                                                        Quel sentiment vous procure cet enseignant vis à vis de sa matière? 
+                                                                        Pensez-y et accorder une note sincère.
+                                                                    </p>
                 
                                                                 </div>
                                                             </div>
@@ -207,7 +226,12 @@ $commentsNumber=$result['count'];
                 
                                                             <div class="panel-collapse collapse" id="collapse3" aria-expanded="false" style="height: 0px;">
                                                                 <div class="panel-body">
-                                                                    <p>Mauris adisciping fringila turpis intend tellus ornare etos pelim. Pulvunar est cardio neque vitae elit. Lorem vulputat paentra nunc gravida. Mauris adisciping fringila turpis intend tellus ornare etos.</p>
+                                                                    <p>
+                                                                        L'ambiance d'un cours est un facteur tout aussi important dans l'expérience
+                                                                        d'un étudiant avec un enseignant particulier. Comment la jugez-vous pendant les cours
+                                                                        de cet enseignant? Tendue? décontractée? Ennuyeuse?
+                                                                        Attribuez votre score en fonction de vos préférences. 
+                                                                    </p>
                                                                 </div>
                                                             </div>
                 
@@ -223,7 +247,14 @@ $commentsNumber=$result['count'];
                 
                                                             <div class="panel-collapse collapse" id="collapse4" aria-expanded="false">
                                                                 <div class="panel-body">
-                                                                    <p>Mauris adisciping fringila turpis intend tellus ornare etos pelim. Pulvunar est cardio neque vitae elit. Lorem vulputat paentra nunc gravida. Mauris adisciping fringila turpis intend tellus ornare etos.</p>
+                                                                    <p>
+                                                                        Pour ce critère, qui concerne les notes obtenus dans les devoirs ou examens, il est recommandé
+                                                                        de se baser sur votre expérience et celle de vos camarades de promotion. 
+                                                                        Jugez-vous que l'attribution de notes de la part de cet enseignant se fait de manière
+                                                                        adéquate, crédible et égale? Avez-vous souvent eu l'impression que vous ne méritiez pas la note
+                                                                        obtenue dans un, ou plusieurs, examen? (Attention, il peut également s'agir d'une bonne note non méritée).
+                                                                        <b> Prière de faire preuve de sérieux et de maturité au moment où vous attribuerez un score à ce critère. </b>
+                                                                    </p>
                                                                 </div>
                                                             </div>
                 
