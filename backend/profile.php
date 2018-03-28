@@ -51,7 +51,7 @@
             <!-- LOGO -->
             <div class="topbar-left">
                 <div class="text-center">
-                    <a href="index.php" class="logo"><i class="md md-terrain"></i> <span>FeedSAT </span></a>
+                    <a href="index.html" class="logo"><i class="md md-terrain"></i> <span>FeedSAT </span></a>
                 </div>
             </div>
             <!-- Button mobile view to collapse sidebar menu -->
@@ -146,21 +146,21 @@
                 <div id="sidebar-menu">
                     <ul>
                         <li>
-                            <a href="index.php" class="waves-effect active"><i class="md md-home"></i><span> Dashboard </span></a>
+                            <a href="index.html" class="waves-effect active"><i class="md md-home"></i><span> Dashboard </span></a>
                         </li>
 
                         <li class="has_sub">
                             <a href="#" class="waves-effect"><i class="md md-view-list"></i><span> Comments </span><span class="pull-right"><i class="md md-add"></i></span></a>
                             <ul class="list-unstyled">
-                                <li><a href="apprComment.php">Moderation of Comments</a></li>
+                                <li><a href="tables-editable.html">Moderation of Comments</a></li>
                             </ul>
                         </li>
 
                         <li class="has_sub">
                             <a href="#" class="waves-effect"><i class="md md-person"></i><span> Users </span><span class="pull-right"><i class="md md-add"></i></span></a>
                             <ul class="list-unstyled">
-                                <li><a href="profile.php">Profile</a></li>
-
+                                <li><a href="profile.html">Profile</a></li>
+                                <li><a href="login.html">Login</a></li>
                             </ul>
                         </li>
                         <div class="clearfix"></div>
