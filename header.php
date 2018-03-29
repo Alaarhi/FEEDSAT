@@ -119,7 +119,7 @@
                 <div class="row">
                     <div class="col-lg-4 col-md-4 col-sm-12">
                         <div class="pm-header-logo-container">
-                            <a href="index.php"><img src="img/Medical-Link.jpg" class="img-responsive pm-header-logo" alt="Medical-Link Template"></a>
+                            <a href="index.php"><img src="img/logo.png" class="img-responsive pm-header-logo" alt="Medical-Link Template"></a>
                         </div>
                     </div>
 
