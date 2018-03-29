@@ -87,7 +87,7 @@ $commentsNumber=$result['count'];
                 
                                                     <div class="col-lg-3 col-md-3 col-sm-12">
                 
-                                                        <div class="pm-author-bio-img-bg" style="background-image:url(<?php echo $prof['photo'];?>">
+                                                        <div class="pm-author-bio-img-bg" style="background-image:url(<?php if($prof['photo']!="") echo $prof['photo']; else echo "img/AvatarProf2.png";?>)">
                                                             <div class="pm-single-news-post-avatar-icon">
                                                                 <img width="33" height="41" src="img/news/post-icon.jpg" class="img-responsive" alt="icon">
                                                             </div>

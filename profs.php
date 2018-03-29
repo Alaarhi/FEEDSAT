@@ -2,16 +2,7 @@
     include 'dbConnection.php';
     include 'header.php';
 
-    $requeteProfs = $bd->prepare('SELECT * FROM professor ORDER BY photo DESC LIMIT 0,9 ');
-    $requeteMesProfs = $bd->prepare(
-        'SELECT DISTINCT p.id, p.name, p.surname, p.photo, p.grade FROM teach as t 
-        INNER JOIN professor as p 
-        ON (t.profId = p.id) 
-        WHERE EXISTS (
-            SELECT level, fosId FROM student as s WHERE s.id = ?
-            )'
-        );
-    $i=0;
+
 ?>
         <div class="pm-sub-header-container">
         	<div class="pm-sub-header-info-profs">    	
@@ -19,7 +10,7 @@
                 	<div class="row">
                     	<div class="col-lg-12">               	
                             <p class="pm-page-title">Les enseignants de l'INSAT</p>
-                            <p class="pm-page-message">Curieux de découvrir la côte de popularité d'un enseignant? <br> Consulter son profil et découvrez ce qu'en pensent les étudiants </p>
+                            <p class="pm-page-message">Curieux de découvrir la côte de popularité d'un enseignant ? <br> Consulter son profil et découvrez ce qu'en pensent les étudiants </p>
                             
                         </div>
                     </div>
@@ -50,49 +41,14 @@
 
 
 <!-- PANEL 1 -->
-        <div class="container pm-containerPadding-bottom-30  pm-containerPadding-top-20">
-        <div class="row pm-containerPadding-bottom-60 pm-center">
-            <?php
-            if (isset($_GET['id'])) {
-                $idEtudiant = $_GET['id'];
-                $requeteMesProfs->execute(array($idEtudiant));
-                $profs = $requeteMesProfs->fetchALL(PDO::FETCH_ASSOC);
-            } else {
-                $requeteProfs->execute();
-                $profs = $requeteProfs->fetchALL(PDO::FETCH_ASSOC);
-            }
+        <div id="subRow" class="container pm-containerPadding-bottom-30  pm-containerPadding-top-20">
+        <div id="row" class="row pm-containerPadding-bottom-10 pm-center">
             
-            foreach ($profs as $prof) { 
-            //while($prof = $requete->fetch()){
-             ?>
-            	<!-- Column 1 -->
-                <div class="col-lg-4 col-md-4 col-sm-12 desktop pm-center pm-columnPadding-30 pm-column-spacing">
-                    <!-- Single testimonial -->
-                    <div class="pm-single-testimonial-shortcode">
-                    	<div style="background-image:url(<?php echo $prof['photo']; ?>);" class="pm-single-testimonial-img-bg">
-                            <div class="pm-single-testimonial-avatar-icon">
-                                <img width="33" height="41" class="img-responsive" src="img/news/post-icon.jpg">
-                            </div>
-                        </div>
-                       <a href="profile.php?id=<?php echo $prof['id'] ?>"><p class="name"><?php
-                       echo $prof['name'] . $prof['surname'];
-                               $idprf=$prof['id'];
-                        ?></p></a>
-                        <div class="pm-single-testimonial-divider"></div>
-                    </div>
-                    <!-- Single testimonial end -->
-              	</div>
-                <!-- Column 1 end -->
-                <?php
-                }
-                ?>
             </div>
-                <?php if (!(isset($_GET['id']))) { ?>
-                <div class="pm-comment-reply-btn">
+                <div id="voirPlus" class="pm-comment-reply-btn">
                     <br>
-                    <a href="#" class="pm-square-btn-comment comment-reply">VOIR PLUS +</a>
+                    <a href="javascript:;" onclick="voirPlus(<?php if (isset($_GET['id'])) echo $_GET['id']; ?>);" class="pm-square-btn-comment comment-reply">VOIR PLUS +</a>
                 </div>
-                <?php } ?>
             
             </div>
         <!-- PANEL 5 end -->
@@ -128,6 +84,44 @@
     <script src="js/tinynav.js"></script>
     <script src="js/jquery-ui.js"></script>
     <script src="js/countdown/countdown.js"></script>
+
+    <script>
+        <?php if(isset($_GET['id'])) echo "voirPlus(".$_GET['id'].");"; else echo "voirPlus();"; ?>
+                var offset=0;
+                function voirPlus(id){
+              
+                                        $.ajax({
+                                            url : 'voirPlusProfs.php',
+                                            type : 'GET',
+                                            data: {
+                                                    offset,id
+                                                  },
+                                            dataType : "json",
+                                            success : function(response, statut){
+                                                if((response.reponse.length!=""))
+                                                    {
+                                                        
+                                                        $("#row").append(response.reponse);
+                                                        $('#row').fadeIn(2000);
+                                                        offset=response.lastCount;
+                                                        if(response.iterations!=9)
+                                                        $('#voirPlus').hide();
+                                                    }
+                                                else
+                                                { 
+                                                    $('#voirPlus').hide();
+                                                }
+                                        },
+                                            error : function(response, statut, erreur){
+                                                alert(response);
+                                            }
+                                        });
+
+                                          
+
+                        }
+
+    </script>
         
     <p id="back-top" class="visible-lg visible-md visible-sm" style="bottom: 10px;"></p>
     

@@ -3875,7 +3875,7 @@ header {
   height: 200px;
   width: 200px;
   position: relative;
-  border: 5px solid #303F9F;
+  border: 5px solid #6158b3;
   margin: 0 auto 50px;
   border-radius: 99px;
   -webkit-border-radius: 99px;
@@ -3883,8 +3883,8 @@ header {
 
 .pm-single-testimonial-avatar-icon {
   background-color: white;
-  border: 3px solid #303F9F;
-  color: #303F9F;
+  border: 3px solid #6158b3;
+  color: #6158b3;
   font-size: 30px !important;
   margin: 0 auto;
   text-align: center;
