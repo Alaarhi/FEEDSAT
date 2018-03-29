@@ -4,9 +4,8 @@
   <form class="modal-content animate" onsubmit="return false">
     
     <div class="imgcontainer">
-      <span onclick="document.getElementById('avis').style.display='none'" class="close" title="fermer">&times;</span>
-        <img src="img/medical-link.jpg" alt="Logo">
-          <h4 style="margin-top: 5%; text-align:center; color: #5e6467">Identifiez-vous pour accéder à ce contenu</h4>
+        <img src="img/logo.png" alt="Logo">
+          <h4 style="margin-top: 5%; text-align:center; color: #303F9F">Identifiez-vous pour accéder à ce contenu</h4>
     </div>
       
     <div class="container">
