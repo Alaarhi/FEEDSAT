@@ -124,9 +124,9 @@
         INNER JOIN student as s
         INNER JOIN professor as p
         ON (s.id = r.studentId) AND (p.id = r.profId)
-        WHERE  (s.fosId = ?) AND (s.level = ?)
+        WHERE  (s.fosId = ?) AND (s.level = ?) AND (s.id != ?)
         LIMIT 0,4');
-    $requeteVosEnseignants->execute(array($idFiliere, $level));
+    $requeteVosEnseignants->execute(array($idFiliere, $level,$idEtudiant));
 
     //MENU TOP COMMENTS
     $requeteTopComments = $bd->prepare(
@@ -235,12 +235,21 @@
 
         <!-- PANEL 2 -->
         <div class="pm-column-container testimonials pm-parallax-panel" id="zone-profs" style=" background-image: url('img/home/purple.jpg'); background-repeat: repeat-y; " data-stellar-background-ratio="0" >
-        	<div class="container pm-containerPadding-top-110 pm-containerPadding-bottom-80">
+        	<div class="container pm-containerPadding-top-70 pm-containerPadding-bottom-20">
             	<div class="row">
                 	<div class="col-lg-12 pm-column-spacing pm-center">
                     	<h5 class="light">MES ENSEIGNANTS</h5>
-                        <p class="light">Que pensent les étudiants de votre promo de vos enseignants?</p>
-                        <br>
+                        <p class="light"><b>
+                        Une liste exhaustive des enseignants ayant été évalués par les étudiants de votre promotion.
+                        </p></b>
+                        <?php if (($requeteVosEnseignants->rowCount()) !=0) { ?>
+                        <p class="light" style="font-size:13px">
+                        NB: Le score affiché s'agit de la moyenne de cet enseignant attribué par ce groupe restreint d'étudiants.
+                        Le score général, attribué par toute filière confondue, peut être différent. Ce dernier est visible sur la profil de chaque enseignant. 
+                        </p>
+                        <?php } ?>
+                        </p>
+                        
                     </div>
                     <?php
                     if ($_SESSION['nbrVoters'] == 0) {
@@ -252,8 +261,8 @@
                             </h4>
                             <h4 class="light" style="font-size:23px; color: rgb(255,255,255);">
                         </div>
-                        <div class="col-lg-3 pm-column-spacing pm-center"></div>
-                        <div class="col-lg-4 pm-column-spacing pm-center">
+                        <!--<div class="col-lg-3 pm-column-spacing pm-center"></div>-->
+                        <div class="col-lg-12 col-md-12 col-sm-12 pm-column-spacing pm-center" style="padding-left:15%;padding-right:30%">
                             <div class="pm-comment-reply-btn">
                             <br><br>
                                 <a href= "profs.php?id=<?php echo $idEtudiant ?>"; class="pm-square-btn comment-reply"><b>Donner un Feedback</b></a>
@@ -261,7 +270,7 @@
                             <!--<u><a href="profs.php?id=<?php //echo $idEtudiant ?>"><b> Faire un feedback</b></a></u>-->
                             </h4>
                         </div>
-                        <div class="col-lg-3 pm-column-spacing pm-center"></div>
+                        <!--<div class="col-lg-3 pm-column-spacing pm-center"></div>-->
                     <?php
                     }
                     else {
@@ -286,12 +295,27 @@
                             foreach ($AmisVotants as $amiVotant) {
                                 $moyenneProf = $moyenneProf + $amiVotant['score'];
                             }
-                        $moyenneProf = ($moyenneProf / $nbrAmisVotants);
+                            $moyenneProf = ($moyenneProf / $nbrAmisVotants);
                         }
                     ?>
-                    <div class="col-lg-3 col-md-3 col-sm-12 pm-column-spacing">
+                    <?php if (($requeteVosEnseignants->rowCount()) == 1) { ?>
+                    <div class="col-lg-12 col-md-12 col-sm-12 pm-column-spacing pm-center" style="padding-left:40%; padding-right:40%">
+                    <?php } ?>
+                   
+                    <?php if (($requeteVosEnseignants->rowCount()) == 2) { ?>
+                    <div class="col-lg-6 col-md-6 col-sm-12 pm-column-spacing pm-center"  style="padding-left:15%; padding-right:15%">
+                    <?php } ?>
+
+                    <?php if (($requeteVosEnseignants->rowCount()) == 3) { ?>
+                    <div class="col-lg-4 col-md-4 col-sm-12 pm-column-spacing pm-center" style="padding-left:5%; padding-right:5%">
+                    <?php } ?>
+
+                    <?php if (($requeteVosEnseignants->rowCount()) == 4) { ?>
+                    <div class="col-lg-3 col-md-3 col-sm-12 pm-column-spacing pm-center">
+                    <?php } ?>
+
                     <!-- Staff profile -->
-                        <div class="pm-staff-profile-parent-container">
+                        <div class="pm-staff-profile-parent-container" >
                             <div class="pm-staff-profile-container" style="background-image:url(<?php echo $row->photo; ?>);">
                                 <div class="pm-staff-profile-overlay-container">
                                     <ul class="pm-staff-profile-icons">
@@ -308,7 +332,7 @@
                             <div class="pm-staff-profile-info">
                                 <p class="pm-staff-profile-name light"><?php echo $row->surname.' '.$row->name; ?></p>
                                 <p class="pm-staff-profile-name light">
-                                <?php printf('%0.2f', $moyenneProf)?>
+                                <?php printf('%0.2f', $moyenneProf); echo '/10'?>
                                 </p>
                                 <p class="pm-staff-profile-title light">
                                 <?php
@@ -337,9 +361,7 @@
                                         }
                                         break;
                                     case 3:
-                                        //$dernierElement = end(($requeteAmisVotants->fetch(PDO::FETCH_ASSOC)));
                                         foreach ($AmisVotants as $amiVotant) {
-
                                             if ($numRow != 2) {
                                                 echo $amiVotant['prenomEtudiant'].' '.$amiVotant['nomEtudiant'].', ';
                                             } else {
@@ -351,7 +373,6 @@
                                         break;
                                     default :
                                         foreach ($AmisVotants as $amiVotant) {
-
                                             if($numRow != $nbrAmisVotants-1) {
                                                 echo $amiVotant['prenomEtudiant'].' '.$amiVotant['nomEtudiant'].', ';
                                             }   else {
@@ -369,17 +390,17 @@
                         <!-- Staff profile end -->
                     </div>
                     <?php } ?>
-                    <div class="col-lg-4 pm-column-spacing pm-center">
-                        <div class="pm-comment-reply-btn">
-                            <br><br>
-                            <a href= "#"; class="pm-square-btn-comment-avis comment-reply"><b>VOIR PLUS</b></a>
-                        </div>
-                            <!--<u><a href="profs.php?id=<?php //echo $idEtudiant ?>"><b> Faire un feedback</b></a></u>-->
-                        </h4>
-                        </div>
-                    <div class="col-lg-3 pm-column-spacing pm-center"></div>
+                    </div>
                     <?php } ?>
-
+                    <?php if (($requeteVosEnseignants->rowCount()) == 4) { ?>
+                        <div class="row">
+                            <div class="pm-comment-reply-btn">
+                                <br><br>
+                                <a href= "#"; class="pm-square-btn-comment-avis comment-reply"><b>VOIR PLUS</b></a>
+                            </div>
+                        </div>
+                    </div>
+                    <?php } ?>
                 </div><!-- /.row -->
             </div><!-- /.container -->
         </div>
@@ -417,7 +438,20 @@
                     if (($requeteTopComments->rowCount()) !=0 ) {
                         while ($row = $requeteTopComments->fetch(PDO::FETCH_OBJ)) {
                     ?>
-                    <div class="col-lg-4 col-md-4 col-sm-12 desktop pm-center pm-columnPadding-30 pm-column-spacing">
+
+                    <?php if (($requeteTopComments->rowCount()) == 3 ) { ?>
+                        <div class="col-lg-4 col-md-4 col-sm-12 desktop pm-center pm-columnPadding-30 pm-column-spacing">
+                    <?php } ?>
+
+                    <?php if (($requeteTopComments->rowCount()) == 2 ) { ?>
+                        <div class="col-lg-6 col-md-6 col-sm-12 desktop pm-center pm-columnPadding-30 pm-column-spacing" style="padding-left:15%;padding-right:15%">
+                    <?php } ?>
+
+                    <?php if (($requeteTopComments->rowCount()) == 1 ) { ?>
+                        <div class="col-lg-12 col-md-12 col-sm-12 desktop pm-center pm-columnPadding-30 pm-column-spacing" style="padding-left:40%;padding-right:40%">
+                    <?php } ?>
+
+                    <!--<div class="col-lg-4 col-md-4 col-sm-12 desktop pm-center pm-columnPadding-30 pm-column-spacing">-->
                         <div class="pm-single-testimonial-shortcode">
                             <div style="background-image:url(<?php echo $row->photo; ?>);" class="pm-single-testimonial-img-bg">
                                 <div class="pm-single-testimonial-avatar-icon">
@@ -428,7 +462,7 @@
                             <div class="pm-single-testimonial-divider"></div>
                             <p class="quote"> <?php echo '"'.$row->commentaire.'"'; ?> </p>
                             <div class="pm-single-testimonial-divider"></div>
-                            <p class="date"> <?php echo $row->dateCommentaire; ?> </p>
+                            <p class="date"> <?php echo $row->dateCommentaire; ?> <br> <?php echo $row->nbrInteractions.' intéraction(s)';?> </p>
                         </div>
                     </div>
                     <?php }}} ?>
