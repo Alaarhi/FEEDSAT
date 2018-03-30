@@ -35,20 +35,20 @@ include 'header.php';
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">               	
-                    <p class="pm-page-title">MES ENSEIGNANTS</p>
-                    <p class="pm-page-message">Découvrez la popularité de vos enseignants </p>
+                    <p class="pm-page-title"><?php echo $depName?></p>
+                    <p class="pm-page-message">Découvrez la popularité des enseignants de ce département. </p>
                 </div>
             </div>
         </div>            
     </div>          
-    <div class="row">
-        <div class="col-lg-12  pm-columnPadding30 pm-center">
+    <div class="row"><br><br>
+        <!--<div class="col-lg-12  pm-columnPadding30 pm-center">
             <br><br>
                 <h5>CONSULTER . VOTER . AMÉLIORER </h5>
             <div class="pm-column-title-divider">
                 <img height="29" width="29" src="img/divider-icon.png" alt="icon">
             </div>                  
-        </div>
+        </div>-->
     </div>
 </div>
 <!-- Sub-header area end -->
