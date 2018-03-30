@@ -269,7 +269,7 @@ else
                                                 <br>Pensez-vous que cet enseignant s'absente trop fréquemment? 
                                                 <br>Si c'est le cas, demandez-vous si les conséquences ont impacté 
                                                 vos notes dans les examens ou votre niveau de compréhension général
-                                                de la matière en fin de semestre et attribuez un score en fonction de 
+                                                du cours en fin de semestre et attribuez un score en fonction de 
                                                 votre réponse à cette question.    
                                                 </p>
                                                   <div class="rating" id="presence">

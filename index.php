@@ -395,7 +395,7 @@ if($resultRT1[0] > 0)
                     <a href="#" class="fa fa-fire pm-icon-btn"></a>
 
                     <h6 class="pm-column-title"><?php echo($gradePlusFeed." ".$nomPlusFeed." ".$prenomPlusFeed); ?></h6>
-                    <h7 class="pm-column-subtitle">Le profil le <b> plus populaire </b> sur FEEDSAT</h7>
+                    <h7 class="pm-column-subtitle">Le profil le <b> plus populaire </b></h7>
 
                     <div class="pm-title-divider"></div>
                     <p>

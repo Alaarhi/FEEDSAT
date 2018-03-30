@@ -256,7 +256,7 @@
                         <div class="col-lg-4 pm-column-spacing pm-center">
                             <div class="pm-comment-reply-btn">
                             <br><br>
-                                <a href= "profs.php?id=<?php echo $idEtudiant ?>"; class="pm-square-btn-comment-avis comment-reply"><b>Faire un Feedback</b></a>
+                                <a href= "profs.php?id=<?php echo $idEtudiant ?>"; class="pm-square-btn comment-reply"><b>Donner un Feedback</b></a>
                             </div>
                             <!--<u><a href="profs.php?id=<?php //echo $idEtudiant ?>"><b> Faire un feedback</b></a></u>-->
                             </h4>
