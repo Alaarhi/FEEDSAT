@@ -57,7 +57,7 @@ video {
 .pm-slider {
 	opacity:0;
 	overflow:hidden;
-	max-height: 507px !important;
+	max-height: 82vh !important;
 	position: relative;
 	margin:0;
 	overflow: hidden;

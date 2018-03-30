@@ -115,7 +115,7 @@
         
     	<!-- Header area -->
         <header>
-            <div class="container">
+            <div class="container" style="padding-bottom:5px;">
                 <div class="row">
                     <div class="col-lg-4 col-md-4 col-sm-12">
                         <div class="pm-header-logo-container">
@@ -177,7 +177,7 @@
                                 <?php if (isset($_SESSION['nom'])) { ?>
                                 <li><a href="avis.php">Ma promotion</a></li>
                                 <?php } else { ?>
-                                <li><a onclick="document.getElementById('avis').style.display='block'">Ma promotion</a></li>
+                                <li><a href="javascript:;" onclick="document.getElementById('avis').style.display='block'">Ma promotion</a></li>
                                 <?php } ?>
                                 
                             </ul>

@@ -64,13 +64,13 @@ include 'header.php';
                 <div class="col-lg-4 col-md-4 col-sm-12 desktop pm-center pm-columnPadding-30 pm-column-spacing">
                     <!-- Single testimonial -->
                     <div class="pm-single-testimonial-shortcode">
-                    	<div style="background-image:url(<?php if($prof['photo']!="") echo $prof['photo']; else echo  "img/AvatarProf2.png";?>);" class="pm-single-testimonial-img-bg">
+                    	<div style="background-image:url(<?php if($prof['gender']=="1") echo  "img/AvatarFemaleProf.png"; else echo  "img/AvatarProf2.png";?>);" class="pm-single-testimonial-img-bg">
                             <div class="pm-single-testimonial-avatar-icon">
                                 <img width="33" height="41" class="img-responsive" src="img/news/post-icon.jpg">
                             </div>
                         </div>
                        <a href="profile.php?id=<?php echo $prof['id'] ?>"><p class="name"><?php
-                       echo $prof['name'] . $prof['surname'];
+                       echo $prof['surname'] ." ". $prof['name'];
                                $idprf=$prof['id'];
                         ?></p></a>
                         <div class="pm-single-testimonial-divider"></div>

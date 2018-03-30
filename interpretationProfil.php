@@ -130,7 +130,7 @@ while($ratings=$requete->fetch())
     if((sizeof($filiairesS)>0)&&(sizeof($filiairesNonS)==0))
     $phrase3 = "De plus, on constate qu'il va très bien avec les ".$filiairesS[rand(0,sizeof($filiairesS)-1)].".";
     if((sizeof($filiairesS)==0)&&(sizeof($filiairesNonS)>0))
-    $phrase3 = "De plus, on constate qu'il ne va pas trop avec les ".$filiairesS[rand(0,sizeof($filiairesS)-1)].".";
+    $phrase3 = "De plus, on constate qu'il ne va pas trop avec les ".$filiairesNonS[rand(0,sizeof($filiairesNonS)-1)].".";
     if((sizeof($filiairesS)>0)&&(sizeof($filiairesNonS)>0))
     $phrase3 = "De plus, on constate qu'il va très bien avec les ".$filiairesS[rand(0,sizeof($filiairesS)-1)]." mais pas aussi bien avec les ".$filiairesNonS[rand(0,sizeof($filiairesNonS)-1)].".";
     $phrase=$phrase.$phrase3;
