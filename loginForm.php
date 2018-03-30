@@ -154,7 +154,13 @@
     <div class="imgcontainer" id="message">
       <span onclick="document.getElementById('dejaVote').style.display='none'" class="close" title="fermer">&times;</span>
         <img src="img/medical-link.jpg" alt="Logo">
-          <h4 style="margin-top: 10%; text-align:center; color: #5e6467"><font color="#4553a9">Vous avez déja donné votre avis par rapport à cet enseignant. <br><br> Ce vote sera considéré comme un changement d'avis et non pas un vote supplémentaire.</font></h4>
+          <h4 style="margin-top: 10%; text-align:center; color: #5e6467">
+            <font color="#4553a9">
+              Vous avez déjà attribué un score à ce profil. 
+              Une nouvelle tentative de vote modifiera ce dernier et ne comptera pas comme un vote supplémentaire.
+              <br> 
+            </font>
+          </h4>
           <button style= 
       "
         background-color:  #303F9F;
@@ -185,8 +191,8 @@
         <img src="img/medical-link.jpg" alt="Logo"><br>
           <h4 style="margin-top: 10%; text-align:center; color: #5e6467; font-size:19px">
             <font color="#4553a9">
-              Desolé, vous n'êtes pas en mesure d'évaluer cet enseignant tant que vous ne suivez pas son cours. 
-              <br><br>Vous êtes toutefois libre de consulter son profil pour voir et intéragir avec les commentaires laissés par ses étudiants.
+            Desolé, vous n'êtes pas en mesure d'évaluer cet enseignant tant que vous ne suivez pas son cours.
+              <br><br>Vous êtes libre toutefois de consulter son profil pour voir et intéragir avec les avis partagés par ses étudiants.
               <br><br><br></font></h4>
           <button style= 
       "
@@ -216,21 +222,21 @@
     <div class="imgcontainer" id="message">
       <span onclick="document.getElementById('submitCommentaire').style.display='none'" class="close" title="fermer">&times;</span>
         <img src="img/medical-link.jpg" alt="Logo">
-          <h4 style="margin-top: 5%; text-align:center; color: #5e6467; font-size:20px">
-            <font color="green"><b>Nous vous remercions pour votre contribution à FEEDSAT. </b>
-              <br> 
-              Grâce à vous, nous sommes capables d'offrir aux INSATiens un support de Feedbacks 
-              encore plus pertinent. 
-              
+          <h4 style="margin-top: 5%; text-align:center; color: #5e6467; font-size:18px">
+          <font color="green"><b>Nous vous remercions pour votre contribution à INSAT-FEEDBACKS. </b>
+              <br>
+              Grâce à vous, nous sommes capables d'offrir aux INSATiens un support de Feedbacks
+              encore plus pertinent.
+
               </font></h4><br><br>
             <br><br>
             <h4 style="margin-top: -5%; text-align:center; color: #5e6467; font-size:15px">
-              <font color="#4553a9"> 
+              <font color="#4553a9">
                 <b>Votre commentaire est désormais en attente d'approbation.</b>
-                Gardez à l'esprit que nous pouvons interdire la publication de votre commentaire s'il n'est 
-                pas conforme à nos critères d'approbation. En aucun cas nous ne tolèrerons les commentaires 
-                à caractère haineux et non respectueux envers un enseignant ainsi que les commentaires qui ne réflètent pas 
-                une volonté de partager une opinion constructive. 
+                Gardez à l'esprit que nous pouvons interdire la publication de votre commentaire s'il n'est
+                pas conforme à nos critères d'approbation. En aucun cas nous ne tolèrerons les commentaires
+                à caractère haineux et non respectueux envers un enseignant ainsi que les commentaires qui ne réflètent pas
+                une volonté de partager une opinion constructive.
               </font></h4>
           <button style= 
       "

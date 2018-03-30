@@ -21,20 +21,37 @@ if (isset($_POST['inputRecherche'])) {
                 $requeteRecherche->bindParam(':inputValue', $elements[0]);
                 $requeteRecherche->execute();
                 $profs = $requeteRecherche->fetchAll(PDO::FETCH_ASSOC);
+                $indice = 1;
                 break;
             
             case 2:
                 $requeteRecherche = $bd->prepare(
-                    'SELECT * FROM professor 
-                    WHERE (name LIKE :nameValue"%") OR (surname LIKE :surnameValue"%")
-                    OR (name LIKE :nameValue) OR (name LIKE "%":nameValue) OR (name LIKE :nameValue"%") OR (name = "%":nameValue)
-                    OR (surname LIKE :surnameValue) OR (surname LIKE "%":surnameValue) OR (surname LIKE :surnameValue"%") OR (surname = "%":surnameValue)'
+                    'SELECT * FROM professor AS p 
+                    WHERE (p.name = ?) AND (p.surname = ?)'
                 );
-                $requeteRecherche->bindParam(':surnameValue', $elements[0]);
-                $requeteRecherche->bindParam(':nameValue', $elements[1]);
-                $requeteRecherche->execute();
-                $profs = $requeteRecherche->fetchAll(PDO::FETCH_ASSOC);
-                break;
+                $requeteRecherche->execute(array($elements[1],$elements[0]));
+                if ($requeteRecherche->rowCount()!=0) {
+                        $profs = $requeteRecherche->fetchAll(PDO::FETCH_ASSOC);
+                        $indice = 2;
+                        break;
+                    }
+
+                else {
+                    $requeteRecherche = $bd->prepare(
+                        'SELECT * FROM professor 
+                        WHERE (name LIKE :nameValue"%") OR (surname LIKE :surnameValue"%")
+                        OR (name LIKE :nameValue) OR (name LIKE "%":nameValue) OR (name LIKE :nameValue"%") OR (name = "%":nameValue)
+                        OR (surname LIKE :surnameValue) OR (surname LIKE "%":surnameValue) OR (surname LIKE :surnameValue"%") OR (surname = "%":surnameValue)'
+                    );
+                    $requeteRecherche->bindParam(':surnameValue', $elements[0]);
+                    $requeteRecherche->bindParam(':nameValue', $elements[1]);
+                    $requeteRecherche->execute();
+                    if ($requeteRecherche->rowCount()!=0) {
+                        $profs = $requeteRecherche->fetchAll(PDO::FETCH_ASSOC);
+                        $indice = 2;
+                        break;
+                    }
+            }
         }
 } 
 
@@ -47,20 +64,20 @@ include 'header.php';
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">               	
-                    <p class="pm-page-title">MES ENSEIGNANTS</p>
-                    <p class="pm-page-message">Découvrez la popularité de vos enseignants </p>
+                    <p class="pm-page-title" style="font-size:21px">Résultat de recherche pour: </p>
+                    <p class="pm-page-message"><?php echo '"'.$input.'"' ?></p>
                 </div>
             </div>
         </div>            
     </div>          
-    <div class="row">
-        <div class="col-lg-12  pm-columnPadding30 pm-center">
+    <div class="row"><br><br>
+        <!--<div class="col-lg-12  pm-columnPadding30 pm-center">
             <br><br>
                 <h5>CONSULTER . VOTER . AMÉLIORER </h5>
             <div class="pm-column-title-divider">
                 <img height="29" width="29" src="img/divider-icon.png" alt="icon">
             </div>                  
-        </div>
+        </div>-->
     </div>
 </div>
 <!-- Sub-header area end -->
@@ -69,15 +86,15 @@ include 'header.php';
 <div class="container pm-containerPadding-bottom-30  pm-containerPadding-top-20">
         <div class="row pm-containerPadding-bottom-60 pm-center">
             <?php
-            if ($requeteRecherche) {
-            if ($requeteRecherche->rowCount() != 0){
+            //if ($requeteRecherche) {
+            if ($indice != 0){
                 foreach ($profs as $prof) { 
             ?>
             	<!-- Column 1 -->
                 <div class="col-lg-4 col-md-4 col-sm-12 desktop pm-center pm-columnPadding-30 pm-column-spacing">
                     <!-- Single testimonial -->
                     <div class="pm-single-testimonial-shortcode">
-                    	<div style="background-image:url(img/information/avatar1.jpg);" class="pm-single-testimonial-img-bg">
+                    	<div style="background-image:url(<?php echo $prof['photo']; ?>);" class="pm-single-testimonial-img-bg">
                             <div class="pm-single-testimonial-avatar-icon">
                                 <img width="33" height="41" class="img-responsive" src="img/news/post-icon.jpg">
                             </div>
@@ -92,11 +109,11 @@ include 'header.php';
               	</div>
                 <!-- Column 1 end -->
             <?php
-            }}}
-            else if ($indice == 1) {
+            }}
+            else {
             ?>
             <div class="col-lg-12 pm-column-spacing pm-center">
-                <h4 class="light" style="font-size:30px;"> <font color=#303F9F> Aucun enseignant de ce nom trouvé. <br> Veuillez réessayer.</font></h4></font> 
+                <h4 class="light" style="font-size:30px;"> <font color=#303F9F> Aucun enseignant ne correspond à votre recherche. <br> Veuillez réessayer.</font></h4></font> 
             </div>    
             <?php } ?>
             </div>
