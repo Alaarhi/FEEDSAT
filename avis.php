@@ -237,17 +237,10 @@
         <div class="pm-column-container testimonials pm-parallax-panel" id="zone-profs" style=" background-image: url('img/home/purple.jpg'); background-repeat: repeat-y; " data-stellar-background-ratio="0" >
         	<div class="container pm-containerPadding-top-70 pm-containerPadding-bottom-20">
             	<div class="row">
-                	<div class="col-lg-12 pm-column-spacing pm-center">
+                	<div class="col-lg-12 pm-column-spacing pm-center" style="padding-bottom: 50px;">
                     	<h5 class="light">MES ENSEIGNANTS</h5>
-                        <p class="light"><b>
+                        <p class="light">
                         Une liste exhaustive des enseignants ayant été évalués par les étudiants de votre promotion.
-                        </p></b>
-                        <?php if (($requeteVosEnseignants->rowCount()) !=0) { ?>
-                        <p class="light" style="font-size:13px">
-                        NB: Le score affiché s'agit de la moyenne de cet enseignant attribué par ce groupe restreint d'étudiants.
-                        Le score général, attribué par toute filière confondue, peut être différent. Ce dernier est visible sur la profil de chaque enseignant. 
-                        </p>
-                        <?php } ?>
                         </p>
                         
                     </div>
@@ -398,9 +391,16 @@
                                 <br><br>
                                 <a href= "#"; class="pm-square-btn-comment-avis comment-reply"><b>VOIR PLUS</b></a>
                             </div>
+                            
                         </div>
                     </div>
                     <?php } ?>
+                    <?php if (($requeteVosEnseignants->rowCount()) !=0) { ?>
+                        <p class="light" style="font-size:13px">
+                        NB: Le score affiché s'agit de la moyenne de cet enseignant attribué par ce groupe restreint d'étudiants.
+                        Le score général, attribué par toute filière confondue, peut être différent. Ce dernier est visible sur le profil de chaque enseignant. 
+                        </p>
+                        <?php } ?>
                 </div><!-- /.row -->
             </div><!-- /.container -->
         </div>

@@ -1,6 +1,6 @@
 ﻿<?php 
     include 'dbConnection.php';    
-    
+     
     $ind=0;
     $req0=$bd->query('select id from professor');    
     while($result0=$req0->fetch())  
@@ -570,15 +570,17 @@ if($resultRT1[0] > 0)
 
               <div class="col-lg-3 col-md-6 col-sm-6 desktop pm-center pm-columnPadding-30 pm-column-spacing">
 
-                    <p class="typcn typcn-group pm-static-icon"></p>
+                    <p class="fa fa-line-chart pm-static-icon"></p>
+
 
                     <!-- milestone -->
                     <div class="milestone">
                         <div class="milestone-content">
-                            <span data-speed="2000" data-stop="<?php echo($nbfeed[0]); ?>" class="milestone-value"></span>
-                            <div class="milestone-description"><b> Ratings </b></div>
+                            <span data-speed="2000" data-stop="<?php echo($taux); ?>" class="milestone-value"></span>
+                            <div class="milestone-description"><b> Taux de participation </b></div>
                         </div>
                     </div>
+                    
                     <!-- milestone end -->
 
                 </div>
@@ -615,13 +617,12 @@ if($resultRT1[0] > 0)
 
                 <div class="col-lg-3 col-md-6 col-sm-6 desktop pm-center pm-columnPadding-30 pm-column-spacing">
 
-                    <p class="fa fa-line-chart pm-static-icon"></p>
-
+                <p class="typcn typcn-group pm-static-icon"></p>                    
                     <!-- milestone -->
                     <div class="milestone">
                         <div class="milestone-content">
-                            <span data-speed="2000" data-stop="<?php echo($taux); ?>" class="milestone-value"></span>
-                            <div class="milestone-description"><b> Taux de participation </b></div>
+                            <span data-speed="2000" data-stop="<?php echo($nbfeed[0]); ?>" class="milestone-value"></span>
+                            <div class="milestone-description"><b> Ratings </b></div>
                         </div>
                     </div>
                     <!-- milestone end -->
