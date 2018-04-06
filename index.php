@@ -164,7 +164,7 @@ while(($resultBestCom=$reqBestCom->fetch()) && $nbCom<3 )
 
     $reqFos=$bd->query('select fos from fos where id='.$resultSt['fosId']);
     $resultFos=$reqFos->fetch();
-        
+
     if($resultFos[0]=="Réseaux informatiques et télécommunications") {$tabStFos[$nbCom]="RT";}
     if($resultFos[0]=="Génie Logiciel") $tabStFos[$nbCom]="GL";
     if($resultFos[0]=="Biologie") $tabStFos[$nbCom]="BIO";
@@ -452,7 +452,7 @@ if($resultRT1[0] > 0)
 
           <!-- Column message -->
         	<div class="pm-column-container-message">
-            <p><strong>INSAT-FEEDBACKS</strong> permet aux étudiants de toutes les filières de l'INSAT de s'exprimer librement et partagez leurs retours d'expérience </p>
+            <p><strong>INSAT-FEEDBACKS</strong> permet aux étudiants de toutes les filières de l'INSAT de s'exprimer librement et partager leurs retours d'expérience </p>
             </div>
             <!-- Column message end -->
 
