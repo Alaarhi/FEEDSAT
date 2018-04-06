@@ -2543,6 +2543,10 @@ header {
   color: #303F9F;
   font-weight: 500; }
 
+  input.pm-search-field:focus{
+    outline: none;
+}
+
 /* 38. Categories menu */
 .pm-dropdown.pm-categories-menu {
   width: 220px;
