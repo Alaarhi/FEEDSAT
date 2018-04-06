@@ -64,7 +64,7 @@ include 'header.php';
                 <div class="col-lg-4 col-md-4 col-sm-12 desktop pm-center pm-columnPadding-30 pm-column-spacing">
                     <!-- Single testimonial -->
                     <div class="pm-single-testimonial-shortcode">
-                    	<div style="background-image:url(<?php if($prof['gender']=="1") echo  "img/AvatarFemaleProf.png"; else echo  "img/AvatarProf2.png";?>);" class="pm-single-testimonial-img-bg">
+                    	<div style="background-image:url(<?php if($prof['gender']=="1") echo("img/AvatarFemaleProf.png"); else echo("img/AvatarProf2.png");?>);" class="pm-single-testimonial-img-bg">
                             <div class="pm-single-testimonial-avatar-icon">
                                 <img width="33" height="41" class="img-responsive" src="img/news/post-icon.jpg">
                             </div>
