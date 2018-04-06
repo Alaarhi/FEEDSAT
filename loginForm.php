@@ -177,7 +177,7 @@
             <font color="#4553a9">
               Vous avez déjà attribué un score à ce profil. 
               Une nouvelle tentative de vote modifiera ce dernier et ne comptera pas comme un vote supplémentaire.
-              <br> 
+              <br> <br>
             </font>
           </h4>
           <button style= 

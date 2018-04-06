@@ -322,7 +322,7 @@ $commentsNumber=$result['count'];
                                         <div class="row">
                                             <div  class="col-lg-12">
                 
-                                                <center><h4 class="pm-comments-response-title"> <font color=#303F9F><?php if($commentsNumber==1) echo ($commentsNumber." étudiant a"); else echo($commentsNumber." étudiants ont") ?> commenté le profil de cet enseignant</font></h4></center>
+                                                <center><h4 class="pm-comments-response-title"> <font color=#303F9F><?php if($commentsNumber==0) echo (" Aucun étudiant n'a"); else if($commentsNumber==1) echo ($commentsNumber." étudiant a"); else echo($commentsNumber." étudiants ont") ?> commenté le profil de cet enseignant</font></h4></center>
                                                 <?php if($commentsNumber!=0) { 
                                                     $i=0;
                                                     $reqMAXIComments=$bd->query('select count(*) as counts ,commentId from interact GROUP BY commentId ORDER BY counts DESC');
