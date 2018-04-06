@@ -3,7 +3,7 @@
     $requ=$bd->query("select count(score) as nbr, sum(score) as somme from rating");
     $resrequ=$requ->fetch();
     $logoHeader="img/level0.png";    
-    if($resrequ)
+    if($resrequ['nbr']!=0)
     {
     if(round($resrequ['somme']/$resrequ['nbr'],0)<=2)
     $logoHeader="img/level0.png";

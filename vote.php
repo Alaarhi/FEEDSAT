@@ -407,6 +407,7 @@ else
                           </div>
                         </div>
                 <!-- PANEL 4 end -->
+                <?php include 'loginForm.php'; ?>
 
 
                 <!-- BODY CONTENT end -->
@@ -471,16 +472,27 @@ else
                             },
                             success : function(response, statut){
                                 if(response=="done")
-                                alert("POPUP : POPUP : VOTE RECU PUIS REDIRECTION")
+                                document.getElementById('submitVote').style.display='block';
                             },
                             error : function(response, statut, erreur){
-                                alert('ma tsabech  '+erreur);
                             }
                         }); 
                     
 
                 }
                 
+                function validerPopupVoter(){
+                    window.location = "profile.php?id=<?php echo $id ?>";
+                }
+
+
+
+
+                var modal = document.getElementById('submitVote');
+                window.onclick = function(event) {
+                    if (event.target == modal) {
+                        modal.style.display = "none";
+                    }}
             </script>
 
             <p id="back-top" class="visible-lg visible-md visible-sm" style="bottom: -70px;"></p>

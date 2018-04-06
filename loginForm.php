@@ -3,7 +3,7 @@
     $requ=$bd->query("select count(score) as nbr, sum(score) as somme from rating");
     $resrequ=$requ->fetch();
     $logoHeader="img/level0.png";    
-    if($resrequ)
+    if($resrequ['nbr']!=0)
     {
     if(round($resrequ['somme']/$resrequ['nbr'],0)<=2)
     $logoHeader="img/level0.png";
@@ -64,7 +64,7 @@
     <div class="imgcontainer">
 
         <img src="<?php echo $logoHeader; ?>" alt="Logo">
-          <h4 style="margin-top: 5%; text-align:center; color: #5e6467">Identifiez-vous pour accéder à ce contenu</h4>
+          <h4 style="margin-top: 5%; text-align:center; color: #303F9F">Identifiez-vous pour accéder à ce contenu</h4>
     </div>
       
     <div class="container">
@@ -101,7 +101,7 @@
     
     <div class="imgcontainer">
         <img src="<?php echo $logoHeader; ?>" alt="Logo">
-          <h4 style="margin-top: 5%; text-align:center; color: #5e6467">Identifiez-vous pour laisser un commentaire</h4>
+          <h4 style="margin-top: 5%; text-align:center; color: #303F9F">Identifiez-vous pour laisser un commentaire</h4>
     </div>
       
     <div class="container">
@@ -137,7 +137,7 @@
     
     <div class="imgcontainer">
         <img src="<?php echo $logoHeader; ?>" alt="Logo">
-          <h4 style="margin-top: 5%; text-align:center; color: #5e6467">Identifiez-vous pour interagir</h4>
+          <h4 style="margin-top: 5%; text-align:center; color: #303F9F">Identifiez-vous pour interagir</h4>
     </div>
       
     <div class="container">
@@ -246,7 +246,7 @@
               Grâce à vous, nous sommes capables d'offrir aux INSATiens un support de Feedbacks
               encore plus pertinent.
 
-              </font></h4><br><br>
+              </font></h4><br>
             <br><br>
             <h4 style="margin-top: -5%; text-align:center; color: #5e6467; font-size:15px">
               <font color="#4553a9">
@@ -255,7 +255,7 @@
                 pas conforme à nos critères d'approbation. En aucun cas nous ne tolèrerons les commentaires
                 à caractère haineux et non respectueux envers un enseignant ainsi que les commentaires qui ne réflètent pas
                 une volonté de partager une opinion constructive.
-              </font></h4>
+              </font></h4><br>
           <button style= 
       "
         background-color:  #303F9F;
@@ -276,6 +276,35 @@
         </div>
   </form>
 </div>
+
+
+<div id="submitVote" class="modal" >
+  <form class="modal-content animate" onsubmit="return false">
+    
+    <div class="imgcontainer" id="message">
+        <img src="<?php echo $logoHeader; ?>" alt="Logo">
+          <h4 style="margin-top: 5%; text-align:center; color: #303F9F"><br>Votre évaluation est bien prise en compte.<br><br> Nous vous remercions pour votre contribution.</h4><br>           
+          <button style= 
+      "
+        background-color:  #303F9F;
+        color: white;
+        padding: 14px 20px;
+        margin: 15px 30px;
+        border: none;
+        cursor: pointer;
+        width: 50%;
+        font-size:15px;
+        font-family: 'Raleway';
+        transition: all 0.5s;
+        -moz-transition: all 0.5s;
+        -webkit-transition: all 0.5s;
+        -o-transition: all 0.5s;
+      "   
+      onclick="validerPopupVoter();" >OK</button> 
+        </div>
+  </form>
+</div>
+
 
 
 <script>
