@@ -138,7 +138,6 @@
         LIMIT '.$min.',3');
         
     $requeteTopComments->execute(array($idFiliere, $idEtudiant));
-
 ?>
 
         <!-- Sub-header area -->
