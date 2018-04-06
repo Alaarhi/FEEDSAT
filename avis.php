@@ -1,6 +1,7 @@
 ﻿﻿<?php
 
     include 'dbConnection.php';
+    include 'header.php';
 
     if (!(isset($_SESSION['idEtudiant']))) {
         header ("location: index.php");
@@ -118,16 +119,8 @@
     $_SESSION['nbrProfsRated'] = $nbrProfsRated->nbrProfsRated;
 
 
-    //MENU VOS ENSEIGNANTS
-    $requeteVosEnseignants = $bd->prepare(
-        'SELECT DISTINCT p.id, p.name, p.surname, p.photo, p.linkedIn FROM rating as r
-        INNER JOIN student as s
-        INNER JOIN professor as p
-        ON (s.id = r.studentId) AND (p.id = r.profId)
-        WHERE  (s.fosId = ?) AND (s.level = ?) AND (s.id != ?)
-        LIMIT 0,4');
-    $requeteVosEnseignants->execute(array($idFiliere, $level,$idEtudiant));
 
+    $min = 0;
     //MENU TOP COMMENTS
     $requeteTopComments = $bd->prepare(
         'SELECT c.comment as commentaire,
@@ -142,11 +135,10 @@
         WHERE (s.fosId = ?) AND (c.approved = 1) AND (s.id != ?)
         GROUP BY i.commentId
         ORDER BY nbrInteractions DESC
-        LIMIT 0,3'
-        );
+        LIMIT '.$min.',3');
+        
     $requeteTopComments->execute(array($idFiliere, $idEtudiant));
 
-    include 'header.php';
 ?>
 
         <!-- Sub-header area -->
@@ -236,175 +228,31 @@
         <!-- PANEL 2 -->
         <div class="pm-column-container testimonials pm-parallax-panel" id="zone-profs" style=" background-image: url('img/home/purple.jpg'); background-repeat: repeat-y; " data-stellar-background-ratio="0" >
         	<div class="container pm-containerPadding-top-70 pm-containerPadding-bottom-20">
-            	<div class="row">
+            	<div class="row" id="row">
                 	<div class="col-lg-12 pm-column-spacing pm-center" style="padding-bottom: 50px;">
                     	<h5 class="light">MES ENSEIGNANTS</h5>
                         <p class="light">
                         Une liste exhaustive des enseignants ayant été évalués par les étudiants de votre promotion.
                         </p>
-                        
                     </div>
-                    <?php
-                    if ($_SESSION['nbrVoters'] == 0) {
-                    ?>
-                        <div class="col-lg-12 pm-column-spacing pm-center">
-                            <h4 class="light" style="font-size: 23px;">
-                                Aucun étudiant de votre promotion n'a pour le moment partagé un feedback sur un de vos enseignants.
-                                <br> Soyez parmi les premiers le faire!
-                            </h4>
-                            <h4 class="light" style="font-size:23px; color: rgb(255,255,255);">
-                        </div>
-                        <!--<div class="col-lg-3 pm-column-spacing pm-center"></div>-->
-                        <div class="col-lg-12 col-md-12 col-sm-12 pm-column-spacing pm-center" style="padding-left:15%;padding-right:30%">
-                            <div class="pm-comment-reply-btn">
-                            <br><br>
-                                <a href= "profs.php?id=<?php echo $idEtudiant ?>"; class="pm-square-btn comment-reply"><b>Donner un Feedback</b></a>
-                            </div>
-                            <!--<u><a href="profs.php?id=<?php //echo $idEtudiant ?>"><b> Faire un feedback</b></a></u>-->
-                            </h4>
-                        </div>
-                        <!--<div class="col-lg-3 pm-column-spacing pm-center"></div>-->
-                    <?php
-                    }
-                    else {
-                        while ($row = $requeteVosEnseignants->fetch(PDO::FETCH_OBJ)) {
-                        $requeteAmisVotants = $bd->prepare(
-                            'SELECT s.surname as prenomEtudiant, s.name AS nomEtudiant,
-                            p.id, p.surname AS prenomProf, p.name AS nomProf,
-                            r.score
-                            FROM student AS s
-                            INNER JOIN rating AS r
-                            INNER JOIN professor AS p
-                            ON (r.studentId = s.id) AND (r.profId = p.id)
-                            WHERE (s.id != ?) AND (s.fosId = ?) AND (r.studentLevel = ?) AND (p.id = ?)');
-                        $requeteAmisVotants->execute(array($idEtudiant, $idFiliere, $level, $row->id));
-                        $nbrAmisVotants = $requeteAmisVotants->rowCount();
+                </div><!-- /.row -->
 
-                        $AmisVotants = $requeteAmisVotants->fetchALL(PDO::FETCH_ASSOC);
+                <div id="voirPlus" class="pm-comment-reply-btn">
+                    <br>
+                    <a href="javascript:;" onclick="voirPlus();" class="pm-square-btn-comment comment-reply">VOIR PLUS +</a>
+                </div>
 
-
-                        $moyenneProf = 0;
-                        if ($nbrAmisVotants != 0) {
-                            foreach ($AmisVotants as $amiVotant) {
-                                $moyenneProf = $moyenneProf + $amiVotant['score'];
-                            }
-                            $moyenneProf = ($moyenneProf / $nbrAmisVotants);
-                        }
-                    ?>
-                    <?php if (($requeteVosEnseignants->rowCount()) == 1) { ?>
-                    <div class="col-lg-12 col-md-12 col-sm-12 pm-column-spacing pm-center" style="padding-left:40%; padding-right:40%">
-                    <?php } ?>
-                   
-                    <?php if (($requeteVosEnseignants->rowCount()) == 2) { ?>
-                    <div class="col-lg-6 col-md-6 col-sm-12 pm-column-spacing pm-center"  style="padding-left:15%; padding-right:15%">
-                    <?php } ?>
-
-                    <?php if (($requeteVosEnseignants->rowCount()) == 3) { ?>
-                    <div class="col-lg-4 col-md-4 col-sm-12 pm-column-spacing pm-center" style="padding-left:5%; padding-right:5%">
-                    <?php } ?>
-
-                    <?php if (($requeteVosEnseignants->rowCount()) == 4) { ?>
-                    <div class="col-lg-3 col-md-3 col-sm-12 pm-column-spacing pm-center">
-                    <?php } ?>
-
-                    <!-- Staff profile -->
-                        <div class="pm-staff-profile-parent-container" >
-                            <div class="pm-staff-profile-container" style="background-image:url(<?php echo $row->photo; ?>);">
-                                <div class="pm-staff-profile-overlay-container">
-                                    <ul class="pm-staff-profile-icons">
-                                        <li><a href="<?php echo $row->linkedIn?>" class="fa fa-linkedin"></a></li>
-                                    </ul>
-                                    <div class="pm-staff-profile-quote">
-                                        <!--<p>"The good physician treats the disease; the great physician treats the patient who has the disease."</p>-->
-                                        <br><br><br><br><br><br><a href="profile.php?id=<?php echo $row->id ?>" class="pm-square-btn pm-center-align">VOIR PROFIL</a>
-                                    </div>
-                                </div>
-                                <a href="#" class="pm-staff-profile-expander fa fa-plus"></a>
-                            </div>
-
-                            <div class="pm-staff-profile-info">
-                                <p class="pm-staff-profile-name light"><?php echo $row->surname.' '.$row->name; ?></p>
-                                <p class="pm-staff-profile-name light">
-                                <?php printf('%0.2f', $moyenneProf); echo '/10'?>
-                                </p>
-                                <p class="pm-staff-profile-title light">
-                                <?php
-                                $numRow = 0;
-                                switch ($nbrAmisVotants) {
-                                    case 0:
-                                        echo 'Aucun étudiant de votre classe n\'a évalué cet enseignant.
-                                            Soyez le premier à le faire!';
-                                        break;
-                                    case 1:
-                                        foreach ($AmisVotants as $amiVotant) {
-                                            echo $amiVotant['prenomEtudiant'].' '.$amiVotant['nomEtudiant'].
-                                                ' a évalué cet enseignant.';
-                                        }
-                                        break;
-                                    case 2:
-                                        foreach ($AmisVotants as $amiVotant) {
-                                            if ($numRow != 1) {
-                                                echo $amiVotant['prenomEtudiant'].' '.$amiVotant['nomEtudiant'].' et ';
-                                            } else {
-                                                echo $amiVotant['prenomEtudiant'].' '.$amiVotant['nomEtudiant'].' ont évalué cet enseignant.';
-                                                break;
-                                            }
-                                            $numRow ++;
-
-                                        }
-                                        break;
-                                    case 3:
-                                        foreach ($AmisVotants as $amiVotant) {
-                                            if ($numRow != 2) {
-                                                echo $amiVotant['prenomEtudiant'].' '.$amiVotant['nomEtudiant'].', ';
-                                            } else {
-                                                echo ' et '.$amiVotant['prenomEtudiant'].' '.$amiVotant['nomEtudiant'].' ont évalué cet enseignant.';
-                                                break;
-                                            }
-                                            $numRow ++;
-                                        }
-                                        break;
-                                    default :
-                                        foreach ($AmisVotants as $amiVotant) {
-                                            if($numRow != $nbrAmisVotants-1) {
-                                                echo $amiVotant['prenomEtudiant'].' '.$amiVotant['nomEtudiant'].', ';
-                                            }   else {
-                                                    echo 'et '.($nbrAmisVotants - 3).' autre(s) étudiant(s) de votre promotion ont évalué cet enseignant.';
-                                                    break;
-                                                }
-                                            $numRow ++;
-                                        }
-                                        break;
-                                }
-                                ?>
-                                </p>
-                            </div>
-                        </div>
-                        <!-- Staff profile end -->
-                    </div>
-                    <?php } ?>
-                    </div>
-                    <?php } ?>
-                    <?php if (($requeteVosEnseignants->rowCount()) == 4) { ?>
-                        <div class="row">
-                            <div class="pm-comment-reply-btn">
-                                <br><br>
-                                <a href= "#"; class="pm-square-btn-comment-avis comment-reply"><b>VOIR PLUS</b></a>
-                            </div>
-                            
-                        </div>
-                    </div>
-                    <?php } ?>
-                    <?php if (($requeteVosEnseignants->rowCount()) !=0) { ?>
+                    <?php /* if (($requeteVosEnseignants->rowCount()) != 0) { ?>
                         <p class="light" style="font-size:13px">
-                        NB: Le score affiché s'agit de la moyenne de cet enseignant attribué par ce groupe restreint d'étudiants.
+                        NB: Le score affiché s'agit de la moyenne de cet enseignant attribuée par ce groupe restreint d'étudiants.
                         Le score général, attribué par toute filière confondue, peut être différent. Ce dernier est visible sur le profil de chaque enseignant. 
                         </p>
-                        <?php } ?>
-                </div><!-- /.row -->
+                    <?php } */ ?>
+
             </div><!-- /.container -->
         </div>
         <!-- PANEL 2 end -->
+
 
         <!-- PANEL 4 -->
         <div class="pm-column-container testimonials pm-parallax-panel" style="background-color: rgb(32, 186, 199); background-image: url(&quot;img/home/testimonials-bg.jpg&quot;); background-repeat: repeat-y; background-position: 0% -1376.5px;" data-stellar-background-ratio="0.5" data-stellar-vertical-offset="-50">
@@ -473,9 +321,7 @@
     <!-- BODY CONTENT end -->
     <?php include 'footer.html';?>
     </div>
-
-
-
+                     
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -501,6 +347,52 @@
     <script src="js/tinynav.js"></script>
     <script src="js/jquery-ui.js"></script>
     <script src="js/countdown/countdown.js"></script>
+
+
+    <script>
+    voirPlus();
+    var offset = 0;
+    function voirPlus() {
+        
+        var level = <?php echo $level ?>;
+        var idEtudiant = <?php echo $idEtudiant ?>;
+        var idFiliere = <?php echo $idFiliere ?>;
+        var nbrVoters = <?php echo $_SESSION['nbrVoters'] ?>;
+        $.ajax({
+            url : 'voirPlusAvis.php',
+            type : 'GET',
+            data: {
+                offset,
+                level,
+                idEtudiant,
+                idFiliere,
+                nbrVoters
+            },
+            dataType : "json",
+            success: function(response, statut) {
+                console.log("succes");
+                console.dir(response);
+                if ((response.reponse.length != ""))
+                    {
+                        $("#row").append(response.reponse);
+                        $('#row').fadeIn(2000);
+                        offset = response.lastCount;
+                        if (response.iterations != 4)
+                            $('#voirPlus').hide();
+                    }
+                else { 
+                    $('#voirPlus').hide();
+                }
+            },
+            error: function(response, statut, erreur) {
+                console.log(status);
+                console.dir(response);
+                console.log(erreur);
+                alert("error");
+            }
+        });
+    }
+    </script>       
 
     <p id="back-top" class="visible-lg visible-md visible-sm" style="bottom: 10px;"></p>
 

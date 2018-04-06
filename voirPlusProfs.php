@@ -47,7 +47,7 @@ $reponse=$reponse.'<!-- Column 1 -->
                     <img width="33" height="41" class="img-responsive" src="img/news/post-icon.jpg">
                 </div>
             </div>
-           <a href="profile.php?id='.$prof['id'].'"><p class="name">'.$prof['surname'].' '.$prof['name'].'
+           <a href="profile.php?id='.$prof["id"].'"><p class="name">'.$prof["surname"].' '.$prof["name"].'
             </p></a>
             <div class="pm-single-testimonial-divider"></div>
         </div>
