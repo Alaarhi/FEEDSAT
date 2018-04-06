@@ -308,7 +308,7 @@ if($resultRT1[0] > 0)
                                       <span class="pm-caption-excerpt">
                                         <b>Un espace de feedbacks et de critiques constructifs </b>
                                       </span>
-                                      <a href="services.php" class="pm-slide-btn">Plus <i class="fa fa-plus"></i></a>
+                                      <a href="about.php" class="pm-slide-btn">Plus <i class="fa fa-plus"></i></a>
                                 </div>
                             </div>
 
