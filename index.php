@@ -731,8 +731,11 @@ if($resultRT1[0] > 0)
 
             <div class="container pm-containerPadding100">
             	<div class="row">
+                <div class="col-lg-12 pm-center">
+                    	<h5 class="light">LES MEILLEURS COMMENTAIRES</h5>
+                    </div>
                 	<div class="col-lg-12 pm-center">
-                    	<h5 class="light">Aucun commentaire pour le moment</h5>
+                    <h4 class="light">Aucun commentaire pour le moment</h4>
                     </div>
                 	<div class="pm-testimonials-carousel" id="pm-testimonials-carousel">
                     	<ul class="pm-testimonial-items">
