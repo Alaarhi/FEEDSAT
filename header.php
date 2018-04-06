@@ -1,3 +1,26 @@
+<?php 
+	// connect to the database
+    $requ=$bd->query("select count(score) as nbr, sum(score) as somme from rating");
+    $resrequ=$requ->fetch();
+    $logoHeader="img/level0.png";    
+    if($resrequ)
+    {
+    if(round($resrequ['somme']/$resrequ['nbr'],0)<=2)
+    $logoHeader="img/level0.png";
+    if(round($resrequ['somme']/$resrequ['nbr'],0)>2 && round($resrequ['somme']/$resrequ['nbr'],0)<=4)
+    $logoHeader="img/level1.png";
+    if(round($resrequ['somme']/$resrequ['nbr'],0)>4 && round($resrequ['somme']/$resrequ['nbr'],0)<=6)
+    $logoHeader="img/level2.png";
+    if(round($resrequ['somme']/$resrequ['nbr'],0)>6 && round($resrequ['somme']/$resrequ['nbr'],0)<=8)
+    $logoHeader="img/level3.png";
+    if(round($resrequ['somme']/$resrequ['nbr'],0)>8 && round($resrequ['somme']/$resrequ['nbr'],0)<10)
+    $logoHeader="img/level4.png";
+    if(round($resrequ['somme']/$resrequ['nbr'],0)==10)
+    $logoHeader="img/level5.png";
+    }
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -119,7 +142,7 @@
                 <div class="row">
                     <div class="col-lg-4 col-md-4 col-sm-12">
                         <div class="pm-header-logo-container">
-                            <a href="index.php"><img src="img/logo.png" class="img-responsive pm-header-logo" alt="Medical-Link Template"></a>
+                            <a href="index.php"><img src="<?php echo $logoHeader; ?>" class="img-responsive pm-header-logo" alt="Insat Feedbacks"></a>
                         </div>
                     </div>
 

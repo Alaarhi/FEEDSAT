@@ -43,7 +43,6 @@
 <!-- PANEL 1 -->
         <div id="subRow" class="container pm-containerPadding-bottom-30  pm-containerPadding-top-20">
         <div id="row" class="row pm-containerPadding-bottom-10 pm-center">
-            
             </div>
                 <div id="voirPlus" class="pm-comment-reply-btn">
                     <br>
@@ -86,10 +85,18 @@
     <script src="js/countdown/countdown.js"></script>
 
     <script>
+
+                        $(document).ajaxStart(function () {
+                            if(!document.getElementById("loader"))
+                            $("#row").append('<div id="loader"><img src="img/logoanime.gif"/></div>');
+                        });
+
+
+
         <?php if(isset($_GET['id'])) echo "voirPlus(".$_GET['id'].");"; else echo "voirPlus();"; ?>
                 var offset=0;
                 function voirPlus(id){
-              
+                    
                                         $.ajax({
                                             url : 'voirPlusProfs.php',
                                             type : 'GET',
@@ -98,6 +105,7 @@
                                                   },
                                             dataType : "json",
                                             success : function(response, statut){
+                                                $("#loader").remove();
                                                 if((response.reponse.length!=""))
                                                     {
                                                         
@@ -113,7 +121,9 @@
                                                 }
                                         },
                                             error : function(response, statut, erreur){
-                                                alert(response);
+                                                setTimeout(() => {
+                                                        voirPlus()
+                                                    }, 1000)
                                             }
                                         });
 

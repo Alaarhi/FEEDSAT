@@ -463,6 +463,18 @@ $commentsNumber=$result['count'];
             <script id="559" src="js/index-clap.js"></script>
 
             <script src='https://cdnjs.cloudflare.com/ajax/libs/mo-js/0.288.1/mo.min.js'></script>
+            
+            
+            <script>
+            $(document).ajaxStart(function () {
+                            if(!document.getElementById("loaderRecents"))
+                            $("#zone_plus_recents").append('<div style="padding-top:30px;" id="loaderRecents"><center><img src="img/logoanime.gif"/></center></div>');
+                            if(!document.getElementById("loaderTop"))
+                            $("#zone_top_commentaires").append('<div style="padding-top:30px;" id="loaderTop"><center><img src="img/logoanime.gif"/></center></div>');
+                        });
+            </script>
+            
+            
             <script>
                 clapping(0);
                 
@@ -692,6 +704,7 @@ $commentsNumber=$result['count'];
                                             },
                                             dataType : "json",
                                             success : function(response, statut){
+                                                $("#loaderRecents").remove();
                                                 var finVoirPlusR=(nbrClicksRecents.toString()).length;
                                                 finVoirPlusR=finVoirPlusR+28;
                                                 if(response.comment.length!=finVoirPlusR)
@@ -713,7 +726,9 @@ $commentsNumber=$result['count'];
                                             nbrClicksRecents=nbrClicksRecents+3;
                                         },
                                             error : function(response, statut, erreur){
-
+                                                setTimeout(() => {
+                                                        plusRecents(<?php echo $id; ?>)
+                                                    }, 1000)
                                             }
                                         });
 
@@ -760,6 +775,7 @@ $commentsNumber=$result['count'];
                                             },
                                             dataType : "json",
                                             success : function(response, statut){
+                                                $("#loaderTop").remove();
                                                 var finVoirPlusT=(nbrClicksTopComments.toString()).length;
                                                 finVoirPlusT=finVoirPlusT+28;
                                                 if(response.comment.length!=finVoirPlusT)
@@ -787,7 +803,9 @@ $commentsNumber=$result['count'];
                                             nbrClicksTopComments=nbrClicksTopComments+3;
                                         },
                                             error : function(response, statut, erreur){
-
+                                                setTimeout(() => {
+                                                        topCommentaires(<?php echo $id; ?>)
+                                                    }, 1000)
                                             }
                                         });
 

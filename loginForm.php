@@ -1,10 +1,32 @@
+<?php 
+	// connect to the database
+    $requ=$bd->query("select count(score) as nbr, sum(score) as somme from rating");
+    $resrequ=$requ->fetch();
+    $logoHeader="img/level0.png";    
+    if($resrequ)
+    {
+    if(round($resrequ['somme']/$resrequ['nbr'],0)<=2)
+    $logoHeader="img/level0.png";
+    if(round($resrequ['somme']/$resrequ['nbr'],0)>2 && round($resrequ['somme']/$resrequ['nbr'],0)<=4)
+    $logoHeader="img/level1.png";
+    if(round($resrequ['somme']/$resrequ['nbr'],0)>4 && round($resrequ['somme']/$resrequ['nbr'],0)<=6)
+    $logoHeader="img/level2.png";
+    if(round($resrequ['somme']/$resrequ['nbr'],0)>6 && round($resrequ['somme']/$resrequ['nbr'],0)<=8)
+    $logoHeader="img/level3.png";
+    if(round($resrequ['somme']/$resrequ['nbr'],0)>8 && round($resrequ['somme']/$resrequ['nbr'],0)<10)
+    $logoHeader="img/level4.png";
+    if(round($resrequ['somme']/$resrequ['nbr'],0)==10)
+    $logoHeader="img/level5.png";
+    }
 
+
+?>
 <div id="avis" class="modal" >
 <!--<div class="modal-content animate">-->
   <form class="modal-content animate" onsubmit="return false">
     
     <div class="imgcontainer">
-        <img src="img/logo.png" alt="Logo">
+        <img src="<?php echo $logoHeader; ?>" alt="Logo">
           <h4 style="margin-top: 5%; text-align:center; color: #303F9F">Identifiez-vous pour accéder à ce contenu</h4>
     </div>
       
@@ -40,8 +62,8 @@
   <form class="modal-content animate" onsubmit="return false">
     
     <div class="imgcontainer">
-      <span onclick="document.getElementById('vote').style.display='none'" class="close" title="fermer">&times;</span>
-        <img src="img/medical-link.jpg" alt="Logo">
+
+        <img src="<?php echo $logoHeader; ?>" alt="Logo">
           <h4 style="margin-top: 5%; text-align:center; color: #5e6467">Identifiez-vous pour accéder à ce contenu</h4>
     </div>
       
@@ -78,8 +100,7 @@
   <form class="modal-content animate" onsubmit="return false">
     
     <div class="imgcontainer">
-      <span onclick="document.getElementById('commentaire').style.display='none'" class="close" title="fermer">&times;</span>
-        <img src="img/medical-link.jpg" alt="Logo">
+        <img src="<?php echo $logoHeader; ?>" alt="Logo">
           <h4 style="margin-top: 5%; text-align:center; color: #5e6467">Identifiez-vous pour laisser un commentaire</h4>
     </div>
       
@@ -115,8 +136,7 @@
   <form class="modal-content animate" onsubmit="return false">
     
     <div class="imgcontainer">
-      <span onclick="document.getElementById('applaud').style.display='none'" class="close" title="fermer">&times;</span>
-        <img src="img/medical-link.jpg" alt="Logo">
+        <img src="<?php echo $logoHeader; ?>" alt="Logo">
           <h4 style="margin-top: 5%; text-align:center; color: #5e6467">Identifiez-vous pour interagir</h4>
     </div>
       
@@ -152,8 +172,7 @@
   <form class="modal-content animate" onsubmit="return false">
     
     <div class="imgcontainer" id="message">
-      <span onclick="document.getElementById('dejaVote').style.display='none'" class="close" title="fermer">&times;</span>
-        <img src="img/medical-link.jpg" alt="Logo">
+        <img src="<?php echo $logoHeader; ?>" alt="Logo">
           <h4 style="margin-top: 10%; text-align:center; color: #5e6467">
             <font color="#4553a9">
               Vous avez déjà attribué un score à ce profil. 
@@ -187,8 +206,8 @@
   <form class="modal-content animate" onsubmit="return false">
     
     <div class="imgcontainer" id="message">
-      <span onclick="document.getElementById('incapableVoter').style.display='none'" class="close" title="fermer">&times;</span>
-        <img src="img/medical-link.jpg" alt="Logo"><br>
+      <!-- <span onclick="document.getElementById('incapableVoter').style.display='none'" class="close" title="fermer">&times;</span> -->
+        <img src="<?php echo $logoHeader; ?>" alt="Logo"><br>
           <h4 style="margin-top: 10%; text-align:center; color: #5e6467; font-size:19px">
             <font color="#4553a9">
             Desolé, vous n'êtes pas en mesure d'évaluer cet enseignant tant que vous ne suivez pas son cours.
@@ -220,8 +239,7 @@
   <form class="modal-content animate" onsubmit="return false">
     
     <div class="imgcontainer" id="message">
-      <span onclick="document.getElementById('submitCommentaire').style.display='none'" class="close" title="fermer">&times;</span>
-        <img src="img/medical-link.jpg" alt="Logo">
+        <img src="<?php echo $logoHeader; ?>" alt="Logo">
           <h4 style="margin-top: 5%; text-align:center; color: #5e6467; font-size:18px">
           <font color="green"><b>Nous vous remercions pour votre contribution à INSAT-FEEDBACKS. </b>
               <br>
