@@ -46,7 +46,7 @@ include 'header.php';
             <br><br>
                 <h5>CONSULTER . VOTER . AMÉLIORER </h5>
             <div class="pm-column-title-divider">
-                <img height="29" width="29" src="img/divider-icon.png" alt="icon">
+                <img height="29" width="32" src="img/MiniLogoWBG.png" alt="icon">
             </div>                  
         </div>-->
     </div>
@@ -66,7 +66,7 @@ include 'header.php';
                     <div class="pm-single-testimonial-shortcode">
                     	<div style="background-image:url(<?php if($prof['gender']=="1") echo("img/AvatarFemaleProf.png"); else echo("img/AvatarProf2.png");?>);" class="pm-single-testimonial-img-bg">
                             <div class="pm-single-testimonial-avatar-icon">
-                                <img width="33" height="41" class="img-responsive" src="img/news/post-icon.jpg">
+                                <img style="padding-top:3px;" width="36" height="41" src="img/MiniLogo.png" class="img-responsive" >
                             </div>
                         </div>
                        <a href="profile.php?id=<?php echo $prof['id'] ?>"><p class="name"><?php

@@ -39,7 +39,7 @@ $requete = $bd->query('SELECT * FROM professor WHERE departement = "Génie Biolo
             <br><br>
             <h5>CONSULTER . VOTER . AMÉLIORER </h5>
             <div class="pm-column-title-divider">
-                <img height="29" width="29" src="img/divider-icon.png" alt="icon">
+                <img height="29" width="32" src="img/MiniLogoWBG.png" alt="icon">
             </div>
 
         </div>
@@ -75,7 +75,7 @@ $requete = $bd->query('SELECT * FROM professor WHERE departement = "Génie Biolo
 
                 <div style="background-image:url(img/information/avatar1.jpg);" class="pm-single-testimonial-img-bg">
                     <div class="pm-single-testimonial-avatar-icon">
-                        <img width="33" height="41" class="img-responsive" src="img/news/post-icon.jpg">
+                        <img style="padding-top:3px;" width="36" height="41" src="img/MiniLogo.png" class="img-responsive" >
                     </div>
                 </div>
 

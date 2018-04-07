@@ -44,7 +44,7 @@ $reponse=$reponse.'<!-- Column 1 -->
         <div class="pm-single-testimonial-shortcode">
             <div style="background-image:url('.$img.');" class="pm-single-testimonial-img-bg">
                 <div class="pm-single-testimonial-avatar-icon">
-                    <img width="33" height="41" class="img-responsive" src="img/news/post-icon.jpg">
+                    <img style="padding-top:3px;" width="36" height="41" src="img/MiniLogo.png" class="img-responsive" >
                 </div>
             </div>
            <a href="profile.php?id='.$prof["id"].'"><p class="name">'.$prof["surname"].' '.$prof["name"].'

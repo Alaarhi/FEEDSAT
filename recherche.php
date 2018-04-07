@@ -75,7 +75,7 @@ include 'header.php';
             <br><br>
                 <h5>CONSULTER . VOTER . AMÉLIORER </h5>
             <div class="pm-column-title-divider">
-                <img height="29" width="29" src="img/divider-icon.png" alt="icon">
+                <img height="29" width="32" src="img/MiniLogoWBG.png" alt="icon">
             </div>                  
         </div>-->
     </div>

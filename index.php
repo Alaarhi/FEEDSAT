@@ -370,7 +370,7 @@ if($resultRT1[0] > 0)
 
                   <h5>  PROFILS DU MOMENT </h5>
                   <div class="pm-column-title-divider">
-                    <img height="29" width="29" src="img/divider-icon.png" alt="icon">
+                    <img height="29" width="32" src="img/MiniLogoWBG.png" alt="icon">
                     <br><br>
                   </div>
 
@@ -594,7 +594,7 @@ if($resultRT1[0] > 0)
 
                     <h5>HIGHLIGHTS</h5>
                     <div class="pm-column-title-divider">
-                      <img height="29" width="29" src="img/divider-icon.png" alt="icon">
+                      <img height="29" width="32" src="img/MiniLogoWBG.png" alt="icon">
                       <br>
                     </div>
 

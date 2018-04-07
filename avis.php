@@ -167,7 +167,7 @@
             	<div class="col-lg-12 pm-columnPadding30 pm-center">
                     <h5> MA PROMOTION EN CHIFFRES </h5>
                     <div class="pm-column-title-divider">
-                    	<img height="29" width="29" src="img/divider-icon.png" alt="icon">
+                    	<img height="29" width="32" src="img/MiniLogoWBG.png" alt="icon">
                     </div>
                 </div>
             </div>
@@ -264,7 +264,7 @@
             	<div class="col-lg-12 pm-columnPadding30 pm-center">
                    <h5> MEILLEURS COMMENTAIRES </h5>
                     <div class="pm-column-title-divider">
-                    	<img height="29" width="29" src="img/divider-icon.png" alt="icon">
+                    	<img height="29" width="32" src="img/MiniLogoWBG.png" alt="icon">
                     </div>
                 </div>
             </div>
