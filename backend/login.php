@@ -48,7 +48,7 @@
             <div class="panel panel-color panel-primary panel-pages">
                 <div class="panel-heading bg-img"> 
                     <div class="bg-overlay"></div>
-                    <h3 class="text-center m-t-10 text-white"> Sign In to <strong>FEEDSAT</strong> </h3>
+                    <h3 class="text-center m-t-10 text-white"> Sign In to <strong>INSAT FEEDBACKS</strong> </h3>
                 </div> 
 
 

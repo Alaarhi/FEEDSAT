@@ -51,7 +51,7 @@
             <!-- LOGO -->
             <div class="topbar-left">
                 <div class="text-center">
-                    <a href="index.html" class="logo"><i class="md md-terrain"></i> <span>FeedSAT </span></a>
+                    <a href="index.html" class="logo"><i class="md md-terrain"></i> <span>INSAT FEEDBACKS </span></a>
                 </div>
             </div>
             <!-- Button mobile view to collapse sidebar menu -->
@@ -249,7 +249,7 @@
                                                 <div class="about-info-p">
                                                     <strong>Email</strong>
                                                     <br/>
-                                                    <p class="text-muted">alaa.riahi@feedsat.com</p>
+                                                    <p class="text-muted">alaa.riahi@INSATFEEDBACKS.com</p>
                                                 </div>
                                                 <div class="about-info-p m-b-0">
                                                     <strong>Location</strong>
@@ -365,7 +365,7 @@
                 </div> <!-- content -->
 
                 <footer class="footer text-right">
-                    2018 © FEEDSAT.
+                    2018 © INSAT FEEDBACKS.
                 </footer>
 
             </div>

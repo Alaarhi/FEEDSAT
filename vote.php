@@ -26,7 +26,7 @@ else
     <meta name="author" content="">
     <link rel="shortcut icon" href="favicon.html">
 
-    <title>FEEDSAT </title>
+    <title>INSAT FEEDBACKS </title>
 
     <link href="bootstrap3/css/bootstrap.css" rel="stylesheet">
 
