@@ -67,10 +67,11 @@ include 'header.php';
     <div class="pm-sub-header-info-profs" >    	
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">               	
+                <div class="col-lg-12">        
+                    <br>       	
                     <p class="pm-page-title" style="display: inline-block">Résultat de recherche pour: &nbsp; &nbsp;</p>
                     <p class="pm-page-message" style="display: inline-block; font-size: 35px; color:blue">
-                            <?php echo ' " '.$input.' " ' ?> 
+                            <?php echo ' " '.$input.' "  ' ?> 
                     </p>
                 </div>
             </div>
@@ -90,7 +91,7 @@ include 'header.php';
 
 <!-- PANEL 1 -->
 <div class="container pm-containerPadding-bottom-30  pm-containerPadding-top-20">
-        <div class="row pm-containerPadding-bottom-60 pm-center">
+        <div class="row pm-containerPadding-bottom-120 pm-center">
             <?php
             //if ($requeteRecherche) {
             if ($indice != 0) {
@@ -102,11 +103,10 @@ include 'header.php';
                     <div class="pm-single-testimonial-shortcode">
                     	<div style="background-image: url(<?php if($prof['gender']=='1') echo  'img/AvatarFemaleProf.png'; else echo  'img/AvatarProf2.png';?>);" class="pm-single-testimonial-img-bg">
                             <div class="pm-single-testimonial-avatar-icon">
-                                <img width="33" height="41" class="img-responsive" src="img/news/post-icon.jpg">
-                            </div>
+                            <img style="padding-top:3px;" width="36" height="41" src="img/MiniLogo.png" class="img-responsive">                            </div>
                         </div>
                        <a href="profile.php?id=<?php echo $prof['id'] ?>"><p class="name"><?php
-                       echo $prof['surname'] . $prof['name'];
+                       echo $prof['surname'] ." ". $prof['name'];
                                $idprf=$prof['id'];
                         ?></p></a>
                         <div class="pm-single-testimonial-divider"></div>
@@ -119,7 +119,7 @@ include 'header.php';
             }
             else {
             ?>
-            <div class="col-lg-12 pm-column-spacing pm-center">
+            <div class="col-lg-12 pm-column-spacing pm-center"><br><br><br>
                 <h4 class="light" style="font-size:30px;"> <font color=#303F9F> Aucun enseignant ne correspond à votre recherche. <br> Veuillez réessayer.</font></h4></font> 
             </div>    
             <?php } ?>
