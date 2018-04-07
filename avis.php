@@ -302,7 +302,7 @@
                         <div class="pm-single-testimonial-shortcode">
                             <div style="background-image:url(<?php echo $row->photo; ?>);" class="pm-single-testimonial-img-bg">
                                 <div class="pm-single-testimonial-avatar-icon">
-                                    <img width="33" height="41" class="img-responsive" src="img/news/post-icon.jpg">
+                                    <img style="padding-top:3px;" width="36" height="41" src="img/MiniLogoWBG.png" class="img-responsive" >
                                 </div>
                             </div>
                             <p class="name"><?php echo $row->prenomAuteur.' '.$row->nomAuteur; ?></p>

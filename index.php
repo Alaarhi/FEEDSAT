@@ -678,7 +678,8 @@ if($resultRT1[0] > 0)
             	<div class="row">
                 
                 	<div class="col-lg-12 pm-center">
-                    	<h5 class="light">LES MEILLEURS COMMENTAIRES</h5>
+                        <h5 class="light">LES MEILLEURS COMMENTAIRES</h5>
+                        <center><div class="pm-divider light"></div></center>
                     </div>
 
                 	<div class="pm-testimonials-carousel" id="pm-testimonials-carousel">
@@ -732,10 +733,13 @@ if($resultRT1[0] > 0)
             <div class="container pm-containerPadding100">
             	<div class="row">
                 <div class="col-lg-12 pm-center">
-                    	<h5 class="light">LES MEILLEURS COMMENTAIRES</h5>
+                        <h5 class="light">LES MEILLEURS COMMENTAIRES</h5>
+                        <center><div class="pm-divider light"></div></center>
+                        <br><br>
+
                     </div>
                 	<div class="col-lg-12 pm-center">
-                    <h4 class="light">Aucun commentaire pour le moment</h4>
+                    <h4 class="light">Pour le moment, il n'existe aucun commentaire sur la plateforme ayant des interactions.</h4>
                     </div>
                 	<div class="pm-testimonials-carousel" id="pm-testimonials-carousel">
                     	<ul class="pm-testimonial-items">
