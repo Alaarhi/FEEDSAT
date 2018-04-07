@@ -3,7 +3,7 @@
 
     $test=$bd->query('select * from rating');
     $resTest=$test->fetch();
-    if($resTest=$test->fetch())
+    if($test->rowCount()!=0)
     {
     $ind=0;
     $req0=$bd->query('select id from professor');    
@@ -11,7 +11,7 @@
          {  
             $req=$bd->query('select * from rating where profId='.$result0['id']);
             $cdc=0; $tdp=0; $pdg=0; $adc=0; $cdln = 0; $i=0;$note=0;
-            if($req)
+            if($req->rowCount()!=0)
                 {
                     while($result=$req->fetch())
                         {   
@@ -22,10 +22,10 @@
                             $cdln+= intval($result['gradesCredibility']);    
                             $i=$i+1;    
                         }
-                    if($i>0)
-                        {
+                  //  if($i>0)
+                    //    {
                             $cdc=$cdc/$i; $tdp=$tdp/$i; $pdg=$pdg/$i; $adc=$adc/$i; $cdln = $cdln/$i;
-                        }
+                      //  }
                     $req5=$bd->query('select * from rcriteria');                        
                     while ($result5=$req5->fetch())
                         {
@@ -108,7 +108,7 @@
 $reqFeed=$bd->query('select COUNT(profId),profId from rating GROUP BY profId ORDER BY COUNT(profId) DESC');    
 $resultFeed=$reqFeed->fetch();
 
-if($resultFeed=$reqFeed->fetch())
+if($reqFeed->rowCount()!=0)
 {
 $reqProf=$bd->query('select * from professor where id='.$resultFeed['profId']);
 $resultProf=$reqProf->fetch();
