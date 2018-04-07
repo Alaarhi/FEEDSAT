@@ -2,12 +2,12 @@
 
 include 'dbConnection.php';
 $indice = 0;
-if (isset($_POST['inputRecherche'])) {
-    $input = $_POST['inputRecherche'];
-    /*if ($input == "") {
-        $indice = 1;
-    }
-    else {*/
+if (isset($_GET['inputRecherche'])) {    $input = $_GET['inputRecherche'];
+    $_SESSION['lastSearch'] = $input;
+
+if (!(isset($_GET['inputRecherche']))) {
+    $input = $_SESSION['lastSearch'];
+}
         $elements = explode(" ", $input);
         switch (sizeof($elements)) {
             case 1:
@@ -20,19 +20,22 @@ if (isset($_POST['inputRecherche'])) {
                 );
                 $requeteRecherche->bindParam(':inputValue', $elements[0]);
                 $requeteRecherche->execute();
-                $profs = $requeteRecherche->fetchAll(PDO::FETCH_ASSOC);
-                $indice = 1;
+                if ($requeteRecherche->rowCount() != 0) {
+                    $profs = $requeteRecherche->fetchAll(PDO::FETCH_ASSOC);
+                    $indice = 1;
+                    
+                }
                 break;
-            
+                
             case 2:
                 $requeteRecherche = $bd->prepare(
                     'SELECT * FROM professor AS p 
                     WHERE (p.name = ?) AND (p.surname = ?)'
                 );
                 $requeteRecherche->execute(array($elements[1],$elements[0]));
-                if ($requeteRecherche->rowCount()!=0) {
+                if ($requeteRecherche->rowCount() !=0 ) {
                         $profs = $requeteRecherche->fetchAll(PDO::FETCH_ASSOC);
-                        $indice = 2;
+                        $indice = 1;
                         break;
                     }
 
@@ -48,7 +51,7 @@ if (isset($_POST['inputRecherche'])) {
                     $requeteRecherche->execute();
                     if ($requeteRecherche->rowCount()!=0) {
                         $profs = $requeteRecherche->fetchAll(PDO::FETCH_ASSOC);
-                        $indice = 2;
+                        $indice = 1;
                         break;
                     }
             }
@@ -56,16 +59,19 @@ if (isset($_POST['inputRecherche'])) {
 } 
 
 
+
 include 'header.php';
 ?>
 
 <div class="pm-sub-header-container">
-    <div class="pm-sub-header-info-profs">    	
+    <div class="pm-sub-header-info-profs" >    	
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">               	
-                    <p class="pm-page-title" style="font-size:21px">Résultat de recherche pour: </p>
-                    <p class="pm-page-message"><?php echo '"'.$input.'"' ?></p>
+                    <p class="pm-page-title" style="display: inline-block">Résultat de recherche pour: &nbsp; &nbsp;</p>
+                    <p class="pm-page-message" style="display: inline-block; font-size: 35px; color:blue">
+                            <?php echo ' " '.$input.' " ' ?> 
+                    </p>
                 </div>
             </div>
         </div>            
@@ -87,7 +93,7 @@ include 'header.php';
         <div class="row pm-containerPadding-bottom-60 pm-center">
             <?php
             //if ($requeteRecherche) {
-            if ($indice != 0){
+            if ($indice != 0) {
                 foreach ($profs as $prof) { 
             ?>
             	<!-- Column 1 -->
@@ -109,7 +115,8 @@ include 'header.php';
               	</div>
                 <!-- Column 1 end -->
             <?php
-            }}
+                }
+            }
             else {
             ?>
             <div class="col-lg-12 pm-column-spacing pm-center">

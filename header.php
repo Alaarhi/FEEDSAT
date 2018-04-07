@@ -151,7 +151,7 @@
                         	<li>
                             	<div class="pm-search-field-container">
                                 	
-                                	<form action="recherche.php" method="post">
+                                	<form action="recherche.php" method="get">
                                     	<input name="inputRecherche" class="pm-search-field" type="text" placeholder="Rechercher un prof...">
                                         <!--<a href="recherche.php" type="submit" class="fa fa-search"></a>-->
                                     </form>
