@@ -1,7 +1,6 @@
 ﻿﻿<?php
 
     include 'dbConnection.php';
-    include 'header.php';
 
     if (!(isset($_SESSION['idEtudiant']))) {
         header ("location: index.php");
@@ -118,15 +117,12 @@
     $nbrProfsRated = $reqNbrProfsRated->fetch(PDO::FETCH_OBJ);
     $_SESSION['nbrProfsRated'] = $nbrProfsRated->nbrProfsRated;
 
-
-
-    $min = 0;
     //MENU TOP COMMENTS
     $requeteTopComments = $bd->prepare(
         'SELECT c.comment as commentaire,
         s.id as idAauteur, s.surname as prenomAuteur, s.name as nomAuteur,
         sum(interaction) as nbrInteractions,
-        date_format(c.timestamp, \'%d-%m-%Y\') as dateCommentaire,
+        date_format(c.timestamp, "%d-%m-%Y") as dateCommentaire,
         s.imageUrl as photo
         FROM interact as i
         INNER JOIN student as s
@@ -135,9 +131,11 @@
         WHERE (s.fosId = ?) AND (c.approved = 1) AND (s.id != ?)
         GROUP BY i.commentId
         ORDER BY nbrInteractions DESC
-        LIMIT '.$min.',3');
-        
+        LIMIT 0,3');
     $requeteTopComments->execute(array($idFiliere, $idEtudiant));
+
+    include 'header.php';
+
 ?>
 
         <!-- Sub-header area -->
