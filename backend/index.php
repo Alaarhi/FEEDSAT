@@ -1,4 +1,5 @@
-<?php include '../dbConnection.php';
+<?php
+include '../dbConnection.php';
 ?>
 
 
