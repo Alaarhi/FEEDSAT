@@ -86,16 +86,11 @@
 
     <script>
 
-                        $(document).ajaxStart(function () {
-                            if(!document.getElementById("loader"))
-                            $("#row").append('<div style="padding-left:2%;" id="loader"><img src="img/logoanime.gif"/></div>');
-                        });
-
-
-
         <?php if(isset($_GET['id'])) echo "voirPlus(".$_GET['id'].");"; else echo "voirPlus();"; ?>
                 var offset=0;
                 function voirPlus(id){
+                    if(!document.getElementById("loader"))
+                            $("#row").append('<div style="padding-left:2%;" id="loader"><img src="img/logoanime.gif"/></div>');
                     
                                         $.ajax({
                                             url : 'voirPlusProfs.php',

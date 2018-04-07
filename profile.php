@@ -465,14 +465,7 @@ $commentsNumber=$result['count'];
             <script src='https://cdnjs.cloudflare.com/ajax/libs/mo-js/0.288.1/mo.min.js'></script>
             
             
-            <script>
-            $(document).ajaxStart(function () {
-                            if(!document.getElementById("loaderRecents"))
-                            $("#zone_plus_recents").append('<div style="padding-top:30px;padding-left:2%;" id="loaderRecents"><center><img src="img/logoanime.gif"/></center></div>');
-                            if(!document.getElementById("loaderTop"))
-                            $("#zone_top_commentaires").append('<div style="padding-top:30px;padding-left:2%;" id="loaderTop"><center><img src="img/logoanime.gif"/></center></div>');
-                        });
-            </script>
+
             
             
             <script>
@@ -666,6 +659,9 @@ $commentsNumber=$result['count'];
 
 
                         function plusRecents(profId){
+                            if(!document.getElementById("loaderRecents"))
+                            $("#zone_plus_recents").append('<div style="padding-top:30px;padding-left:2%;" id="loaderRecents"><center><img src="img/logoanime.gif"/></center></div>');
+                            
                             var param;
                             var zone = '<div class="pm-comments-container" hidden id="zone_plus_recents"></div>'; 
                             if(document.getElementById("zone_top_commentaires"))
@@ -739,6 +735,9 @@ $commentsNumber=$result['count'];
                 lastCount=" ";   
                topCommentaires(<?php echo $id; ?>);
                function topCommentaires(profId){
+                            if(!document.getElementById("loaderTop"))
+                            $("#zone_top_commentaires").append('<div style="padding-top:30px;padding-left:2%;" id="loaderTop"><center><img src="img/logoanime.gif"/></center></div>');
+
                             var zone = '<div class="pm-comments-container" hidden id="zone_top_commentaires"></div>'; 
                             if(document.getElementById("zone_plus_recents"))
                             $('#zone_plus_recents').remove();
