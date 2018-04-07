@@ -111,7 +111,7 @@
                                     <br><br><br><br><br><br><a href="profile.php?id='.$row->id.'" class="pm-square-btn pm-center-align"> VOIR PROFIL </a>
                               </div>
                             </div>
-                            <a href="#" class="pm-staff-profile-expander fa fa-plus"></a>
+                            <a href="profile.php?id='.$row->id.'" class="pm-staff-profile-expander fa fa-plus"></a>
                         </div>
 
                         <div class="pm-staff-profile-info">
@@ -185,3 +185,5 @@
     echo json_encode(array("reponse" => $reponse, "lastCount" => $nextOffset, "iterations" => $i));        
 
 ?>
+
+

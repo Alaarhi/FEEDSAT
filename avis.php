@@ -236,7 +236,7 @@
 
                 <div id="voirPlus" class="pm-comment-reply-btn">
                     <br>
-                    <a href="javascript:;" onclick="voirPlus();" class="pm-square-btn-comment comment-reply">VOIR PLUS +</a>
+                    <aS href="javascript:;" onclick="voirPlus();" class="pm-square-btn-comment comment-reply">VOIR PLUS +</a>
                 </div>
 
                     <?php /* if (($requeteVosEnseignants->rowCount()) != 0) { ?>
@@ -289,11 +289,11 @@
                     <?php } ?>
 
                     <?php if (($requeteTopComments->rowCount()) == 2 ) { ?>
-                        <div class="col-lg-6 col-md-6 col-sm-12 desktop pm-center pm-columnPadding-30 pm-column-spacing" style="padding-left:15%;padding-right:15%">
+                        <div class="col-lg-6 col-md-6 col-sm-12 desktop pm-center pm-columnPadding-30 pm-column-spacing" style="padding-left:0%;padding-right:0%">
                     <?php } ?>
 
                     <?php if (($requeteTopComments->rowCount()) == 1 ) { ?>
-                        <div class="col-lg-12 col-md-12 col-sm-12 desktop pm-center pm-columnPadding-30 pm-column-spacing" style="padding-left:40%;padding-right:40%">
+                        <div class="col-lg-12 col-md-12 col-sm-12 desktop pm-center pm-columnPadding-30 pm-column-spacing" style="padding-left:0%;padding-right:0%">
                     <?php } ?>
 
                     <!--<div class="col-lg-4 col-md-4 col-sm-12 desktop pm-center pm-columnPadding-30 pm-column-spacing">-->
