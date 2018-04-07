@@ -3,33 +3,28 @@ include 'dbConnection.php';
 
 if (isset($_GET['dep'])) {
     $departement =  $_GET['dep'];
-    $requeteFiltre = $bd->prepare ('SELECT * FROM professor as p WHERE p.departement = :departement');
     switch ($departement) {
         case "gim":
             $depName = "Génie Informatique et Mathématiques";
-            $requeteFiltre->bindParam(':departement', $depName);
             break;
 
         case "gpi":
             $depName = "Génie Physique et Instrumentation";
-            $requeteFiltre->bindParam(':departement', $depName);         
             break;
 
-        case "gbc":
+        case "gbc": 
             $depName = "Génie Biologique et de Chimie";
-            $requeteFiltre->bindParam(':departement', $depName);
             break;
 
         case "slf":
             $depName = "Sciences Sociales, Langues et Formation Générale";
-            $requeteFiltre->bindParam(':departement', $depName);
             break;
     }
-    $requeteFiltre->execute();
-    $profs = $requeteFiltre->fetchAll(PDO::FETCH_ASSOC);
 }
+
 include 'header.php';
 ?>
+
 <div class="pm-sub-header-container">
     <div class="pm-sub-header-info-profs">    	
         <div class="container">
@@ -55,40 +50,15 @@ include 'header.php';
 
 <!-- PANEL 1 -->
 <div class="container pm-containerPadding-bottom-30  pm-containerPadding-top-20">
-        <div class="row pm-containerPadding-bottom-60 pm-center">
-            <?php
-            if ($requeteFiltre->rowCount() != 0) {
-                foreach ($profs as $prof) { 
-            ?>
-            	<!-- Column 1 -->
-                <div class="col-lg-4 col-md-4 col-sm-12 desktop pm-center pm-columnPadding-30 pm-column-spacing">
-                    <!-- Single testimonial -->
-                    <div class="pm-single-testimonial-shortcode">
-                    	<div style="background-image:url(<?php if($prof['gender']=="1") echo("img/AvatarFemaleProf.png"); else echo("img/AvatarProf2.png");?>);" class="pm-single-testimonial-img-bg">
-                            <div class="pm-single-testimonial-avatar-icon">
-                                <img style="padding-top:3px;" width="36" height="41" src="img/MiniLogo.png" class="img-responsive" >
-                            </div>
-                        </div>
-                       <a href="profile.php?id=<?php echo $prof['id'] ?>"><p class="name"><?php
-                       echo $prof['surname'] ." ". $prof['name'];
-                               $idprf=$prof['id'];
-                        ?></p></a>
-                        <div class="pm-single-testimonial-divider"></div>
-                    </div>
-                    <!-- Single testimonial end -->
-              	</div>
-                <!-- Column 1 end -->
-            <?php
-            }}
-            else {
-            ?>
-            <div class="col-lg-12 pm-column-spacing pm-center">
-                <h4 class="light" style="font-size:30px;"> <font color=#303F9F> Aucun enseignant de ce nom trouvé. <br> Veuillez réessayer.</font></h4></font> 
-            </div>    
-            <?php } ?>
+        <div class="row pm-containerPadding-bottom-60 pm-center" id="row">
+            </div>
+
+            <div id="voirPlus" class="pm-comment-reply-btn">
+                    <br>
+                    <a href="javascript:;" onclick="voirPlus();" class="pm-square-btn-comment comment-reply">VOIR PLUS +</a>
             </div>
                 
-            </div>
+</div>    
         <!-- PANEL 5 end -->
         
         <!-- BODY CONTENT end -->
@@ -122,6 +92,52 @@ include 'header.php';
     <script src="js/tinynav.js"></script>
     <script src="js/jquery-ui.js"></script>
     <script src="js/countdown/countdown.js"></script>
+
+
+    <script>
+        var dep = <?php echo $_GET['dep'] ?>;
+        voirPlus(dep)
+        var offset = 0;
+        
+        function voirPlus(dep) {
+            if(!document.getElementById("loader")) {
+                $("#row").append('<div style="padding-left:2%;" id="loader"><img src="img/logoanime.gif"/></div>');
+            }
+            $.ajax({
+                url : 'voirPlusFiltre.php',
+                type : 'GET',
+                data: {
+                    offset,
+                    dep
+                },
+                dataType : "json",
+                success : function(response, statut) {
+                    console.log("succes");
+                    console.dir(response);
+                    $("#loader").remove();
+                    if((response.reponse.length!="")) {
+                        $("#row").append(response.reponse);
+                        $('#row').fadeIn(2000);
+                        offset=response.lastCount;
+                        if(response.iterations != 9)
+                            $('#voirPlus').hide();
+                    }
+                    else { 
+                        $('#voirPlus').hide();
+                    }
+                },
+                error : function(response, statut, erreur){
+                    console.log(status);
+                    console.dir(response);
+                    console.log(erreur);
+                    alert("error");
+                    setTimeout(() => {
+                        voirPlus()
+                    }, 1000)
+                }
+            });
+        }
+    </script>
         
     <p id="back-top" class="visible-lg visible-md visible-sm" style="bottom: 10px;"></p>
     

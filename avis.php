@@ -350,7 +350,6 @@
     voirPlus();
     var offset = 0;
     function voirPlus() {
-        
         var level = <?php echo $level ?>;
         var idEtudiant = <?php echo $idEtudiant ?>;
         var idFiliere = <?php echo $idFiliere ?>;
