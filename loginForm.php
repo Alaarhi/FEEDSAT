@@ -2,21 +2,21 @@
 	// connect to the database
     $requ=$bd->query("select count(score) as nbr, sum(score) as somme from rating");
     $resrequ=$requ->fetch();
-    $logoHeader="img/level0.png";    
+    $logoHeader="img/PopUpLevel0.png";    
     if($resrequ['nbr']!=0)
     {
     if(round($resrequ['somme']/$resrequ['nbr'],0)<=2)
-    $logoHeader="img/level0.png";
+    $logoHeader="img/PopUpLevel0.png";
     if(round($resrequ['somme']/$resrequ['nbr'],0)>2 && round($resrequ['somme']/$resrequ['nbr'],0)<=4)
-    $logoHeader="img/level1.png";
+    $logoHeader="img/PopUpLevel1.png";
     if(round($resrequ['somme']/$resrequ['nbr'],0)>4 && round($resrequ['somme']/$resrequ['nbr'],0)<=6)
-    $logoHeader="img/level2.png";
+    $logoHeader="img/PopUpLevel2.png";
     if(round($resrequ['somme']/$resrequ['nbr'],0)>6 && round($resrequ['somme']/$resrequ['nbr'],0)<=8)
-    $logoHeader="img/level3.png";
+    $logoHeader="img/PopUpLevel3.png";
     if(round($resrequ['somme']/$resrequ['nbr'],0)>8 && round($resrequ['somme']/$resrequ['nbr'],0)<10)
-    $logoHeader="img/level4.png";
+    $logoHeader="img/PopUpLevel4.png";
     if(round($resrequ['somme']/$resrequ['nbr'],0)==10)
-    $logoHeader="img/level5.png";
+    $logoHeader="img/PopUpLevel5.png";
     }
 
 
