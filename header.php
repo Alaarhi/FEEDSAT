@@ -28,9 +28,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" href="favicon.php">
+    <link rel="shortcut icon" href="img/MiniLogo.png">
 
-    <title>FEEDSSAT</title>
+    <title>INSAT FEEDBAKCS</title>
 
     <link href="bootstrap3/css/bootstrap.css" rel="stylesheet">
 
@@ -190,6 +190,7 @@
                                 <li><a href="index.php" class="fa fa-home" id="pm-home-btn"></a></li>
                                 <li>
                                 	<a href="profs.php">Les enseignants de l'INSAT</a>
+                                    
                                     <ul>
                                         <li><a href="filtre.php?dep=gim">Génie informatique et Mathématique</a></li>
                                         <li><a href="filtre.php?dep=gpi">Génie physique et instrumentation</a></li>

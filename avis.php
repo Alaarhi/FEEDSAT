@@ -1,7 +1,6 @@
 ﻿﻿<?php
 
     include 'dbConnection.php';
-    include 'header.php';
 
     if (!(isset($_SESSION['idEtudiant']))) {
         header ("location: index.php");
@@ -118,15 +117,12 @@
     $nbrProfsRated = $reqNbrProfsRated->fetch(PDO::FETCH_OBJ);
     $_SESSION['nbrProfsRated'] = $nbrProfsRated->nbrProfsRated;
 
-
-
-    $min = 0;
     //MENU TOP COMMENTS
     $requeteTopComments = $bd->prepare(
         'SELECT c.comment as commentaire,
         s.id as idAauteur, s.surname as prenomAuteur, s.name as nomAuteur,
         sum(interaction) as nbrInteractions,
-        date_format(c.timestamp, \'%d-%m-%Y\') as dateCommentaire,
+        date_format(c.timestamp, "%d-%m-%Y") as dateCommentaire,
         s.imageUrl as photo
         FROM interact as i
         INNER JOIN student as s
@@ -135,9 +131,10 @@
         WHERE (s.fosId = ?) AND (c.approved = 1) AND (s.id != ?)
         GROUP BY i.commentId
         ORDER BY nbrInteractions DESC
-        LIMIT '.$min.',3');
-        
+        LIMIT 0,3');
     $requeteTopComments->execute(array($idFiliere, $idEtudiant));
+
+    include 'header.php';
 
 ?>
 
@@ -168,7 +165,7 @@
             	<div class="col-lg-12 pm-columnPadding30 pm-center">
                     <h5> MA PROMOTION EN CHIFFRES </h5>
                     <div class="pm-column-title-divider">
-                    	<img height="29" width="29" src="img/divider-icon.png" alt="icon">
+                    	<img height="29" width="32" src="img/MiniLogoWBG.png" alt="icon">
                     </div>
                 </div>
             </div>
@@ -265,7 +262,7 @@
             	<div class="col-lg-12 pm-columnPadding30 pm-center">
                    <h5> MEILLEURS COMMENTAIRES </h5>
                     <div class="pm-column-title-divider">
-                    	<img height="29" width="29" src="img/divider-icon.png" alt="icon">
+                    	<img height="29" width="32" src="img/MiniLogoWBG.png" alt="icon">
                     </div>
                 </div>
             </div>
@@ -303,7 +300,7 @@
                         <div class="pm-single-testimonial-shortcode">
                             <div style="background-image:url(<?php echo $row->photo; ?>);" class="pm-single-testimonial-img-bg">
                                 <div class="pm-single-testimonial-avatar-icon">
-                                    <img width="33" height="41" class="img-responsive" src="img/news/post-icon.jpg">
+                                    <img style="padding-top:3px;" width="36" height="41" src="img/MiniLogoWBG.png" class="img-responsive" >
                                 </div>
                             </div>
                             <p class="name"><?php echo $row->prenomAuteur.' '.$row->nomAuteur; ?></p>

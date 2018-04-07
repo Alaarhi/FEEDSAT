@@ -1,49 +1,51 @@
 ﻿<?php 
-    include 'dbConnection.php';    
-     
+    include 'dbConnection.php';   
+
+    $test=$bd->query('select * from rating');
+    $resTest=$test->fetch();
+    if($test->rowCount()!=0)
+    {
     $ind=0;
     $req0=$bd->query('select id from professor');    
     while($result0=$req0->fetch())  
-    {  
-    $req=$bd->query('select * from rating where profId='.$result0['id']);
-    $cdc=0; $tdp=0; $pdg=0; $adc=0; $cdln = 0; $i=0;$note=0;
-    if($req)
-    {
-    while($result=$req->fetch())
-        {   
-            $cdc+= intval($result['courseContent']);
-            $tdp+= intval($result['absenteism']);
-            $pdg+= intval($result['pedagogy']);
-            $adc+= intval($result['ambiance']);
-            $cdln+= intval($result['gradesCredibility']);    
-            $i=$i+1;    
-        }
-    if($i>0)
-    {
-    $cdc=$cdc/$i; $tdp=$tdp/$i; $pdg=$pdg/$i; $adc=$adc/$i; $cdln = $cdln/$i;
-    $req5=$bd->query('select * from rcriteria');
-    while ($result5=$req5->fetch())
-    {
-        if($result5['criteria']=="Ambiance en classe")
-            $adcr=$result5['weight'];
-        if($result5['criteria']=="Contenu du cours")
-            $cdcr=$result5['weight'];
-        if($result5['criteria']=="Crédibilité de la note")
-            $cdlnr=$result5['weight'];
-        if($result5['criteria']=="Pédagogie")
-            $pdgr=$result5['weight'];
-        if($result5['criteria']=="Taux de présence")
-            $tdpr=$result5['weight'];   
-    }
-    $note=($cdc*$cdcr+$adc*$adcr+$cdln*$cdlnr+$pdg*$pdgr+$tdp*$tdpr)/10;
-    $tabIdProf[$ind]=$result0['id'];
-    $tabNote[$ind]=$note;
-    $ind++;    
-}
-    //insertion dans 2tabs:
-    
-    }    
-}//fin while 1
+         {  
+            $req=$bd->query('select * from rating where profId='.$result0['id']);
+            $cdc=0; $tdp=0; $pdg=0; $adc=0; $cdln = 0; $i=0;$note=0;
+            if($req->rowCount()!=0)
+                {
+                    while($result=$req->fetch())
+                        {   
+                            $cdc+= intval($result['courseContent']);
+                            $tdp+= intval($result['absenteism']);
+                            $pdg+= intval($result['pedagogy']);
+                            $adc+= intval($result['ambiance']);
+                            $cdln+= intval($result['gradesCredibility']);    
+                            $i=$i+1;    
+                        }
+                  //  if($i>0)
+                    //    {
+                            $cdc=$cdc/$i; $tdp=$tdp/$i; $pdg=$pdg/$i; $adc=$adc/$i; $cdln = $cdln/$i;
+                      //  }
+                    $req5=$bd->query('select * from rcriteria');                        
+                    while ($result5=$req5->fetch())
+                        {
+                            if($result5['criteria']=="Ambiance en classe")
+                            $adcr=$result5['weight'];
+                            if($result5['criteria']=="Contenu du cours")
+                            $cdcr=$result5['weight'];
+                            if($result5['criteria']=="Crédibilité de la note")
+                            $cdlnr=$result5['weight'];
+                            if($result5['criteria']=="Pédagogie")
+                            $pdgr=$result5['weight'];
+                            if($result5['criteria']=="Taux de présence")
+                            $tdpr=$result5['weight'];   
+                        }
+                    $note=($cdc*$cdcr+$adc*$adcr+$cdln*$cdlnr+$pdg*$pdgr+$tdp*$tdpr)/10;
+                    $tabIdProf[$ind]=$result0['id'];
+                    $tabNote[$ind]=$note;
+                    $ind++;    
+                }    
+        }//fin while 1
     $max=0;
     $imax=0;
     $min=10;
@@ -89,12 +91,25 @@
         $gradeWorstProf="MA.";
     if($grade=="Assistant")
         $gradeWorstProf="A.";
+    }
+    else
+    {
+        $nomBestProf="aucun";
+        $prenomBestProf="prof";
+        $gradeBestProf="existe";
 
+        $nomWorstProf="aucun";
+        $prenomWorstProf="Prof";
+        $gradeWorstProf="existe";
+
+    }
 
 //prof avec le plus de feedbacks:
 $reqFeed=$bd->query('select COUNT(profId),profId from rating GROUP BY profId ORDER BY COUNT(profId) DESC');    
 $resultFeed=$reqFeed->fetch();
 
+if($reqFeed->rowCount()!=0)
+{
 $reqProf=$bd->query('select * from professor where id='.$resultFeed['profId']);
 $resultProf=$reqProf->fetch();
 
@@ -109,7 +124,13 @@ if($grade=="Maître Assistant")
     $gradePlusFeed="MA.";
 if($grade=="Assistant")
     $gradePlusFeed="A.";
-
+}
+else
+{
+    $nomPlusFeed="Aucun";
+    $prenomPlusFeed="prof";
+    $gradePlusFeed="existe";
+}
 //nombre interactions:
 $reqnbinteract=$bd->query('select COUNT(*) from interact');
 $resultnbinteract=$reqnbinteract->fetch();
@@ -139,10 +160,18 @@ while(($resultBestCom=$reqBestCom->fetch()) && $nbCom<3 )
     $tabCom[$nbCom]=$resultCom[0];
     $tabStName[$nbCom]=$resultSt['name'];
     $tabStSurname[$nbCom]=$resultSt['surname'];
-    $tabStLevel[$nbCom]=$resultSt['level'];
+    $tabStLevel[$nbCom]=$resultSt['level']; 
+
     $reqFos=$bd->query('select fos from fos where id='.$resultSt['fosId']);
     $resultFos=$reqFos->fetch();
-    $tabStFos[$nbCom]=$resultFos[0];    
+
+    if($resultFos[0]=="Réseaux informatiques et télécommunications") {$tabStFos[$nbCom]="RT";}
+    if($resultFos[0]=="Génie Logiciel") $tabStFos[$nbCom]="GL";
+    if($resultFos[0]=="Biologie") $tabStFos[$nbCom]="BIO";
+    if($resultFos[0]=="Chimie") $tabStFos[$nbCom]="CH";
+    if($resultFos[0]=="Informatique Industrielle et Automatique") $tabStFos[$nbCom]="IIA";
+    if($resultFos[0]=="Instrumentation et maintenance industrielle") $tabStFos[$nbCom]="IMI";
+
     $nbCom++;
 }
 
@@ -279,7 +308,7 @@ if($resultRT1[0] > 0)
                                       <span class="pm-caption-excerpt">
                                         <b>Un espace de feedbacks et de critiques constructifs </b>
                                       </span>
-                                      <a href="services.php" class="pm-slide-btn">Plus <i class="fa fa-plus"></i></a>
+                                      <a href="about.php" class="pm-slide-btn">Plus <i class="fa fa-plus"></i></a>
                                 </div>
                             </div>
 
@@ -341,7 +370,7 @@ if($resultRT1[0] > 0)
 
                   <h5>  PROFILS DU MOMENT </h5>
                   <div class="pm-column-title-divider">
-                    <img height="29" width="29" src="img/divider-icon.png" alt="icon">
+                    <img height="29" width="32" src="img/MiniLogoWBG.png" alt="icon">
                     <br><br>
                   </div>
 
@@ -363,8 +392,10 @@ if($resultRT1[0] > 0)
                         et sa popularité auprès d'eux.
                     </p>
 
-                    <a href="/feedsat/profile.php?id=<?php echo($idBestProfRate); ?>" class="pm-standard-link">Voir profil <i class="fa fa-plus"></i></a>
-
+                    <?php
+                    if($nomBestProf<>"aucun"){ ?>
+                    <a href="profile.php?id=<?php echo($idBestProfRate); ?>" class="pm-standard-link">Voir profil <i class="fa fa-plus"></i></a>
+                  <?php  } ?>
                 </div>
                 <!-- Column 1 end -->
 
@@ -383,8 +414,10 @@ if($resultRT1[0] > 0)
                         sa notoriété à l'insatisfaction de ses étudiants et l'accumulation 
                         des critiques négatives le concernant.
                     </p>
-                    <a href="/feedsat/profile.php?id=<?php echo($idWorstProfRate); ?>" class="pm-standard-link">Voir profil<i class="fa fa-plus"></i></a>
-
+                    <?php
+                    if($nomWorstProf<>"aucun"){ ?>
+                    <a href="profile.php?id=<?php echo($idWorstProfRate); ?>" class="pm-standard-link">Voir profil<i class="fa fa-plus"></i></a>
+                    <?php  } ?>
                 </div>
                 <!-- Column 2 end -->
 
@@ -403,8 +436,10 @@ if($resultRT1[0] > 0)
                         des profils les plus visités, commentés et évalués en ce moment.
 
                     </p><br>
-                    <a href="/feedsat/profile.php?id=<?php echo($resultFeed['profId']); ?>" class="pm-standard-link">Voir profil<i class="fa fa-plus"></i></a>
-
+                    <?php
+                    if($nomWorstProf<>"aucun"){ ?>
+                    <a href="profile.php?id=<?php echo($resultFeed['profId']); ?>" class="pm-standard-link">Voir profil<i class="fa fa-plus"></i></a>
+                    <?php  } ?>
                 </div>
                 <!-- Column 3 end -->
 
@@ -417,7 +452,7 @@ if($resultRT1[0] > 0)
 
           <!-- Column message -->
         	<div class="pm-column-container-message">
-            <p><strong>INSAT-FEEDBACKS</strong> permet aux étudiants de toutes les filières de l'INSAT de s'exprimer librement et partagez leurs retours d'expérience </p>
+            <p><strong>INSAT-FEEDBACKS</strong> permet aux étudiants de toutes les filières de l'INSAT de s'exprimer librement et partager leurs retours d'expérience </p>
             </div>
             <!-- Column message end -->
 
@@ -559,7 +594,7 @@ if($resultRT1[0] > 0)
 
                     <h5>HIGHLIGHTS</h5>
                     <div class="pm-column-title-divider">
-                      <img height="29" width="29" src="img/divider-icon.png" alt="icon">
+                      <img height="29" width="32" src="img/MiniLogoWBG.png" alt="icon">
                       <br>
                     </div>
 
@@ -643,7 +678,8 @@ if($resultRT1[0] > 0)
             	<div class="row">
                 
                 	<div class="col-lg-12 pm-center">
-                    	<h5 class="light">LES MEILLEURS COMMENTAIRES</h5>
+                        <h5 class="light">LES MEILLEURS COMMENTAIRES</h5>
+                        <center><div class="pm-divider light"></div></center>
                     </div>
 
                 	<div class="pm-testimonials-carousel" id="pm-testimonials-carousel">
@@ -696,8 +732,14 @@ if($resultRT1[0] > 0)
 
             <div class="container pm-containerPadding100">
             	<div class="row">
+                <div class="col-lg-12 pm-center">
+                        <h5 class="light">LES MEILLEURS COMMENTAIRES</h5>
+                        <center><div class="pm-divider light"></div></center>
+                        <br><br>
+
+                    </div>
                 	<div class="col-lg-12 pm-center">
-                    	<h5 class="light">Aucun commentaire pour le moment</h5>
+                    <h4 class="light">Pour le moment, il n'existe aucun commentaire sur la plateforme ayant des interactions.</h4>
                     </div>
                 	<div class="pm-testimonials-carousel" id="pm-testimonials-carousel">
                     	<ul class="pm-testimonial-items">

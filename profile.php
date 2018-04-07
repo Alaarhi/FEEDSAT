@@ -89,7 +89,7 @@ $commentsNumber=$result['count'];
                 
                                                         <div class="pm-author-bio-img-bg" style="background-image:url(<?php if($prof['gender']=='1') echo  'img/AvatarFemaleProf.png'; else echo 'img/AvatarProf2.png';?>)">
                                                             <div class="pm-single-news-post-avatar-icon">
-                                                                <img width="33" height="41" src="img/news/post-icon.jpg" class="img-responsive" alt="icon">
+                                                                <img style="padding-top:3px;" width="36" height="41" src="img/MiniLogo.png" class="img-responsive" alt="icon">
                                                             </div>
                                                         </div>
                 
@@ -468,9 +468,9 @@ $commentsNumber=$result['count'];
             <script>
             $(document).ajaxStart(function () {
                             if(!document.getElementById("loaderRecents"))
-                            $("#zone_plus_recents").append('<div style="padding-top:30px;" id="loaderRecents"><center><img src="img/logoanime.gif"/></center></div>');
+                            $("#zone_plus_recents").append('<div style="padding-top:30px;padding-left:2%;" id="loaderRecents"><center><img src="img/logoanime.gif"/></center></div>');
                             if(!document.getElementById("loaderTop"))
-                            $("#zone_top_commentaires").append('<div style="padding-top:30px;" id="loaderTop"><center><img src="img/logoanime.gif"/></center></div>');
+                            $("#zone_top_commentaires").append('<div style="padding-top:30px;padding-left:2%;" id="loaderTop"><center><img src="img/logoanime.gif"/></center></div>');
                         });
             </script>
             

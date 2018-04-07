@@ -79,7 +79,7 @@ include '../dbConnection.php';
             <!-- LOGO -->
             <div class="topbar-left">
                 <div class="text-center">
-                    <a href="index.php" class="logo"><i class="md md-terrain"></i> <span>FeedSAT </span></a>
+                    <a href="index.php" class="logo"><i class="md md-terrain"></i> <span>INSAT FEEDBACKS </span></a>
                 </div>
             </div>
             <!-- Button mobile view to collapse sidebar menu -->
@@ -260,7 +260,7 @@ include '../dbConnection.php';
                 </div> <!-- content -->
 
                 <footer class="footer text-right">
-                    2018 © FEEDSAT.
+                    2018 © INSAT FEEDBACKS.
                 </footer>
 
             </div>

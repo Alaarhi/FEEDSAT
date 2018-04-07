@@ -1011,7 +1011,7 @@ header {
   -o-transition: all 0.4s; }
 
 .sf-menu ul li a:before {
-  content: "\f132";
+  content: "\f138";
   color: white;
   font-family: 'FontAwesome';
   margin-right: 10px; }
@@ -2701,15 +2701,18 @@ header {
   padding: 8px 0px 8px 15px;
   display: block;
   line-height: 28px !important;
-  font-family: "Open sans";
+  font-family: "Raleway";
   font-size: 18px;
   color: #303F9F;
   font-weight: 300; }
+
+
 
 .panel-title > a.pm-dark-link {
   background-color: #303F9F;
   color: white;
   text-align: left; }
+
 
 .panel-body p {
   font-size: 14px;
@@ -3840,7 +3843,7 @@ header {
   height: auto; }
 
 .pm-single-testimonial-shortcode img {
-  margin-bottom: 30px; }
+  margin-bottom: 300px; }
 
 .pm-single-testimonial-shortcode .name {
   font-family: 'Open Sans';

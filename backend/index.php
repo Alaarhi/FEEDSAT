@@ -58,7 +58,7 @@
                 <!-- LOGO -->
                 <div class="topbar-left">
                     <div class="text-center">
-                        <a href="index.php" class="logo"><i class="md md-terrain"></i> <span>FeedSAT </span></a>
+                        <a href="index.php" class="logo"><i class="md md-terrain"></i> <span>INSAT FEEDBACKS </span></a>
                     </div>
                 </div>
                 <!-- Button mobile view to collapse sidebar menu -->
@@ -192,7 +192,7 @@
                             <div class="col-sm-12">
                                 <h4 class="pull-left page-title">Welcome !</h4>
                                 <ol class="breadcrumb pull-right">
-                                    <li><a href="#">FEEDSAT</a></li>
+                                    <li><a href="#">INSAT FEEDBACKS</a></li>
                                     <li class="active">Dashboard</li>
                                 </ol>
                             </div>
@@ -460,7 +460,7 @@
                 </div> <!-- content -->
 
                 <footer class="footer text-right">
-                    2018 © FEEDSAT.
+                    2018 © INSAT FEEDBACKS.
                 </footer>
 
             </div>
