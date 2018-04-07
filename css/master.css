@@ -1417,14 +1417,14 @@ header {
     padding-top: 80px;
     background-position: center top;
     background-repeat: no-repeat;
-    background-image: url(../img/2.png);
+    background-color: #f7f7f7;    
     height: 225px; }
 
     .pm-sub-header-info-profs {
       padding-top: 80px;
       background-position: center top;
       background-repeat: no-repeat;
-      background-image: url(../img/3.jpg);
+      background-color: #f7f7f7;
       height: 225px; }
 
 .pm-page-title {
@@ -1450,7 +1450,7 @@ header {
 .pm-page-message {
   font-family: 'Raleway';
   font-size: 16px;
-  color: #ffffff;
+  color: #7d76c5;
   font-weight: 500; }
 
   .pm-page-message-profs {
