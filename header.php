@@ -208,8 +208,8 @@
                             <?php if (isset($_SESSION['nom'])) { ?>    
                                 <li><a href="javascript:;"><?php echo $_SESSION['prenom']." ".$_SESSION['nom']; ?></a>
                                     <ul>
-                                    <li><a href="#">Ajouter une photo d'identité</a></li>
-                                    <li><a href="#">Changer de mot de passe</a></li>
+                                   <!-- <li><a href="#">Ajouter une photo d'identité</a></li> -->
+                                    <li><a href="javascript:;" onclick="document.getElementById('chmdp').style.display='block'">Changer de mot de passe</a></li>
                                     <li><a href="deconnexion.php">Se déconnecter</a></li>
                                     </ul>
                                 </li>
@@ -252,9 +252,13 @@ $("#avisVoirPlus").click(avisVoirPlus(){
 <script>
 // If user clicks anywhere outside of the modal, Modal will close
 var modal4 = document.getElementById('avis');
+var modal3 = document.getElementById('chmdp');
 window.onclick = function(event) {
     if (event.target == modal4) {
         modal4.style.display = "none";
+    }
+    if (event.target == modal3) {
+        modal3.style.display = "none";
     }
 }
 </script>

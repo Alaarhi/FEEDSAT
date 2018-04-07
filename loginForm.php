@@ -307,9 +307,82 @@
 
 
 
+<div id="chmdp" class="modal" >
+<!--<div class="modal-content animate">-->
+  <form class="modal-content animate" onsubmit="return false">
+    
+    <div class="imgcontainer">
+        <img src="<?php echo $logoHeader; ?>" alt="Logo">
+          <h4 style="margin-top: 5%; text-align:center; color: #303F9F">Changer votre mot de passe</h4>
+    </div>
+      
+    <div  class="container">
+      <div id="chmdpcontainer">
+      <input name="numInscri" id="mdpasse" class="pm-form-textfield" type="password" placeholder="Nouveau Mot De Passe">
+      <input name="numCin" id="cmdpasse" class="pm-form-textfield" type="password" placeholder="Confirmer Le Nouveau Mot De Passe">        
+      <div id="error1" style="display:none; padding-left:3%; font-family:Raleway;"> <font color="red"> Les deux mots de passes ne sont pas identiques. </font></div>     
+    </div>
+      <button style= 
+      "
+        background-color:  #303F9F;
+        color: white;
+        padding: 14px 20px;
+        margin: 15px 30px;
+        border: none;
+        cursor: pointer;
+        width: 50%;
+        font-size:15px;
+        font-family: 'Raleway';
+        transition: all 0.5s;
+        -moz-transition: all 0.5s;
+        -webkit-transition: all 0.5s;
+        -o-transition: all 0.5s;
+      "   
+      onclick="chMdp(<?php echo $_SESSION['idEtudiant']; ?>);" id ="boutonchmdp">VALIDER</button>  
+    </div>
+  </form>
+</div>
+
+
+
 <script>
 
+    function chMdp(studentId){
+      mdp = document.getElementById("mdpasse").value;
+      cmdp = document.getElementById("cmdpasse").value;
 
+      if(document.getElementById("error1").style.display=="block")
+      $("#error1").hide();
+
+      if(mdp!=cmdp)
+      document.getElementById("error1").style.display="block";
+      else
+      $.ajax({
+                                                        url : 'chMdp.php',
+                                                        type : 'POST',
+                                                        data: {
+                                                        mdp,studentId
+                                                        },
+                                                        success : function(response, statut){
+                                                          if(document.getElementById("errorr"))
+                                                          $("#errorr").remove();
+
+                                                          if(response=="Mot de passe changé avec succès.")
+                                                          color="green";
+                                                          else
+                                                          color="red";
+
+                                                          $('#chmdpcontainer').append('<div id="errorr" style="padding-left:3%; font-family:Raleway;"> <font color="'+color+'">'+response+'</font></div> ');
+                                                          if(response=="Mot de passe changé avec succès.")
+                                                          setTimeout(() => {
+                                                            window.location = "index.php";
+                                                              }, 1000);
+                                                        },
+                                                        error : function(response, statut, erreur){
+                                                          alert(erreur);
+                                                        }
+                                                    }); 
+    }
 
     function seConnecter(id){
 
@@ -342,7 +415,6 @@
                                                           }
                                                         },
                                                         error : function(response, statut, erreur){
-                                                          alert(erreur);
                                                         }
                                                     }); 
 
