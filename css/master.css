@@ -1011,7 +1011,7 @@ header {
   -o-transition: all 0.4s; }
 
 .sf-menu ul li a:before {
-  content: "\f132";
+  content: "\f138";
   color: white;
   font-family: 'FontAwesome';
   margin-right: 10px; }

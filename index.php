@@ -394,7 +394,7 @@ if($resultRT1[0] > 0)
 
                     <?php
                     if($nomBestProf<>"aucun"){ ?>
-                    <a href="/feedsat/profile.php?id=<?php echo($idBestProfRate); ?>" class="pm-standard-link">Voir profil <i class="fa fa-plus"></i></a>
+                    <a href="profile.php?id=<?php echo($idBestProfRate); ?>" class="pm-standard-link">Voir profil <i class="fa fa-plus"></i></a>
                   <?php  } ?>
                 </div>
                 <!-- Column 1 end -->
@@ -416,7 +416,7 @@ if($resultRT1[0] > 0)
                     </p>
                     <?php
                     if($nomWorstProf<>"aucun"){ ?>
-                    <a href="/feedsat/profile.php?id=<?php echo($idWorstProfRate); ?>" class="pm-standard-link">Voir profil<i class="fa fa-plus"></i></a>
+                    <a href="profile.php?id=<?php echo($idWorstProfRate); ?>" class="pm-standard-link">Voir profil<i class="fa fa-plus"></i></a>
                     <?php  } ?>
                 </div>
                 <!-- Column 2 end -->
@@ -438,7 +438,7 @@ if($resultRT1[0] > 0)
                     </p><br>
                     <?php
                     if($nomWorstProf<>"aucun"){ ?>
-                    <a href="/feedsat/profile.php?id=<?php echo($resultFeed['profId']); ?>" class="pm-standard-link">Voir profil<i class="fa fa-plus"></i></a>
+                    <a href="profile.php?id=<?php echo($resultFeed['profId']); ?>" class="pm-standard-link">Voir profil<i class="fa fa-plus"></i></a>
                     <?php  } ?>
                 </div>
                 <!-- Column 3 end -->
