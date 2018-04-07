@@ -18,7 +18,7 @@
 
     //MENU VOS ENSEIGNANTS
     $requeteVosEnseignants = $bd->prepare(
-        'SELECT DISTINCT p.id, p.name, p.surname, p.photo, p.linkedIn FROM rating as r
+        'SELECT DISTINCT p.id, p.name, p.surname, p.photo, p.linkedIn, p.gender FROM rating as r
         INNER JOIN student as s
         INNER JOIN professor as p
         ON (s.id = r.studentId) AND (p.id = r.profId)
@@ -52,6 +52,10 @@
     } else {
         while ($row = $requeteVosEnseignants->fetch(PDO::FETCH_OBJ)) {
             $i ++;
+            if ($row->gender == "1")
+                $img = "img/AvatarFemaleProfCarre.png";
+            else 
+                $img = "img/AvatarProf2Carre.png";
             $requeteAmisVotants = $bd->prepare(
                 'SELECT s.surname as prenomEtudiant, s.name AS nomEtudiant,
                 p.id, p.surname AS prenomProf, p.name AS nomProf,
@@ -93,18 +97,19 @@
                     break;
             }
 
+
+
             $reponse = $reponse.'
                 <!-- Staff profile -->
                     <div class="pm-staff-profile-parent-container" >
-                        <div class="pm-staff-profile-container" style="background-image:url('.$row->photo.');">
+                        <div class="pm-staff-profile-container" style="background-image:url('.$img.');">
                             <div class="pm-staff-profile-overlay-container">
                                 <ul class="pm-staff-profile-icons">
                                     <li><a href="'.$row->linkedIn.'" class="fa fa-linkedin"></a></li>
                                 </ul>
                                 <div class="pm-staff-profile-quote">
-                                    <!--<p>"The good physician treats the disease; the great physician treats the patient who has the disease."</p>-->
-                                    <br><br><br><br><br><br><a href="profile.php?id='.$row->id.'" class="pm-square-btn pm-center-align">VOIR PROFIL</a>
-                                </div>
+                                    <br><br><br><br><br><br><a href="profile.php?id='.$row->id.'" class="pm-square-btn pm-center-align"> VOIR PROFIL </a>
+                              </div>
                             </div>
                             <a href="#" class="pm-staff-profile-expander fa fa-plus"></a>
                         </div>
