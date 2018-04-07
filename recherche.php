@@ -100,7 +100,7 @@ include 'header.php';
                             </div>
                         </div>
                        <a href="profile.php?id=<?php echo $prof['id'] ?>"><p class="name"><?php
-                       echo $prof['name'] . $prof['surname'];
+                       echo $prof['surname'] . $prof['name'];
                                $idprf=$prof['id'];
                         ?></p></a>
                         <div class="pm-single-testimonial-divider"></div>

@@ -89,7 +89,7 @@
         -webkit-transition: all 0.5s;
         -o-transition: all 0.5s;
       "   
-      onclick="seConnecter('id2,mdp2,src2,err2');" id ="avisVoirPlus" >SE CONNECTER</button>  
+      onclick="seConnecter('id2,mdp2,src2,err2');" id ="avisVoirPlus2" >SE CONNECTER</button>  
     </div>
   </form>
 </div>
@@ -126,7 +126,7 @@
         -webkit-transition: all 0.5s;
         -o-transition: all 0.5s;
       "   
-      onclick="seConnecter('id3,mdp3,src3,err3');" id ="avisVoirPlus" >SE CONNECTER</button>  
+      onclick="seConnecter('id3,mdp3,src3,err3');" id ="avisVoirPlus3" >SE CONNECTER</button>  
     </div>
   </form>
 </div>
@@ -162,7 +162,7 @@
         -webkit-transition: all 0.5s;
         -o-transition: all 0.5s;
       "   
-      onclick="seConnecter('id6,mdp6,src6,err6');" id ="avisVoirPlus" >SE CONNECTER</button>  
+      onclick="seConnecter('id6,mdp6,src6,err6');" id ="avisVoirPlus4" >SE CONNECTER</button>  
     </div>
   </form>
 </div>
