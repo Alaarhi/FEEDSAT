@@ -11,7 +11,7 @@
     $i = 0;
     $reponse = "";
 
-    //if (isset($_GET['dep'])) {
+    if (isset($_GET['dep'])) {
         $departement =  $_GET['dep'];
         $requeteFiltre = $bd->prepare ('SELECT * FROM professor as p WHERE p.departement = ":departement" LIMIT 0,9'); //LIMIT '.$offset.',9'
         switch ($departement) {
@@ -39,8 +39,8 @@
         $requeteFiltre->execute();
         $profs = $requeteFiltre->fetchAll(PDO::FETCH_ASSOC);
         
-    /*}
-    if ($requeteFiltre->rowCount() != 0) {*/
+    }
+    if ($requeteFiltre->rowCount() != 0) {
         
         foreach ($profs as $prof) { 
             
@@ -68,7 +68,7 @@
                 <!-- Column 1 end -->';
                 $idprf = $prof['id'];
         }
-//    } else {
+    } else {
         $reponse = $reponse.'<div class="col-lg-12 pm-column-spacing pm-center">
                             <h4 class="light" style="font-size:30px;"> 
                                 <font color=#303F9F> 
@@ -76,7 +76,7 @@
                                 </font> 
                             </h4></font> 
                             </div>';   
-    //} 
+    } 
 
     echo json_encode(array("reponse" => $reponse, "lastCount" => $nextOffset, "iterations" => $i));        
 ?>
