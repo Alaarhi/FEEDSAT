@@ -678,7 +678,8 @@ if($resultRT1[0] > 0)
             	<div class="row">
                 
                 	<div class="col-lg-12 pm-center">
-                    	<h5 class="light">LES MEILLEURS COMMENTAIRES</h5>
+                        <h5 class="light">LES MEILLEURS COMMENTAIRES</h5>
+                        <div class="pm-divider light"></div>
                     </div>
 
                 	<div class="pm-testimonials-carousel" id="pm-testimonials-carousel">
