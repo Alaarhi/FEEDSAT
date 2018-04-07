@@ -190,6 +190,7 @@
                                 <li><a href="index.php" class="fa fa-home" id="pm-home-btn"></a></li>
                                 <li>
                                 	<a href="profs.php">Les enseignants de l'INSAT</a>
+                                    
                                     <ul>
                                         <li><a href="filtre.php?dep=gim">Génie informatique et Mathématique</a></li>
                                         <li><a href="filtre.php?dep=gpi">Génie physique et instrumentation</a></li>
