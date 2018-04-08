@@ -64,7 +64,7 @@ include 'header.php';
 ?>
 
 <div class="pm-sub-header-container">
-    <div class="pm-sub-header-info-profs" >    	
+    <div class="pm-sub-header-info-profs" style="padding-top: 60px; height: 180px">    	
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">        
@@ -120,7 +120,7 @@ include 'header.php';
             else {
             ?>
             <div class="col-lg-12 pm-column-spacing pm-center"><br><br><br>
-                <h4 class="light" style="font-size:30px;"> <font color=#303F9F> Aucun enseignant ne correspond à votre recherche. <br> Veuillez réessayer.</font></h4></font> 
+                <h4 class="light" style="font-size:25px;"> <font color=#303F9F> Aucun profil ne correspond à votre recherche. <br> Veuillez réessayer.</font></h4></font> 
             </div>    
             <?php } ?>
             </div>
