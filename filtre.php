@@ -3,6 +3,7 @@ include 'dbConnection.php';
 
 if (isset($_GET['dep'])) {
     $departement =  $_GET['dep'];
+    $depName="Département Introuvable";
     switch ($departement) {
         case "gim":
             $depName = "Génie Informatique et Mathématiques";
@@ -50,12 +51,12 @@ include 'header.php';
 
 <!-- PANEL 1 -->
 <div class="container pm-containerPadding-bottom-30  pm-containerPadding-top-20">
-        <div class="row pm-containerPadding-bottom-60 pm-center" id="row">
+        <div class="row pm-containerPadding-bottom-10 pm-center" id="row">
             </div>
 
             <div id="voirPlus" class="pm-comment-reply-btn">
                     <br>
-                    <a href="javascript:;" onclick="voirPlus();" class="pm-square-btn-comment comment-reply">VOIR PLUS +</a>
+                    <a href="javascript:;" onclick="voirPlus('<?php echo $_GET['dep']; ?>');" class="pm-square-btn-comment comment-reply">VOIR PLUS +</a>
             </div>
                 
 </div>    
@@ -95,25 +96,22 @@ include 'header.php';
 
 
     <script>
-        var dep = <?php echo $_GET['dep'] ?>;
-        voirPlus(dep)
+        voirPlus("<?php echo $_GET['dep']; ?>");
         var offset = 0;
         
         function voirPlus(dep) {
-            if(!document.getElementById("loader")) {
-                $("#row").append('<div style="padding-left:2%;" id="loader"><img src="img/logoanime.gif"/></div>');
-            }
+
+            if(!document.getElementById("loader"))
+                            $("#row").append('<div style="padding-left:2%;" id="loader"><img src="img/logoanime.gif"/></div>');
+
             $.ajax({
                 url : 'voirPlusFiltre.php',
                 type : 'GET',
                 data: {
-                    offset,
-                    dep
+                    offset,dep
                 },
                 dataType : "json",
                 success : function(response, statut) {
-                    console.log("succes");
-                    console.dir(response);
                     $("#loader").remove();
                     if((response.reponse.length!="")) {
                         $("#row").append(response.reponse);
@@ -127,13 +125,9 @@ include 'header.php';
                     }
                 },
                 error : function(response, statut, erreur){
-                    console.log(status);
-                    console.dir(response);
-                    console.log(erreur);
-                    alert("error");
                     setTimeout(() => {
-                        voirPlus()
-                    }, 1000)
+                            voirPlus("<?php echo $_GET['dep']; ?>")
+                        }, 1000)                    
                 }
             });
         }

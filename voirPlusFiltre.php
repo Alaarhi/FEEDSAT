@@ -13,36 +13,31 @@
 
     if (isset($_GET['dep'])) {
         $departement =  $_GET['dep'];
-        $requeteFiltre = $bd->prepare ('SELECT * FROM professor as p WHERE p.departement = ":departement" LIMIT 0,9'); //LIMIT '.$offset.',9'
+        $depName="aucun";
         switch ($departement) {
             case "gim":
                 $depName = "Génie Informatique et Mathématiques";
-                $requeteFiltre->bindParam(':departement', $depName);
                 
                 break;
     
             case "gpi":
                 $depName = "Génie Physique et Instrumentation";
-                $requeteFiltre->bindParam(':departement', $depName);         
                 break;
     
             case "gbc": 
                 $depName = "Génie Biologique et de Chimie";
-                $requeteFiltre->bindParam(':departement', $depName);
                 break;
     
             case "slf":
                 $depName = "Sciences Sociales, Langues et Formation Générale";
-                $requeteFiltre->bindParam(':departement', $depName);
                 break;
         }
-        $requeteFiltre->execute();
-        $profs = $requeteFiltre->fetchAll(PDO::FETCH_ASSOC);
+        $requeteFiltre = $bd->query('SELECT * FROM professor as p WHERE p.departement = "'.$depName.'" LIMIT '.$offset.',9'); //LIMIT ,9'        
         
     }
-    if ($requeteFiltre->rowCount() != 0) {
+    if ($requeteFiltre->rowCount()>0) {
         
-        foreach ($profs as $prof) { 
+        while ($prof=$requeteFiltre->fetch()) { 
             
             $i ++;
             

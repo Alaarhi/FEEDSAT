@@ -315,7 +315,7 @@ if($resultRT1[0] > 0)
 
                     </li>
 
-                    <li data-thumb="" class="pmslide_1"><img src="img/home/purple.jpg" alt="img02" />
+                    <li data-thumb="" class="pmslide_1"><img src="img/home/slider3.jpg" alt="img02" />
 
 
                         	<div class="pm-holder">
@@ -334,7 +334,7 @@ if($resultRT1[0] > 0)
 
                     </li>
 
-                    <li data-thumb="" class="pmslide_2"><img src="img/home/purple.jpg" alt="img02" />
+                    <li data-thumb="" class="pmslide_2"><img src="img/home/slider4.jpg" alt="img02" />
 
 
                         	<div class="pm-holder">
