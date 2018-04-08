@@ -81,15 +81,15 @@
 
             switch($requeteVosEnseignants->rowCount()) {
                 case 1:
-                    $reponse = $reponse.'<div class="col-lg-3 col-md-3 col-sm-12 pm-column-spacing pm-center" style="margin-left:11.5%">';
+                    $reponse = $reponse.'<div class="col-lg-3 col-md-3 col-sm-12 pm-column-spacing pm-center" style="margin-left:35%">';
                     break;
 
                 case 2:
-                    $reponse = $reponse.'<div class="col-lg-6 col-md-6 col-sm-12 pm-column-spacing pm-center"  style="padding-left:15%; padding-right:15%">';
+                    $reponse = $reponse.'<div class="col-lg-3 col-md-3 col-sm-12 pm-column-spacing pm-center" style="margin-left:15%;">';
                     break;
 
                 case 3:
-                    $reponse = $reponse.'<div class="col-lg-4 col-md-4 col-sm-12 pm-column-spacing pm-center" style="padding-left:5%; padding-right:5%">';
+                    $reponse = $reponse.'<div class="col-lg-3 col-md-3 col-sm-12 pm-column-spacing pm-center" style="margin-left:6%;">';
                     break;
 
                 case 4:
@@ -101,7 +101,7 @@
 
             $reponse = $reponse.'
                 <!-- Staff profile -->
-                    <div class="pm-staff-profile-parent-container" >
+                    <div class="pm-staff-profile-parent-container" style="padding-bottom: -10%">
                         <div class="pm-staff-profile-container" style="background-image:url('.$img.');">
                             <div class="pm-staff-profile-overlay-container">
                                 <ul class="pm-staff-profile-icons">
@@ -114,7 +114,7 @@
                             <a href="profile.php?id='.$row->id.'" class="pm-staff-profile-expander fa fa-plus"></a>
                         </div>
 
-                        <div class="pm-staff-profile-info">
+                        <div class="pm-staff-profile-info" style="padding:40px 0px 0px 0px">
                             <p class="pm-staff-profile-name light">'.$row->surname.' '.$row->name.'</p>
                             <p class="pm-staff-profile-name light">';
 
@@ -122,7 +122,7 @@
                             
                             $reponse = $reponse.$moy.'/10
                             </p>
-                            <p class="pm-staff-profile-title light">';
+                            <p class="pm-staff-profile-title light" style="display:inline;font-size:15px;line-height:0px;">';
 
                             //<?php
                             $numRow = 0;
@@ -149,7 +149,7 @@
 
                                     }
                                     break;
-                                case 3:
+                                /*case 3:
                                     foreach ($AmisVotants as $amiVotant) {
                                         if ($numRow != 2) {
                                             $reponse = $reponse.$amiVotant["prenomEtudiant"].' '.$amiVotant["nomEtudiant"].', ';
@@ -159,9 +159,9 @@
                                         }
                                         $numRow ++;
                                     }
-                                    break;
+                                    break;*/
                                 default :
-                                    foreach ($AmisVotants as $amiVotant) {
+                                    /*foreach ($AmisVotants as $amiVotant) {
                                         if($numRow != $nbrAmisVotants-1) {
                                             $reponse = $reponse.$amiVotant["prenomEtudiant"].' '.$amiVotant["nomEtudiant"].', ';
                                         }   else {
@@ -169,6 +169,16 @@
                                                 break;
                                             }
                                         $numRow ++;
+                                    }*/
+                                    foreach ($AmisVotants as $amiVotant) {
+                                        if (($nbrAmisVotants -1) == 1) {
+                                            $reponse = $reponse.$amiVotant["prenomEtudiant"].' '.$amiVotant["nomEtudiant"].'et '.($nbrAmisVotants - 1).' autre 
+                                            ont évalué cet enseignant.';
+                                        } else {
+                                            $reponse = $reponse.$amiVotant["prenomEtudiant"].' '.$amiVotant["nomEtudiant"].'et '.($nbrAmisVotants - 1).' autres 
+                                            ont évalué cet enseignant.';
+                                        }
+                                        break;
                                     }
                                     break;
                             }
