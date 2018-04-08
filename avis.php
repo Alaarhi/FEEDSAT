@@ -1,11 +1,12 @@
-﻿﻿<?php
+<?php
 
     include 'dbConnection.php';
-
+    
     if (!(isset($_SESSION['idEtudiant']))) {
         header ("location: index.php");
     }
-
+    include 'header.php';    
+    
     $idEtudiant = $_SESSION['idEtudiant'];
     $idFiliere = $_SESSION['idFiliere'];
     $level = $_SESSION['level'];
@@ -134,7 +135,6 @@
         LIMIT 0,3');
     $requeteTopComments->execute(array($idFiliere, $idEtudiant));
 
-    include 'header.php';
 
 ?>
 
