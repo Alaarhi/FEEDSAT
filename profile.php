@@ -640,10 +640,13 @@ $commentsNumber=$result['count'];
 
                         function menuTopCommentaires(profId)
                         {
+                            if(!document.getElementById("zone_top_commentaires"))
+                            {
                             nbrClicksTopComments=0;    
                             parametre=1;
                             param2=1;
                             topCommentaires(profId);
+                            }
                         }
                         
                         function choice(profId){
