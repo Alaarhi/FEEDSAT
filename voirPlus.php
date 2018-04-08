@@ -75,7 +75,7 @@ if(isset($_GET['parametre']))
         $bloc=$bloc.'<div class="pm-comment-box-container">
         
                                                 <div class="pm-comment-box-avatar-container">
-                                                    <div class="pm-comment-avatar" style="background-image:url(img/news/01_avatar.jpg);">
+                                                    <div class="pm-comment-avatar" style="background-image:url(img/studentAvatar.png);">
                                                     </div>
                                                     <ul class="pm-comment-author-list">
                                                         <li><p class="pm-comment-name">'.$studentName.'</p></li>
@@ -176,7 +176,7 @@ while(($result=$req->fetch())&&($i<3))
     $bloc=$bloc.'<div class="pm-comment-box-container">
     
                                             <div class="pm-comment-box-avatar-container">
-                                                <div class="pm-comment-avatar" style="background-image:url(img/news/01_avatar.jpg);">
+                                                <div class="pm-comment-avatar" style="background-image:url(img/studentAvatar.png);">
                                                 </div>
                                                 <ul class="pm-comment-author-list">
                                                     <li><p class="pm-comment-name">'.$studentName.'</p></li>
