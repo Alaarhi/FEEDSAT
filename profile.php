@@ -378,7 +378,7 @@ $commentsNumber=$result['count'];
                 
                                             <div class="row pm-containerPadding-top-20">
                 
-                                                <form name="pm-submit-comment-form" action="http://projects.pulsarmedia.ca/medical-link/post">
+                                                <form name="pm-submit-comment-form" action="https://projects.pulsarmedia.ca/medical-link/post">
                 
                                                     <div class="col-lg-4 col-md-4 col-sm-12">
                 

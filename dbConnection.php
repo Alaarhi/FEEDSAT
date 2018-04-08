@@ -3,6 +3,6 @@
 	session_start();
 
 	// connect to the database
-	$bd = new PDO('mysql:host=localhost;dbname=feedsat;charset=utf8', 'root', '');
+	$bd = new PDO('mysql:host=insatfeewwfeedsa.mysql.db;dbname=insatfeewwfeedsa;charset=utf8', 'insatfeewwfeedsa', '123456mmM');
 
 ?>
