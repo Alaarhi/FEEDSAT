@@ -687,7 +687,7 @@ if($resultRT1[0] > 0)
                     	<ul class="pm-testimonial-items">
                         
                         	<li>
-                                <div class="pm-testimonial-img" style="background-image:url(img/information/hamza.jpg);">
+                                <div class="pm-testimonial-img" style="background-image:url(img/BigStudentAvatar.png);">
                                 	<!--<div class="pm-testimonial-img-icon">
                                     	<img src="img/home/post-icon.jpg" class="img-responsive pm-center-align" alt="icon">
                                     </div>-->
@@ -699,7 +699,7 @@ if($resultRT1[0] > 0)
                                 <p class="pm-testimonial-quote"><?php echo($tabCom[0]); ?></p>
                             </li>
                             <li>
-                                <div class="pm-testimonial-img" style="background-image:url(img/information/abir.jpg);">
+                                <div class="pm-testimonial-img" style="background-image:url(img/BigStudentAvatar2.png);">
                                 </div>
                                 <p class="pm-testimonial-name"><?php echo($tabStSurname[1]." ".$tabStName[1]); ?></p>
                                 <p class="pm-testimonial-title"><?php echo($tabStFos[1]." ".$tabStLevel[1]); ?></p>
@@ -707,7 +707,7 @@ if($resultRT1[0] > 0)
                                 <p class="pm-testimonial-quote"><?php echo($tabCom[1]); ?></p>
                             </li>
                             <li>
-                                <div class="pm-testimonial-img" style="background-image:url(img/information/ala.jpg);">
+                                <div class="pm-testimonial-img" style="background-image:url(img/BigStudentAvatar3.png);">
                                 </div>
                                 <p class="pm-testimonial-name"><?php echo($tabStSurname[2]." ".$tabStName[2]); ?></p>
                                 <p class="pm-testimonial-title"><?php echo($tabStFos[2]." ".$tabStLevel[2]); ?></p>
@@ -806,7 +806,7 @@ if($resultRT1[0] > 0)
                                 <p class="pm-testimonial-quote"><?php echo($tabCom[0]); ?></p>
                             </li>
                             <li>
-                                <div class="pm-testimonial-img" style="background-image:url(img/BigStudentAvatar.png);">
+                                <div class="pm-testimonial-img" style="background-image:url(img/BigStudentAvatar2.png);">
                                 </div>
                                 <p class="pm-testimonial-name"><?php echo($tabStSurname[1]." ".$tabStName[1]); ?></p>
                                 <p class="pm-testimonial-title"><?php echo($tabStFos[1]." ".$tabStLevel[1]); ?></p>

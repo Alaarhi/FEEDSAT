@@ -264,6 +264,7 @@
                     <div class="pm-column-title-divider">
                     	<img height="29" width="32" src="img/MiniLogoWBG.png" alt="icon">
                     </div>
+                    
                 </div>
             </div>
             <div class="row pm-containerPadding-top-30 pm-containerPadding-bottom-60 pm-center">
@@ -298,10 +299,9 @@
 
                     <!--<div class="col-lg-4 col-md-4 col-sm-12 desktop pm-center pm-columnPadding-30 pm-column-spacing">-->
                         <div class="pm-single-testimonial-shortcode">
-                            <div style="background-image:url(<?php echo $row->photo; ?>);" class="pm-single-testimonial-img-bg">
+                            <div style="background-image:url(img/BigStudentAvatar3.png);" class="pm-single-testimonial-img-bg">
                                 <div class="pm-single-testimonial-avatar-icon">
-                                    <img style="padding-top:3px;" width="36" height="41" src="img/MiniLogoWBG.png" class="img-responsive" >
-                                </div>
+                                <img style="padding-top:9px;" width="36" height="41" src="img/MiniLogo.png" class="img-responsive">                                </div>
                             </div>
                             <p class="name"><?php echo $row->prenomAuteur.' '.$row->nomAuteur; ?></p>
                             <div class="pm-single-testimonial-divider"></div>
