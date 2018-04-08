@@ -42,9 +42,9 @@
         <div class="col-lg-12 col-md-12 col-sm-12 pm-column-spacing pm-center" style="padding-left:15%;padding-right:30%">
             <div class="pm-comment-reply-btn">
             <br><br>
-                <a href= "profs.php?id=<?php echo $idEtudiant ?>"; class="pm-square-btn comment-reply"><b>Donner un Feedback</b></a>
+                <a href= "profs.php?id='.$idEtudiant.'" class="pm-square-btn comment-reply"><b>Donner un Feedback</b></a>
             </div>
-            <!--<u><a href="profs.php?id=<?php //echo $idEtudiant ?>"><b> Faire un feedback</b></a></u>-->
+            <!--<u><a href="profs.php?id=<?php echo $idEtudiant ?>"><b> Faire un feedback</b></a></u>-->
             </h4>
         </div>
         <!--<div class="col-lg-3 pm-column-spacing pm-center"></div>-->';

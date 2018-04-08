@@ -119,7 +119,7 @@
 
     //MENU TOP COMMENTS
     $requeteTopComments = $bd->prepare(
-        'SELECT c.comment as commentaire,
+        'SELECT SUBSTRING(c.comment,1, 200) as commentaire,
         s.id as idAauteur, s.surname as prenomAuteur, s.name as nomAuteur,
         sum(interaction) as nbrInteractions,
         date_format(c.timestamp, "%d-%m-%Y") as dateCommentaire,
@@ -234,7 +234,7 @@
                     </div>
                 </div><!-- /.row -->
 
-                <div id="voirPlus" class="pm-comment-reply-btn">
+                <div id="voirPlus" class="pm-comment-reply-btn" style="text-align:center">
                     <br>
                     <aS href="javascript:;" onclick="voirPlus();" class="pm-square-btn-comment comment-reply">VOIR PLUS +</a>
                 </div>
@@ -366,8 +366,6 @@
             },
             dataType : "json",
             success: function(response, statut) {
-                console.log("succes");
-                console.dir(response);
                 if ((response.reponse.length != ""))
                     {
                         $("#row").append(response.reponse);
@@ -381,10 +379,7 @@
                 }
             },
             error: function(response, statut, erreur) {
-                console.log(status);
-                console.dir(response);
-                console.log(erreur);
-                alert("error");
+                alert("erreur");
             }
         });
     }
