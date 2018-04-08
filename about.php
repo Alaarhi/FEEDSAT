@@ -129,8 +129,8 @@ Objectif ultime
     </div>
 </div> 
 
-<div class="pm-column-container pm-parallax-panel" style="background-color:#303F9F; background-position: 0%" data-stellar-background-ratio="0">                
-    <div class="container" style="padding-bottom:2%;padding-bottom:2%">
+<div class="pm-column-container  pm-parallax-panel" style="background-color:#303F9F; background-position: 0%" data-stellar-background-ratio="0">                
+    <div class="container" style="padding-bottom:2%;padding-top:2%">
         <div class="row">
             <div class="col-lg-12">
                 <h1 style="font-family:'Raleway';color:#ffc107;font-size:30px"><b>Des questions?</b></h1><br>
