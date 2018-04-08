@@ -306,9 +306,9 @@ if($resultRT1[0] > 0)
                                         Parce que votre voix compte
                                       </span>
                                       <span class="pm-caption-excerpt">
-                                        Un espace où les étudiants peuvent partager leurs points de vue librement
+                                        <b>Un espace où les étudiants peuvent partager leurs points de vue librement</b>
                                       </span>
-                                      <a href="#IFawards" class="pm-slide-btn">À propos de nous <i class="fa fa-plus"></i></a>
+                                      <a href="about.php" class="pm-slide-btn">À propos de nous <i class="fa fa-plus"></i></a>
                                 </div>
                             </div>
 
@@ -325,7 +325,7 @@ if($resultRT1[0] > 0)
                                       vers un changement positif
                                       </span>
                                       <span class="pm-caption-excerpt">
-                                        Tout étudiant a un rôle à jouer. Ne soyez plus un simple spectateur.
+                                       <b> Tout étudiant a un rôle à jouer. Ne soyez plus un simple spectateur. </b>
                                       </span>
                                       <a href="profs.php" class="pm-slide-btn">Partagez un feedback <i class="fa fa-plus"></i></a>
                                 </div>
@@ -344,7 +344,7 @@ if($resultRT1[0] > 0)
                                         Votez, commentez, intéragissez
                                       </span>
                                       <span class="pm-caption-excerpt">
-                                        Vous pouvez intéragir de plusieurs manières avec vos enseignants ou vos camarades
+                                        <b>Vous pouvez intéragir de plusieurs manières avec vos enseignants ou vos camarades </b>
                                       </span>
                                       <a href="about.php" class="pm-slide-btn">Plus d'informations<i class="fa fa-plus"></i></a>
                                 </div>
