@@ -237,7 +237,7 @@ video {
 	width: 100%;
 	padding:15px 10px 20px;
 	z-index:3000;
-	/*background-color:rgba(24, 36, 51, .9);*/
+	background-color: rgba(48, 63, 159,.7);
 }
 
 
