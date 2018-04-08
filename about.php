@@ -144,7 +144,7 @@ Objectif ultime
                 <h1 style="font-family:'Raleway';color:#ffc107;font-size:30px"><b>Des questions?</b></h1><br>
                 <div class="pm-divider" style="height: 1px; background-color: #ffc107; width: 80px; margin: -10px 0 30px;"></div>
                 <p style="font-size:15px; color:white">
-                     Contactez-nous via contact@feedsat.com pour plus de renseignements.
+                     Contactez-nous via contact@insat-feedbacks.com pour plus de renseignements.
                 </p>
             </div>
         </div>
