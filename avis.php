@@ -107,12 +107,13 @@
 
     // STATISTIQUE #4 : Nombre de profs évalués par mes amis
     $reqNbrProfsRated = $bd->prepare(
-        'SELECT count(*) as nbrProfsRated
-        FROM rating as r
-        INNER JOIN professor as p
-        INNER JOIN student as s
-        ON (r.studentId = s.id) AND (r.profId = p.id)
-        WHERE (s.fosId = ?) AND (s.level = ?)');
+        'SELECT count(*) as nbrProfsRated from (  
+            SELECT DISTINCT(profId) from rating r
+            INNER JOIN student s
+            ON (r.studentId = s.id)
+            WHERE (s.fosId = ?) AND (s.level = ?)
+            )R1');
+        
     $reqNbrProfsRated->execute(array($idFiliere, $level));
 
     $nbrProfsRated = $reqNbrProfsRated->fetch(PDO::FETCH_OBJ);
