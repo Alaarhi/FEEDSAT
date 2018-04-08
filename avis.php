@@ -121,7 +121,7 @@
 
     //MENU TOP COMMENTS
     $requeteTopComments = $bd->prepare(
-        'SELECT SUBSTRING(c.comment,1, 200) as commentaire,
+        'SELECT SUBSTRING(c.comment,1, 200) as commentaire, c.visibility,
         s.id as idAauteur, s.surname as prenomAuteur, s.name as nomAuteur,
         sum(interaction) as nbrInteractions,
         date_format(c.timestamp, "%d-%m-%Y") as dateCommentaire,
@@ -304,7 +304,16 @@
                                 <div class="pm-single-testimonial-avatar-icon">
                                 <img style="padding-top:9px;" width="36" height="41" src="img/MiniLogo.png" class="img-responsive">                                </div>
                             </div>
-                            <p class="name"><?php echo $row->prenomAuteur.' '.$row->nomAuteur; ?></p>
+                            <p class="name">
+                            <?php
+                                if ($row->visibility == 1) {
+                                    echo $row->prenomAuteur.' '.$row->nomAuteur; 
+                                } 
+                                else {
+                                    echo "Anonyme";
+                                } 
+                            ?>
+                            </p>
                             <div class="pm-single-testimonial-divider"></div>
                             <p class="quote"> <?php echo '"'.$row->commentaire.'"'; ?> </p>
                             <div class="pm-single-testimonial-divider"></div>
