@@ -707,7 +707,7 @@ if($resultRT1[0] > 0)
                                 <p class="pm-testimonial-quote"><?php echo($tabCom[1]); ?></p>
                             </li>
                             <li>
-                                <div class="pm-testimonial-img" style="background-image:url(img/BigStudentAvatar3.png);">
+                                <div class="pm-testimonial-img" style="background-image:url(img/BigStudentAvatar4.png);">
                                 </div>
                                 <p class="pm-testimonial-name"><?php echo($tabStSurname[2]." ".$tabStName[2]); ?></p>
                                 <p class="pm-testimonial-title"><?php echo($tabStFos[2]." ".$tabStLevel[2]); ?></p>
