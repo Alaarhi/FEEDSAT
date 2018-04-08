@@ -165,7 +165,7 @@
             	<div class="col-lg-12 pm-columnPadding30 pm-center">
                     <h5> MA PROMOTION EN CHIFFRES </h5>
                     <div class="pm-column-title-divider">
-                    	<img height="29" width="32" src="img/MiniLogoWBG.png" alt="icon">
+                    <img style="padding-top:3px;" width="36" height="41" src="img/MiniLogo.png" class="img-responsive">
                     </div>
                 </div>
             </div>
