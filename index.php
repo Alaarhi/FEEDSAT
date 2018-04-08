@@ -301,14 +301,14 @@ if($resultRT1[0] > 0)
 
                             <div class="pm-holder">
                                 <div class="pm-caption">
-                                      <h1>L'INSAT EST UN JOYAU</h1>
+                                      <h1>Rejoignez la communauté</h1>
                                       <span class="pm-caption-decription">
-                                        La préserver est notre devoir
+                                        Parce que votre voix compte
                                       </span>
                                       <span class="pm-caption-excerpt">
-                                        <b>Un espace de feedbacks et de critiques constructifs </b>
+                                        Un espace où les étudiants peuvent partager leurs points de vue librement
                                       </span>
-                                      <a href="about.php" class="pm-slide-btn">Plus <i class="fa fa-plus"></i></a>
+                                      <a href="#IFawards" class="pm-slide-btn">À propos de nous <i class="fa fa-plus"></i></a>
                                 </div>
                             </div>
 
@@ -320,14 +320,14 @@ if($resultRT1[0] > 0)
 
                         	<div class="pm-holder">
                                 <div class="pm-caption">
-                                      <h1>Leading the way</h1>
+                                      <h1>Un pas de plus </h1>
                                       <span class="pm-caption-decription">
-                                        in research and development
+                                      vers un changement positif
                                       </span>
                                       <span class="pm-caption-excerpt">
-                                        Medical-Link provides many great features like a custom slider and a medical appointment form.
+                                        Tout étudiant a un rôle à jouer. Ne soyez plus un simple spectateur.
                                       </span>
-                                      <a href="services.php" class="pm-slide-btn">learn more <i class="fa fa-plus"></i></a>
+                                      <a href="profs.php" class="pm-slide-btn">Partagez un feedback <i class="fa fa-plus"></i></a>
                                 </div>
                             </div>
 
@@ -339,14 +339,14 @@ if($resultRT1[0] > 0)
 
                         	<div class="pm-holder">
                                 <div class="pm-caption">
-                                      <h1>A friendly staff</h1>
+                                      <h1>Partagez un feedback</h1>
                                       <span class="pm-caption-decription">
-                                        for a comfortable experience
+                                        Votez, commentez, intéragissez
                                       </span>
                                       <span class="pm-caption-excerpt">
-                                        Pulsar Media is always around to answer your questions or help solve your technical issues.
+                                        Vous pouvez intéragir de plusieurs manières avec vos enseignants ou vos camarades
                                       </span>
-                                      <a href="medical-staff.php" class="pm-slide-btn">meet our staff <i class="fa fa-plus"></i></a>
+                                      <a href="about.php" class="pm-slide-btn">Plus d'informations<i class="fa fa-plus"></i></a>
                                 </div>
                             </div>
 
@@ -365,7 +365,7 @@ if($resultRT1[0] > 0)
 
        	<!-- PANEL 1 -->
         <div class="container pm-containerPadding-top-100 pm-containerPadding-bottom-90">
-        	<div class="row">
+        	<div class="row" id="IFawards">
             <div class="col-lg-12 pm-center pm-containerPadding-bottom-0">
 
                   <h5>  PROFILS DU MOMENT </h5>

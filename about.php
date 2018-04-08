@@ -71,7 +71,7 @@ Objectif ultime
     <div class="container" style="padding: 40px 15px;">
         <div class="row">
             <div class="col-lg-12">
-                <h1 style="font-family:'Raleway';color:#303F9F;font-size:30px"><b>Nos engagements evers l'éudiant et l'enseignant</b></h1><br>
+                <h1 style="font-family:'Raleway';color:#303F9F;font-size:30px"><b>Nos engagements evers l'étudiant et l'enseignant</b></h1><br>
                 <div class="pm-divider" style="height: 1px; background-color: #303F9F; width: 80px; margin: -10px 0 30px;"></div>
                 <p style="font-size:15px">
                     Conscients des enjeux que présente une telle plateforme, nous avons mis en place un règlement
