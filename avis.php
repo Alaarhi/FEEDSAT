@@ -299,7 +299,7 @@
 
                     <!--<div class="col-lg-4 col-md-4 col-sm-12 desktop pm-center pm-columnPadding-30 pm-column-spacing">-->
                         <div class="pm-single-testimonial-shortcode">
-                            <div style="background-image:url(img/BigStudentAvatar3.png);" class="pm-single-testimonial-img-bg">
+                            <div style="background-image:url(img/avatarEtudiant.jpg);" class="pm-single-testimonial-img-bg">
                                 <div class="pm-single-testimonial-avatar-icon">
                                 <img style="padding-top:9px;" width="36" height="41" src="img/MiniLogo.png" class="img-responsive">                                </div>
                             </div>
