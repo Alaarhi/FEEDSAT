@@ -296,7 +296,7 @@ if($resultRT1[0] > 0)
                 <ul class="pm-slides-container" id="pm_slides_container">
 
                     <!-- FULL WIDTH slides -->
-                    <li data-thumb="" class="pmslide_0"><img src="img/home/insatbirds2.jpg" alt="img01" />
+                    <li data-thumb="" class="pmslide_0"><img src="img/insights2.jpg" alt="img01" />
 
 
                             <div class="pm-holder">
@@ -315,7 +315,7 @@ if($resultRT1[0] > 0)
 
                     </li>
 
-                    <li data-thumb="" class="pmslide_1"><img src="img/home/slider3.jpg" alt="img02" />
+                    <li data-thumb="" class="pmslide_1"><img src="img/inss.jpg" alt="img02" />
 
 
                         	<div class="pm-holder">
@@ -334,7 +334,7 @@ if($resultRT1[0] > 0)
 
                     </li>
 
-                    <li data-thumb="" class="pmslide_2"><img src="img/home/slider4.jpg" alt="img02" />
+                    <li data-thumb="" class="pmslide_2"><img src="img/ins.jpg" alt="img02" />
 
 
                         	<div class="pm-holder">
