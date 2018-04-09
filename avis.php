@@ -34,7 +34,7 @@
         $requeteTauxAnonyme = $bd->prepare('SELECT visibility as visibilite, count(*) as nbrComments from student
             INNER JOIN comment
             ON (student.id = comment.studentId)
-            WHERE (student.fosId = ?) AND (student.level = ?)
+            WHERE (student.fosId = ?) AND (student.level = ?) AND (comment.approved="1")
             GROUP BY (comment.visibility)');
         $requeteTauxAnonyme->execute(array($idFiliere, $level));
 
