@@ -292,80 +292,80 @@ if($resultRT1[0] > 0)
 <?php include 'header.php'; ?>
         <!-- SLIDER AREA -->
         <div class="pm-pulse-container" id="pm-pulse-container">
-
-            <div id="pm-pulse-loader">
-                <img src="js/pulse/img/ajax-loader.gif" alt="Slider Loading" />
-            </div>
-
-            <div id="pm-slider" class="pm-slider">
-
-                <div id="pm-slider-progress-bar"></div>
-
-                <ul class="pm-slides-container" id="pm_slides_container">
-
-                    <!-- FULL WIDTH slides -->
-                    <li data-thumb="" class="pmslide_0"><img src="img/insights2.jpg" alt="img01" />
-
-
-                            <div class="pm-holder">
-                                <div class="pm-caption">
-                                      <h1>L'INSAT EST UN JOYAU</h1>
-                                      <span class="pm-caption-decription">
-                                        La préserver est notre devoir
-                                      </span>
-                                      <span class="pm-caption-excerpt">
-                                        <b>Un espace de feedbacks et de critiques constructifs </b>
-                                      </span>
-                                      <a href="about.php" class="pm-slide-btn">Plus <i class="fa fa-plus"></i></a>
-                                </div>
-                            </div>
-
-
-                    </li>
-
-                    <li data-thumb="" class="pmslide_1"><img src="img/inss.jpg" alt="img02" />
-
-
-                        	<div class="pm-holder">
-                                <div class="pm-caption">
-                                      <h1>Leading the way</h1>
-                                      <span class="pm-caption-decription">
-                                        in research and development
-                                      </span>
-                                      <span class="pm-caption-excerpt">
-                                        Medical-Link provides many great features like a custom slider and a medical appointment form.
-                                      </span>
-                                      <a href="services.php" class="pm-slide-btn">learn more <i class="fa fa-plus"></i></a>
-                                </div>
-                            </div>
-
-
-                    </li>
-
-                    <li data-thumb="" class="pmslide_2"><img src="img/ins.jpg" alt="img02" />
-
-
-                        	<div class="pm-holder">
-                                <div class="pm-caption">
-                                      <h1>A friendly staff</h1>
-                                      <span class="pm-caption-decription">
-                                        for a comfortable experience
-                                      </span>
-                                      <span class="pm-caption-excerpt">
-                                        Pulsar Media is always around to answer your questions or help solve your technical issues.
-                                      </span>
-                                      <a href="medical-staff.php" class="pm-slide-btn">meet our staff <i class="fa fa-plus"></i></a>
-                                </div>
-                            </div>
-
-
-                    </li>
-
-                </ul>
-
-            </div>
-
-        </div>
+        
+                    <div id="pm-pulse-loader">
+                        <img src="js/pulse/img/ajax-loader.gif" alt="Slider Loading" />
+                    </div>
+        
+                    <div id="pm-slider" class="pm-slider">
+        
+                        <div id="pm-slider-progress-bar"></div>
+        
+                        <ul class="pm-slides-container" id="pm_slides_container">
+        
+                            <!-- FULL WIDTH slides -->
+                            <li data-thumb="" class="pmslide_0"><img src="img/insights2.jpg" alt="img01" />
+        
+        
+                                    <div class="pm-holder">
+                                        <div class="pm-caption">
+                                              <h1>Rejoignez la communauté</h1>
+                                              <span class="pm-caption-decription">
+                                                Parce que votre voix compte
+                                              </span>
+                                              <span class="pm-caption-excerpt">
+                                                <b>Un espace où les étudiants peuvent partager leurs points de vue librement</b>
+                                              </span>
+                                              <a href="about.php" class="pm-slide-btn">À propos de nous <i class="fa fa-plus"></i></a>
+                                        </div>
+                                    </div>
+        
+        
+                            </li>
+        
+                            <li data-thumb="" class="pmslide_1"><img src="img/inss.jpg" alt="img02" />
+        
+        
+                                    <div class="pm-holder">
+                                        <div class="pm-caption">
+                                              <h1>Un pas de plus </h1>
+                                              <span class="pm-caption-decription">
+                                              vers un changement positif
+                                              </span>
+                                              <span class="pm-caption-excerpt">
+                                               <b> Tout étudiant a un rôle à jouer. Ne soyez plus un simple spectateur. </b>
+                                              </span>
+                                              <a href="profs.php" class="pm-slide-btn">Partagez un feedback <i class="fa fa-plus"></i></a>
+                                        </div>
+                                    </div>
+        
+        
+                            </li>
+        
+                            <li data-thumb="" class="pmslide_2"><img src="img/ins.jpg" alt="img02" />
+        
+        
+                                    <div class="pm-holder">
+                                        <div class="pm-caption">
+                                              <h1>Partagez un feedback</h1>
+                                              <span class="pm-caption-decription">
+                                                Votez, commentez, intéragissez
+                                              </span>
+                                              <span class="pm-caption-excerpt">
+                                                <b>Vous pouvez intéragir de plusieurs manières avec vos enseignants ou vos camarades </b>
+                                              </span>
+                                              <a href="about.php" class="pm-slide-btn">Plus d'informations<i class="fa fa-plus"></i></a>
+                                        </div>
+                                    </div>
+        
+        
+                            </li>
+        
+                        </ul>
+        
+                    </div>
+        
+                </div>
 
  		<!-- SLIDER AREA end -->
 
@@ -720,7 +720,7 @@ if($resultRT1[0] > 0)
                                         <p class="pm-testimonial-name"> <?php echo("anonyme"); ?> </p>
                                     <?php } ?>
                                 <div class="pm-testimonial-divider"></div>
-                                <p class="pm-testimonial-quote"><?php echo($grade[1].".".$nom[1]." ".$prenom[1].": ".$tabCom[1]); ?></p>
+                                <p class="pm-testimonial-quote"><?php echo("<b>à ".$nom[0]." ".$prenom[0]." :</b> ".$tabCom[1]); ?></p>
                             </li>
 
 
@@ -735,7 +735,7 @@ if($resultRT1[0] > 0)
                                         <p class="pm-testimonial-name"> <?php echo("anonyme"); ?> </p>
                                     <?php } ?>
                                 <div class="pm-testimonial-divider"></div>
-                                <p class="pm-testimonial-quote"><?php echo($grade[2].".".$nom[2]." ".$prenom[2].": ".$tabCom[2]); ?></p>
+                                <p class="pm-testimonial-quote"><?php echo("<b>à ".$nom[0]." ".$prenom[0]." :</b> ".$tabCom[2]); ?></p>
                                 
                             </li>
                         </ul>
@@ -796,7 +796,7 @@ if($resultRT1[0] > 0)
                                         <p class="pm-testimonial-name"> <?php echo("anonyme"); ?> </p>
                                     <?php } ?>
                                 <div class="pm-testimonial-divider"> </div>
-                                <p class="pm-testimonial-quote"><?php echo($grade[0].".".$nom[0]." ".$prenom[0].": ".$tabCom[0]); ?></p>
+                                <p class="pm-testimonial-quote"><?php echo("<b>à ".$nom[0]." ".$prenom[0]." :</b> ".$tabCom[0]); ?></p>
                             </li>
                         </ul>
                     </div>
@@ -836,7 +836,7 @@ if($resultRT1[0] > 0)
                                         <p class="pm-testimonial-name"> <?php echo("anonyme"); ?> </p>
                                     <?php } ?>
                                 <div class="pm-testimonial-divider"> </div>
-                                <p class="pm-testimonial-quote"><?php echo($grade[0].".".$nom[0]." ".$prenom[0].": ".$tabCom[0]); ?></p>
+                                <p class="pm-testimonial-quote"><?php echo("<b>à ".$nom[0]." ".$prenom[0]." :</b> ".$tabCom[0]); ?></p>
 
                             </li>
                             <li>
@@ -850,7 +850,7 @@ if($resultRT1[0] > 0)
                                         <p class="pm-testimonial-name"> <?php echo("anonyme"); ?> </p>
                                     <?php } ?>
                                 <div class="pm-testimonial-divider"></div>
-                                <p class="pm-testimonial-quote"><?php echo($grade[1].".".$nom[1]." ".$prenom[1].": ".$tabCom[1]); ?></p>
+                                <p class="pm-testimonial-quote"><?php echo("<b>à ".$nom[0]." ".$prenom[0]." :</b> ".$tabCom[1]); ?></p>
                             </li>
                         </ul>
                     </div>
