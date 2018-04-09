@@ -2,11 +2,11 @@
 
 include 'dbConnection.php';
 $indice = 0;
-if (isset($_GET['inputRecherche'])) {    $input = $_GET['inputRecherche'];
+if (isset($_GET['inputRecherche'])) {    $input = htmlspecialchars($_GET['inputRecherche']);
     $_SESSION['lastSearch'] = $input;
 
 if (!(isset($_GET['inputRecherche']))) {
-    $input = $_SESSION['lastSearch'];
+    $input = htmlspecialchars($_SESSION['lastSearch']);
 }
         $elements = explode(" ", $input);
         switch (sizeof($elements)) {
