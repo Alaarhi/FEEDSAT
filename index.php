@@ -136,8 +136,8 @@ $reqnbinteract=$bd->query('select COUNT(*) from interact');
 $resultnbinteract=$reqnbinteract->fetch();
 
 //nombre comments:
-$reqnbincom=$bd->query('select COUNT(*) from comment');
-$resultnbcom=$reqnbinteract->fetch();
+$reqnbincom=$bd->query('select COUNT(*) from comment where approved=1');
+$resultnbcom=$reqnbincom->fetch();
 
 // nb feedbacks:
 $reqfeed=$bd->query('select COUNT(*) from rating');
@@ -153,16 +153,24 @@ $reqBestCom=$bd->query('select COUNT(commentId),commentId,studentId from interac
 $nbCom=0;
 while(($resultBestCom=$reqBestCom->fetch()) && $nbCom<3 )
 {
-    $reqCom=$bd->query('select comment from comment where id='.$resultBestCom['commentId']);
-    $reqSt=$bd->query('select name,surname,level,fosId from student where id='.$resultBestCom['studentId']);
+    $reqCom=$bd->query('select comment,visibility, studentId, profId from comment where id='.$resultBestCom["commentId"]);
     $resultCom=$reqCom->fetch();
-    $resultSt=$reqSt->fetch();    
-    $tabCom[$nbCom]=$resultCom[0];
+    $reqSt=$bd->query('select name,surname,level,fosId from student where id='.$resultCom["studentId"]);
+    $resultSt=$reqSt->fetch(); 
+
+    $tabCom[$nbCom]=$resultCom["comment"];
     $tabStName[$nbCom]=$resultSt['name'];
     $tabStSurname[$nbCom]=$resultSt['surname'];
     $tabStLevel[$nbCom]=$resultSt['level']; 
+    $tabComVis[$nbCom]=$resultCom["visibility"];
 
-    $reqFos=$bd->query('select fos from fos where id='.$resultSt['fosId']);
+    $reqProf=$bd->query('select name,surname,grade from professor where id='.$resultCom["profId"]);    
+    $resProf=$reqProf->fetch();
+    $nom[$nbCom]=$resProf['name'];
+    $prenom[$nbCom]=$resProf['surname'];
+    $grade[$nbCom]=$resProf['grade'];
+
+    $reqFos=$bd->query('select fos from fos where id='.$resultCom["profId"]);
     $resultFos=$reqFos->fetch();
 
     if($resultFos[0]=="Réseaux informatiques et télécommunications") {$tabStFos[$nbCom]="RT";}
@@ -174,7 +182,7 @@ while(($resultBestCom=$reqBestCom->fetch()) && $nbCom<3 )
 
     $nbCom++;
 }
-
+ 
 //satisfaction:
 $reqMPI=$bd->query('select COUNT(score) from rating, student where( (rating.score>5) 
                     and (rating.studentId=student.id) and (student.fosId=0) )');
@@ -301,14 +309,14 @@ if($resultRT1[0] > 0)
 
                             <div class="pm-holder">
                                 <div class="pm-caption">
-                                      <h1>Rejoignez la communauté</h1>
+                                      <h1>L'INSAT EST UN JOYAU</h1>
                                       <span class="pm-caption-decription">
-                                        Parce que votre voix compte
+                                        La préserver est notre devoir
                                       </span>
                                       <span class="pm-caption-excerpt">
-                                        <b>Un espace où les étudiants peuvent partager leurs points de vue librement</b>
+                                        <b>Un espace de feedbacks et de critiques constructifs </b>
                                       </span>
-                                      <a href="about.php" class="pm-slide-btn">À propos de nous <i class="fa fa-plus"></i></a>
+                                      <a href="about.php" class="pm-slide-btn">Plus <i class="fa fa-plus"></i></a>
                                 </div>
                             </div>
 
@@ -320,14 +328,14 @@ if($resultRT1[0] > 0)
 
                         	<div class="pm-holder">
                                 <div class="pm-caption">
-                                      <h1>Un pas de plus </h1>
+                                      <h1>Leading the way</h1>
                                       <span class="pm-caption-decription">
-                                      vers un changement positif
+                                        in research and development
                                       </span>
                                       <span class="pm-caption-excerpt">
-                                       <b> Tout étudiant a un rôle à jouer. Ne soyez plus un simple spectateur. </b>
+                                        Medical-Link provides many great features like a custom slider and a medical appointment form.
                                       </span>
-                                      <a href="profs.php" class="pm-slide-btn">Partagez un feedback <i class="fa fa-plus"></i></a>
+                                      <a href="services.php" class="pm-slide-btn">learn more <i class="fa fa-plus"></i></a>
                                 </div>
                             </div>
 
@@ -339,14 +347,14 @@ if($resultRT1[0] > 0)
 
                         	<div class="pm-holder">
                                 <div class="pm-caption">
-                                      <h1>Partagez un feedback</h1>
+                                      <h1>A friendly staff</h1>
                                       <span class="pm-caption-decription">
-                                        Votez, commentez, intéragissez
+                                        for a comfortable experience
                                       </span>
                                       <span class="pm-caption-excerpt">
-                                        <b>Vous pouvez intéragir de plusieurs manières avec vos enseignants ou vos camarades </b>
+                                        Pulsar Media is always around to answer your questions or help solve your technical issues.
                                       </span>
-                                      <a href="about.php" class="pm-slide-btn">Plus d'informations<i class="fa fa-plus"></i></a>
+                                      <a href="medical-staff.php" class="pm-slide-btn">meet our staff <i class="fa fa-plus"></i></a>
                                 </div>
                             </div>
 
@@ -365,7 +373,7 @@ if($resultRT1[0] > 0)
 
        	<!-- PANEL 1 -->
         <div class="container pm-containerPadding-top-100 pm-containerPadding-bottom-90">
-        	<div class="row" id="IFawards">
+        	<div class="row">
             <div class="col-lg-12 pm-center pm-containerPadding-bottom-0">
 
                   <h5>  PROFILS DU MOMENT </h5>
@@ -688,31 +696,46 @@ if($resultRT1[0] > 0)
                         
                         	<li>
                                 <div class="pm-testimonial-img" style="background-image:url(img/avatarEtudiant.jpg);">
-                                	<!--<div class="pm-testimonial-img-icon">
-                                    	<img src="img/home/post-icon.jpg" class="img-responsive pm-center-align" alt="icon">
-                                    </div>-->
                                 </div>
-                                
+                                <?php if($tabComVis[0]== "1") { ?>
                                 <p class="pm-testimonial-name"> <?php echo($tabStSurname[0]." ".$tabStName[0]); ?> </p>
                                 <p class="pm-testimonial-title"> <?php echo($tabStFos[0]." ".$tabStLevel[0]); ?></p>
+                                <?php }
+                                else { ?>
+                                    <p class="pm-testimonial-name"> <?php echo("anonyme"); ?> </p>
+                                <?php } ?>
                                 <div class="pm-testimonial-divider"> </div>
-                                <p class="pm-testimonial-quote"><?php echo($tabCom[0]); ?></p>
+                                <p class="pm-testimonial-quote"><?php echo($grade[0].".".$nom[0]." ".$prenom[0].": ".$tabCom[0]); ?></p>
                             </li>
+
+
                             <li>
                                 <div class="pm-testimonial-img" style="background-image:url(img/avatarEtudiant.jpg);">
                                 </div>
-                                <p class="pm-testimonial-name"><?php echo($tabStSurname[1]." ".$tabStName[1]); ?></p>
-                                <p class="pm-testimonial-title"><?php echo($tabStFos[1]." ".$tabStLevel[1]); ?></p>
+                                <?php if($tabComVis[1]== "1") { ?>
+                                    <p class="pm-testimonial-name"> <?php echo($tabStSurname[1]." ".$tabStName[1]); ?> </p>
+                                    <p class="pm-testimonial-title"> <?php echo($tabStFos[1]." ".$tabStLevel[1]); ?></p>
+                                    <?php }
+                                    else { ?>
+                                        <p class="pm-testimonial-name"> <?php echo("anonyme"); ?> </p>
+                                    <?php } ?>
                                 <div class="pm-testimonial-divider"></div>
-                                <p class="pm-testimonial-quote"><?php echo($tabCom[1]); ?></p>
+                                <p class="pm-testimonial-quote"><?php echo($grade[1].".".$nom[1]." ".$prenom[1].": ".$tabCom[1]); ?></p>
                             </li>
+
+
                             <li>
                                 <div class="pm-testimonial-img" style="background-image:url(img/avatarEtudiant.jpg);">
                                 </div>
-                                <p class="pm-testimonial-name"><?php echo($tabStSurname[2]." ".$tabStName[2]); ?></p>
-                                <p class="pm-testimonial-title"><?php echo($tabStFos[2]." ".$tabStLevel[2]); ?></p>
+                                <?php if($tabComVis[2]== "1") { ?>
+                                    <p class="pm-testimonial-name"> <?php echo($tabStSurname[2]." ".$tabStName[2]); ?> </p>
+                                    <p class="pm-testimonial-title"> <?php echo($tabStFos[2]." ".$tabStLevel[2]); ?></p>
+                                    <?php }
+                                    else { ?>
+                                        <p class="pm-testimonial-name"> <?php echo("anonyme"); ?> </p>
+                                    <?php } ?>
                                 <div class="pm-testimonial-divider"></div>
-                                <p class="pm-testimonial-quote"><?php echo($tabCom[2]); ?></p>
+                                <p class="pm-testimonial-quote"><?php echo($grade[2].".".$nom[2]." ".$prenom[2].": ".$tabCom[2]); ?></p>
                                 
                             </li>
                         </ul>
@@ -724,7 +747,7 @@ if($resultRT1[0] > 0)
         </div>
         <?php  } ?>
 
-        <!-- ***********0 commentaire************ -->
+        <<<!-- ***********0 commentaire************ -->
 
         <?php if($nbCom==0)
                                 {?>
@@ -765,10 +788,15 @@ if($resultRT1[0] > 0)
                         	<li>
                                 <div class="pm-testimonial-img" style="background-image:url(img/avatarEtudiant.jpg);">
                                 </div>
-                                <p class="pm-testimonial-name"> <?php echo($tabStSurname[0]." ".$tabStName[0]); ?> </p>
-                                <p class="pm-testimonial-title"> <?php echo($tabStFos[0]." ".$tabStLevel[0]); ?></p>
+                                <?php if($tabComVis[0]== "1") { ?>
+                                    <p class="pm-testimonial-name"> <?php echo($tabStSurname[0]." ".$tabStName[0]); ?> </p>
+                                    <p class="pm-testimonial-title"> <?php echo($tabStFos[0]." ".$tabStLevel[0]); ?></p>
+                                    <?php }
+                                    else { ?>
+                                        <p class="pm-testimonial-name"> <?php echo("anonyme"); ?> </p>
+                                    <?php } ?>
                                 <div class="pm-testimonial-divider"> </div>
-                                <p class="pm-testimonial-quote"><?php echo($tabCom[0]); ?></p>
+                                <p class="pm-testimonial-quote"><?php echo($grade[0].".".$nom[0]." ".$prenom[0].": ".$tabCom[0]); ?></p>
                             </li>
                         </ul>
                     </div>
@@ -800,18 +828,29 @@ if($resultRT1[0] > 0)
                                     </div>-->
                                 </div>
                                 
-                                <p class="pm-testimonial-name"> <?php echo($tabStSurname[0]." ".$tabStName[0]); ?> </p>
-                                <p class="pm-testimonial-title"> <?php echo($tabStFos[0]." ".$tabStLevel[0]); ?></p>
+                                <?php if($tabComVis[0]== "1") { ?>
+                                    <p class="pm-testimonial-name"> <?php echo($tabStSurname[0]." ".$tabStName[0]); ?> </p>
+                                    <p class="pm-testimonial-title"> <?php echo($tabStFos[0]." ".$tabStLevel[0]); ?></p>
+                                    <?php }
+                                    else { ?>
+                                        <p class="pm-testimonial-name"> <?php echo("anonyme"); ?> </p>
+                                    <?php } ?>
                                 <div class="pm-testimonial-divider"> </div>
-                                <p class="pm-testimonial-quote"><?php echo($tabCom[0]); ?></p>
+                                <p class="pm-testimonial-quote"><?php echo($grade[0].".".$nom[0]." ".$prenom[0].": ".$tabCom[0]); ?></p>
+
                             </li>
                             <li>
                                 <div class="pm-testimonial-img" style="background-image:url(img/avatarEtudiant.jpg);">
                                 </div>
-                                <p class="pm-testimonial-name"><?php echo($tabStSurname[1]." ".$tabStName[1]); ?></p>
-                                <p class="pm-testimonial-title"><?php echo($tabStFos[1]." ".$tabStLevel[1]); ?></p>
+                                <?php if($tabComVis[1]== "1") { ?>
+                                    <p class="pm-testimonial-name"> <?php echo($tabStSurname[1]." ".$tabStName[1]); ?> </p>
+                                    <p class="pm-testimonial-title"> <?php echo($tabStFos[1]." ".$tabStLevel[1]); ?></p>
+                                    <?php }
+                                    else { ?>
+                                        <p class="pm-testimonial-name"> <?php echo("anonyme"); ?> </p>
+                                    <?php } ?>
                                 <div class="pm-testimonial-divider"></div>
-                                <p class="pm-testimonial-quote"><?php echo($tabCom[1]); ?></p>
+                                <p class="pm-testimonial-quote"><?php echo($grade[1].".".$nom[1]." ".$prenom[1].": ".$tabCom[1]); ?></p>
                             </li>
                         </ul>
                     </div>
