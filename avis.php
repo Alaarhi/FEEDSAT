@@ -237,7 +237,7 @@
 
                 <div id="voirPlus" class="pm-comment-reply-btn" style="text-align:center">
                     <br>
-                    <aS href="javascript:;" onclick="voirPlus();" class="pm-square-btn-comment comment-reply">VOIR PLUS +</a>
+                    <a href="javascript:;" onclick="voirPlus();" class="pm-square-btn-comment-avis comment-reply">VOIR PLUS +</a>
                 </div>
 
                     <?php /* if (($requeteVosEnseignants->rowCount()) != 0) { ?>
