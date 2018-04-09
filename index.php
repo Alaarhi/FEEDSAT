@@ -705,7 +705,7 @@ if($resultRT1[0] > 0)
                                     <p class="pm-testimonial-name"> <?php echo("anonyme"); ?> </p>
                                 <?php } ?>
                                 <div class="pm-testimonial-divider"> </div>
-                                <p class="pm-testimonial-quote"><?php echo($grade[0].".".$nom[0]." ".$prenom[0].": ".$tabCom[0]); ?></p>
+                                <p class="pm-testimonial-quote"><?php echo("<b>à ".$nom[0]." ".$prenom[0]." :</b> ".$tabCom[0]); ?></p>
                             </li>
 
 
@@ -747,7 +747,7 @@ if($resultRT1[0] > 0)
         </div>
         <?php  } ?>
 
-        <<<!-- ***********0 commentaire************ -->
+        <!-- ***********0 commentaire************ -->
 
         <?php if($nbCom==0)
                                 {?>

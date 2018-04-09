@@ -646,7 +646,6 @@ $commentsNumber=$result['count'];
                             parametre=1;
                             param2=1;
                             topCommentaires(profId);
-                            }
                         }
                         
                         function choice(profId){
