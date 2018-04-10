@@ -170,16 +170,15 @@ while(($resultBestCom=$reqBestCom->fetch()) && $nbCom<3 )
     $prenom[$nbCom]=$resProf['surname'];
     $grade[$nbCom]=$resProf['grade'];
 
-    $reqFos=$bd->query('select fos from fos where id='.$resultCom["profId"]);
+    $reqFos=$bd->query('select fos from fos where id='.$resultSt["fosId"]);
     $resultFos=$reqFos->fetch();
 
-    if($resultFos[0]=="Réseaux informatiques et télécommunications") {$tabStFos[$nbCom]="RT";}
+    if($resultFos[0]=="Réseaux informatiques et télécommunications") $tabStFos[$nbCom]="RT";
     if($resultFos[0]=="Génie Logiciel") $tabStFos[$nbCom]="GL";
     if($resultFos[0]=="Biologie") $tabStFos[$nbCom]="BIO";
     if($resultFos[0]=="Chimie") $tabStFos[$nbCom]="CH";
     if($resultFos[0]=="Informatique Industrielle et Automatique") $tabStFos[$nbCom]="IIA";
     if($resultFos[0]=="Instrumentation et maintenance industrielle") $tabStFos[$nbCom]="IMI";
-
     $nbCom++;
 }
  
@@ -720,7 +719,7 @@ if($resultRT1[0] > 0)
                                         <p class="pm-testimonial-name"> <?php echo("anonyme"); ?> </p>
                                     <?php } ?>
                                 <div class="pm-testimonial-divider"></div>
-                                <p class="pm-testimonial-quote"><?php echo("<b>à ".$nom[0]." ".$prenom[0]." :</b> ".$tabCom[1]); ?></p>
+                                <p class="pm-testimonial-quote"><?php echo("<b>à ".$nom[1]." ".$prenom[1]." :</b> ".$tabCom[1]); ?></p>
                             </li>
 
 
@@ -735,7 +734,7 @@ if($resultRT1[0] > 0)
                                         <p class="pm-testimonial-name"> <?php echo("anonyme"); ?> </p>
                                     <?php } ?>
                                 <div class="pm-testimonial-divider"></div>
-                                <p class="pm-testimonial-quote"><?php echo("<b>à ".$nom[0]." ".$prenom[0]." :</b> ".$tabCom[2]); ?></p>
+                                <p class="pm-testimonial-quote"><?php echo("<b>à ".$nom[2]." ".$prenom[2]." :</b> ".$tabCom[2]); ?></p>
                                 
                             </li>
                         </ul>
@@ -850,7 +849,7 @@ if($resultRT1[0] > 0)
                                         <p class="pm-testimonial-name"> <?php echo("anonyme"); ?> </p>
                                     <?php } ?>
                                 <div class="pm-testimonial-divider"></div>
-                                <p class="pm-testimonial-quote"><?php echo("<b>à ".$nom[0]." ".$prenom[0]." :</b> ".$tabCom[1]); ?></p>
+                                <p class="pm-testimonial-quote"><?php echo("<b>à ".$nom[1]." ".$prenom[1]." :</b> ".$tabCom[1]); ?></p>
                             </li>
                         </ul>
                     </div>
