@@ -618,8 +618,8 @@ if($resultRT1[0] > 0)
                     <!-- milestone -->
                     <div class="milestone">
                         <div class="milestone-content">
-                            <span data-speed="2000" data-stop="<?php echo($taux); ?>" class="milestone-value"></span>
-                            <div class="milestone-description"><b> Taux de participation </b></div>
+                            <span data-speed="2000" data-stop="<?php echo $taux; ?>" class="milestone-value"></span>
+                            <div class="milestone-description"> Taux de participation en pourcentage </div>
                         </div>
                     </div>
                     
@@ -635,7 +635,7 @@ if($resultRT1[0] > 0)
                     <div class="milestone">
                         <div class="milestone-content">
                             <span data-speed="2000" data-stop="<?php echo($resultnbcom[0]); ?>" class="milestone-value"></span>
-                            <div class="milestone-description"><b> Commentaires </b></div>
+                            <div class="milestone-description"> Commentaires </div>
                         </div>
                     </div>
                     <!-- milestone end -->
@@ -650,7 +650,7 @@ if($resultRT1[0] > 0)
                     <div class="milestone">
                         <div class="milestone-content">
                             <span data-speed="2000" data-stop="<?php echo($resultnbinteract[0]); ?>" class="milestone-value"></span>
-                            <div class="milestone-description"><b> Intéractions sur les commentaires </b></div>
+                            <div class="milestone-description"> Intéractions sur les commentaires </div>
                         </div>
                     </div>
                     <!-- milestone end -->
@@ -664,7 +664,7 @@ if($resultRT1[0] > 0)
                     <div class="milestone">
                         <div class="milestone-content">
                             <span data-speed="2000" data-stop="<?php echo($nbfeed[0]); ?>" class="milestone-value"></span>
-                            <div class="milestone-description"><b> Ratings </b></div>
+                            <div class="milestone-description"> Ratings </div>
                         </div>
                     </div>
                     <!-- milestone end -->
