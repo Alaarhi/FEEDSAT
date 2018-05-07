@@ -604,7 +604,6 @@ $commentsNumber=$result['count'];
                                         });
                                         return "x";
                                     }
-                        lastTimee(<?php echo $id; ?>);
 
                         
                                         $.ajax({
@@ -736,7 +735,7 @@ $commentsNumber=$result['count'];
                         }
                 
                 lastCount=" ";   
-               topCommentaires(<?php echo $id; ?>);
+               menuPlusRecents(<?php echo $id; ?>);
                function topCommentaires(profId){
                             if(!document.getElementById("loaderTop"))
                             $("#zone_top_commentaires").append('<div style="padding-top:30px;padding-left:2%;" id="loaderTop"><center><img src="img/logoanime.gif"/></center></div>');
