@@ -628,7 +628,6 @@ $commentsNumber=$result['count'];
                                         });
                                    
 
-                                    
                             function menuPlusRecents(profId)
                         {   nbrClicksRecents=0;
                             if(document.getElementById("plusRecents").classList.contains("pm-square-btn-comment"))
