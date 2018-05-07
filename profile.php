@@ -51,8 +51,7 @@ while ($result=$req->fetch())
 $note=($cdc*$cdcr+$adc*$adcr+$cdln*$cdlnr+$pdg*$pdgr+$tdp*$tdpr)/10;
 $note=round($note, 1);
 }
-$req=$bd->prepare('select count(distinct(studentId)) as count from comment where profId= :id and approved = 1');
-$req->bindParam(':id', $id);
+$req=$bd->query('select count(distinct(studentId)) as count from comment where profId='.$id.' and approved = 1');
 $result=$req->fetch();
 $commentsNumber=$result['count'];
 
