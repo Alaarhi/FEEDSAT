@@ -3,9 +3,13 @@ include 'interpretationProfil.php';
 if(isset($_GET['id']))
 {
 $id=$_GET['id'];
-$req=$bd->query('select * from professor where id='.$id);
+$req=$bd->prepare('select * from professor where id = :id');
+$req->bindParam(':id', $id);
+$req->execute();
 $prof=$req->fetch();
-$req=$bd->query('select * from rating where profId='.$id);
+$req=$bd->prepare('select * from rating where profId = :id');
+$req->bindParam(':id', $id);
+$req->execute();
 $cdc=0; $tdp=0; $pdg=0; $adc=0; $cdln = 0; $i=0;$note=0;
 if($req)
 {
@@ -47,7 +51,8 @@ while ($result=$req->fetch())
 $note=($cdc*$cdcr+$adc*$adcr+$cdln*$cdlnr+$pdg*$pdgr+$tdp*$tdpr)/10;
 $note=round($note, 1);
 }
-$req=$bd->query('select count(distinct(studentId)) as count from comment where profId='.$id.' and approved = 1');
+$req=$bd->prepare('select count(distinct(studentId)) as count from comment where profId= :id and approved = 1');
+$req->bindParam(':id', $id);
 $result=$req->fetch();
 $commentsNumber=$result['count'];
 
