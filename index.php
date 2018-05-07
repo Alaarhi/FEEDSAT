@@ -183,22 +183,21 @@ while(($resultBestCom=$reqBestCom->fetch()) && $nbCom<3 )
 }
  
 //satisfaction:
-$reqMPI=$bd->query('select COUNT(score) from rating, student where( (rating.score>5) 
-                    and (rating.studentId=student.id) and (student.fosId=0) )');
-$reqBIO=$bd->query('select COUNT(score) from rating, student where( (rating.score>5) 
-                    and (rating.studentId=student.id) and (student.fosId=1) )');
-$reqCBA=$bd->query('select COUNT(score) from rating, student where( (rating.score>5) 
-                    and (rating.studentId=student.id) and (student.fosId=12) )');
-$reqCH=$bd->query('select COUNT(score) from rating, student where( (rating.score>5) 
-                    and (rating.studentId=student.id) and (student.fosId=3) )');
-$reqGL=$bd->query('select COUNT(score) from rating, student where( (rating.score>5) 
-                    and (rating.studentId=student.id) and (student.fosId=4) )');
-$reqIIA=$bd->query('select COUNT(score) from rating, student where( (rating.score>5) 
-                    and (rating.studentId=student.id) and (student.fosId=5) )');
-$reqIMI=$bd->query('select COUNT(score) from rating, student where( (rating.score>5) 
-                    and (rating.studentId=student.id) and (student.fosId=6) )');
-$reqRT=$bd->query('select COUNT(score) from rating, student where( (rating.score>5) 
-                    and (rating.studentId=student.id) and (student.fosId=13) )');
+$reqMPI=$bd->query('select AVG(score) from rating as r, student as s where (s.id = r.studentID) and (s.fosID = 0)');
+
+$reqBIO=$bd->query('select AVG(score) from rating as r, student as s where (s.id=r.studentID) and (s.fosID = 1)');
+
+$reqCBA=$bd->query('select AVG(score) from rating as r, student as s where (s.id=r.studentID) and (s.fosID = 2)');
+
+$reqCH=$bd->query('select AVG(score) from rating as r, student as s where (s.id=r.studentID) and (s.fosID = 3)');
+
+$reqGL=$bd->query('select AVG(score) from rating as r, student as s where (s.id=r.studentID) and (s.fosID = 4)');
+
+$reqIIA=$bd->query('select AVG(score) from rating as r, student as s where (s.id=r.studentID) and (s.fosID = 5)');
+
+$reqIMI=$bd->query('select AVG(score) from rating as r, student as s where (s.id=r.studentID) and (s.fosID = 6)');
+
+$reqRT=$bd->query('select AVG(score) from rating as r, student as s where (s.id=r.studentID) and (s.fosID = 13)');
 
                     $resultMPI=$reqMPI->fetch();
                     $resultBIO=$reqBIO->fetch();
@@ -209,7 +208,7 @@ $reqRT=$bd->query('select COUNT(score) from rating, student where( (rating.score
                     $resultIMI=$reqIMI->fetch();
                     $resultRT=$reqRT->fetch();
 
-$rMPI=$bd->query('select COUNT(score) from rating, student where( 
+/*$rMPI=$bd->query('select COUNT(score) from rating, student where( 
                     (rating.studentId=student.id) and (student.fosId=0) )');
 $rBIO=$bd->query('select COUNT(score) from rating, student where( 
                     (rating.studentId=student.id) and (student.fosId=1) )');
@@ -234,52 +233,53 @@ $rRT=$bd->query('select COUNT(score) from rating, student where(
                 $resultIIA1=$rIIA->fetch();
                 $resultIMI1=$rIMI->fetch();
                 $resultRT1=$rRT->fetch();
+*/
 
-if($resultMPI1[0] > 0) 
+if($resultMPI[0] > 0) 
     {
-        $MPI=$resultMPI[0]*100/$resultMPI1[0];
+        $MPI=($resultMPI[0]*100)/10;
         $MPI=round($MPI,1);
     }
     else {$MPI=0;}
-if($resultBIO1[0] > 0) 
+if($resultBIO[0] > 0) 
     {
-        $BIO= $resultBIO[0]*100/$resultBIO1[0];
+        $BIO= ($resultBIO[0]*100)/10;
         $BIO=round($BIO,1);
     }
     else {$BIO=0;}
-if($resultCBA1[0] > 0) 
+if($resultCBA[0] > 0) 
     {
-        $CBA=$resultCBA[0]*100/$resultCBA1[0];
+        $CBA=($resultCBA[0]*100)/10;
         $CBA=round($CBA,1);
     }
     else {$CBA=0;}
-if($resultCH1[0] > 0) 
+if($resultCH[0] > 0) 
     {
-        $CH=$resultCH[0]/$resultCH1[0];
+        $CH=($resultCH[0]*100/10);
         $CH=round($CH,1);
     }
     else {$CH=0;}
-if($resultGL1[0] > 0) 
+if($resultGL[0] > 0) 
     {
-        $GL=$resultGL[0]*100/$resultGL1[0];
+        $GL=($resultGL[0]*100)/10;
         $GL=round($GL,1);
     }
     else {$GL=0;}
-if($resultIIA1[0] > 0) 
+if($resultIIA[0] > 0) 
     {
-        $IIA=$resultIIA[0]*100/$resultIIA1[0];
+        $IIA=($resultIIA[0]*100)/10;
         $IIA=round($IIA,1);
     }
     else {$IIA=0;}
-if($resultIMI1[0] > 0) 
+if($resultIMI[0] > 0) 
     {
-        $IMI=$resultIMI[0]/$resultIMI1[0];
+        $IMI=($resultIMI[0]*100)/10;
         $IMI=round($IMI,1);
     }
     else {$IMI=0;}
-if($resultRT1[0] > 0) 
+if($resultRT[0] > 0) 
     {
-        $RT=($resultRT[0]*100/$resultRT1[0]);
+        $RT=($resultRT[0]*100/10);
         $RT=round($RT,1);
     }
     else {$RT=0;}
@@ -502,7 +502,7 @@ if($resultRT1[0] > 0)
 
                       <!-- Progress bar -->
                       <div class="pm-progress-bar-description" id="pm-progress-bar-desc-3">
-                          Informtique Industrielle Automatique (IIA)
+                          Informatique Industrielle Automatique (IIA)
                           <div class="pm-progress-bar-diamond"></div>
                           <span><?php echo($IIA."%"); ?></span>
                       </div>
@@ -562,7 +562,7 @@ if($resultRT1[0] > 0)
 
                         <!-- Progress bar -->
                         <div class="pm-progress-bar-description" id="pm-progress-bar-desc-7">
-                            Informatiques et Mainenance Industrielle (IMI)
+                            Instrumentation et Maintenance Industrielle (IMI)
                             <div class="pm-progress-bar-diamond"></div>
                             <span><?php echo($IMI."%"); ?></span>
                         </div>
@@ -619,7 +619,7 @@ if($resultRT1[0] > 0)
                     <div class="milestone">
                         <div class="milestone-content">
                             <span data-speed="2000" data-stop="<?php echo $taux; ?>" class="milestone-value"></span>
-                            <div class="milestone-description"> Taux de participation en pourcentage </div>
+                            <div class="milestone-description"> % Taux de participation en pourcentage </div>
                         </div>
                     </div>
                     

@@ -121,15 +121,17 @@
 
     //MENU TOP COMMENTS
     $requeteTopComments = $bd->prepare(
-        'SELECT SUBSTRING(c.comment,1, 200) as commentaire, c.visibility,
+        'SELECT SUBSTRING(c.comment,1, 400) as commentaire, c.visibility,
         s.id as idAauteur, s.surname as prenomAuteur, s.name as nomAuteur,
-        sum(interaction) as nbrInteractions,
+        sum(interaction) as nbrInteractions, 
         date_format(c.timestamp, "%d-%m-%Y") as dateCommentaire,
-        s.imageUrl as photo
+        s.imageUrl as photo,
+        p.name as prenomProf, p.surname as nomProf
         FROM interact as i
         INNER JOIN student as s
         INNER JOIN comment as c
-        ON (c.studentId = s.id) AND (c.id = i.commentId)
+        INNER JOIN professor as p 
+        ON (c.studentId = s.id) AND (c.id = i.commentId) AND (c.profId = p.id)
         WHERE (s.fosId = ?) AND (c.approved = 1) AND (s.id != ?)
         GROUP BY i.commentId
         ORDER BY nbrInteractions DESC
@@ -315,7 +317,7 @@
                             ?>
                             </p>
                             <div class="pm-single-testimonial-divider"></div>
-                            <p class="quote"> <?php echo '"'.$row->commentaire.'"'; ?> </p>
+                            <p class="quote"> <?php echo "<b> à ".$row->prenomProf.' '.$row->nomProf." :</b> ".'"'.$row->commentaire.'"'; ?> </p>
                             <div class="pm-single-testimonial-divider"></div>
                             <p class="date"> <?php echo $row->dateCommentaire; ?> <br> <?php echo $row->nbrInteractions.' intéraction(s)';?> </p>
                         </div>
