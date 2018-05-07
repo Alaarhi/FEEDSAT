@@ -172,10 +172,10 @@
                                     }*/
                                     foreach ($AmisVotants as $amiVotant) {
                                         if (($nbrAmisVotants -1) == 1) {
-                                            $reponse = $reponse.$amiVotant["prenomEtudiant"].' '.$amiVotant["nomEtudiant"].'et '.($nbrAmisVotants - 1).' autre 
+                                            $reponse = $reponse.$amiVotant["prenomEtudiant"].' '.$amiVotant["nomEtudiant"].' et '.($nbrAmisVotants - 1).' autre 
                                             ont évalué cet enseignant.';
                                         } else {
-                                            $reponse = $reponse.$amiVotant["prenomEtudiant"].' '.$amiVotant["nomEtudiant"].'et '.($nbrAmisVotants - 1).' autres 
+                                            $reponse = $reponse.$amiVotant["prenomEtudiant"].' '.$amiVotant["nomEtudiant"].' et '.($nbrAmisVotants - 1).' autres 
                                             ont évalué cet enseignant.';
                                         }
                                         break;

@@ -199,8 +199,12 @@
                                     </ul>
                                 </li>
                                 <?php if (isset($_SESSION['nom'])) { ?>
+<<<<<<< HEAD
                                 <li><a href="avis.php">Ma promotion &nbsp; <span class="glyphicon glyphicon-bullhorn"></span><span class="badge badge-notify">7</span>  
                                 <span class="glyphicon glyphicon-comment"></span>  <span class="badge badge-notify">5</span></a></li>
+=======
+                                <li><a href="avis.php">Ma promotion &nbsp; <!-- <span class="glyphicon glyphicon-bullhorn"></span><span class="badge badge-notify">7</span>  <span class="glyphicon glyphicon-comment"></span>  <span class="badge badge-notify">5</span> --></a></li>
+>>>>>>> 94d1528ee975767ac2d009bcbd798b1d2bfc3cdd
                                 <?php } else { ?>
                                 <li><a href="javascript:;" onclick="document.getElementById('avis').style.display='block'">Ma promotion</a></li>
                                 <?php } ?>
