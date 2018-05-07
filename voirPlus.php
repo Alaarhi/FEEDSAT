@@ -47,7 +47,17 @@ if(isset($_GET['parametre']))
         if($req2&&$req3)
         {
         $NInteract = $req3->fetch();
-        $student=$req2->fetch();    
+        $student=$req2->fetch();  
+
+        $filiaire = $bd->query('select * from fos where id="'.$student['fosId'].'"');
+        $filiaire = $filiaire->fetch();
+        if($filiaire['fos']=="Réseaux informatiques et télécommunications") $filiaireCom="RT";
+        if($filiaire['fos']=="Génie Logiciel") $filiaireCom="GL";
+        if($filiaire['fos']=="Biologie") $filiaireCom="BIO";
+        if($filiaire['fos']=="Chimie") $filiaireCom="CH";
+        if($filiaire['fos']=="Informatique Industrielle et Automatique") $filiaireCom="IIA";
+        if($filiaire['fos']=="Instrumentation et maintenance industrielle") $filiaireCom="IMI"; 
+         
         $studentName="";
 
         if($result['visibility']=="1")
@@ -78,7 +88,7 @@ if(isset($_GET['parametre']))
                                                     <div class="pm-comment-avatar" style="background-image:url(img/studentAvatar.png);">
                                                     </div>
                                                     <ul class="pm-comment-author-list">
-                                                        <li><p class="pm-comment-name">'.$studentName.'</p></li>
+                                                        <li><p class="pm-comment-name">'.$studentName.' ('.$filiaireCom.') </p></li>
                                                         <li style="padding-left: 24%">
         
         
@@ -151,6 +161,14 @@ while(($result=$req->fetch())&&($i<3))
     $req3 = $bd->query('select count(*) as NInteract from interact where commentId = '.$result['id']);
     $NInteract = $req3->fetch();
     $student=$req2->fetch();    
+    $filiaire = $bd->query('select * from fos where id="'.$student['fosId'].'"');
+    $filiaire = $filiaire->fetch();
+    if($filiaire['fos']=="Réseaux informatiques et télécommunications") $filiaireCom="RT";
+    if($filiaire['fos']=="Génie Logiciel") $filiaireCom="GL";
+    if($filiaire['fos']=="Biologie") $filiaireCom="BIO";
+    if($filiaire['fos']=="Chimie") $filiaireCom="CH";
+    if($filiaire['fos']=="Informatique Industrielle et Automatique") $filiaireCom="IIA";
+    if($filiaire['fos']=="Instrumentation et maintenance industrielle") $filiaireCom="IMI";
     $studentName="";
     if($result['visibility']=="1")
     $studentName=$student['surname'].' '.$student['name'];
@@ -179,7 +197,7 @@ while(($result=$req->fetch())&&($i<3))
                                                 <div class="pm-comment-avatar" style="background-image:url(img/studentAvatar.png);">
                                                 </div>
                                                 <ul class="pm-comment-author-list">
-                                                    <li><p class="pm-comment-name">'.$studentName.'</p></li>
+                                                    <li><p class="pm-comment-name">'.$studentName.' ('.$filiaireCom.')</p></li>
                                                     <li style="padding-left: 24%">
     
     

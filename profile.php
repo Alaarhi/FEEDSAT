@@ -3,9 +3,13 @@ include 'interpretationProfil.php';
 if(isset($_GET['id']))
 {
 $id=$_GET['id'];
-$req=$bd->query('select * from professor where id='.$id);
+$req=$bd->prepare('select * from professor where id = :id');
+$req->bindParam(':id', $id);
+$req->execute();
 $prof=$req->fetch();
-$req=$bd->query('select * from rating where profId='.$id);
+$req=$bd->prepare('select * from rating where profId = :id');
+$req->bindParam(':id', $id);
+$req->execute();
 $cdc=0; $tdp=0; $pdg=0; $adc=0; $cdln = 0; $i=0;$note=0;
 if($req)
 {
@@ -604,7 +608,6 @@ $commentsNumber=$result['count'];
                                         });
                                         return "x";
                                     }
-                        lastTimee(<?php echo $id; ?>);
 
                         
                                         $.ajax({
@@ -625,7 +628,6 @@ $commentsNumber=$result['count'];
                                         });
                                    
 
-                                    
                             function menuPlusRecents(profId)
                         {   nbrClicksRecents=0;
                             if(document.getElementById("plusRecents").classList.contains("pm-square-btn-comment"))
@@ -736,7 +738,7 @@ $commentsNumber=$result['count'];
                         }
                 
                 lastCount=" ";   
-               topCommentaires(<?php echo $id; ?>);
+               menuPlusRecents(<?php echo $id; ?>);
                function topCommentaires(profId){
                             if(!document.getElementById("loaderTop"))
                             $("#zone_top_commentaires").append('<div style="padding-top:30px;padding-left:2%;" id="loaderTop"><center><img src="img/logoanime.gif"/></center></div>');
