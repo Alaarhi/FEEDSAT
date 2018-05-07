@@ -8,20 +8,20 @@ $offset=$_GET['offset'];
 $nextOffset=intval($offset)+9;
 
 $requeteProfs = $bd->prepare('SELECT * FROM professor ORDER BY photo DESC LIMIT '.$offset.',9');
-$requeteMesProfs = $bd->prepare(
-    'SELECT DISTINCT p.id, p.name, p.surname, p.photo, p.grade ,p.gender FROM teach as t 
-    INNER JOIN professor as p 
+$requeteMesProfs = $bd->prepare (
+    'SELECT * FROM `teach` AS t 
+    INNER JOIN professor AS p 
     ON (t.profId = p.id) 
-    WHERE EXISTS (
-        SELECT level, fosId FROM student as s WHERE s.id = ?
-        )'
+    WHERE 
+        fosId = (SELECT fosId FROM student AS s WHERE s.id= ?)
+        AND level = (SELECT level FROM student AS s WHERE s.id= ?)'
     );
 
 $i=0;
 
 if (isset($_GET['id'])) {
     $idEtudiant = $_GET['id'];
-    $requeteMesProfs->execute(array($idEtudiant));
+    $requeteMesProfs->execute(array($idEtudiant,$idEtudiant));
     $profs = $requeteMesProfs->fetchALL(PDO::FETCH_ASSOC);
 } else {
     $requeteProfs->execute();

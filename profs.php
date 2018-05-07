@@ -86,7 +86,7 @@
 
     <script>
 
-        <?php if(isset($_GET['id'])) echo "voirPlus(".$_GET['id'].");"; else echo "voirPlus();"; ?>
+        <?php if(isset($_SESSION['idEtudiant'])) echo "voirPlus(".$_SESSION['idEtudiant'].");"; else echo "voirPlus();"; ?>
                 var offset=0;
                 function voirPlus(id){
                     if(!document.getElementById("loader"))
