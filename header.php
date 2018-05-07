@@ -30,7 +30,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="img/MiniLogo.png">
 
-    <title>INSAT FEEDBAKCS</title>
+    <title>INSAT FEEDBACKS</title>
 
     <link href="bootstrap3/css/bootstrap.css" rel="stylesheet">
 
