@@ -190,7 +190,7 @@ and (rating.studentId=student.id) and (student.fosId=0) )');
 $reqBIO=$bd->query('select COUNT(score) from rating, student where( (rating.score>=5) 
 and (rating.studentId=student.id) and (student.fosId=1) )');
 $reqCBA=$bd->query('select COUNT(score) from rating, student where( (rating.score>=5) 
-and (rating.studentId=student.id) and (student.fosId=12) )');
+and (rating.studentId=student.id) and (student.fosId=2) )');
 $reqCH=$bd->query('select COUNT(score) from rating, student where( (rating.score>=5) 
 and (rating.studentId=student.id) and (student.fosId=3) )');
 $reqGL=$bd->query('select COUNT(score) from rating, student where( (rating.score>=5) 
