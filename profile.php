@@ -125,7 +125,7 @@ $etudiantsVotant=$etudiantsVotant->fetch();
                                                                 ?>
                                                                     <a href="#" onclick="voter(<?php if(isset($_SESSION['idEtudiant'])) echo '1'; else echo '0'?>,<?php echo $voted; ?>,<?php echo $teaches; ?>)" class="pm-square-btn comment-reply">VOTER</a>
                                                                 </div>
-                                                        <p class="pm-author-name"><?php echo($prof['surname']." ".$prof['name']); ?> <dfn data-info="<?php echo $etudiantsVotant['count']; ?> étudiants ont voté pour cet enseignant"> <i class="fa fa-info-circle"></i></dfn></p> 
+                                                        <p class="pm-author-name"><?php echo($prof['surname']." ".$prof['name']); ?> <dfn data-info="<?php if($etudiantsVotant['count']==0) echo "Aucun étudiant n'a "; else if ($etudiantsVotant['count']==1) echo "1 étudiant a "; else echo $etudiantsVotant['count']." étudiants ont "; ?>voté pour cet enseignant"> <i class="fa fa-info-circle"></i></dfn></p> 
                                                         <p class="pm-author-title"><?php echo($prof['grade']); ?></p>
                 
                                                         <div class="pm-author-divider"></div>
