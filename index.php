@@ -185,107 +185,107 @@ while(($resultBestCom=$reqBestCom->fetch()) && $nbCom<3 )
 }
  
 //satisfaction:
-$reqMPI=$bd->query('select AVG(score) from rating as r, student as s where (s.id = r.studentID) and (s.fosID = 0)');
+$reqMPI=$bd->query('select COUNT(score) from rating, student where( (rating.score>=5) 
+and (rating.studentId=student.id) and (student.fosId=0) )');
+$reqBIO=$bd->query('select COUNT(score) from rating, student where( (rating.score>=5) 
+and (rating.studentId=student.id) and (student.fosId=1) )');
+$reqCBA=$bd->query('select COUNT(score) from rating, student where( (rating.score>=5) 
+and (rating.studentId=student.id) and (student.fosId=12) )');
+$reqCH=$bd->query('select COUNT(score) from rating, student where( (rating.score>=5) 
+and (rating.studentId=student.id) and (student.fosId=3) )');
+$reqGL=$bd->query('select COUNT(score) from rating, student where( (rating.score>=5) 
+and (rating.studentId=student.id) and (student.fosId=4) )');
+$reqIIA=$bd->query('select COUNT(score) from rating, student where( (rating.score>=5) 
+and (rating.studentId=student.id) and (student.fosId=5) )');
+$reqIMI=$bd->query('select COUNT(score) from rating, student where( (rating.score>=5) 
+and (rating.studentId=student.id) and (student.fosId=6) )');
+$reqRT=$bd->query('select COUNT(score) from rating, student where( (rating.score>=5) 
+and (rating.studentId=student.id) and (student.fosId=13) )');
 
-$reqBIO=$bd->query('select AVG(score) from rating as r, student as s where (s.id=r.studentID) and (s.fosID = 1)');
+$resultMPI=$reqMPI->fetch();
+$resultBIO=$reqBIO->fetch();
+$resultCBA=$reqCBA->fetch();
+$resultCH=$reqCH->fetch();
+$resultGL=$reqGL->fetch();
+$resultIIA=$reqIIA->fetch();
+$resultIMI=$reqIMI->fetch();
+$resultRT=$reqRT->fetch();
 
-$reqCBA=$bd->query('select AVG(score) from rating as r, student as s where (s.id=r.studentID) and (s.fosID = 2)');
-
-$reqCH=$bd->query('select AVG(score) from rating as r, student as s where (s.id=r.studentID) and (s.fosID = 3)');
-
-$reqGL=$bd->query('select AVG(score) from rating as r, student as s where (s.id=r.studentID) and (s.fosID = 4)');
-
-$reqIIA=$bd->query('select AVG(score) from rating as r, student as s where (s.id=r.studentID) and (s.fosID = 5)');
-
-$reqIMI=$bd->query('select AVG(score) from rating as r, student as s where (s.id=r.studentID) and (s.fosID = 6)');
-
-$reqRT=$bd->query('select AVG(score) from rating as r, student as s where (s.id=r.studentID) and (s.fosID = 13)');
-
-                    $resultMPI=$reqMPI->fetch();
-                    $resultBIO=$reqBIO->fetch();
-                    $resultCBA=$reqCBA->fetch();
-                    $resultCH=$reqCH->fetch();
-                    $resultGL=$reqGL->fetch();
-                    $resultIIA=$reqIIA->fetch();
-                    $resultIMI=$reqIMI->fetch();
-                    $resultRT=$reqRT->fetch();
-
-/*$rMPI=$bd->query('select COUNT(score) from rating, student where( 
-                    (rating.studentId=student.id) and (student.fosId=0) )');
+$rMPI=$bd->query('select COUNT(score) from rating, student where( 
+(rating.studentId=student.id) and (student.fosId=0) )');
 $rBIO=$bd->query('select COUNT(score) from rating, student where( 
-                    (rating.studentId=student.id) and (student.fosId=1) )');
+(rating.studentId=student.id) and (student.fosId=1) )');
 $rCBA=$bd->query('select COUNT(score) from rating, student where( 
-                    (rating.studentId=student.id) and (student.fosId=2) )');
+(rating.studentId=student.id) and (student.fosId=2) )');
 $rCH=$bd->query('select COUNT(score) from rating, student where( 
-                    (rating.studentId=student.id) and (student.fosId=3) )');
+(rating.studentId=student.id) and (student.fosId=3) )');
 $rGL=$bd->query('select COUNT(score) from rating, student where( 
-                     (rating.studentId=student.id) and (student.fosId=4) )');
+ (rating.studentId=student.id) and (student.fosId=4) )');
 $rIIA=$bd->query('select COUNT(score) from rating, student where( 
-                    (rating.studentId=student.id) and (student.fosId=5) )');
+(rating.studentId=student.id) and (student.fosId=5) )');
 $rIMI=$bd->query('select COUNT(score) from rating, student where( 
-                   (rating.studentId=student.id) and (student.fosId=6) )');
+(rating.studentId=student.id) and (student.fosId=6) )');
 $rRT=$bd->query('select COUNT(score) from rating, student where( 
-                (rating.studentId=student.id) and (student.fosId=13) )');
+(rating.studentId=student.id) and (student.fosId=13) )');
 
-                $resultMPI1=$rMPI->fetch();
-                $resultBIO1=$rBIO->fetch();
-                $resultCBA1=$rCBA->fetch();
-                $resultCH1=$rCH->fetch();
-                $resultGL1=$rGL->fetch();
-                $resultIIA1=$rIIA->fetch();
-                $resultIMI1=$rIMI->fetch();
-                $resultRT1=$rRT->fetch();
-*/
+$resultMPI1=$rMPI->fetch();
+$resultBIO1=$rBIO->fetch();
+$resultCBA1=$rCBA->fetch();
+$resultCH1=$rCH->fetch();
+$resultGL1=$rGL->fetch();
+$resultIIA1=$rIIA->fetch();
+$resultIMI1=$rIMI->fetch();
+$resultRT1=$rRT->fetch();
 
-if($resultMPI[0] > 0) 
-    {
-        $MPI=($resultMPI[0]*100)/10;
-        $MPI=round($MPI,1);
-    }
-    else {$MPI=0;}
-if($resultBIO[0] > 0) 
-    {
-        $BIO= ($resultBIO[0]*100)/10;
-        $BIO=round($BIO,1);
-    }
-    else {$BIO=0;}
-if($resultCBA[0] > 0) 
-    {
-        $CBA=($resultCBA[0]*100)/10;
-        $CBA=round($CBA,1);
-    }
-    else {$CBA=0;}
-if($resultCH[0] > 0) 
-    {
-        $CH=($resultCH[0]*100/10);
-        $CH=round($CH,1);
-    }
-    else {$CH=0;}
-if($resultGL[0] > 0) 
-    {
-        $GL=($resultGL[0]*100)/10;
-        $GL=round($GL,1);
-    }
-    else {$GL=0;}
-if($resultIIA[0] > 0) 
-    {
-        $IIA=($resultIIA[0]*100)/10;
-        $IIA=round($IIA,1);
-    }
-    else {$IIA=0;}
-if($resultIMI[0] > 0) 
-    {
-        $IMI=($resultIMI[0]*100)/10;
-        $IMI=round($IMI,1);
-    }
-    else {$IMI=0;}
-if($resultRT[0] > 0) 
-    {
-        $RT=($resultRT[0]*100/10);
-        $RT=round($RT,1);
-    }
-    else {$RT=0;}
-                                        
+if($resultMPI1[0] > 0) 
+{
+$MPI=$resultMPI[0]*100/$resultMPI1[0];
+$MPI=round($MPI,1);
+}
+else {$MPI=0;}
+if($resultBIO1[0] > 0) 
+{
+$BIO= $resultBIO[0]*100/$resultBIO1[0];
+$BIO=round($BIO,1);
+}
+else {$BIO=0;}
+if($resultCBA1[0] > 0) 
+{
+$CBA=$resultCBA[0]*100/$resultCBA1[0];
+$CBA=round($CBA,1);
+}
+else {$CBA=0;}
+if($resultCH1[0] > 0) 
+{
+$CH=$resultCH[0]*100/$resultCH1[0];
+$CH=round($CH,1);
+}
+else {$CH=0;}
+if($resultGL1[0] > 0) 
+{
+$GL=$resultGL[0]*100/$resultGL1[0];
+$GL=round($GL,1);
+}
+else {$GL=0;}
+if($resultIIA1[0] > 0) 
+{
+$IIA=$resultIIA[0]*100/$resultIIA1[0];
+$IIA=round($IIA,1);
+}
+else {$IIA=0;}
+if($resultIMI1[0] > 0) 
+{
+$IMI=$resultIMI[0]*100/$resultIMI1[0];
+$IMI=round($IMI,1);
+}
+else {$IMI=0;}
+if($resultRT1[0] > 0) 
+{
+$RT=($resultRT[0]*100/$resultRT1[0]);
+$RT=round($RT,1);
+}
+else {$RT=0;}
+        
                     
 
     
