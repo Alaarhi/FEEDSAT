@@ -71,6 +71,58 @@ Body font color:#7e7e7e;
 Divider Color:#d3d3d3;
 
 -------------------------------------------------------------------*/
+/** Code for hover info **/
+::-moz-selection { background: rgba(0,0,0,0.2); }
+::selection { background: rgba(0,0,0,0.2); }
+
+a.dfn-hover {
+	color: #333;
+	text-decoration: none;
+}
+
+dfn {
+  padding: 0 0.4em;
+  cursor: help;
+  font-style: initial;
+  position: relative;
+  
+}
+dfn::after {
+  content: attr(data-info);
+  display: inline;
+  position: absolute;
+  top: 22px; left: 0;
+  opacity: 0;
+  width: 230px;
+  font-size: 12px;
+  font-family: "Open sans";
+  font-weight: normal;
+  text-align: center;
+  line-height: 1.5em;
+  padding: 0.5em 0.8em;
+  background: #303F9F;
+  color: #fff;
+  pointer-events: none; /* This prevents the box from apearing when hovered. */
+  transition: opacity 250ms, top 250ms;
+}
+dfn::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 12px; left: 20px;
+  opacity: 0;
+  width: 0; height: 0;
+  border: solid transparent 5px;
+  border-bottom-color: rgba(0,0,0,0.8);
+  transition: opacity 250ms, top 250ms;
+}
+dfn:hover {z-index: 2;} /* Keeps the info boxes on top of other elements */
+dfn:hover::after,
+dfn:hover::before {opacity: 1;}
+dfn:hover::after {top: 30px;}
+dfn:hover::before {top: 20px;}
+
+
 /* 1. Box Modes  */
 /* full screen mode */
 .pm-full-mode {
@@ -5902,6 +5954,7 @@ transform: rotate(-25deg);
     
     /* ================ TOOLTIPS ================= */
     
+    
     #radios label:hover::before {
       content: attr(for);
       font-family: Roboto, -apple-system, sans-serif;
@@ -5934,8 +5987,3 @@ transform: rotate(-25deg);
 
 
 
-
-
-
-
-/*# sourceMappingURL=master.css.map */
