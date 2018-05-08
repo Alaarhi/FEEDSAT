@@ -140,13 +140,15 @@ $reqnbincom=$bd->query('select COUNT(*) from comment where approved=1');
 $resultnbcom=$reqnbincom->fetch();
 
 // nb feedbacks:
-$reqfeed=$bd->query('select COUNT(*) from ( select count(*) from rating group by studentId) as B');
+$reqfeed=$bd->query('select COUNT(*) from rating');
 $nbfeed=$reqfeed->fetch();
 
 //taux participation:
 $reqnbstudent=$bd->query('select COUNT(*) from student');
 $resultnbstudent=$reqnbstudent->fetch();
-$taux=round(($nbfeed[0]/$resultnbstudent[0])*100,2);
+$interm = $bd->query('select COUNT(*) as count from ( select count(*) from rating group by studentId) as B');
+$interm = $interm->fetch();
+$taux=round(($interm['count']/$resultnbstudent[0])*100,2);
 
 //Best comments:
 $reqBestCom=$bd->query('select COUNT(commentId),commentId,studentId from interact GROUP BY commentId ORDER BY COUNT(commentId) DESC');    
