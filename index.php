@@ -140,7 +140,7 @@ $reqnbincom=$bd->query('select COUNT(*) from comment where approved=1');
 $resultnbcom=$reqnbincom->fetch();
 
 // nb feedbacks:
-$reqfeed=$bd->query('select COUNT(*) from rating');
+$reqfeed=$bd->query('select COUNT(*) from ( select count(*) from rating group by studentId) as B');
 $nbfeed=$reqfeed->fetch();
 
 //taux participation:
