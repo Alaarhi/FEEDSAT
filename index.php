@@ -350,7 +350,7 @@ else {$RT=0;}
                                         <div class="pm-caption">
                                               <h1>Partagez un feedback</h1>
                                               <span class="pm-caption-decription">
-                                                Évaluez, commentez, intéragissez
+                                                Évaluez & Commentez
                                               </span>
                                               <span class="pm-caption-excerpt">
                                                 <b>Vous pouvez intéragir de plusieurs manières avec vos enseignants ou vos camarades </b>
