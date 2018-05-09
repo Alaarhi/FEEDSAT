@@ -221,7 +221,7 @@
                                     </ul>
                                 </li>
                                 <?php if (isset($_SESSION['nom'])) { ?>
-                                <li><a href="avis.php">Ma promotion &nbsp; <!-- <span class="glyphicon glyphicon-bullhorn"></span><span class="badge badge-notify">7</span>  <span class="glyphicon glyphicon-comment"></span>  <span class="badge badge-notify">5</span> --></a></li>
+                                <li ><a href="avis.php" >Ma promotion &nbsp; <!-- <span class="glyphicon glyphicon-bullhorn"></span><span class="badge badge-notify">7</span>  <span class="glyphicon glyphicon-comment"></span>  <span class="badge badge-notify">5</span> --></a></li>
                                 <?php } else { ?>
                                 <li><a href="javascript:;" onclick="document.getElementById('avis').style.display='block'">Ma promotion</a></li>
                                 <?php } ?>
@@ -230,7 +230,7 @@
                             
                             <ul class="sf-menu pm-nav" style="float: right;">
                             <li>
-                           <a href="https://www.facebook.com/messages/t/Insatfeedbacks"><i style="font-size:26px;position:relative;top:4px;" class="fab fa-facebook-messenger"></i></a>
+                           <a href="https://www.facebook.com/messages/t/Insatfeedbacks"  target="_blank"><i style="font-size:26px;position:relative;top:4px;" class="fab fa-facebook-messenger"></i></a>
                                 </li>
                                 
                                 <li>
