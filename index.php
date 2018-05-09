@@ -353,7 +353,7 @@ else {$RT=0;}
                                                 Évaluez & Commentez
                                               </span>
                                               <span class="pm-caption-excerpt">
-                                                <b>Vous pouvez intéragir de plusieurs manières avec vos enseignants ou vos camarades </b>
+                                                <b>Vous pouvez intéragir de plusieurs manières avec vos enseignants et vos camarades </b>
                                               </span>
                                               <a href="about.php" class="pm-slide-btn">Plus d'informations<i class="fa fa-plus"></i></a>
                                         </div>

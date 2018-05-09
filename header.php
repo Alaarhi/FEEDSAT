@@ -7,13 +7,13 @@
     {
     if(round($resrequ['somme']/$resrequ['nbr'],0)<=2)
     $logoHeader="img/level0.png";
-    if(round($resrequ['somme']/$resrequ['nbr'],0)>2 && round($resrequ['somme']/$resrequ['nbr'],0)<=4)
+    if(round($resrequ['somme']/$resrequ['nbr'],0)>2 && round($resrequ['somme']/$resrequ['nbr'],0)<4)
     $logoHeader="img/level1.png";
-    if(round($resrequ['somme']/$resrequ['nbr'],0)>4 && round($resrequ['somme']/$resrequ['nbr'],0)<=6)
+    if(round($resrequ['somme']/$resrequ['nbr'],0)>=4 && round($resrequ['somme']/$resrequ['nbr'],0)<6)
     $logoHeader="img/level2.png";
-    if(round($resrequ['somme']/$resrequ['nbr'],0)>6 && round($resrequ['somme']/$resrequ['nbr'],0)<=8)
+    if(round($resrequ['somme']/$resrequ['nbr'],0)>=6 && round($resrequ['somme']/$resrequ['nbr'],0)<8)
     $logoHeader="img/level3.png";
-    if(round($resrequ['somme']/$resrequ['nbr'],0)>8 && round($resrequ['somme']/$resrequ['nbr'],0)<10)
+    if(round($resrequ['somme']/$resrequ['nbr'],0)>=8 && round($resrequ['somme']/$resrequ['nbr'],0)<10)
     $logoHeader="img/level4.png";
     if(round($resrequ['somme']/$resrequ['nbr'],0)==10)
     $logoHeader="img/level5.png";
