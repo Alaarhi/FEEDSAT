@@ -176,7 +176,7 @@
           <h4 style="margin-top: 10%; text-align:center; color: #5e6467">
             <font color="#4553a9">
               Vous avez déjà attribué un score à ce profil. 
-              Une nouvelle tentative de vote modifiera ce dernier et ne comptera pas comme un vote supplémentaire.
+              Une nouvelle tentative modifiera ce dernier et ne comptera pas comme une évaluation supplémentaire.
               <br> <br>
             </font>
           </h4>
@@ -206,7 +206,6 @@
   <form class="modal-content animate" onsubmit="return false">
     
     <div class="imgcontainer" id="message">
-      <!-- <span onclick="document.getElementById('incapableVoter').style.display='none'" class="close" title="fermer">&times;</span> -->
         <img src="<?php echo $logoHeader; ?>" alt="Logo"><br>
           <h4 style="margin-top: 10%; text-align:center; color: #5e6467; font-size:19px">
             <font color="#4553a9">
@@ -253,7 +252,7 @@
                 <b>Votre commentaire est désormais en attente d'approbation.</b>
                 Gardez à l'esprit que nous pouvons interdire la publication de votre commentaire s'il n'est
                 pas conforme à nos critères d'approbation. En aucun cas nous ne tolèrerons les commentaires
-                à caractère haineux et non respectueux envers un enseignant ainsi que les commentaires qui ne réflètent pas
+                à caractère haineux et non respectueux envers un enseignant, ni que les commentaires qui ne réflètent pas
                 une volonté de partager une opinion constructive.
               </font></h4><br>
           <button style= 

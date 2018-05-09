@@ -123,9 +123,9 @@ $etudiantsVotant=$etudiantsVotant->fetch();
                                                                 }
                                                                 
                                                                 ?>
-                                                                    <a href="#" onclick="voter(<?php if(isset($_SESSION['idEtudiant'])) echo '1'; else echo '0'?>,<?php echo $voted; ?>,<?php echo $teaches; ?>)" class="pm-square-btn comment-reply">VOTER</a>
+                                                                    <a href="#" onclick="voter(<?php if(isset($_SESSION['idEtudiant'])) echo '1'; else echo '0'?>,<?php echo $voted; ?>,<?php echo $teaches; ?>)" class="pm-square-btn comment-reply">ÉVALUER</a>
                                                                 </div>
-                                                        <p class="pm-author-name"><?php echo($prof['surname']." ".$prof['name']); ?> <dfn data-info="<?php if($etudiantsVotant['count']==0) echo "Aucun étudiant n'a "; else if ($etudiantsVotant['count']==1) echo "1 étudiant a "; else echo $etudiantsVotant['count']." étudiants ont "; ?>voté pour cet enseignant"> <i class="fa fa-info-circle"></i></dfn></p> 
+                                                        <p class="pm-author-name"><?php echo($prof['surname']." ".$prof['name']); ?> <dfn data-info="<?php if($etudiantsVotant['count']==0) echo "Aucun étudiant n'a "; else if ($etudiantsVotant['count']==1) echo "1 étudiant a "; else echo $etudiantsVotant['count']." étudiants ont "; ?>évalué cet enseignant"> <i class="fa fa-info-circle"></i></dfn></p> 
                                                         <p class="pm-author-title"><?php echo($prof['grade']); ?></p>
                 
                                                         <div class="pm-author-divider"></div>
@@ -156,7 +156,7 @@ $etudiantsVotant=$etudiantsVotant->fetch();
                                                         <div class="panel panel-default">
                 
                                                             <div class="panel-heading">
-                                                                <h4 class="panel-title"><i class="fa fa-plus"></i><a class="pm-accordion-link pm-dark-link collapsed" href="#collapse0" data-parent="#accordion" data-toggle="collapse" aria-expanded="false">Contenu du cours : <?php echo $cdc; ?></a></h4>
+                                                                <h4 class="panel-title"><i class="fa fa-plus"></i><a class="pm-accordion-link pm-dark-link collapsed" href="#collapse0" data-parent="#accordion" data-toggle="collapse" aria-expanded="false">Contenu du cours : <?php if ($etudiantsVotant['count'] == 0) echo "&nbsp; -"; else echo $cdc ; ?></a></h4>
                                                             </div>
                 
                                                             <div class="panel-collapse collapse" id="collapse0" aria-expanded="false" style="height: 0px;">
@@ -177,7 +177,7 @@ $etudiantsVotant=$etudiantsVotant->fetch();
                                                         <div class="panel panel-default">
                 
                                                             <div class="panel-heading">
-                                                                <h4 class="panel-title"><i class="fa fa-plus"></i><a class="pm-accordion-link collapsed pm-dark-link" href="#collapse1" data-parent="#accordion" data-toggle="collapse" aria-expanded="false">Taux de présence : <?php echo $tdp; ?></a></h4>
+                                                                <h4 class="panel-title"><i class="fa fa-plus"></i><a class="pm-accordion-link collapsed pm-dark-link" href="#collapse1" data-parent="#accordion" data-toggle="collapse" aria-expanded="false">Taux de présence : <?php if ($etudiantsVotant['count'] == 0) echo "&nbsp; -"; else echo $tdp; ?></a></h4>
                                                             </div>
                 
                                                             <div class="panel-collapse collapse" id="collapse1" aria-expanded="false">
@@ -201,7 +201,7 @@ $etudiantsVotant=$etudiantsVotant->fetch();
                                                         <div class="panel panel-default">
                 
                                                             <div class="panel-heading">
-                                                                <h4 class="panel-title"><i class="fa fa-plus"></i><a class="pm-accordion-link collapsed pm-dark-link" href="#collapse2" data-parent="#accordion" data-toggle="collapse" aria-expanded="false">Pédagogie : <?php echo $pdg; ?></a></h4>
+                                                                <h4 class="panel-title"><i class="fa fa-plus"></i><a class="pm-accordion-link collapsed pm-dark-link" href="#collapse2" data-parent="#accordion" data-toggle="collapse" aria-expanded="false">Pédagogie : <?php if ($etudiantsVotant['count'] == 0) echo "&nbsp; -"; else echo $pdg ; ?></a></h4>
                                                             </div>
                 
                                                             <div class="panel-collapse collapse" id="collapse2" aria-expanded="false">
@@ -227,7 +227,7 @@ $etudiantsVotant=$etudiantsVotant->fetch();
                                                         <div class="panel panel-default">
                 
                                                             <div class="panel-heading">
-                                                                <h4 class="panel-title"><i class="fa fa-plus"></i><a class="pm-accordion-link pm-dark-link collapsed" href="#collapse3" data-parent="#accordion" data-toggle="collapse" aria-expanded="false">Ambiance en classe : <?php echo $adc; ?></a></h4>
+                                                                <h4 class="panel-title"><i class="fa fa-plus"></i><a class="pm-accordion-link pm-dark-link collapsed" href="#collapse3" data-parent="#accordion" data-toggle="collapse" aria-expanded="false">Ambiance en classe : <?php if ($etudiantsVotant['count'] == 0) echo "&nbsp; -"; else echo $adc ; ?></a></h4>
                                                             </div>
                 
                                                             <div class="panel-collapse collapse" id="collapse3" aria-expanded="false" style="height: 0px;">
@@ -248,7 +248,7 @@ $etudiantsVotant=$etudiantsVotant->fetch();
                                                         <div class="panel panel-default">
                 
                                                             <div class="panel-heading">
-                                                                <h4 class="panel-title"><i class="fa fa-plus"></i><a class="pm-accordion-link collapsed pm-dark-link" href="#collapse4" data-parent="#accordion" data-toggle="collapse" aria-expanded="false">Crédibilité de la note : <?php echo $cdln; ?></a></h4>
+                                                                <h4 class="panel-title"><i class="fa fa-plus"></i><a class="pm-accordion-link collapsed pm-dark-link" href="#collapse4" data-parent="#accordion" data-toggle="collapse" aria-expanded="false">Crédibilité de la note : <?php if ($etudiantsVotant['count'] == 0) echo "&nbsp; -"; else echo $cdln ; ?></a></h4>
                                                             </div>
                 
                                                             <div class="panel-collapse collapse" id="collapse4" aria-expanded="false">
@@ -301,15 +301,12 @@ $etudiantsVotant=$etudiantsVotant->fetch();
                 
                                                 </div>
                 
-                                                <div class="col-lg-3 col-md-6 col-sm-6 desktop pm-center " style="padding: 30px 0px 0px 70px">
-                
-                                                                            <p class="pm-static-number"><?php echo $note; ?></p>
-                
-                                                                            <!-- milestone -->
-                
-                                                                            <!-- milestone end -->
-                
-                                                                        </div>
+                                                <div class="col-lg-3 col-md-6 col-sm-6 desktop pm-center " style="padding: 30px 0px 0px 70px">                                                
+                                                    <?php if ($etudiantsVotant['count'] == 0) { ?>
+                                                        <p class="pm-static-number"><?php echo " - ";  ?></p>
+                                                    <?php } else { ?>
+                                                        <p class="pm-static-number"> <?php echo $note; } ?></p> 
+                                                </div>
                 
                                     </div>
                 

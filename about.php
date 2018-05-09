@@ -50,7 +50,7 @@ Objectif ultime
                 <p style="font-size:15px; color:white">
                     Pour donner un feedback sur la plateforme, il n'y a rien de plus simple. Vous avez deux possibilités: <br><br>
 
-                    <b>1- Via la page "Vote": </b> Accessible depuis le profil de l'enseignant, la page "vote" est 
+                    <b>1- Via la page d'évaluation: </b> Accessible depuis le profil de l'enseignant, la page "d'évaluation est 
                     un espace où il vous est demandé d'attribuer un score, allant de 1 à 10, à cet enseignant en se 
                     basant sur 5 critères différents. 
                     Un score moyen sera calculé ensuite en fonction des notes que vous avez attribuées. 
@@ -58,7 +58,7 @@ Objectif ultime
 
                     <b>2- Via l'espace commentaire: </b> Un espace commentaire est reservé sur tous les profils d'enseignants. C'est un 
                     endroit où vous pouvez partager - de manière plus explicite - votre feedback sur l'enseignant concerné et donner vos motivations 
-                    derrière les scores attribués sur chaque critère de la page "vote". En outre, il est possible d'intéragir avec 
+                    derrière les scores attribués sur chaque critère de la page  d'évaluation. En outre, il est possible d'intéragir avec 
                     les commentaires déjà présents et "applaudir" ceux qui se rapprochent d'une façon ou d'une autre de votre point de vue. 
                 </p>
             </div>
@@ -108,7 +108,6 @@ Objectif ultime
                     de réactions sur les groupes 'officiels' rassemblant les insatiens sur les réseaux sociaux.<br><br>
                     Il ne s'agit nullement d'une tentative de placer les enseignants de l'INSAT en ligne de mire mais 
                     simplement de rassembler les étudiants de l'institut et les encourager à s'exprimer librement et avec transparence.
-                    <!--Notre ambition est de  aux étudiants de contribuer au changement -->
                 </p>
             </div>
         </div>
