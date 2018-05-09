@@ -32,8 +32,8 @@ Objectif ultime
                 </p>    
                 <p style="font-size:15px">
                     En tant qu'étudiant à l'INSAT, vous êtes d'ores et déjà inscrit sur le site grâce à votre numéro d'inscription (identifiant) 
-                    et votre numéro de carte d'identité nationale (mot de passe). Sachez toutefois qu'il est recommandé de changer votre 
-                    mot de passe sur le site via l'espace abonné qui vous est accessible après votre connexion.                                        
+                    et votre numéro de carte d'identité nationale (mot de passe). <b> Sachez toutefois qu'il est recommandé de changer votre 
+                    mot de passe sur le site via l'espace utilisateur qui vous est accessible après votre connexion.  </b>                                     
                 </p>
             </div>
         </div>
@@ -50,7 +50,7 @@ Objectif ultime
                 <p style="font-size:15px; color:white">
                     Pour donner un feedback sur la plateforme, il n'y a rien de plus simple. Vous avez deux possibilités: <br><br>
 
-                    <b>1- Via la page d'évaluation: </b> Accessible depuis le profil de l'enseignant, la page "d'évaluation est 
+                    <b>1- Via la page d'évaluation: </b> Accessible depuis le profil de l'enseignant, la page d'évaluation est 
                     un espace où il vous est demandé d'attribuer un score, allant de 1 à 10, à cet enseignant en se 
                     basant sur 5 critères différents. 
                     Un score moyen sera calculé ensuite en fonction des notes que vous avez attribuées. 
