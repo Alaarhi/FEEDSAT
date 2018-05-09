@@ -205,7 +205,12 @@
                                 <?php } ?>
                                 
                             </ul>
+                            
                             <ul class="sf-menu pm-nav" style="float: right;">
+                                <li>
+                           <a href="about.php"> <i style="font-size:25px;position:relative;top:3.5px;" class="fa fa-question-circle"></i></a>
+                                </li>
+
                             <?php if (isset($_SESSION['nom'])) { ?>    
                                 <li><a href="javascript:;"><?php echo $_SESSION['prenom']." ".$_SESSION['nom']; ?></a>
                                     <ul>
