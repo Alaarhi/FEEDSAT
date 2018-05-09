@@ -39,6 +39,7 @@
     <link href="css/modal.css" rel="stylesheet">
     <link href="css/style-clap.css" rel="stylesheet">
 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
 
 
     <!-- mobile css -->
@@ -91,6 +92,27 @@
     <!-- Development Google Fonts -->
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300italic,300,400italic,600,600italic,700,700italic,800,800italic%7COpen+Sans+Condensed:300,300italic,700%7CRaleway:400,200,300,100,600,500,700,800,900%7COswald:400,300,700%7CRoboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic%7CRoboto+Condensed:400,300,300italic,400italic,700,700italic%7CRoboto+Slab:400,100,300,700%7CLato:400,100,100italic,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
     <!-- Development Google Fonts -->
+
+
+
+<!-- Facebook Pixel Code -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '179132902906667');
+  fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=179132902906667&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Facebook Pixel Code -->
+
 
 
   </head>
@@ -207,10 +229,13 @@
                             </ul>
                             
                             <ul class="sf-menu pm-nav" style="float: right;">
+                            <li>
+                           <a href="https://www.facebook.com/messages/t/Insatfeedbacks"><i style="font-size:26px;position:relative;top:4px;" class="fab fa-facebook-messenger"></i></a>
+                                </li>
+                                
                                 <li>
                            <a href="about.php"> <i style="font-size:25px;position:relative;top:3.5px;" class="fa fa-question-circle"></i></a>
                                 </li>
-
                             <?php if (isset($_SESSION['nom'])) { ?>    
                                 <li><a href="javascript:;"><?php echo $_SESSION['prenom']." ".$_SESSION['nom']; ?></a>
                                     <ul>
@@ -220,6 +245,7 @@
                                     </ul>
                                 </li>
                                 <?php } ?>
+                                
                             </ul>
                         </nav>
                         <?php include 'loginForm.php'; ?>
