@@ -230,7 +230,7 @@
                             
                             <ul class="sf-menu pm-nav" style="float: right;">
                             <li>
-                           <a href="https://www.facebook.com/messages/t/Insatfeedbacks"  target="_blank"><i style="font-size:26px;position:relative;top:4px;" class="fab fa-facebook-messenger"></i></a>
+                           <a href="https://www.facebook.com/messages/t/Insatfeedbacks"  target="_blank"><i style="font-size:24.5px;position:relative;top:4px;" class="fab fa-facebook-messenger"></i></a>
                                 </li>
                                 
                                 <li>
